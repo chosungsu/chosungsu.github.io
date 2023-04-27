@@ -6,7 +6,7 @@ const RESOURCES = {
   "assets/AssetManifest.json": "addc54b10603d3b1e3edc558b6744502",
 "assets/FontManifest.json": "5d7b8f3f3c0a7db2fa05edcc3bb4a3d8",
 "assets/fonts/MaterialIcons-Regular.otf": "e7069dfd19b331be16bed984668fe080",
-"assets/NOTICES": "ed19595104a086a585222273cf53c5d5",
+"assets/NOTICES": "42b2966f98ab4ee77a7b5299c88dc2f9",
 "assets/packages/flutter_vector_icons/fonts/AntDesign.ttf": "3a2ba31570920eeb9b1d217cabe58315",
 "assets/packages/flutter_vector_icons/fonts/Entypo.ttf": "31b5ffea3daddc69dd01a1f3d6cf63c5",
 "assets/packages/flutter_vector_icons/fonts/EvilIcons.ttf": "140c53a7643ea949007aa9a282153849",
@@ -33,9 +33,9 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "276605812a6d2d1771a7fa2fb502b841",
-"/": "276605812a6d2d1771a7fa2fb502b841",
-"main.dart.js": "0af51a0bdebaa72b420ae0b5471fe3a8",
+"index.html": "ae64b6a12ef873e546bf93ab689c292a",
+"/": "ae64b6a12ef873e546bf93ab689c292a",
+"main.dart.js": "1f67df1a5a90fd4e25df7c858935d375",
 "manifest.json": "3ffe0642f03ea16343debcc34f02e7ad",
 "version.json": "bac40db0904e7dfbc0ecabf69add18a0"
 };
