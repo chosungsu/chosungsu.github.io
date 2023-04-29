@@ -19597,7 +19597,7 @@ T6:function T6(a,b){this.a=a
 this.b=b},
 T5:function T5(a,b){this.a=a
 this.b=b},
-aAa(a){var s,r,q,p,o,n,m,l,k=null,j=[A.eB("projecttitle1"),A.eB("projecttitle2"),A.eB("projecttitle3")],i=[A.eB("projectsummary1"),A.eB("projectsummary2"),A.eB("projectsummary3")],h=["https://github.com/ChocoPytoch/BISTelligence","https://github.com/chosungsu/GangseoBack","https://github.com/chosungsu/Dacon_devmasterjo_page"],g=J.ZE(3,t.ib)
+aAa(a){var s,r,q,p,o,n,m,l,k=null,j=[A.eB("projecttitle1"),A.eB("projecttitle2"),A.eB("projecttitle3")],i=[A.eB("projectsummary1"),A.eB("projectsummary2"),A.eB("projectsummary3")],h=["https://github.com/ChocoPytoch/BISTelligence","https://github.com/chosungsu/GangseoBack","https://github.com/chosungsu/Dacon_devmasterjo_page/tree/main/%EC%84%9C%EC%9A%B8%EC%8B%9C%20%EB%94%B0%EB%A6%89%EC%9D%B4%20%EB%8C%80%EC%97%AC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C"],g=J.ZE(3,t.ib)
 for(s=t._,r=0;r<3;++r){$.bd()
 q=$.bf()
 if(q.f==null)q.nm()
