@@ -7,10 +7,7 @@ const nextConfig = {
     unoptimized: true,
   },
   basePath: process.env.NODE_ENV === 'production' ? '/chosungsu.github.io' : '',
-  assetPrefix: '',
-  experimental: {
-    serverActions: false
-  }
+  assetPrefix: ''
 };
 
 module.exports = withMDX(nextConfig); 
