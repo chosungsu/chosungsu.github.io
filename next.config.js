@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '',
+  basePath: process.env.NODE_ENV === 'production' ? '/chosungsu.github.io' : '',
   assetPrefix: '',
 };
 
