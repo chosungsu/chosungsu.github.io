@@ -6,8 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/chosungsu.github.io' : '',
-  assetPrefix: ''
+  basePath: '',
+  assetPrefix: '',
+  trailingSlash: true,
 };
 
 module.exports = withMDX(nextConfig); 
