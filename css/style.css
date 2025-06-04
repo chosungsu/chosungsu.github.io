@@ -1,0 +1,73 @@
+/* 전체 스타일 */
+body {
+    padding-top: 56px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 히어로 섹션 */
+#hero {
+    background-color: #f8f9fa;
+    padding: 100px 0;
+    margin-top: 2rem;
+}
+
+/* 섹션 스타일 */
+section {
+    padding: 80px 0;
+}
+
+/* 네비게이션 바 */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* 카드 스타일 */
+.card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 논문 아이템 스타일 */
+.publication-item {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.publication-item h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 소셜 링크 스타일 */
+.social-links a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    #hero {
+        padding: 60px 0;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+} 
