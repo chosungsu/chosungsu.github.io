@@ -8,8 +8,8 @@ import Container from '../components/Container';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '조성수의 학술 웹사이트',
-  description: '연구 프로젝트와 논문을 소개하는 개인 웹사이트입니다.',
+  title: 'SungSu\'s site',
+  description: 'Here is my personal website made by Next.js and Github Pages',
 };
 
 export default function RootLayout({

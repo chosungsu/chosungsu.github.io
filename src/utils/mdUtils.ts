@@ -14,6 +14,24 @@ export interface PostData {
 let cachedProjects: PostData[] | null = null;
 let cachedBlogPosts: PostData[] | null = null;
 
+interface ProjectInfo {
+  id: string;
+  lang: string;
+  baseId: string;
+}
+
+function parseProjectFileName(fileName: string): ProjectInfo {
+  const match = fileName.match(/^(.+?)(?:-([a-z]{2}))?\.md$/);
+  if (!match) return { id: fileName, lang: 'ko', baseId: fileName };
+  
+  const [, baseId, lang] = match;
+  return {
+    id: fileName.replace(/\.md$/, ''),
+    lang: lang || 'ko',
+    baseId,
+  };
+}
+
 export async function getBlogPosts(): Promise<PostData[]> {
   if (cachedBlogPosts) {
     return cachedBlogPosts;
@@ -64,17 +82,18 @@ export async function getProjectPosts(): Promise<PostData[]> {
       fileNames
         .filter(fileName => fileName.endsWith('.md'))
         .map(async fileName => {
-          const id = fileName.replace(/\.md$/, '');
+          const { id, lang } = parseProjectFileName(fileName);
           const fullPath = path.join(projectsDirectory, fileName);
           const fileContents = await fs.readFile(fullPath, 'utf8');
           const { data, content } = matter(fileContents);
 
           return {
             id,
-            title: data.title,
-            date: data.date,
-            description: data.description,
-            tags: data.tags,
+            lang,
+            title: data.title || '',
+            date: data.date || new Date().toISOString(),
+            description: data.description || '',
+            tags: Array.isArray(data.tags) ? data.tags : [],
             content,
           };
         })
@@ -85,6 +104,22 @@ export async function getProjectPosts(): Promise<PostData[]> {
   } catch (error) {
     console.error('Error loading projects:', error);
     return [];
+  }
+}
+
+export async function getAvailableLanguages(baseId: string): Promise<string[]> {
+  try {
+    const projectsDirectory = path.join(process.cwd(), 'public/projects');
+    const fileNames = await fs.readdir(projectsDirectory);
+    
+    return fileNames
+      .filter(fileName => fileName.endsWith('.md'))
+      .map(fileName => parseProjectFileName(fileName))
+      .filter(info => info.baseId === baseId)
+      .map(info => info.lang);
+  } catch (error) {
+    console.error('Error getting available languages:', error);
+    return ['ko'];
   }
 }
 

@@ -1,8 +1,7 @@
 import { getProjectPosts, getPostById } from '@/utils/mdUtils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import ReactMarkdown from 'react-markdown';
-import FormattedDate from '@/components/FormattedDate';
+import ProjectContent from '@/components/ProjectContent';
 
 interface Props {
   params: {
@@ -12,13 +11,22 @@ interface Props {
 
 export async function generateStaticParams() {
   const projects = await getProjectPosts();
-  return projects.map((project) => ({
-    id: project.id,
-  }));
+
+  // 모든 프로젝트 ID(언어 코드 포함)를 수집하고, 기본 ID도 추가하여 중복 제거
+  const ids = new Set<string>();
+  projects.forEach(project => {
+    ids.add(project.id); // project1-ko, project1-en 등
+    const baseId = project.id.replace(/-[a-z]{2}$/, '');
+    ids.add(baseId);    // project1 와 같이 언어 코드 없는 경로도 추가
+  });
+
+  return Array.from(ids).map(id => ({ id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = await getPostById(params.id, 'projects');
+  // 파라미터가 이미 언어 코드를 포함하고 있는지 확인, 없으면 기본 ko 로 설정
+  const fullId = /-[a-z]{2}$/.test(params.id) ? params.id : `${params.id}-ko`;
+  const project = await getPostById(fullId, 'projects');
 
   if (!project) {
     return {
@@ -32,36 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProjectPage({ params }: Props) {
-  const project = await getPostById(params.id, 'projects');
-
-  if (!project) {
-    notFound();
-  }
-
-  return (
-    <div className="min-h-screen py-16 bg-white dark:bg-gray-900">
-      <article className="max-w-3xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-          {project.title}
-        </h1>
-        <div className="flex justify-between items-center mb-8">
-          <FormattedDate date={project.date} />
-          <div className="flex space-x-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="prose dark:prose-invert max-w-none">
-          <ReactMarkdown>{project.content}</ReactMarkdown>
-        </div>
-      </article>
-    </div>
-  );
+export default function ProjectPage({ params }: Props) {
+  // 파라미터가 이미 언어 코드를 포함하고 있는지 확인, 없으면 기본 ko 로 설정
+  const fullId = /-[a-z]{2}$/.test(params.id) ? params.id : `${params.id}-ko`;
+  return <ProjectContent id={fullId} />;
 } 

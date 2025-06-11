@@ -5,11 +5,18 @@ import { getBlogPosts, getProjectPosts } from '@/utils/mdUtils';
 import FormattedDate from '@/components/FormattedDate';
 
 export default async function Home() {
-  const projects = await getProjectPosts();
+  const allProjects = await getProjectPosts();
   const posts = await getBlogPosts();
 
+  // 한국어 프로젝트만 필터링
+  const projects = allProjects.filter(project => project.id.endsWith('-ko'));
   const latestProjects = projects.slice(0, 2);
   const latestPosts = posts.slice(0, 2);
+
+  // 프로젝트 ID에서 기본 ID 추출 (언어 코드 제거)
+  const getBaseProjectId = (fullId: string) => {
+    return fullId.replace(/-[a-z]{2}$/, '');
+  };
 
   return (
     <div className="min-h-screen py-16 bg-white dark:bg-gray-900">
@@ -67,7 +74,11 @@ export default async function Home() {
           </div>
           <div className="space-y-6">
             {latestProjects.map((project) => (
-              <Link key={project.id} href={`/projects/${project.id}`} className="block">
+              <Link 
+                key={project.id} 
+                href={`/projects/${getBaseProjectId(project.id)}`}
+                className="block"
+              >
                 <div className="border dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white dark:bg-gray-800">
                   <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                     {project.title}

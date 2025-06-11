@@ -34,9 +34,6 @@ export default function Navbar() {
             <Link href="/blog" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
               Blog
             </Link>
-            <Link href="/cv" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-              CV
-            </Link>
             <ThemeToggle />
           </div>
         </nav>
