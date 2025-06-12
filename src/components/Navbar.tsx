@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <div className={`fixed top-0 w-full z-50 transition-all duration-200 ${
-      isScrolled ? 'backdrop-blur-md bg-white/70 dark:bg-gray-900/70' : 'bg-white dark:bg-gray-900'
+      isScrolled ? 'backdrop-blur-md bg-white/70 dark:bg-zinc-900/70' : 'bg-white dark:bg-zinc-900'
     }`}>
       <Container>
         <nav className="flex justify-between items-center h-16">

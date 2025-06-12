@@ -98,7 +98,7 @@ export default function PostContent({ id }: PostContentProps) {
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
           <button
             onClick={() => router.push('/posts')}
-            className="text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-gray-600 dark:text-gray-400 hover:underline"
           >
             Go back to post list
           </button>
@@ -112,7 +112,7 @@ export default function PostContent({ id }: PostContentProps) {
   }
 
   return (
-    <div className="min-h-screen py-8 bg-white dark:bg-gray-900">
+    <div className="min-h-screen py-8">
       <article className="max-w-3xl mx-auto px-4">
         <header className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
           <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">

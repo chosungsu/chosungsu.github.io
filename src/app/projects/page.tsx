@@ -5,7 +5,7 @@ export default async function Projects() {
   const projects = await getProjectPosts();
 
   return (
-    <div className="min-h-screen pb-4 bg-white dark:bg-gray-900">
+    <div className="min-h-screen pb-4">
       <div className="max-w-3xl mx-auto">
         <ProjectList initialProjects={projects} />
       </div>
