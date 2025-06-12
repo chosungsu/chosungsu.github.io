@@ -1,5 +1,4 @@
 import { getProjectPosts, getPostById } from '@/utils/mdUtils';
-import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ProjectContent from '@/components/ProjectContent';
 

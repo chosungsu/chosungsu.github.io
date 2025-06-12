@@ -8,19 +8,19 @@ import FormattedDate from './FormattedDate';
 import { Globe } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
-import remarkMath from 'remark-math';
 import rehypeRaw from 'rehype-raw';
+import ScrollToTop from './ScrollToTop';
+import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
-import ScrollToTop from './ScrollToTop';
 
-interface ProjectContentProps {
+interface PostContentProps {
   id: string;
 }
 
-export default function ProjectContent({ id }: ProjectContentProps) {
+export default function PostContent({ id }: PostContentProps) {
   const router = useRouter();
-  const [project, setProject] = useState<any>(null);
+  const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -34,48 +34,48 @@ export default function ProjectContent({ id }: ProjectContentProps) {
   }, [id]);
 
   useEffect(() => {
-    async function loadProject() {
+    async function loadPost() {
       setLoading(true);
       setError(null);
       try {
-        const projectResponse = await fetch(`/api/projects/${id}`);
-        if (!projectResponse.ok) {
-          throw new Error(`HTTP error! status: ${projectResponse.status}`);
+        const postResponse = await fetch(`/api/posts/${id}`);
+        if (!postResponse.ok) {
+          throw new Error(`HTTP error! status: ${postResponse.status}`);
         }
-        const projectData = await projectResponse.json();
-        if (projectData.project) {
-          setProject(projectData.project);
+        const postData = await postResponse.json();
+        if (postData.post) {
+          setPost(postData.post);
         } else {
-          throw new Error('Project data not found');
+          throw new Error('Post data not found');
         }
       } catch (error) {
-        console.error('Failed to load project:', error);
-        setError(error instanceof Error ? error.message : 'Failed to load project');
+        console.error('Failed to load post:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load post');
       } finally {
         setLoading(false);
       }
     }
 
-    loadProject();
+    loadPost();
   }, [id]);
 
   const handleLanguageChange = async (lang: string) => {
     const newId = `${baseId}-${lang}`;
     try {
-      const response = await fetch(`/api/projects/${newId}`);
+      const response = await fetch(`/api/posts/${newId}`);
       if (response.ok) {
         const data = await response.json();
-        if (data.project) {
-          setProject(data.project);
+        if (data.post) {
+          setPost(data.post);
           setSelectedLang(lang);
           // URL 은 기본 경로로 유지하면서 내용만 변경
-          router.replace(`/projects/${baseId}`);
+          router.replace(`/posts/${baseId}`);
           // 새 콘텐츠 로드 후 스크롤 맨 위로 이동
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       }
     } catch (error) {
-      console.error('Failed to load project in new language:', error);
+      console.error('Failed to load post in new language:', error);
     }
     setIsLangDropdownOpen(false);
   };
@@ -97,17 +97,17 @@ export default function ProjectContent({ id }: ProjectContentProps) {
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
           <button
-            onClick={() => router.push('/projects')}
+            onClick={() => router.push('/posts')}
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            Go back to project list
+            Go back to post list
           </button>
         </div>
       </div>
     );
   }
 
-  if (!project) {
+  if (!post) {
     return notFound();
   }
 
@@ -116,12 +116,12 @@ export default function ProjectContent({ id }: ProjectContentProps) {
       <article className="max-w-3xl mx-auto px-4">
         <header className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
           <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-            {project.title}
+            {post.title}
           </h1>
           <div className="flex flex-wrap justify-between items-center gap-4">
-            <FormattedDate date={project.date} className="text-sm text-gray-600 dark:text-gray-400" />
+            <FormattedDate date={post.date} className="text-sm text-gray-600 dark:text-gray-400" />
             <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag: string) => (
+              {post.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
@@ -220,14 +220,14 @@ export default function ProjectContent({ id }: ProjectContentProps) {
               },
               img: ({ src, alt }) => (
                 src ? (
-                  <div className="relative w-full h-[400px] my-8">
+                  <span className="block relative w-full h-[400px] my-8">
                     <Image
                       src={src}
                       alt={alt || ''}
                       fill
                       className="object-cover rounded-lg"
                     />
-                  </div>
+                  </span>
                 ) : null
               ),
               a: ({ href, ...props }) => (
@@ -244,7 +244,7 @@ export default function ProjectContent({ id }: ProjectContentProps) {
               ),
             }}
           >
-            {project.content}
+            {post.content}
           </ReactMarkdown>
         </div>
       </article>

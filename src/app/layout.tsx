@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navbar from '../components/Navbar';
 import Container from '../components/Container';
+import ScrollReset from '../components/ScrollReset';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={`${inter.className} bg-white dark:bg-gray-900`}>
         <ThemeProvider>
+          <ScrollReset />
           <Navbar />
           <main className="pt-16 min-h-screen">
             <Container>

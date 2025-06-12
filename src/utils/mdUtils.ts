@@ -38,7 +38,7 @@ export async function getBlogPosts(): Promise<PostData[]> {
   }
 
   try {
-    const postsDirectory = path.join(process.cwd(), 'public/blog');
+    const postsDirectory = path.join(process.cwd(), 'public/posts');
     const fileNames = await fs.readdir(postsDirectory);
 
     const posts = await Promise.all(
@@ -123,9 +123,9 @@ export async function getAvailableLanguages(baseId: string): Promise<string[]> {
   }
 }
 
-export async function getPostById(id: string, type: 'blog' | 'projects'): Promise<PostData | null> {
+export async function getPostById(id: string, type: 'posts' | 'projects'): Promise<PostData | null> {
   try {
-    const posts = type === 'blog' ? await getBlogPosts() : await getProjectPosts();
+    const posts = type === 'posts' ? await getBlogPosts() : await getProjectPosts();
     return posts.find(post => post.id === id) || null;
   } catch (error) {
     console.error(`Error loading ${type} post:`, error);

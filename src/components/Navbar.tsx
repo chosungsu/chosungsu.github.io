@@ -27,12 +27,12 @@ export default function Navbar() {
             Sungsu Cho
           </Link>
           
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-4">
             <Link href="/projects" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
               Projects
             </Link>
-            <Link href="/blog" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-              Blog
+            <Link href="/posts" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+              Posts
             </Link>
             <ThemeToggle />
           </div>
