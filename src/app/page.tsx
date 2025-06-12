@@ -22,7 +22,7 @@ export default async function Home() {
   };
 
   return (
-    <div className="min-h-screen py-16 bg-white dark:bg-gray-900">
+    <div className="min-h-screen py-16">
       <div className="max-w-3xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12">
           <div className="w-48 h-48 relative rounded-full overflow-hidden">
@@ -80,7 +80,7 @@ export default async function Home() {
               <Link 
                 key={project.id} 
                 href={`/projects/${getBaseProjectId(project.id)}`}
-                className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between"
+                className="block border dark:border-gray-700 rounded-lg p-6 h-50 overflow-hidden flex flex-col justify-between"
               >
                 <h2
                   className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
@@ -137,7 +137,7 @@ export default async function Home() {
               <Link 
                 key={post.id} 
                 href={`/posts/${getBaseProjectId(post.id)}`} 
-                className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between">
+                className="block border dark:border-gray-700 rounded-lg p-6 h-50 overflow-hidden flex flex-col justify-between">
                 <h2 className="text-md font-semibold mb-2 text-gray-900 dark:text-white">
                   {post.title}
                 </h2>

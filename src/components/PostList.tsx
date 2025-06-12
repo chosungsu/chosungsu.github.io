@@ -115,7 +115,7 @@ export default function PostList({ initialPosts }: PostListProps) {
           <Link
             href={`/posts/${getBasePostId(post.id)}`}
             key={post.id}
-            className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between"
+            className="block border dark:border-gray-700 rounded-lg p-6 h-50 overflow-hidden flex flex-col justify-between"
           >
             <h2
               className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
@@ -155,13 +155,13 @@ export default function PostList({ initialPosts }: PostListProps) {
 
       {/* 검색 Dialog */}
       <Dialog open={showSearchModal} onOpenChange={handleOpenChange}>
-        <DialogContent className="p-0 max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <DialogContent className="p-0 max-h-[90vh] flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-700">
           <DialogTitle className="sr-only">Search Posts</DialogTitle>
           <DialogDescription className="sr-only">
             Search posts by title, description, or tags
           </DialogDescription>
           {/* Input & ESC row */}
-          <div className="relative px-6 pt-6 pb-4 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
+          <div className="relative px-2 pt-4 pb-2 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
             <div className="relative flex items-center">
               <Search className="absolute left-3 w-4 h-4 text-gray-400" />
               <input

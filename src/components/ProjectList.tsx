@@ -83,7 +83,7 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
           <Link
             href={`/projects/${getBaseProjectId(project.id)}`}
             key={project.id}
-            className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between"
+            className="block border dark:border-gray-700 rounded-lg p-6 h-50 overflow-hidden flex flex-col justify-between"
           >
             <h2
               className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
