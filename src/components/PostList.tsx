@@ -7,7 +7,7 @@ import { PostData } from '@/utils/mdUtils';
 import FormattedDate from './FormattedDate';
 import { CalendarArrowDown, CalendarArrowUp, Search, ChevronRight } from 'lucide-react';
 import ScrollToTop from './ScrollToTop';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/Dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 interface PostListProps {
   initialPosts: PostData[];
