@@ -64,8 +64,8 @@ export default function ProjectContent({ id }: ProjectContentProps) {
         if (data.project) {
           setProject(data.project);
           setSelectedLang(lang);
-          // replace를 사용하여 현재 페이지를 새 페이지로 교체
-          router.replace(`/projects/${newId}`);
+          // URL 은 기본 경로로 유지하면서 내용만 변경
+          router.replace(`/projects/${baseId}`);
         }
       }
     } catch (error) {

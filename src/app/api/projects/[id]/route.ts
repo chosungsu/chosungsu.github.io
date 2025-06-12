@@ -8,21 +8,12 @@ function getBaseProjectId(fullId: string) {
 
 export async function generateStaticParams() {
   const projects = await getProjectPosts();
-  
-  // 모든 프로젝트의 기본 ID와 언어 버전 ID 모두 포함
-  const allIds = new Set<string>();
-  
-  projects.forEach(project => {
-    // 기본 ID 추가
-    const baseId = getBaseProjectId(project.id);
-    allIds.add(baseId);
-    // 언어 버전 ID 추가
-    allIds.add(project.id);
-  });
-  
-  return Array.from(allIds).map(id => ({
-    id: id,
-  }));
+
+  // 언어 코드가 포함된 실제 파일 ID만 정적 생성
+  const ids = projects.map(project => project.id);
+
+  // 중복 제거
+  return Array.from(new Set(ids)).map(id => ({ id }));
 }
 
 export async function GET(
