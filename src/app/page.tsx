@@ -77,18 +77,25 @@ export default async function Home() {
               <Link 
                 key={project.id} 
                 href={`/projects/${getBaseProjectId(project.id)}`}
-                className="block"
+                className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between"
               >
-                <div className="border dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-shadow bg-white dark:bg-gray-800">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <FormattedDate date={project.date} />
-                    <div className="flex space-x-2">
+                <h2
+                  className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
+                  style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                >
+                  {project.title}
+                </h2>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-300 mb-4"
+                  style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                >
+                  {project.description}
+                </p>
+                <div className="flex justify-between items-center">
+                  <FormattedDate date={project.date} />
+                  <div className="flex space-x-2 items-center">
+                    {/* 태그 상세: 중간 이상 화면에서 표시 */}
+                    <div className="hidden sm:flex space-x-2">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
@@ -98,6 +105,12 @@ export default async function Home() {
                         </span>
                       ))}
                     </div>
+                    {/* 태그 개수: 작은 화면에서만 표시 */}
+                    {project.tags.length > 0 && (
+                      <span className="flex sm:hidden px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm">
+                        +{project.tags.length}
+                      </span>
+                    )}
                   </div>
                 </div>
               </Link>

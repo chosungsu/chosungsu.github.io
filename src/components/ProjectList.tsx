@@ -5,7 +5,8 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import { PostData } from '@/utils/mdUtils';
 import FormattedDate from './FormattedDate';
-import { ArrowDownToLine, ArrowUpToLine } from 'lucide-react';
+import { CalendarArrowDown, CalendarArrowUp } from 'lucide-react';
+import ScrollToTop from './ScrollToTop';
 
 interface ProjectListProps {
   initialProjects: PostData[];
@@ -71,9 +72,9 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
         >
           <span>Date</span>
           {isDescending ? (
-            <ArrowDownToLine className="w-4 h-4" />
+            <CalendarArrowUp className="w-4 h-4" />
           ) : (
-            <ArrowUpToLine className="w-4 h-4" />
+            <CalendarArrowDown className="w-4 h-4" />
           )}
         </button>
       </div>
@@ -82,25 +83,40 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
           <Link
             href={`/projects/${getBaseProjectId(project.id)}`}
             key={project.id}
-            className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 hover:shadow-lg transition-shadow"
+            className="block border dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-800 h-50 overflow-hidden flex flex-col justify-between"
           >
-            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+            <h2
+              className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
+              style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+            >
               {project.title}
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
+            <p
+              className="text-sm text-gray-600 dark:text-gray-300 mb-4"
+              style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+            >
               {project.description}
             </p>
             <div className="flex justify-between items-center">
               <FormattedDate date={project.date} />
-              <div className="flex space-x-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-                  >
-                    {tag}
+              <div className="flex space-x-2 items-center">
+                {/* 태그 상세: 중간 이상 화면에서 표시 */}
+                <div className="hidden sm:flex space-x-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {/* 태그 개수: 작은 화면에서만 표시 */}
+                {project.tags.length > 0 && (
+                  <span className="flex sm:hidden px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm">
+                    +{project.tags.length}
                   </span>
-                ))}
+                )}
               </div>
             </div>
           </Link>
@@ -109,6 +125,7 @@ export default function ProjectList({ initialProjects }: ProjectListProps) {
           <div ref={ref} className="h-10" />
         )}
       </div>
+      <ScrollToTop />
     </div>
   );
 } 

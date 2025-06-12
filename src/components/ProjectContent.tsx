@@ -9,6 +9,7 @@ import { Globe } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import rehypeRaw from 'rehype-raw';
+import ScrollToTop from './ScrollToTop';
 
 interface ProjectContentProps {
   id: string;
@@ -106,14 +107,14 @@ export default function ProjectContent({ id }: ProjectContentProps) {
   }
 
   return (
-    <div className="min-h-screen py-16 bg-white dark:bg-gray-900">
+    <div className="min-h-screen py-8 bg-white dark:bg-gray-900">
       <article className="max-w-3xl mx-auto px-4">
         <header className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
             {project.title}
           </h1>
           <div className="flex flex-wrap justify-between items-center gap-4">
-            <FormattedDate date={project.date} className="text-gray-600 dark:text-gray-400" />
+            <FormattedDate date={project.date} className="text-sm text-gray-600 dark:text-gray-400" />
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag: string) => (
                 <span
@@ -242,6 +243,7 @@ export default function ProjectContent({ id }: ProjectContentProps) {
           </ReactMarkdown>
         </div>
       </article>
+      <ScrollToTop />
     </div>
   );
 } 
