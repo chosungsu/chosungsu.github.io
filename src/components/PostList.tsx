@@ -155,13 +155,13 @@ export default function PostList({ initialPosts }: PostListProps) {
 
       {/* 검색 Dialog */}
       <Dialog open={showSearchModal} onOpenChange={handleOpenChange}>
-        <DialogContent className="p-0 max-h-[90vh] flex flex-col">
+        <DialogContent className="p-0 max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <DialogTitle className="sr-only">Search Posts</DialogTitle>
           <DialogDescription className="sr-only">
             Search posts by title, description, or tags
           </DialogDescription>
           {/* Input & ESC row */}
-          <div className="relative px-6 pt-6 pb-4 flex-shrink-0">
+          <div className="relative px-6 pt-6 pb-4 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
             <div className="relative flex items-center">
               <Search className="absolute left-3 w-4 h-4 text-gray-400" />
               <input
@@ -170,12 +170,8 @@ export default function PostList({ initialPosts }: PostListProps) {
                 placeholder="Search posts"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 text-base bg-transparent placeholder-gray-400 border-0 focus:outline-none"
+                className="w-full pl-10 pr-12 py-3 text-base text-gray-900 dark:text-gray-100 bg-transparent placeholder-gray-400 border-0 focus:outline-none focus:ring-0"
               />
-              {/* esc pill */}
-              <span className="absolute right-3 text-xs uppercase text-gray-400 bg-gray-700 rounded px-2 py-0.5 select-none">
-                esc
-              </span>
             </div>
           </div>
           {/* list container */}
@@ -185,12 +181,12 @@ export default function PostList({ initialPosts }: PostListProps) {
             ) : filteredPosts.length === 0 ? (
               <p className="text-center text-gray-500 py-10">No posts found.</p>
             ) : (
-              <ul className="divide-y divide-gray-700">
+              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                 {filteredPosts.map((post) => (
                   <li key={post.id}>
                     <Link
                       href={`/posts/${getBasePostId(post.id)}`}
-                      className="flex justify-between items-center py-3 hover:bg-gray-700 px-2 rounded"
+                      className="flex justify-between items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 rounded text-gray-900 dark:text-gray-100"
                       onClick={() => handleOpenChange(false)}
                     >
                       <span className="truncate max-w-sm">{post.title}</span>

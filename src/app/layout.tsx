@@ -20,15 +20,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white dark:bg-gray-900`}>
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider>
-          <ScrollReset />
-          <Navbar />
-          <main className="pt-16 min-h-screen">
-            <Container>
-              {children}
-            </Container>
-          </main>
+          <div className="min-h-screen bg-white dark:bg-gray-900">
+            <ScrollReset />
+            <Navbar />
+            <main className="pt-16">
+              <Container>
+                {children}
+              </Container>
+            </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>
