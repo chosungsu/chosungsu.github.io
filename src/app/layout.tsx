@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning className="bg-white dark:bg-zinc-900">
+      <body className={`${inter.className} bg-white dark:bg-zinc-900 min-h-screen`} suppressHydrationWarning>
         <ThemeProvider>
           <div className="min-h-screen bg-white transition-colors duration-200 dark:bg-zinc-900">
             <ScrollReset />

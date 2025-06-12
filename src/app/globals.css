@@ -65,6 +65,17 @@
   }
 }
 
+/* 기본 배경색 설정 */
+html,
+body {
+  background-color: white;
+}
+
+.dark html,
+.dark body {
+  background-color: rgb(24 24 27);
+}
+
 body {
   color: rgb(var(--foreground));
   background-color: rgb(var(--background));
