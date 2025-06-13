@@ -129,4 +129,4 @@ $W_{i,j}$의 값을 직접 $[B_{lower}, B_{upper}]$ 범위로 제한
 
 ### 참고 자료
 
-- 원본 경로: [https://openreview.net/pdf?id=efmbt-1TOH](https://openreview.net/pdf?id=efmbt-1TOH)
+[원본 경로: https://openreview.net/pdf?id=efmbt-1TOH](https://openreview.net/pdf?id=efmbt-1TOH)

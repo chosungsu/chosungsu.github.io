@@ -92,4 +92,4 @@ A PLM‑based causal inference framework leveraging prior knowledge \(K\):
 
 ### References
 
-- Source: ACL Anthology, EMNLP Findings 2024 (#827)
+[Original Path: https://aclanthology.org/2024.findings-emnlp.827/](https://aclanthology.org/2024.findings-emnlp.827/)

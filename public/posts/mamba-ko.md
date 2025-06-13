@@ -92,4 +92,4 @@ PLM을 기반으로 사전 지식 \(K\)를 활용한 인과 추론 프레임워�
 
 ### 참고 자료
 
-- 원본 경로: ACL Anthology, EMNLP Findings 2024 (#827)
+[원본 경로: https://aclanthology.org/2024.findings-emnlp.827/](https://aclanthology.org/2024.findings-emnlp.827/)

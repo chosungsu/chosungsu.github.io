@@ -108,4 +108,4 @@ Instead of clamping, this paper directly applies optimization constraints using 
 
 ### Reference
 
-- Original paper: [https://openreview.net/pdf?id=efmbt-1TOH](https://openreview.net/pdf?id=efmbt-1TOH)
+[Original Path: https://openreview.net/pdf?id=efmbt-1TOH](https://openreview.net/pdf?id=efmbt-1TOH)
