@@ -1,6 +1,6 @@
 ---
 title: 'Query based cross modal projector bolstering mamba multimodal llm'
-date: '2024.12.12'
+date: '2024-12-12'
 tags: ['llm', 'paper review']
 ---
 
@@ -58,8 +58,8 @@ We propose a novel cross‑modal projector for Mamba to address this gap.
 ### Method
 
 #### 1. Preliminaries  
-- SSMs map continuous functions \(x(t)\) to outputs \(y(t)\) via hidden states \(h(t)\).  
-- Discretization adapts the continuous system to sequence data; Mamba dynamically adjusts SSM parameters \((A, B, C, Δ)\) at each time step.
+- SSMs map continuous functions $x(t)$ to outputs $y(t)$ via hidden states $h(t)$.  
+- Discretization adapts the continuous system to sequence data; Mamba dynamically adjusts SSM parameters (A, B, C, $delta$) at each time step.
 
 #### 2. Cross‑Modal Mamba Projector (Q‑Mamba)
 
@@ -84,12 +84,12 @@ This design supports scan-order independence, flexible query sequence lengths, a
 
 ![Example Image](https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png)
 
-A PLM‑based causal inference framework leveraging prior knowledge \(K\):  
-- Prompt-based causal extraction → pairwise relation aggregation → creation of prior \(K\)  
+A PLM‑based causal inference framework leveraging prior knowledge $K$:  
+- Prompt-based causal extraction → pairwise relation aggregation → creation of prior $K$
 - Graph initialization, regularization, and boundary setting lead to a final binary adjacency matrix
 
 ---
 
 ### References
 
-[Original Path: https://aclanthology.org/2024.findings-emnlp.827/](https://aclanthology.org/2024.findings-emnlp.827/)
+[Original Path #1](https://aclanthology.org/2024.findings-emnlp.827/)

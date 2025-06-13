@@ -1,6 +1,6 @@
 ---
 title: 'A generalized explanation framework for visualization of deep learning model predictions'
-date: '2023.11.25'
+date: '2023-11-25'
 tags: ['xai', 'paper review']
 ---
 
@@ -75,7 +75,7 @@ The goal is to compare features and mark boundary differences.
 
 They define:
 
-$R(x, y^*, y_c, x_c) = (D(x, y^*, y_c), D(x_c, y_c, y^*))$
+$#R(x, y^*, y_c, x_c) = (D(x, y^*, y_c), D(x_c, y_c, y^*))#$
 
 - First heatmap identifies regions helpful for $y^*$ but not $y_c$.  
 - Second heatmap does the reverse on another image $x_c$.
@@ -84,4 +84,4 @@ $R(x, y^*, y_c, x_c) = (D(x, y^*, y_c), D(x_c, y_c, y^*))$
 
 ### Reference
 
-[Original Path: https://ieeexplore.ieee.org/document/10034989](https://ieeexplore.ieee.org/document/10034989)
+[Original Path #1](https://ieeexplore.ieee.org/document/10034989)

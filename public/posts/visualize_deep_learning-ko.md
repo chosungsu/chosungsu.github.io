@@ -1,6 +1,6 @@
 ---
 title: 'A generalized explanation framework for visualization of deep learning model predictions'
-date: '2023.11.25'
+date: '2023-11-25'
 tags: ['xai', 'paper review']
 ---
 
@@ -43,7 +43,7 @@ Galore는 이러한 문제를 해결하기 위해 제안되었으며, 분류 모
 1. Explanation Framework
 
 H: X → Y는 이미지를 x∈X에서 클래스 y∈Y={1,…,C}로 매핑하며, 이는 y*=argmax h(x)로 표현됩니다.  
-여기서 h(x)는 합성곱으로 계산되고 y*는 self-aware로서 이미지 x가 예측된 클래스 y*에 속할 가능성을 나타내는 신뢰 점수를 생성합니다.
+여기서 h(x)는 합성곱으로 계산되고 $y^*$는 self-aware로서 이미지 x가 예측된 클래스 $y^*$에 속할 가능성을 나타내는 신뢰 점수를 생성합니다.
 
 2. Attributive explanations
 
@@ -53,14 +53,14 @@ H: X → Y는 이미지를 x∈X에서 클래스 y∈Y={1,…,C}로 매핑하며
 
 <img src="https://velog.velcdn.com/images/ski06043/post/c6aa5505-e9b0-4da7-8218-ddf90b1f6620/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-반사실적 설명은 이미지 x, 예측 결과 y*, 그리고 사용자가 제공한 반사실적 클래스 yc ≠ y*를 가정합니다. 일반적인 접근 방식은 클래스에 속하는 이미지와 입력 이미지 사이의 차이를 강조하고 매칭된 경계를 표시하는 것입니다.
+반사실적 설명은 이미지 x, 예측 결과 y*, 그리고 사용자가 제공한 반사실적 클래스 $y_c ≠ y*$를 가정합니다. 일반적인 접근 방식은 클래스에 속하는 이미지와 입력 이미지 사이의 차이를 강조하고 매칭된 경계를 표시하는 것입니다.
 
-R(x, y*, y_c, x_c) = (D(x, y*, y_c), D(x_c, y_c, y*))
+$$R(x, y*, y_c, x_c) = (D(x, y*, y_c), D(x_c, y_c, y*))$$
 
-위처럼 두 개의 히트맵으로 계산하며 첫 번째 히트맵은 입력 x의 예측 클래스에는 유용하지만 반사실적 클래스에는 유용하지 않은 영역을 식별하도록 하고 두 번째 히트맵은 임의의 이미지 x_c에 대해 반사실적 클래스에는 유용하지만 예측 클래스에는 유용하지 않은 영역을 식별하도록 합니다.
+위처럼 두 개의 히트맵으로 계산하며 첫 번째 히트맵은 입력 x의 예측 클래스에는 유용하지만 반사실적 클래스에는 유용하지 않은 영역을 식별하도록 하고 두 번째 히트맵은 임의의 이미지 $x_c$에 대해 반사실적 클래스에는 유용하지만 예측 클래스에는 유용하지 않은 영역을 식별하도록 합니다.
 
 ---
 
 ### 참고 자료
 
-[원본 경로: https://ieeexplore.ieee.org/document/10034989](https://ieeexplore.ieee.org/document/10034989)
+[원본 경로 #1](https://ieeexplore.ieee.org/document/10034989)

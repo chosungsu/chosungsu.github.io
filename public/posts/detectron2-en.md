@@ -1,6 +1,6 @@
 ---
 title: 'A generalized explanation framework for visualization of deep learning model predictions'
-date: '2023.11.25'
+date: '2023-11-25'
 tags: ['xai', 'paper review']
 ---
 
@@ -18,7 +18,7 @@ Instance segmentation is a challenging task because it requires accurately detec
 
 Mask R-CNN is an extension of Faster R-CNN that adds a branch for predicting segmentation masks on each Region of Interest (RoI), in parallel with the existing branch for classification and bounding box regression. It uses a simple, quantization-free layer called RoIAlign to maintain accurate spatial locations, which has led to significant improvements in prediction accuracy—ranging from 10% to 50%.
 
-[Reference: https://herbwood.tistory.com/20](https://herbwood.tistory.com/20)
+[Reference #1](https://herbwood.tistory.com/20)
 
 ---
 
@@ -54,6 +54,6 @@ It combines box, mask, keypoint, DensePose, and semantic segmentation to generat
 
 ### References
 
-[Original Paper: https://arxiv.org/pdf/1703.06870](https://arxiv.org/pdf/1703.06870)
+[Original Path #1](https://arxiv.org/pdf/1703.06870)
 
-[Original Paper: https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf](https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf)
+[Original Path #2](https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf)

@@ -1,6 +1,6 @@
 ---
 title: 'Neural discrete representation learning'
-date: '2022.10.17'
+date: '2022-10-17'
 tags: ['anomaly detection', 'paper review']
 ---
 
@@ -55,4 +55,4 @@ The experiments mentioned above showed that VQ-VAE can learn discrete latent spa
 
 ### References
 
-[Original path: https://arxiv.org/abs/1711.00937](https://arxiv.org/abs/1711.00937)
+[Original path #1](https://arxiv.org/abs/1711.00937)

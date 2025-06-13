@@ -1,6 +1,6 @@
 ---
 title: 'U-Net: Convolutional Networks for Biomedical Image Segmentation'
-date: '2023.07.24'
+date: '2023-07-24'
 tags: ['image segmentation', 'paper review']
 ---
 
@@ -54,4 +54,4 @@ Each pixel's displacement is calculated using __bicubic interpolation__, and add
 
 ### Reference
 
-[Original Path: https://arxiv.org/pdf/1505.04597](https://arxiv.org/pdf/1505.04597)
+[Original Path #1](https://arxiv.org/pdf/1505.04597)

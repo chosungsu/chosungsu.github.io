@@ -1,6 +1,6 @@
 ---
 title: 'Safe multi-agent navigation guided by goal-conditioned safe reinforcement learning'
-date: '2025.02.25'
+date: '2025-02-25'
 tags: ['reinforcement learning', 'paper review']
 ---
 
@@ -158,5 +158,5 @@ $$C(s) = \begin{cases} 2 - 2h/r, 0≤h≤r \\ 0, otherwise \end{cases}$$
 
 ### 참고 자료
 
-[원본 경로: https://arxiv.org/pdf/2502.17813](https://arxiv.org/pdf/2502.17813)
+[원본 경로 #1](https://arxiv.org/pdf/2502.17813)
 

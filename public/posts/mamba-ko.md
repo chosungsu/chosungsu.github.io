@@ -1,6 +1,6 @@
 ---
 title: 'Query based cross modal projector bolstering mamba multimodal llm'
-date: '2024.12.12'
+date: '2024-12-12'
 tags: ['llm', 'paper review']
 ---
 
@@ -58,8 +58,8 @@ Transformer는 self‑attention의 계산 및 메모리 병목 현상으로 인�
 ### Method
 
 #### 1. Preliminaries  
-- SSM은 연속 함수 \(x(t)\)를 은닉 상태 \(h(t)\)와 함께 출력 \(y(t)\)로 변환합니다.  
-- 연속 시스템을 이산화하여 시퀀스를 처리하며, Mamba는 시간 단계별로 동적으로 SSM 파라미터(\(A, B, C, \Delta\))를 조정 가능하도록 설계됩니다.
+- SSM은 연속 함수 $x(t)$를 은닉 상태 $h(t)$와 함께 출력 $y(t)$로 변환합니다.  
+- 연속 시스템을 이산화하여 시퀀스를 처리하며, Mamba는 시간 단계별로 동적으로 SSM 파라미터 (A, B, C, $delta$)를 조정 가능하도록 설계됩니다.
 
 #### 2. Cross‑Modal Mamba Projector (Q‑Mamba)
 
@@ -75,7 +75,7 @@ Q‑Mamba는 다음 구성요소로 이루어집니다:
 
 #### 3. MLLM 훈련 전략  
 - 2단계 훈련 방식 (LLaVA 기반) 적용:  
-  1. Alignment stage: `visual instruction following dataset`으로 LLM 정렬  
+  1. Alignment stage: visual instruction following dataset으로 LLM 정렬  
   2. Fine‑tuning stage: Projector와 LLM 전체 End‑to‑End 학습
 
 ---
@@ -84,12 +84,12 @@ Q‑Mamba는 다음 구성요소로 이루어집니다:
 
 ![Example Image](https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png)
 
-PLM을 기반으로 사전 지식 \(K\)를 활용한 인과 추론 프레임워크:  
-- 데이터셋 입력 → 프롬프트 기반 인과 탐색 → pairwise 관계 집계 → prior \(K\) 생성  
+PLM을 기반으로 사전 지식 $K$를 활용한 인과 추론 프레임워크:  
+- 데이터셋 입력 → 프롬프트 기반 인과 탐색 → pairwise 관계 집계 → prior $K$ 생성  
 - Graph 초기화, 정규화, 경계 설정을 통해 최종 인접 행렬 산출
 
 ---
 
 ### 참고 자료
 
-[원본 경로: https://aclanthology.org/2024.findings-emnlp.827/](https://aclanthology.org/2024.findings-emnlp.827/)
+[원본 경로 #1](https://aclanthology.org/2024.findings-emnlp.827/)

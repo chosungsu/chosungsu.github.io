@@ -1,6 +1,6 @@
 ---
 title: 'Neural discrete representation learning'
-date: '2022.10.17'
+date: '2022-10-17'
 tags: ['anomaly detection', 'paper review']
 ---
 
@@ -44,6 +44,7 @@ $$q(z = k|x) =\begin{cases} 1 & \text{if } k = \arg \min_j \|z_e(x) - e_j\|^2, \
 <img src="https://velog.velcdn.com/images/ski06043/post/6fec4680-8f82-402a-b173-91a85f34d66a/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 두번째로 가져온 실험은 오디오 데이터인 VCTK와 비교했으며 인코더를 stride 2이고 4 by 4 크기인 6개의 convolution layer를 구성하였다고 합니다. 64배 작은 잠재 공간을 생성할 수 있었고 완벽한 복원은 불가하였으나 파형과 음성의 억양이 달라진 점으로 보아 고수준 추상 공간을 학습하였다는 의미를 발견하여 더 큰 데이터셋으로 128배 작은 잠재 공간으로 수정한 모델로 사전 훈련시켜 클래스 분류 정확도 49.3%에 랜덤 정확도 7.2%를 기록했다고 합니다.
+
 ---
 
 ### Conclusion
@@ -54,4 +55,4 @@ $$q(z = k|x) =\begin{cases} 1 & \text{if } k = \arg \min_j \|z_e(x) - e_j\|^2, \
 
 ### 참고 자료
 
-[원본 경로: https://arxiv.org/abs/1711.00937](https://arxiv.org/abs/1711.00937)
+[원본 경로 #1](https://arxiv.org/abs/1711.00937)

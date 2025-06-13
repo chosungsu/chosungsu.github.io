@@ -1,6 +1,6 @@
 ---
 title: 'Lof, identifying density based local outliers'
-date: '2022.09.12'
+date: '2022-09-12'
 tags: ['anomaly detection', 'paper review']
 ---
 
@@ -63,7 +63,7 @@ Local Reachability Density(이하 LRD) 지표는 기준 데이터 근방 k개의
 
 $lrd(p)$ = $1/directmax(p)$ 에서 $directmax(p)$ = $max$ { reach-dist($p$, $q$) | $q$ $∈$ NMinPts($p$) }
 
-$lrd(o)$ = $1/indirectmax(p)$ 에서 $indirectmax(p)$ = $max$ { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$$∈$ NMinPts($q$) }
+$lrd(o)$ = $1/indirectmax(p)$ 에서 $indirectmax(p)$ = $max$ { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$ $∈$ NMinPts($q$) }
 
 ---
 
@@ -82,7 +82,7 @@ MinPtsUB는 특정 "가까운(closed by)" 객체 집합 $C$가 지역적 이상�
 
 ### 참고 자료
 
-[원본 경로: https://dl.acm.org/doi/pdf/10.1145/335191.335388](https://dl.acm.org/doi/pdf/10.1145/335191.335388)
+[원본 경로 #1](https://dl.acm.org/doi/pdf/10.1145/335191.335388)
 
 
 

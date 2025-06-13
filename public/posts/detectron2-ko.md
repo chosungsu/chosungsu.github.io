@@ -1,6 +1,6 @@
 ---
 title: 'Detectron2 object detection and Manipulating images using cartoonization'
-date: '2023.07.10'
+date: '2023-07-10'
 tags: ['object detection', 'paper review']
 ---
 
@@ -20,7 +20,7 @@ Faster R-CNN을 확장하여 각 관심 영역(RoI)에 대한 분할 마스크�
 
 아래에는 참조한 블로그입니다.
 
-[참조한 블로그: https://herbwood.tistory.com/20](https://herbwood.tistory.com/20)
+[참조한 블로그 #1](https://herbwood.tistory.com/20)
 
 ---
 
@@ -31,15 +31,18 @@ Faster R-CNN을 확장하여 각 관심 영역(RoI)에 대한 분할 마스크�
 자율 주행 차량은 자율성의 정도에 따라 다양한 수준으로 나뉘며, 낮은 자율성 수준에서는 운전자가 차량의 관리와 기능을 더 많이 제어할 수 있습니다. 이러한 기술 발전은 차량의 위치와 주변 환경과의 근접성을 계획하는 데 효과적입니다.
 
 이 논문에서는 Facebook AI Research 소프트웨어 시스템을 활용하여 객체 탐지 알고리즘을 구현하고, 고급 객체 탐지를 위해 빠른 학습을 제공하는 Caffe2 딥러닝 프레임워크를 사용하였습니다. 또한, 이미지 조작에는 cartoonization 기법을 활용했습니다.
+
 ---
 
 ### Introduction
 
 Detectron의 목표는 다음과 같습니다:
 
-고품질
-고성능
-객체 탐지 연구를 위한 코드베이스 제공
+- 고품질
+
+- 고성능
+
+- 객체 탐지 연구를 위한 코드베이스 제공
 
 ---
 
@@ -53,8 +56,8 @@ Detectron의 목표는 다음과 같습니다:
 
 ### 참고 자료
 
-[원본 경로: https://arxiv.org/pdf/1703.06870](https://arxiv.org/pdf/1703.06870)
+[원본 경로 #1](https://arxiv.org/pdf/1703.06870)
 
-[원본 경로: https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf](https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf)
+[원본 경로 #2](https://www.ijert.org/research/detectron2-object-detection-manipulating-images-using-cartoonization-IJERTV10IS080122.pdf)
 
 

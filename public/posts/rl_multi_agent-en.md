@@ -1,6 +1,6 @@
 ---
 title: 'Safe multi-agent navigation guided by goal-conditioned safe reinforcement learning'
-date: '2025.02.25'
+date: '2025-02-25'
 tags: ['reinforcement learning', 'paper review']
 ---
 
@@ -158,5 +158,5 @@ In experiments: $r=10$ (2D navigation) / $r=10$ (visual navigation)
 
 ### References
 
-[Original Path: https://arxiv.org/pdf/2502.17813](https://arxiv.org/pdf/2502.17813)
+[Original Path #1](https://arxiv.org/pdf/2502.17813)
 

@@ -1,6 +1,6 @@
 ---
 title: 'Mitigating adversarial pertubations for deep reinforcement learning via vector quantization'
-date: '2024.09.13'
+date: '2024-09-13'
 tags: ['adversarial attack', 'paper review']
 ---
 
@@ -78,7 +78,7 @@ $$max_{s' \in B(s, \epsilon)} \|f_1(s) - f_2(s')\|_2$$
 
 ### 참고 자료
 
-[원본 경로: https://arxiv.org/abs/2410.03376](https://arxiv.org/abs/2410.03376)
+[원본 경로 #1](https://arxiv.org/abs/2410.03376)
 
 
 

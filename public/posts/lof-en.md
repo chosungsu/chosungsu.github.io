@@ -1,6 +1,6 @@
 ---
 title: 'Lof, identifying density based local outliers'
-date: '2022.09.12'
+date: '2022-09-12'
 tags: ['anomaly detection', 'paper review']
 ---
 
@@ -63,7 +63,7 @@ The Local Reachability Density (LRD) indicator is used to represent the density 
 
 $lrd(p)$ = $1/directmax(p)$ where $directmax(p)$ = $max$ { reach-dist($p$, $q$) | $q$ $∈$ NMinPts($p$) }
 
-$lrd(o)$ = $1/indirectmax(p)$ where $indirectmax(p)$ = $max$ { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$$∈$ NMinPts($q$) }
+$lrd(o)$ = $1/indirectmax(p)$ where $indirectmax(p)$ = $max$ { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$ $∈$ NMinPts($q$) }
 
 ---
 
@@ -82,7 +82,7 @@ MinPtsUB represents the maximum size that a particular set of "closed by" object
 
 ### References
 
-[Original path: https://dl.acm.org/doi/pdf/10.1145/335191.335388](https://dl.acm.org/doi/pdf/10.1145/335191.335388)
+[Original path #1](https://dl.acm.org/doi/pdf/10.1145/335191.335388)
 
 
 

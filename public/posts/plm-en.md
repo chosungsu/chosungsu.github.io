@@ -1,6 +1,6 @@
 ---
 title: 'On Incorporating Prior Knowledge Extracted from Pre-trained Language Models into Causal Discovery'
-date: '2024.03.04'
+date: '2024-03-04'
 tags: ['llm', 'paper review']
 ---
 
@@ -108,4 +108,4 @@ Instead of clamping, this paper directly applies optimization constraints using 
 
 ### Reference
 
-[Original Path: https://openreview.net/pdf?id=efmbt-1TOH](https://openreview.net/pdf?id=efmbt-1TOH)
+[Original Path #1](https://openreview.net/pdf?id=efmbt-1TOH)

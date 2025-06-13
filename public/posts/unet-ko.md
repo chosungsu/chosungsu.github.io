@@ -1,6 +1,6 @@
 ---
 title: 'U-Net: Convolutional Networks for Biomedical Image Segmentation'
-date: '2023.07.24'
+date: '2023-07-24'
 tags: ['image segmentation', 'paper review']
 ---
 
@@ -53,4 +53,4 @@ ISBI 2012 EM 분할 챌린지에서 큰 격차로 우승한 사례가 있었습�
 
 ### Reference
 
-[원본 경로: https://arxiv.org/pdf/1505.04597](https://arxiv.org/pdf/1505.04597)
+[원본 경로 #1](https://arxiv.org/pdf/1505.04597)
