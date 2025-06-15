@@ -111,7 +111,8 @@ __4.Graph Construction from Replay Buffer__
 We construct a weighted directed graph using observation data stored in replay buffer B. Each edge has predicted distance and cost values for specific state pairs, defined as.
 
 $$
-d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
+d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), \
+c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
 $$
 
 Graph G is defined as V=B (graph node set is states in buffer), E=B*B (possible edges between all state pairs), with $W_d$ and $W_c$ representing distance and cost weights respectively:
@@ -150,16 +151,23 @@ Q3: When extended to multi-agent environments, does our approach show superior p
 __Experimental Environments__
 
 -2D Navigation Environment
+
 -Using Central Obstacle Map
+
 -Agent observations: position $s = (x, y) ∈ R^2$
+
 -Agent actions: directional movement $a = (dx, dy) ∈ [−1, 1]^2$
+
 -Agent position is updated every timestep
 
 __Visual Navigation Environment__
 
 -Selected 4 environments from ReplicaCAD dataset
+
 -Simulation using Habitat-Sim
+
 -Agent observations: RGB panorama images (32 × 32 pixels, combining first-person view images from 4 directions)
+
 -Action space: same as 2D navigation environment
 
 __Cost Limits and Cost Function__
