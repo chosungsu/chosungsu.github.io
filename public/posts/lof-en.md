@@ -64,12 +64,12 @@ The Local Reachability Density (LRD) indicator is used to represent the density 
 <img src="https://velog.velcdn.com/images/ski06043/post/b4cfa621-6a01-46bb-8ac3-09dc51195466/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 $$
-lrd(p) = 1/directmax(p) \rightarrow directmax(p) \
+lrd(p) = 1/directmax(p) \rightarrow directmax(p) \\
 = max \{ reach-dist(p, q) | q \in NMinPts(p) \}
 $$
 
 $$
-lrd(o) = 1/indirectmax(p) \rightarrow indirectmax(p) \
+lrd(o) = 1/indirectmax(p) \rightarrow indirectmax(p) \\
 = max \{ reach-dist(q, o) | q \in NMinPts(p) \& o \in NMinPts(q) \}
 $$
 

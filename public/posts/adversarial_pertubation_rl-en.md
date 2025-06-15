@@ -63,7 +63,7 @@ __1.Input Transformation based Defense for RL__
 Let $f_1$, $f_2$ be functions mapping to $s$, and $π$ be a Gaussian policy with constant independent variance. Assuming this network has Lipschitz continuity, we can obtain the following inequality:
 
 $$
-max_{s \in S}({V_{\pi \circ f_1}(s) - V_{\pi \circ f_2}(s)}) \
+max_{s \in S}({V_{\pi \circ f_1}(s) - V_{\pi \circ f_2}(s)}) \\
 \leq \zeta {max_{s \in S} max_{s' \in B(s, \epsilon)} \|f_1(s) - f_2(s')}\|_2
 $$
 

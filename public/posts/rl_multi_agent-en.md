@@ -111,7 +111,7 @@ __4.Graph Construction from Replay Buffer__
 We construct a weighted directed graph using observation data stored in replay buffer B. Each edge has predicted distance and cost values for specific state pairs, defined as.
 
 $$
-d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), \
+d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), \\
 c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
 $$
 

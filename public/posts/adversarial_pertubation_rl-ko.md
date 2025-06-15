@@ -64,7 +64,7 @@ __1.Input Transformation based Defense for RL__
 $f_1$, $f_2$를 각각 $s$로 매핑하는 함수라고 하고, $π$를 일정한 독립 분산을 갖는 가우시안 정책일 때 이 네트워크가 Lipschitz 연속성을 가진다고 가정하면 다음과 같은 부등식을 얻을 수 있습니다.
 
 $$
-max_{s \in S}({V_{\pi \circ f_1}(s) - V_{\pi \circ f_2}(s)}) \
+max_{s \in S}({V_{\pi \circ f_1}(s) - V_{\pi \circ f_2}(s)}) \\
 \leq \zeta {max_{s \in S} max_{s' \in B(s, \epsilon)} \|f_1(s) - f_2(s')}\|_2
 $$
 
