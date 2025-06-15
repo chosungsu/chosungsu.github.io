@@ -108,10 +108,10 @@ However, since Zπ is a categorical probability distribution, we couldn't use st
 
 __4.Graph Construction from Replay Buffer__
 
-We construct a weighted directed graph using observation data stored in replay buffer B. Each edge has predicted distance and cost values for specific state pairs, defined as:
+We construct a weighted directed graph using observation data stored in replay buffer B. Each edge has predicted distance and cost values for specific state pairs, defined as.
 
 $$
-d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)$, $c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
+d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
 $$
 
 Graph G is defined as V=B (graph node set is states in buffer), E=B*B (possible edges between all state pairs), with $W_d$ and $W_c$ representing distance and cost weights respectively:

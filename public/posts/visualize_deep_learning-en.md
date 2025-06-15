@@ -34,17 +34,17 @@ considering probability similarities among top-k classes and self-awareness in p
 
 ### Galore
 
-1.Attributive Explanations
+__1.Attributive Explanations__
 
 These highlight likely contributing pixels.  
 While intuitive, they can lead to exhaustive enumeration and lack insight on high-level reasoning.
 
-2.Deliberative Explanations
+__2.Deliberative Explanations__
 
 Visual concepts are often subtly different.  
 This causes ambiguity in classification, and users may distrust predictions due to this uncertainty.
 
-3.Counterfactual Explanations
+__3.Counterfactual Explanations__
 
 These provide more precise reasoning, offering answers like:  
 "If it weren’t for this, it would have been that."
@@ -53,19 +53,19 @@ These provide more precise reasoning, offering answers like:
 
 ### IMPLEMENTATION
 
-1.Explanation Framework
+__1.Explanation Framework__
 
 Let $H: X \to Y$ be a classifier mapping an image $x \in X$ to a class $y \in Y = \{1, ..., C\}$.  
 Prediction is defined as: $y^* = \arg\max h(x)$.
 
 Here, $h(x)$ is a convolution-based function and $y^*$ includes a __self-awareness confidence score__.
 
-2.Attributive Explanations
+__2.Attributive Explanations__
 
 An attribution function $a$ is applied to an activation tensor with spatial size $W \times H$ and channels $D$, extracted from input $x$.  
 Most tensors $F$ are gradient variants of $h(x)$.
 
-3.Counterfactual Explanations
+__3.Counterfactual Explanations__
 
 <img src="https://velog.velcdn.com/images/ski06043/post/c6aa5505-e9b0-4da7-8218-ddf90b1f6620/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 

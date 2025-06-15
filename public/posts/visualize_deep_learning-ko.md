@@ -24,15 +24,15 @@ Galore는 이러한 문제를 해결하기 위해 제안되었으며, 분류 모
 
 ### Galore
 
-1.속성 기반 설명
+__1.속성 기반 설명__
 
 이 설명은 분류기의 예측에 가능성이 있는 픽셀을 식별하는 것으로 직관적이지만 자칫 모든 요소에 대한 나열식이 될 수 있습니다. 여기서 문제는 이 설명이 통찰력은 줄 수 있으나 큰 패러다임 속에서 왜 그렇게 구분했는지에 대한 설명은 없다는 것입니다.
 
-2.숙고 설명
+__2.숙고 설명__
 
 시각적 개념은 항상 미묘한 차이를 가지고 있습니다. 따라서 분류에 상당한 모호성을 갖고 있습니다. 이러한 불확실성은 종종 사용자에게 예측 결과에 대한 타당성을 의심하도록 합니다.
 
-3.반사실적 설명
+__3.반사실적 설명__
 
 이 설명은 2번처럼 정확한 설명을 할 수 있으며 추가적으로 "반대적인 상황을 가정하여 그것이 아니라면 이것이다." 라는 답변을 제공합니다.
 
@@ -40,16 +40,16 @@ Galore는 이러한 문제를 해결하기 위해 제안되었으며, 분류 모
 
 ### IMPLEMENTATION
 
-1.Explanation Framework
+__1.Explanation Framework__
 
 H: X → Y는 이미지를 x∈X에서 클래스 y∈Y={1,…,C}로 매핑하며, 이는 y*=argmax h(x)로 표현됩니다.  
 여기서 h(x)는 합성곱으로 계산되고 $y^*$는 self-aware로서 이미지 x가 예측된 클래스 $y^*$에 속할 가능성을 나타내는 신뢰 점수를 생성합니다.
 
-2.Attributive explanations
+__2.Attributive explanations__
 
 기여 함수 a는 일반적으로 입력 이미지 x에 대해 추출된 공간적 크기 W×H 와 채널 수 D를 가지는 활성화 텐서에 적용됩니다. 대부분의 텐서 F는 h(x)에 대한 그래디언트 변형입니다.
 
-3.Counterfactual Explanations
+__3.Counterfactual Explanations__
 
 <img src="https://velog.velcdn.com/images/ski06043/post/c6aa5505-e9b0-4da7-8218-ddf90b1f6620/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 

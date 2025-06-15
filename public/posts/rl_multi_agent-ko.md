@@ -109,7 +109,7 @@ __4.리플레이 버퍼에서 그래프 구성 (Graph Construction from Replay B
 리플레이 버퍼 B에 저장된 관측 데이터를 이용해 가중치가 있는 방향 그래프를 구축합니다. 각 edge는 특정 상태 쌍에 대해 예측된 거리 및 비용 값을 가집니다. 아래와 같이 정의됩니다.
 
 $$
-d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)$, $c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
+d_{sp} \approx d_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j), c_{sp} \approx c_{\pi} \leftarrow Q(s, \pi(s_i, a, s_g), s_j)
 $$
 
 그래프 G는 V=B(그래프의 노드 집합은 버퍼 내 상태), E=B*B(모든 상태 쌍 간의 가능한 edge), $W_d$와 $W_c$는 각각 거리와 비용 가중치를 나타냅니다.

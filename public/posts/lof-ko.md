@@ -26,16 +26,16 @@ KDD는 "knowledge discovery in database"의 약어로 데이터베이스 내에�
 
 기존의 거리기반 접근법을 우선 소개하였습니다.
 
-정의 1: Hawkins
+__정의 1: Hawkins__
 
 "이상치는 다른 관측값들과 매우 다르게 나타나, 다른 메커니즘에 의해 생성되었다는 의심을 불러일으키는 관측값이다."
 이 방법론은 $o$ $p$ $q$를 사용해서 객체 $p$, $q$ 간의 거리를 $d(p,q)$로 표시한 아래의 수식으로 정의가 된다고 합니다.
 
 $$
-d(p,c) = min${$d(p,q)|q ∈ C$}
+d(p,c) = min{d(p,q)|q ∈ C}
 $$
 
-정의 2: DB($pct$, $dmin$)
+__정의 2: DB($pct$, $dmin$)__
 
 데이터셋 D의 객체 p는 D에 있는 객체의 최소 백분율 $pct$가 p로부터의 거리 $dmin$보다 크면 DB($pct$, $dmin$)-이상치이다. 즉, 집합 {$q∈D|d(p, q)≤dmin$}의 크기가 D 크기의 (100 - $pct$)% 이하인 경우를 말한다.이 방법론은 특정 유형의 이상치만을 포착하게 되는데 데이터셋을 전역적으로 바라보는 특징으로 인하여 이들은 특히 주변 밀도와 관련하여 국지적 이웃에 비해 이상치인 객체들 즉, "국지적" 이상치를 잘 구분해내지 못한다고 합니다.
 
@@ -45,17 +45,17 @@ $$
 
 이 논문에서 기존 Binary property가 아닌 degree of being an outlier를 나타내기 위해 사용한 개념 중 일부를 아래에 정리하였습니다.
 
-정의 1: $k$-distance of an object $p$
+__정의 1: $k$-distance of an object $p$__
 
 임의의 양의 정수 k에 대해, 객체 p의 $k$-거리($k$-distance(p))는 p와 객체 $o ∈ D$ 사이의 거리 $d(p,o)$로 정의되며, 다음 조건을 만족한다.
 (i) 적어도 $k$개의 객체 $o'$에 대해 $d(p,o')$ ≤ $d(p,o)$가 성립하고,
 (ii) 최대 $k-1$개의 객체 $o'$에 대해 $d(p,o')$ < $d(p,o)$가 성립합니다.
 
-정의 2: $k$-distance neighborhood of an object $p$
+__정의 2: $k$-distance neighborhood of an object $p$__
 
 $p$의 $k$-거리가 주어졌을 때, $p$의 $k$-거리 이웃은 $p$로부터의 거리가 $k$-거리보다 크지 않은 모든 객체를 포함합니다. 즉, { $q ∈ D{p}$ | $d(p, q)$ ≤ $k$-distance($p$) }를 만족하는 객체 $q$를 $p$의 $k$-최근접 이웃이라고 부르게 됩니다.
 
-사용 1: LOF에 대한 상한과 하한
+__사용 1: LOF에 대한 상한과 하한__
 
 클러스터 외부에 있는 객체들에 대한 이상치 정도는 일반화가 가능합니다. 모든 객체 p에 대해 $directmin(p)$는 $p$와 $p$의 최근접 이웃 사이의 최소 도달 가능성 거리를 나타냅니다. 또한 $directmax(p)$는  최대값을 나타냅니다.
 
@@ -64,11 +64,11 @@ Local Reachability Density(이하 LRD) 지표는 기준 데이터 근방 k개의
 <img src="https://velog.velcdn.com/images/ski06043/post/b4cfa621-6a01-46bb-8ac3-09dc51195466/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 $$
-lrd(p) = 1/directmax(p) \rightarrow directmax(p) = max { reach-dist($p$, $q$) | $q$ $∈$ NMinPts($p$) }
+lrd(p) = 1/directmax(p) \rightarrow directmax(p) = max { reach-dist(p, q) | q \in NMinPts(p) }
 $$
 
 $$
-lrd(o) = 1/indirectmax(p) \rightarrow indirectmax(p) = max { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$ $∈$ NMinPts($q$) }
+lrd(o) = 1/indirectmax(p) \rightarrow indirectmax(p) = max { reach-dist(q, o) | q \in NMinPts(p) and o \in NMinPts(q) }
 $$
 
 ---
