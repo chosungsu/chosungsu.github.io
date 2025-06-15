@@ -16,7 +16,7 @@ In contrast, data-driven causal discovery methods can recover global structures 
 
 ### Introduction
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/da251500-eaae-4fea-9c51-1a836d5a099a/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/da251500-eaae-4fea-9c51-1a836d5a099a/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 In real-world settings, limited data availability hinders causal discovery algorithms from accurately recovering causal structures. One solution is to leverage prior domain knowledge. For instance, providing a suitable prior graph can guide causal discovery algorithms when determining causal directions.
 
@@ -32,20 +32,22 @@ However, PLMs inherently suffer from two key drawbacks:
 
 ### Preliminaries
 
-#### 1. Causal Discovery Algorithms
+__1.Causal Discovery Algorithms__
 
 Causal discovery algorithms aim to recover a latent causal graph from numeric datasets, typically leveraging tabular data efficiently. Given a dataset \(X ∈ \mathbb{R}^{n×d}\) with \(d\) variables and \(n\) observations, a causal graph under linear assumptions can be represented as a structural coefficient matrix \(W ∈ \mathbb{R}^{d×d}\), where \(W_{i,j}\) denotes the linear effect of variable \(j\) on variable \(i\).
 
 - **DAG-GNN** (Yu et al., 2019): Uses variational autoencoders with an encoder-decoder structure and introduces acyclicity constraints and the evidence lower bound (ELBO) to approximate causal structures.
 - **NOTEARS** (Zheng et al., 2018): Reformulates combinatorial optimization as a continuous problem and minimizes the following objective:
 
-$$L(W) := \frac{1}{2n} \|X - XW\|_F^2 + \lambda \|W\|_1$$
+$$
+L(W) := \frac{1}{2n} \|X - XW\|_F^2 + \lambda \|W\|_1
+$$
 
 The first term is the Frobenius norm loss, measuring data fit. The second term is an \(l_1\)-regularization enforcing sparsity, controlled by hyperparameter \(\lambda\). Unlike DAG-GNN, it directly enforces acyclicity during optimization.
 
-#### 2. PLM-based Causal Reasoning
+__2.PLM-based Causal Reasoning__
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/2acf1f8c-50ef-49e2-92d8-fce864176ed3/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/2acf1f8c-50ef-49e2-92d8-fce864176ed3/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 Kıcıman et al. (2023) proposed using PLMs with multiple-choice prompts to extract pairwise causal relations. For each variable pair \((\alpha, \beta)\), a prompt is constructed to ask whether \(\alpha\) causally influences \(\beta\). This is repeated for all combinations to construct a causal graph.
 
@@ -55,22 +57,22 @@ Kıcıman et al. (2023) proposed using PLMs with multiple-choice prompts to extr
 
 Before proposing the framework, ablation studies were conducted to assess the impact of prompt artifacts on PLM-based causal reasoning.
 
-#### 1. Issue: Limited Capability to Comprehend Holistic Causal Structure
+__1.Issue: limited capability to comprehend holistic causal structure__ 
 
 Following Ban et al. (2023), a two-stage reasoning process was applied:
-- **Reasoning Phase:** PLM predicts pairwise causal relationships.
-- **Revision Phase:** PLM is given a revision prompt to refine the structure based on prior results.
+- __Reasoning Phase__: PLM predicts pairwise causal relationships.
+- __Revision Phase__: PLM is given a revision prompt to refine the structure based on prior results.
 
 Example revision prompt:  
 "Based on your explanations, verify the correctness of the following causal relations and explain why: {α}₁ → {β}₁, ..., {α}ᵢ → {β}ᵢ"
 
 However, revision through prompt engineering had minimal impact.
 
-#### 2. Given Actual Ground Truth
+__2.Given actual ground truth__
 
 Assuming low performance originated from poor initial reasoning, they provided ground-truth relations directly within prompts. Nonetheless, no significant improvement was observed.
 
-#### 3. Conclusion
+__3.Conclusion__
 
 These findings suggest that structure-aware causal inference with PLMs cannot be effectively achieved through prompt engineering alone.
 
@@ -78,24 +80,28 @@ These findings suggest that structure-aware causal inference with PLMs cannot be
 
 ### Causal Discovery with PLM
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 This paper proposes a framework that incorporates prior knowledge \(K\) extracted from PLMs. Given a dataset, prompts are used to extract pairwise causal relations, which are aggregated to form prior knowledge \(K\). This prior is then integrated into causal discovery algorithms in three ways:
 
-1. **Graph Initialization:**  
+__1.Graph Initialization__ 
 Instead of initializing the coefficient matrix \(W\) with zeros (as in Zheng et al., 2018), use:
 
-$$W = \lambda_{init} K$$
+$$
+W = \lambda_{init} K
+$$
 
 where \(\lambda_{init}\) is a scaling factor to avoid local optima.
 
-2. **Regularization:**  
+__2.Regularization__
 Add a regularization term that encourages learned structures to align with prior \(K\).
 
-3. **Setting Boundaries:**  
+__3.Setting Boundaries__  
 Introduce a similarity loss:
 
-$$L_{sim}(W) := \sum_{i,j} |\sigma(W_{i,j}) - K_{i,j}|$$
+$$
+L_{sim}(W) := \sum_{i,j} |\sigma(W_{i,j}) - K_{i,j}|
+$$
 
 Here, \(\sigma\) is a clamping function to keep \(W_{i,j}\) within [0,1], preventing gradient explosion.  
 Boundary settings vary based on \(K_{i,j}\):

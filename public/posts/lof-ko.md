@@ -31,7 +31,9 @@ KDD는 "knowledge discovery in database"의 약어로 데이터베이스 내에�
 "이상치는 다른 관측값들과 매우 다르게 나타나, 다른 메커니즘에 의해 생성되었다는 의심을 불러일으키는 관측값이다."
 이 방법론은 $o$ $p$ $q$를 사용해서 객체 $p$, $q$ 간의 거리를 $d(p,q)$로 표시한 아래의 수식으로 정의가 된다고 합니다.
 
-$d(p,c) = min${$d(p,q)|q ∈ C$}
+$$
+d(p,c) = min${$d(p,q)|q ∈ C$}
+$$
 
 정의 2: DB($pct$, $dmin$)
 
@@ -61,19 +63,26 @@ Local Reachability Density(이하 LRD) 지표는 기준 데이터 근방 k개의
 
 <img src="https://velog.velcdn.com/images/ski06043/post/b4cfa621-6a01-46bb-8ac3-09dc51195466/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-$lrd(p)$ = $1/directmax(p)$ 에서 $directmax(p)$ = $max$ { reach-dist($p$, $q$) | $q$ $∈$ NMinPts($p$) }
+$$
+lrd(p) = 1/directmax(p) \rightarrow directmax(p) = max { reach-dist($p$, $q$) | $q$ $∈$ NMinPts($p$) }
+$$
 
-$lrd(o)$ = $1/indirectmax(p)$ 에서 $indirectmax(p)$ = $max$ { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$ $∈$ NMinPts($q$) }
+$$
+lrd(o) = 1/indirectmax(p) \rightarrow indirectmax(p) = max { reach-dist($q$, $o$) | $q$ $∈$ NMinPts($p$) and $o$ $∈$ NMinPts($q$) }
+$$
 
 ---
 
 ### Minpts의 역할
 
-Minpts에 따른 LOF 변화
+#### Minpts에 따른 LOF 변화
+
 결론적으로 LOF 값은 MinPts 값에 대해 단조 증가하거나 단조 감소하지 않는다고 합니다.
+
 <img src="https://velog.velcdn.com/images/ski06043/post/6c69db18-59a0-4d22-b19c-4c9b3a3d655c/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-Minpts 범위 설정
+#### Minpts 범위 설정
+
 LOF 값이 단조적이지 않기 때문에 휴리스틱으로, LOF를 계산할 것을 제안하였고, 이 논문에서는 MinPts 범위의 "하한(lower bound)"과 "상한(upper bound)"을 각각 MinPtsLB와 MinPtsUB로 정의합니다.
 MinPtsLB는 특정 클러스터가 "지역적 이상치"와 구분되기 위해 필요한 최소 객체 수로 간주할 수 있습니다. 대부분의 데이터셋에서는 MinPtsLB를 10에서 20 사이로 설정하는 것이 일반적으로 적합합니다.
 MinPtsUB는 특정 "가까운(closed by)" 객체 집합 $C$가 지역적 이상치가 될 수 있는 최대 크기를 나타냅니다. 이에 따라 당연하게도 MinPts 값이 MinPtsUB를 초과하면, $C$의 모든 객체의 LOF 값은 1에 가까워집니다.

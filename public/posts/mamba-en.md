@@ -16,14 +16,14 @@ This projector uses cross‑attention to compress visual tokens based on input, 
 
 ### Introduction
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/f50d60e1-694d-48cc-9aef-5caac866a67f/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/f50d60e1-694d-48cc-9aef-5caac866a67f/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-#### Multimodal Large Language Models (MLLMs)
+__Multimodal Large Language Models (MLLMs)__
 
 MLLMs fuse visual information with text to leverage text‑based LLMs’ strengths in language generation and logical reasoning.  
 This integration shows significant potential in solving real‑world vision‑language tasks like VQA and multimodal dialogue response generation.
 
-#### Limitations of Transformer-based MLLMs
+__Limitations of Transformer-based MLLMs__
 
 Transformer’s self‑attention bottleneck causes quadratic increases in compute and memory as input length grows.  
 Although context window expansion techniques exist, computational burden remains a challenge.
@@ -46,24 +46,26 @@ We propose a novel cross‑modal projector for Mamba to address this gap.
 
 ### Related Works
 
-#### 1. State‑Space Models and Mamba  
+__1.State‑Space Models and Mamba__  
+
 - Architectures like LSSL, S4, S4D, and H3 progressively improved long‑range dependency modeling using SSMs.  
 - Mamba incorporates input‑dependent gating and overcomes limitations of prior SSMs.
 
-#### 2. Multimodal Large Language Models  
+__2.Multimodal Large Language Models__  
+
 - Cobra, VL‑Mamba, and others use SSMs for vision tasks, but they generally rely on fixed token counts and manual scan mechanisms.
 
 ---
 
 ### Method
 
-#### 1. Preliminaries  
+__1.Preliminaries__ 
 - SSMs map continuous functions $x(t)$ to outputs $y(t)$ via hidden states $h(t)$.  
 - Discretization adapts the continuous system to sequence data; Mamba dynamically adjusts SSM parameters (A, B, C, $delta$) at each time step.
 
-#### 2. Cross‑Modal Mamba Projector (Q‑Mamba)
+__2.Cross‑Modal Mamba Projector (Q‑Mamba)__
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/024f3e4e-f4a7-46a4-83a7-620e87a00522/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/024f3e4e-f4a7-46a4-83a7-620e87a00522/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 Q‑Mamba consists of:
 
@@ -73,18 +75,19 @@ Q‑Mamba consists of:
 
 This design supports scan-order independence, flexible query sequence lengths, and resembles Transformer Q‑Former.
 
-#### 3. MLLM Training Strategy  
+__3.MLLM Training Strategy__
+
 - Adopt a two-stage training strategy (inspired by LLaVA):  
-  1. Alignment stage – Align LLM using visual instruction-following datasets  
-  2. Fine‑tuning stage – Train the projector and the LLM end‑to‑end
+  - Alignment stage – Align LLM using visual instruction-following datasets  
+  - Fine‑tuning stage – Train the projector and the LLM end‑to‑end
 
 ---
 
 ### Causal Discovery with PLM
 
-![Example Image](https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png)
+<img src="https://velog.velcdn.com/images/ski06043/post/94900903-6d4f-4e68-853a-029ca30b1053/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-A PLM‑based causal inference framework leveraging prior knowledge $K$:  
+A PLM‑based causal inference framework leveraging prior knowledge $K$
 - Prompt-based causal extraction → pairwise relation aggregation → creation of prior $K$
 - Graph initialization, regularization, and boundary setting lead to a final binary adjacency matrix
 

@@ -10,8 +10,8 @@ When using deep learning models, users want to understand the predictions.
 Galore (Generalized Explanation Framework) was proposed to address this.  
 This approach computes:
 
-1. __Deliberative__ explanations: why a prediction is likely correct.  
-2. __Counterfactual__ explanations: why it is not something else.
+1.__Deliberative__ explanations: why a prediction is likely correct.  
+2.__Counterfactual__ explanations: why it is not something else.
 
 ---
 
@@ -34,17 +34,17 @@ considering probability similarities among top-k classes and self-awareness in p
 
 ### Galore
 
-1. __Attributive Explanations__
+1.Attributive Explanations
 
 These highlight likely contributing pixels.  
 While intuitive, they can lead to exhaustive enumeration and lack insight on high-level reasoning.
 
-2. __Deliberative Explanations__
+2.Deliberative Explanations
 
 Visual concepts are often subtly different.  
 This causes ambiguity in classification, and users may distrust predictions due to this uncertainty.
 
-3. __Counterfactual Explanations__
+3.Counterfactual Explanations
 
 These provide more precise reasoning, offering answers like:  
 "If it weren’t for this, it would have been that."
@@ -53,19 +53,19 @@ These provide more precise reasoning, offering answers like:
 
 ### IMPLEMENTATION
 
-1. __Explanation Framework__
+1.Explanation Framework
 
 Let $H: X \to Y$ be a classifier mapping an image $x \in X$ to a class $y \in Y = \{1, ..., C\}$.  
 Prediction is defined as: $y^* = \arg\max h(x)$.
 
 Here, $h(x)$ is a convolution-based function and $y^*$ includes a __self-awareness confidence score__.
 
-2. __Attributive Explanations__
+2.Attributive Explanations
 
 An attribution function $a$ is applied to an activation tensor with spatial size $W \times H$ and channels $D$, extracted from input $x$.  
 Most tensors $F$ are gradient variants of $h(x)$.
 
-3. __Counterfactual Explanations__
+3.Counterfactual Explanations
 
 <img src="https://velog.velcdn.com/images/ski06043/post/c6aa5505-e9b0-4da7-8218-ddf90b1f6620/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
@@ -75,7 +75,9 @@ The goal is to compare features and mark boundary differences.
 
 They define:
 
-$#R(x, y^*, y_c, x_c) = (D(x, y^*, y_c), D(x_c, y_c, y^*))#$
+$$
+R(x, y^*, y_c, x_c) = (D(x, y^*, y_c), D(x_c, y_c, y^*))
+$$
 
 - First heatmap identifies regions helpful for $y^*$ but not $y_c$.  
 - Second heatmap does the reverse on another image $x_c$.

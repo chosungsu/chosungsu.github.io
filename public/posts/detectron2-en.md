@@ -6,13 +6,13 @@ tags: ['xai', 'paper review']
 
 ### Overview
 
-#### 1. Instance Segmentation
+1.Instance Segmentation
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRHsAP%2FbtqWUpxkKIH%2FL7l9x3pcMKL8fBS2qEzbzk%2Fimg.jpg" style="display: block; margin: 0 auto; height:200;" />
 
 Instance segmentation is a challenging task because it requires accurately detecting all objects in an image while precisely segmenting each instance.
 
-#### 2. Mask R-CNN
+2.Mask R-CNN
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcx1zeb%2FbtqWX5EbBpp%2FSDi2o1RDnpCCs2ckVpA8d0%2Fimg.png" style="display: block; margin: 0 auto; height:200;" />
 
@@ -34,7 +34,7 @@ In this paper, object detection algorithms are implemented using Facebook AI Res
 
 ### Introduction to Detectron
 
-Detectron aims to:
+Detectron aims to.
 
 - Provide high quality
 - Deliver high performance

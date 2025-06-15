@@ -35,9 +35,9 @@ This paper aims to increase the resolution of the output by adding an expanding 
 
 This architecture consists of two components:
 
-1. contracting path (left)
+1.contracting path (left)
 
-2. expansive path (right)
+2.expansive path (right)
 
 The contracting path follows the convolutional network, using two 3×3 convolutions, ReLU as the activation function, and performs downsampling through 2×2 max pooling and 2 strides.
 
@@ -67,9 +67,9 @@ $$
 
 Here, $l : \Omega \rightarrow {1, ..., K}$ is the actual class label for each pixel, and $w : \Omega \rightarrow R$ is a weight map introduced to give greater weight to some pixels. This weight map is pre-computed for the following purposes:
 
-1. To compensate for differences in pixel frequency of specific classes
+1.To compensate for differences in pixel frequency of specific classes
 
-2. To encourage learning of borders that separate adjacent cells
+2.To encourage learning of borders that separate adjacent cells
 
 The above border is calculated through morphological operations and is defined as follows:
 
@@ -79,7 +79,7 @@ $$
 
 Here, $w_c(x)$ is the weight that corrects class frequency, $d_1(x)$, $d_2(x)$ are set as the distances to the cell boundaries in order of proximity, and in the experiment, $w_0$=10 and $\sigma$=5 pixels were set.
 
-In deep networks, weight initialization is important due to the existence of multiple layers and paths. The ideal initial weights should be adjusted so that all feature maps have approximately variance 1. Weight initialization samples from a gaussian distribution with mean 0 and standard deviation $\sqrt{2}{N}$, where N is the number of nodes input to one neuron, for example, N=3x3x64=576 in a 3x3 convolution with 64 channels.
+In deep networks, weight initialization is important due to the existence of multiple layers and paths. The ideal initial weights should be adjusted so that all feature maps have approximately variance 1. Weight initialization samples from a gaussian distribution with mean 0 and standard deviation $\sqrt{2N}$, where N is the number of nodes input to one neuron, for example, N=3x3x64=576 in a 3x3 convolution with 64 channels.
 
 ---
 

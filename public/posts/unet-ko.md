@@ -35,9 +35,9 @@ Deep Convolution Networks는 다양한 시각 인식 과제에서 최고의 성�
 
 이 아키텍처는 두 가지 구성 요소로 이루어져 있습니다.
 
-1. contracting path (좌측)
+1.contracting path (좌측)
 
-2. expansive path (우측)
+2.expansive path (우측)
 
 Contracting path는 컨볼루션 네트워크를 따르고 두 개의 3×3 합성곱, ReLU를 활성화 함수로 사용하며, 2×2 max pooling and 2 strides을 통해 downsampling을 수행합니다.  
 
@@ -67,9 +67,9 @@ $$
 
 여기서 $l : \Omega \rightarrow {1, ..., K}$는 각 픽셀의 실제 클래스 레이블이며 $w : \Omega \rightarrow R$은 일부 픽셀에 더 큰 weight을 부여하기 위해 도입한 weight map입니다. 이 weight map은 다음과 같은 목적을 위해 사전계산이 됩니다.
 
-1. 특정 클래스의 픽셀 빈도 차이를 보상하기 위해
+1.특정 클래스의 픽셀 빈도 차이를 보상하기 위해
 
-2. 붙어 있는 셀 사이를 분리하는 border를 학습하도록 유도하기 위해
+2.붙어 있는 셀 사이를 분리하는 border를 학습하도록 유도하기 위해
 
 위 border는 형태학적 연산(morphological operations)를 통해 계산이 되는데 아래와 같이 정의됩니다.
 
@@ -79,7 +79,7 @@ $$
 
 여기서 $w_c(x)$는 클래스 빈도를 보정하는 가중치, $d_1(x)$, $d_2(x)$는 거리에서 가까운 순의 셀 경계까지의 거리로 정하고 실험에서는 $w_0$=10, $\sigma$=5 픽셀로 설정하였습니다.
 
-deep networks에서는 여러 층과 경로가 존재하므로 가중치 초기화가 중요합니다. 이상적인 초기 가중치는 모든 feature map이 대략 분산 1을 갖도록 조정되어야 합니다. 가중치 초기화는 평균 0, 표준편차 $\sqrt{2}{N}$을 갖는 gaussian 분포에서 샘플링하는데 N은 뉴련 하나에 입력되는 노드 수를 의미하고 예를 들어 3x3 컨볼루션과 채널 64에서 N=3x3x64=576입니다.
+deep networks에서는 여러 층과 경로가 존재하므로 가중치 초기화가 중요합니다. 이상적인 초기 가중치는 모든 feature map이 대략 분산 1을 갖도록 조정되어야 합니다. 가중치 초기화는 평균 0, 표준편차 $\sqrt{2N}$을 갖는 gaussian 분포에서 샘플링하는데 N은 뉴련 하나에 입력되는 노드 수를 의미하고 예를 들어 3x3 컨볼루션과 채널 64에서 N=3x3x64=576입니다.
 
 ---
 

@@ -6,13 +6,13 @@ tags: ['object detection', 'paper review']
 
 ### Overview
 
-1. instance segmentation
+1.instance segmentation
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRHsAP%2FbtqWUpxkKIH%2FL7l9x3pcMKL8fBS2qEzbzk%2Fimg.jpg" style="display: block; margin: 0 auto; height:200;" />
 
 이미지에서 모든 객체를 정확히 탐지하는 동시에 각 인스턴스를 세밀하게 분할해야 하기 때문에 도전적인 태스크입니다.
 
-2. mask rcnn
+2.mask rcnn
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcx1zeb%2FbtqWX5EbBpp%2FSDi2o1RDnpCCs2ckVpA8d0%2Fimg.png" style="display: block; margin: 0 auto; height:200;" />
 
@@ -36,12 +36,10 @@ Faster R-CNN을 확장하여 각 관심 영역(RoI)에 대한 분할 마스크�
 
 ### Introduction
 
-Detectron의 목표는 다음과 같습니다:
+Detectron의 목표는 다음과 같습니다.
 
 - 고품질
-
 - 고성능
-
 - 객체 탐지 연구를 위한 코드베이스 제공
 
 ---

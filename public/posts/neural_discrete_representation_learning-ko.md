@@ -27,7 +27,9 @@ tags: ['anomaly detection', 'paper review']
 
 위 이미지에서처럼 모델은 입력 x를 받아 인코더를 통해 z(x)를 출력하게 된다. 이 때 이산 잠재 변수는 공간에서 최근접 이웃 탐색으로 계산된다. 또한 디코더에 이르기 이전에 posterior categorical distribution 계산은 아래의 수식으로 구성하였다.
 
-$$q(z = k|x) =\begin{cases} 1 & \text{if } k = \arg \min_j \|z_e(x) - e_j\|^2, \\0 & \text{otherwise}.\end{cases}$$
+$$
+q(z = k|x) =\begin{cases} 1 & \text{if } k = \arg \min_j \|z_e(x) - e_j\|^2, \\0 & \text{otherwise}.\end{cases}
+$$
 
 원핫 인코딩 형태로 정의가 되며 z에 대해 단순한 균일 분포로써 KL 발산은 상수가 된다.
 
@@ -35,15 +37,15 @@ $$q(z = k|x) =\begin{cases} 1 & \text{if } k = \arg \min_j \|z_e(x) - e_j\|^2, \
 
 ### Experiments
 
-1. 연속변수와의 비교
+1.연속변수와의 비교
 
-첫 번째 실험으로, VQ-VAE를 연속 변수를 사용하는 일반적인 VAE 및 독립적인 가우시안 또는 범주형 사전 분포를 가지는 VIMCO와 비교했으며 인코더를 stride 2에 4 by 4 크기로 두개의 convolution layer와 두개의 residual 3 by 3 블록 내부에는 Relu + 3 by 3 convolution layer + Relu + 1 by 1 convolution layer로 구성하였다고 합니다. 결과는 VAE 4.51 bits/dim에 근접한 4.67 bits/dim을 기록했다고 합니다.
+첫 번째 실험으로, VQ-VAE를 연속 변수를 사용하는 일반적인 VAE 및 독립적인 가우시안 또는 범주형 사전 분포를 가지는 VIMCO와 비교했으며 인코더를 stride 2에 4x4 크기로 두개의 convolution layer와 두개의 residual 3x3 블록 내부에는 Relu + 3x3 convolution layer + Relu + 1x1 convolution layer로 구성하였다고 합니다. 결과는 VAE 4.51 bits/dim에 근접한 4.67 bits/dim을 기록했다고 합니다.
 
-2. 오디오 데이터
+2.오디오 데이터
 
 <img src="https://velog.velcdn.com/images/ski06043/post/6fec4680-8f82-402a-b173-91a85f34d66a/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
-두번째로 가져온 실험은 오디오 데이터인 VCTK와 비교했으며 인코더를 stride 2이고 4 by 4 크기인 6개의 convolution layer를 구성하였다고 합니다. 64배 작은 잠재 공간을 생성할 수 있었고 완벽한 복원은 불가하였으나 파형과 음성의 억양이 달라진 점으로 보아 고수준 추상 공간을 학습하였다는 의미를 발견하여 더 큰 데이터셋으로 128배 작은 잠재 공간으로 수정한 모델로 사전 훈련시켜 클래스 분류 정확도 49.3%에 랜덤 정확도 7.2%를 기록했다고 합니다.
+두번째로 가져온 실험은 오디오 데이터인 VCTK와 비교했으며 인코더를 stride 2이고 4x4 크기인 6개의 convolution layer를 구성하였다고 합니다. 64배 작은 잠재 공간을 생성할 수 있었고 완벽한 복원은 불가하였으나 파형과 음성의 억양이 달라진 점으로 보아 고수준 추상 공간을 학습하였다는 의미를 발견하여 더 큰 데이터셋으로 128배 작은 잠재 공간으로 수정한 모델로 사전 훈련시켜 클래스 분류 정확도 49.3%에 랜덤 정확도 7.2%를 기록했다고 합니다.
 
 ---
 
