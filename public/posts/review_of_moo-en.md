@@ -141,7 +141,7 @@ When determining the optimal solution in relay node selection using complete enu
 
 #### 2. Scalarization
 
-Cross-layer optimization is used for optimal relay selection in multi-hop wireless ad-hoc networks, where fairness is given to each resource and equal weights are assigned. Each environment has 32 nodes, with node 1 as the transmitting node and node 32 as the receiving node, and the rest assumed to be relays. The path pair combinations consist of 3-hop and 3-hop, with a total of (N-2)(N-3)P_2^{(N-2)-2} combinations.
+Cross-layer optimization is used for optimal relay selection in multi-hop wireless ad-hoc networks, where fairness is given to each resource and equal weights are assigned. Each environment has 32 nodes, with node 1 as the transmitting node and node 32 as the receiving node, and the rest assumed to be relays. The path pair combinations consist of 3-hop and 3-hop, with a total of $(N-2)(N-3)P_2^{(N-2)-2}$ combinations.
 
 The scalarization technique determines optimal values using a Genetic Algorithm (GA), which took 13.96 hours in a 500-iteration search. Also, when different weights are set for each function, the optimal path pairs change, and it was reported to be about 3.72 times faster than the complete enumeration method.
 
