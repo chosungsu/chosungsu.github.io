@@ -69,11 +69,11 @@ In MOO, dominated solutions and optimal values are typically achieved when the v
 
 For two objective functions $f_1(x)$, $f_2(x)$ with different objectives, the Pareto optimal front can appear in three combinations:
 
-1. If f_1(x) is to be minimized and f_2(x) is to be maximized, it forms a convex shape descending from the right
+1. If $f_1(x)$ is to be minimized and $f_2(x)$ is to be maximized, it forms a convex shape descending from the right
 
-2. If f_1(x) is to be maximized and f_2(x) is to be minimized, it forms an upper convex shape descending to the left
+2. If $f_1(x)$ is to be maximized and $f_2(x)$ is to be minimized, it forms an upper convex shape descending to the left
 
-3. If f_1(x) is to be maximized and f_2(x) is to be maximized, it forms an upper convex shape ascending to the right
+3. If $f_1(x)$ is to be maximized and $f_2(x)$ is to be maximized, it forms an upper convex shape ascending to the right
 
 When the ideal point obtained at the intersection of the maximum and minimum values of each objective function is called the utopia point, the optimal value closest to this point can be found using Euclidean distance. However, if there are more than 3 objective functions, visualization of the POF becomes difficult.
 
@@ -115,7 +115,7 @@ F(x) = -\frac{w_1f_1(x)}{\sqrt{E(f_1^2(x))}} \\
 - \frac{w_3f_3(x)}{\sqrt{E(f_3^2(x))}}
 $$
 
-In the above equation, F(x) is the fitness function, f_k(x) is the objective function, and w_k represents the weight.
+In the above equation, $F(x)$ is the fitness function, $f_k(x)$ is the objective function, and $w_k$ represents the weight.
 
 ---
 
