@@ -1,7 +1,7 @@
 ---
 title: 'matrix decompostions'
 date: '2024-05-06'
-tags: ['Probability&Statistics', 'math']
+tags: ['Probability&Statistics', 'lecture']
 ---
 
 ### spectral decomposition

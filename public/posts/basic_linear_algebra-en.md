@@ -1,7 +1,7 @@
 ---
 title: 'Basic linear algebra'
 date: '2024-05-03'
-tags: ['Probability&Statistics', 'math']
+tags: ['Probability&Statistics', 'lecture']
 ---
 
 ### vector space
