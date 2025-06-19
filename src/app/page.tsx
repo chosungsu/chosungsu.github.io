@@ -16,6 +16,17 @@ export default async function Home() {
   const koreanPosts = allPosts.filter(post => post.id.endsWith('-ko'));
   const latestPosts = koreanPosts.slice(0, 2);
 
+  // 태그별 색상 매핑
+  const getTagColor = (tag: string) => {
+    const colorMap: { [key: string]: string } = {
+      'paper review': 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100',
+      'math': 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100',
+      'ai': 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100',
+    };
+    
+    return colorMap[tag] || 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100';
+  };
+
   // 프로젝트 ID에서 기본 ID 추출 (언어 코드 제거)
   const getBaseProjectId = (fullId: string) => {
     return fullId.replace(/-[a-z]{2}$/, '');
@@ -149,14 +160,21 @@ export default async function Home() {
                   <div className="flex space-x-2 items-center">
                     {/* 태그 상세: 중간 이상 화면에서 표시 */}
                     <div className="hidden sm:flex space-x-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {post.tags.map((tag, index) => {
+                        const isMainTag = index === post.tags.length - 1; // 마지막 태그가 main 태그
+                        return (
+                          <span
+                            key={tag}
+                            className={`px-2 py-1 rounded text-sm ${
+                              isMainTag 
+                                ? `${getTagColor(tag)} font-medium` 
+                                : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        );
+                      })}
                     </div>
                     {/* 태그 개수: 작은 화면에서만 표시 */}
                     {post.tags.length > 0 && (

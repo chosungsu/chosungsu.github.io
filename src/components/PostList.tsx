@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import { PostData } from '@/utils/mdUtils';
 import FormattedDate from './FormattedDate';
-import { CalendarArrowDown, CalendarArrowUp, Search, ChevronRight } from 'lucide-react';
+import { CalendarArrowDown, CalendarArrowUp, Search, ChevronRight, Tag } from 'lucide-react';
 import ScrollToTop from './ScrollToTop';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
@@ -23,7 +23,20 @@ export default function PostList({ initialPosts }: PostListProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isDescending, setIsDescending] = useState(true);
+  const [selectedMainTag, setSelectedMainTag] = useState<string>('');
+  const [showTagFilter, setShowTagFilter] = useState(false);
   const { ref, inView } = useInView();
+
+  // 태그별 색상 매핑
+  const getTagColor = (tag: string) => {
+    const colorMap: { [key: string]: string } = {
+      'paper review': 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100',
+      'math': 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100',
+      'ai': 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100',
+    };
+    
+    return colorMap[tag] || 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100';
+  };
 
   // Dialog가 닫힐 때 검색어 초기화
   const handleOpenChange = (open: boolean) => {
@@ -32,6 +45,28 @@ export default function PostList({ initialPosts }: PostListProps) {
       setSearchTerm('');
     }
   };
+
+  // 모든 main 태그 추출 (각 포스트의 마지막 태그가 main 태그)
+  const allMainTags = useMemo(() => {
+    const mainTags = new Set<string>();
+    koreanPosts.forEach(post => {
+      if (post.tags.length > 0) {
+        mainTags.add(post.tags[post.tags.length - 1]); // 마지막 태그가 main 태그
+      }
+    });
+    return Array.from(mainTags).sort();
+  }, [koreanPosts]);
+
+  // 선택된 main 태그로 필터링된 포스트
+  const filteredByMainTag = useMemo(() => {
+    if (!selectedMainTag) return koreanPosts;
+    return koreanPosts.filter(post => {
+      if (post.tags.length > 0) {
+        return post.tags[post.tags.length - 1] === selectedMainTag; // 마지막 태그가 main 태그
+      }
+      return false;
+    });
+  }, [koreanPosts, selectedMainTag]);
 
   const sortPosts = useMemo(() => {
     return (posts: PostData[]) => {
@@ -54,10 +89,10 @@ export default function PostList({ initialPosts }: PostListProps) {
     });
   }, [koreanPosts, searchTerm]);
 
-  // 정렬된 포스트 - 메인 리스트용
+  // 정렬된 포스트 - 메인 리스트용 (main 태그 필터 적용)
   const sortedPosts = useMemo(() => {
-    return sortPosts(koreanPosts);
-  }, [koreanPosts, sortPosts]);
+    return sortPosts(filteredByMainTag);
+  }, [filteredByMainTag, sortPosts]);
 
   // 초기 프로젝트 로딩 및 필터/정렬 변경 시 업데이트
   useEffect(() => {
@@ -81,6 +116,10 @@ export default function PostList({ initialPosts }: PostListProps) {
     setIsDescending(!isDescending);
   };
 
+  const toggleTagFilter = () => {
+    setShowTagFilter(!showTagFilter);
+  };
+
   // 프로젝트 ID에서 기본 ID 추출 (언어 코드 제거)
   const getBasePostId = (fullId: string) => {
     return fullId.replace(/-[a-z]{2}$/, '');
@@ -89,13 +128,27 @@ export default function PostList({ initialPosts }: PostListProps) {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        {/* 검색 아이콘 버튼 */}
-        <button
-          onClick={() => setShowSearchModal(true)}
-          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-        >
-          <Search className="w-4 h-4 text-gray-600 dark:text-gray-300" />
-        </button>
+        <div className="flex items-center gap-2">
+          {/* 검색 아이콘 버튼 */}
+          <button
+            onClick={() => setShowSearchModal(true)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          >
+            <Search className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+          </button>
+
+          {/* 태그 필터 토글 버튼 */}
+          <button
+            onClick={toggleTagFilter}
+            className={`p-2 rounded-full transition-colors ${
+              showTagFilter || selectedMainTag !== ''
+                ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100' 
+                : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300'
+            }`}
+          >
+            <Tag className="w-4 h-4" />
+          </button>
+        </div>
 
         {/* 날짜 정렬 버튼 */}
         <button
@@ -110,6 +163,41 @@ export default function PostList({ initialPosts }: PostListProps) {
           )}
         </button>
       </div>
+
+      {/* 태그 필터 chip UI */}
+      {showTagFilter && (
+        <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="flex flex-wrap gap-2">
+            {/* All 태그 버튼 */}
+            <button
+              onClick={() => setSelectedMainTag('')}
+              className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                selectedMainTag === '' 
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100' 
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
+              }`}
+            >
+              All
+            </button>
+
+            {/* main 태그 필터 버튼들 */}
+            {allMainTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setSelectedMainTag(selectedMainTag === tag ? '' : tag)}
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  selectedMainTag === tag 
+                    ? getTagColor(tag)
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="space-y-6">
         {displayedPosts.map((post) => (
           <Link
@@ -128,14 +216,21 @@ export default function PostList({ initialPosts }: PostListProps) {
               <div className="flex space-x-2 items-center">
                 {/* 태그 상세: 중간 이상 화면에서 표시 */}
                 <div className="hidden sm:flex space-x-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {post.tags.map((tag, index) => {
+                    const isMainTag = index === post.tags.length - 1; // 마지막 태그가 main 태그
+                    return (
+                      <span
+                        key={tag}
+                        className={`px-2 py-1 rounded text-sm ${
+                          isMainTag 
+                            ? `${getTagColor(tag)} font-medium` 
+                            : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
                 {/* 태그 개수: 작은 화면에서만 표시 */}
                 {post.tags.length > 0 && (
