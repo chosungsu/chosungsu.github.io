@@ -8,7 +8,7 @@ tags: ['Probability&Statistics', 'lecture']
 
 symmetric matrix $A \in R^{n*n}$이 있을 때 diagonal matrix $D$와 orthogonal matrix $V$가 존재한다면 $A = VDV^T$로 계산이 가능합니다.
 
-diagonal matrix D = diag(d1, ..., d_n)에서 d_i \in R은 A행렬의 eigenvaue입니다.
+diagonal matrix D = diag($d1, ..., d_n$)에서 $d_i \in R$은 $A$행렬의 eigenvaue입니다.
 
 ---
 

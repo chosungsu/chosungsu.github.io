@@ -8,7 +8,7 @@ tags: ['Probability&Statistics', 'lecture']
 
 When there is a symmetric matrix $A \in R^{n*n}$, if there exist a diagonal matrix $D$ and an orthogonal matrix $V$, it can be calculated as $A = VDV^T$.
 
-In the diagonal matrix D = diag(d1, ..., d_n), d_i \in R is the eigenvalue of matrix A.
+In the diagonal matrix D = diag($d1, ..., d_n$), $d_i \in R$ is the eigenvalue of matrix $A$.
 
 ---
 
