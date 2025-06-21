@@ -1,5 +1,5 @@
 ---
-title: 'Convex_analysis_and_optimization'
+title: 'Convex analysis and optimization'
 date: '2024-05-24'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -41,7 +41,7 @@ $$
 또한 아래의 계산식으로도 convex임을 확인할 수 있습니다.
 
 $$
-f(y) \ge f(x) + \nabla f(x)^{top}(y-x)
+f(y) \ge f(x) + \nabla f(x)^{\top}(y-x)
 $$
 
 ---
@@ -51,7 +51,7 @@ $$
 $f:R^n \rightarrow R$과 vector $z \in R^n$을 $x$가 아래의 수식을 만족할 경우 subgradient of $f$라고 할 수 있습니다.
 
 $$
-f(y) \ge f(x) + z^{top}(y-x)
+f(y) \ge f(x) + z^{\top}(y-x)
 $$
 
 $x$에 대해 적어도 하나 이상의 subgradient가 존재한다면 함수 $f$를 $x$에 대해 subdifferentiable하다고 합니다. 이를 기호로 $\partial f(x)$로 표현합니다.
@@ -68,13 +68,13 @@ $f$가 convex이고 $\nabla^2 f(x)$가 nonnegative definite한 상태가 되는 
 
 ### convex conjugate
 
-$f : R^n \rightarrow R$이고 $f^* : R^n \rightarrow R$인 두 함수가 있을 때 $f^*(y) = sup_{x \in Dom(f)} (y^{top}x - f(x))$로 정의가 되는데 $Dom(f^*) = \{y:f^*(y) < \infty\}$인 조건과 함께 convex/Fenchel conjugate라고 합니다. 참고로 Fenchel's inequality는 아래와 같습니다.
+$f : R^n \rightarrow R$이고 $f^* : R^n \rightarrow R$인 두 함수가 있을 때 $f^*(y) = sup_{x \in Dom(f)} (y^{\top}x - f(x))$로 정의가 되는데 $Dom(f^*) = \{y:f^*(y) < \infty\}$인 조건과 함께 convex/Fenchel conjugate라고 합니다. 참고로 Fenchel's inequality는 아래와 같습니다.
 
 $$
 x^{top}y \le f(x) + f^*(Y)
 $$
 
-이를 $x$, $y$를 미분의 형태로 변환이 가능한데 $x \in \partial f^*(y)$, $y \in \partial f(x)$로 생각할 수 있습니다. legendre duality 이론에 의해서 $f^** = f$로 서로 동일한 condition임을 확인할 수도 있습니다.
+이를 $x$, $y$를 미분의 형태로 변환이 가능한데 $x \in \partial f^*(y)$, $y \in \partial f(x)$로 생각할 수 있습니다. legendre duality 이론에 의해서 $f^{**} = f$로 서로 동일한 condition임을 확인할 수도 있습니다.
 
 ---
 

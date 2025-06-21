@@ -1,5 +1,5 @@
 ---
-title: 'Basic_probability_and_statics'
+title: 'Basic probability and statics'
 date: '2024-05-13'
 tags: ['Probability&Statistics', 'lecture']
 ---

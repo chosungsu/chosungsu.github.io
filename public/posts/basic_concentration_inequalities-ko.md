@@ -1,5 +1,5 @@
 ---
-title: 'Basic_concentration_inequalities'
+title: 'Basic concentration inequalities'
 date: '2024-05-20'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -22,7 +22,7 @@ $x$가 정규분포를 따를 때 $Ee^{\lambda X} = e^{\mu \lambda + \frac{\sigm
 
 $Pr(X=1) = Pr(X=-1) = 1/2$가 되는 것을 rademacher variable이라고 하는데 이 변수는 $\sigma=1$일 때입니다. 이와 동일하게 $Pr(a \le X \le b) = 1$이라면 $X$는 $(b-a)/2$를 sub-gaussian parameter로 갖습니다.
 
-$X_1$, $X_2$가 각각 $\sigma_1$, $\sigma_2$를 sub gaussian variable로 갖는다면 둘이 독립인 경우에는 $X_1 + X_2$의 variable은 $\sqrt{\sigma_1^2+\sigma_2^2}$이 되고 그렇지 않은 경우에는 $\sqrt(2) \sqrt{\sigma_1^2 + \sigma_2^2}$가 됩니다.
+$X_1$, $X_2$가 각각 $\sigma_1$, $\sigma_2$를 sub gaussian variable로 갖는다면 둘이 독립인 경우에는 $X_1 + X_2$의 variable은 $\sqrt{\sigma_1^2+\sigma_2^2}$이 되고 그렇지 않은 경우에는 $\sqrt{2} \sqrt{\sigma_1^2 + \sigma_2^2}$가 됩니다.
 
 ---
 

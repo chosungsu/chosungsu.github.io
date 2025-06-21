@@ -1,5 +1,5 @@
 ---
-title: 'Convergence_of_random_variables'
+title: 'Convergence of random variables'
 date: '2024-05-17'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -109,7 +109,7 @@ $$
 
 #### 6.Hellinger metric
 
-밀도함수를 통해 hellinger metric를 구하면 $d_H(p,q) = \sqrt{\int (\sqrt(p) - \sqrt(q))^2 d\mu}$로 dominate measure인 $\mu$에 독립적이고 다변량 정규분포에서는 아래와 같이 공분산 행렬들의 기하적인 평균과 평균 벡터 간의 가중거리로 구성됩니다.
+밀도함수를 통해 hellinger metric를 구하면 $d_H(p,q) = \sqrt{\int (\sqrt{p} - \sqrt{q})^2 d\mu}$로 dominate measure인 $\mu$에 독립적이고 다변량 정규분포에서는 아래와 같이 공분산 행렬들의 기하적인 평균과 평균 벡터 간의 가중거리로 구성됩니다.
 
 $$
 1-d^2_h(p, q) = \frac{|\sum_1|^{1/4}|\sum_2|^{1/4}}{|(\sum_1+\sum_2)/2|^{1/2}}* \\

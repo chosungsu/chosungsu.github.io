@@ -1,5 +1,5 @@
 ---
-title: 'Convex_analysis_and_optimization'
+title: 'Convex analysis and optimization'
 date: '2024-05-24'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -41,7 +41,7 @@ Here, $f$ can be extended to $R^n$.
 Also, convexity can be confirmed using the following calculation formula:
 
 $$
-f(y) \ge f(x) + \nabla f(x)^{top}(y-x)
+f(y) \ge f(x) + \nabla f(x)^{\top}(y-x)
 $$
 
 ---
@@ -51,7 +51,7 @@ $$
 For $f:R^n \rightarrow R$ and vector $z \in R^n$, if $x$ satisfies the following equation, it can be called a subgradient of $f$:
 
 $$
-f(y) \ge f(x) + z^{top}(y-x)
+f(y) \ge f(x) + z^{\top}(y-x)
 $$
 
 If at least one subgradient exists for $x$, the function $f$ is said to be subdifferentiable at $x$. This is expressed as $\partial f(x)$ in notation.
@@ -68,13 +68,13 @@ It means that $f$ is convex and $\nabla^2 f(x)$ is nonnegative definite.
 
 ### convex conjugate
 
-When there are two functions $f : R^n \rightarrow R$ and $f^* : R^n \rightarrow R$, $f^*(y) = sup_{x \in Dom(f)} (y^{top}x - f(x))$ is defined, and together with the condition $Dom(f^*) = \{y:f^*(y) < \infty\}$, it is called convex/Fenchel conjugate. Note that Fenchel's inequality is as follows:
+When there are two functions $f : R^n \rightarrow R$ and $f^* : R^n \rightarrow R$, $f^*(y) = sup_{x \in Dom(f)} (y^{\top}x - f(x))$ is defined, and together with the condition $Dom(f^*) = \{y:f^*(y) < \infty\}$, it is called convex/Fenchel conjugate. Note that Fenchel's inequality is as follows:
 
 $$
 x^{top}y \le f(x) + f^*(Y)
 $$
 
-This can be transformed into differential form for $x$ and $y$ as $x \in \partial f^*(y)$, $y \in \partial f(x)$. According to Legendre duality theory, it can also be confirmed that $f^** = f$ are identical conditions.
+This can be transformed into differential form for $x$ and $y$ as $x \in \partial f^*(y)$, $y \in \partial f(x)$. According to Legendre duality theory, it can also be confirmed that $f^{**} = f$ are identical conditions.
 
 ---
 

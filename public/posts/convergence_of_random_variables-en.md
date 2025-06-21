@@ -1,5 +1,5 @@
 ---
-title: 'Convergence_of_random_variables'
+title: 'Convergence of random variables'
 date: '2024-05-17'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -109,7 +109,7 @@ The coupling inequality consists of probability distributions ($X$, $Y$) with jo
 
 #### 6.Hellinger metric
 
-When finding the Hellinger metric through density functions, $d_H(p,q) = \sqrt{\int (\sqrt(p) - \sqrt(q))^2 d\mu}$ is independent of the dominating measure $\mu$, and in multivariate normal distribution, it is composed of the geometric mean of covariance matrices and weighted distance between mean vectors as follows:
+When finding the Hellinger metric through density functions, $d_H(p,q) = \sqrt{\int (\sqrt{p} - \sqrt{q})^2 d\mu}$ is independent of the dominating measure $\mu$, and in multivariate normal distribution, it is composed of the geometric mean of covariance matrices and weighted distance between mean vectors as follows:
 
 $$
 1-d^2_h(p, q) = \frac{|\sum_1|^{1/4}|\sum_2|^{1/4}}{|(\sum_1+\sum_2)/2|^{1/2}}* \\

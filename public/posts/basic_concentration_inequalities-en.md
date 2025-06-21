@@ -1,5 +1,5 @@
 ---
-title: 'Basic_concentration_inequalities'
+title: 'Basic concentration inequalities'
 date: '2024-05-20'
 tags: ['Probability&Statistics', 'lecture']
 ---
@@ -22,7 +22,7 @@ The difference from the above Gaussian is that it is defined as $Ee^{\lambda(X-\
 
 When $Pr(X=1) = Pr(X=-1) = 1/2$, it is called a Rademacher variable, and this variable has $\sigma=1$. Similarly, if $Pr(a \le X \le b) = 1$, then $X$ has $(b-a)/2$ as its sub-gaussian parameter.
 
-If $X_1$ and $X_2$ have $\sigma_1$ and $\sigma_2$ as sub-gaussian variables respectively, then when they are independent, the variable of $X_1 + X_2$ becomes $\sqrt{\sigma_1^2+\sigma_2^2}$, and when they are not independent, it becomes $\sqrt(2) \sqrt{\sigma_1^2 + \sigma_2^2}$.
+If $X_1$ and $X_2$ have $\sigma_1$ and $\sigma_2$ as sub-gaussian variables respectively, then when they are independent, the variable of $X_1 + X_2$ becomes $\sqrt{\sigma_1^2+\sigma_2^2}$, and when they are not independent, it becomes $\sqrt{2} \sqrt{\sigma_1^2 + \sigma_2^2}$.
 
 ---
 
