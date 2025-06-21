@@ -1,5 +1,5 @@
 ---
-title: 'othogonal projection'
+title: 'Othogonal projection'
 date: '2024-05-10'
 tags: ['Probability&Statistics', 'lecture']
 ---

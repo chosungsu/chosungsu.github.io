@@ -1,5 +1,5 @@
 ---
-title: 'matrix decompostions'
+title: 'Matrix decompostions'
 date: '2024-05-06'
 tags: ['Probability&Statistics', 'lecture']
 ---
