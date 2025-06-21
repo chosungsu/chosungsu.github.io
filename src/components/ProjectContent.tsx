@@ -220,14 +220,14 @@ export default function ProjectContent({ id }: ProjectContentProps) {
               },
               img: ({ src, alt }) => (
                 src ? (
-                  <div className="relative w-full h-[400px] my-8">
-                    <Image
-                      src={src}
-                      alt={alt || ''}
-                      fill
-                      className="object-cover rounded-lg"
-                    />
-                  </div>
+                  <Image
+                    src={src}
+                    alt={alt || ''}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="my-2 h-auto w-full rounded-lg"
+                  />
                 ) : null
               ),
               a: ({ href, ...props }) => (

@@ -29,6 +29,18 @@ export default function PostContent({ id }: PostContentProps) {
   // 기본 프로젝트 ID (언어 코드 제외)
   const baseId = id.replace(/-[a-z]{2}$/, '');
 
+  // 태그별 색상 매핑
+  const getTagColor = (tag: string) => {
+    const colorMap: { [key: string]: string } = {
+      'paper review': 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100',
+      'math': 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100',
+      'ai': 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100',
+      'lecture': 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100',
+    };
+    
+    return colorMap[tag] || 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100';
+  };
+
   useEffect(() => {
     setSelectedLang(id.endsWith('-ko') ? 'ko' : 'en');
   }, [id]);
@@ -121,14 +133,21 @@ export default function PostContent({ id }: PostContentProps) {
           <div className="flex flex-wrap justify-between items-center gap-4">
             <FormattedDate date={post.date} className="text-sm text-gray-600 dark:text-gray-400" />
             <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-                >
-                  {tag}
-                </span>
-              ))}
+              {post.tags.map((tag: string, index: number) => {
+                const isMainTag = index === post.tags.length - 1; // 마지막 태그가 main 태그
+                return (
+                  <span
+                    key={tag}
+                    className={`px-2 py-1 rounded text-sm ${
+                      isMainTag 
+                        ? `${getTagColor(tag)} font-medium` 
+                        : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
+                    }`}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
           </div>
           <div className="relative mt-4">
@@ -220,14 +239,14 @@ export default function PostContent({ id }: PostContentProps) {
               },
               img: ({ src, alt }) => (
                 src ? (
-                  <span className="block relative w-full h-[400px] my-8">
-                    <Image
-                      src={src}
-                      alt={alt || ''}
-                      fill
-                      className="object-cover rounded-lg"
-                    />
-                  </span>
+                  <Image
+                    src={src}
+                    alt={alt || ''}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="my-8 h-auto w-full rounded-lg"
+                  />
                 ) : null
               ),
               a: ({ href, ...props }) => (
