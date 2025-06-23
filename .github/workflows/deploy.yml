@@ -14,9 +14,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-env:
-  NODE_ENV: production
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +24,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "18"
           cache: npm
       
       - name: Setup Pages
@@ -37,10 +34,8 @@ jobs:
         run: npm ci
       
       - name: Build with Next.js
-        run: |
-          npm run build
-          touch out/.nojekyll
-      
+        run: npm run build
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
