@@ -6,8 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/chosungsu.github.io',
+  assetPrefix: '/chosungsu.github.io/',
   trailingSlash: true,
 };
 
