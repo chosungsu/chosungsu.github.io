@@ -10,11 +10,11 @@ tags: ['Operations Research 1', 'lecture']
 
 A loop is an ordered sequence of at least 4 different cells that satisfies all three conditions below:
 
-1. Two consecutive cells must be in the same row or column.
+1.Two consecutive cells must be in the same row or column.
 
-2. Three or more consecutive cells must not be in the same row or column.
+2.Three or more consecutive cells must not be in the same row or column.
 
-3. The last cell must be in the same row or column as the first cell.
+3.The last cell must be in the same row or column as the first cell.
 
 A loop can be thought of as a closed path.
 
