@@ -141,7 +141,7 @@ $$
 
 노드의 늦은 이벤트 시간에서 초기 이벤트 시간을 빼고 각 노드 사이 활동 기간을 뺀 것과 같습니다.
 
-위의 예시를 그대로 사용하고 Activity $B : TF(1, 2)=LT(2)-ET(1)-t_{12}=9-0-9=0$, dummy : TF(2, 3)=LT(3)-ET(2)-t_{23}=9-9-0=0$, Activity $A : TF(1, 3)=LT(3)-ET(1)-t_{13}=9-0-6=3$, Activity $C : TF(3, 4)=LT(4)-ET(3)-t_{34}=16-9-7=0$, Activity $D : TF(3, 5)=LT(5)-ET(3)-t_{35}=26-9-8=9$, Activity $E : TF(4, 5)=LT(5)-ET(4)-t_{45}=26-16-10=0$, Activity $F : TF(5, 6)=LT(6)-ET(5)-t_{56}=38-26-12=0$ 과 같이 계산됩니다.
+위의 예시를 그대로 사용하고 Activity $B : TF(1, 2)=LT(2)-ET(1)-t_{12}=9-0-9=0$, dummy $: TF(2, 3)=LT(3)-ET(2)-t_{23}=9-9-0=0$, Activity $A : TF(1, 3)=LT(3)-ET(1)-t_{13}=9-0-6=3$, Activity $C : TF(3, 4)=LT(4)-ET(3)-t_{34}=16-9-7=0$, Activity $D : TF(3, 5)=LT(5)-ET(3)-t_{35}=26-9-8=9$, Activity $E : TF(4, 5)=LT(5)-ET(4)-t_{45}=26-16-10=0$, Activity $F : TF(5, 6)=LT(6)-ET(5)-t_{56}=38-26-12=0$ 과 같이 계산됩니다.
 
 #### 3. critical activity and critical path
 
