@@ -51,7 +51,8 @@ This formula can be approximated as an empirical approximation using $m$ samples
 The initial policy gradient uses the total reward $R(\tau^{i})$ of $\tau^{i}$ and the expected value of the derivative of log probability.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \\
+\nabla_\theta E_\tau [R] = \\
+E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right)
 \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
 $$
 
@@ -76,7 +77,8 @@ When approximated as an empirical estimator, it becomes like this.
 Introducing a baseline $b(s)$ to reduce variance was an important decision. This greatly improves stability without introducing bias to the estimator.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \\
+\nabla_\theta E_\tau [R] = \\
+E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta)
 \left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
 $$
 

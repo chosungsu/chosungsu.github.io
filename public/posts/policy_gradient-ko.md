@@ -51,7 +51,8 @@ $$
 초기의 policy gradient는 $\tau^{i}$의 총 보상 $R(\tau^{i})$와 확률의 로그 미분의 기댓값을 사용합니다.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \\
+\nabla_\theta E_\tau [R] = \\
+E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right)
 \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
 $$
 
@@ -76,7 +77,8 @@ $$
 분산을 줄이기 위해 baseline $b(s)$를 도입하는 것은 중요한 결정이었습니다. 이는 추정치에 편향을 도입하지 않으면서도 안정성을 크게 향상시킵니다.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \\
+\nabla_\theta E_\tau [R] = \\
+E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta)
 \left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
 $$
 
