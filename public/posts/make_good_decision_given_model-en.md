@@ -61,7 +61,8 @@ Initialize $\pi_0(s)$ with random values.
 Repeat until $\pi$ no longer changes, compute the value function $V^{\pi_i}$ for the current policy through state-action value function $(Q^{\pi}(s,a))$ and use it to compute a new policy $\pi_{i+1}$.
 
 $$
-Q^{\pi}(s,a)=R(s,a)+\gamma \sum_{s' \in S} P(s'|s, a)V^{\pi}(s'), \\
+Q^{\pi}(s,a)=R(s,a) \\
++\gamma \sum_{s' \in S} P(s'|s, a)V^{\pi}(s'), \\
 \pi_{i+1}(s)=argmax_aQ^{\pi_i}(s, a) \forall s \in S
 $$
 
@@ -84,7 +85,8 @@ $$
 The reward model predicts immediate rewards.
 
 $$
-r(s_t=s, a_t=a)=E(r_t|s_t=s, a_t=a)
+r(s_t=s, a_t=a) \\
+=E(r_t|s_t=s, a_t=a)
 $$
 
 #### policy, $\pi$

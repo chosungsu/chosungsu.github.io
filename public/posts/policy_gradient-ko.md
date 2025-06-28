@@ -51,7 +51,8 @@ $$
 초기의 policy gradient는 $\tau^{i}$의 총 보상 $R(\tau^{i})$와 확률의 로그 미분의 기댓값을 사용합니다.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
+\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \\
+\left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
 $$
 
 이 수식은 편향되지 않은 추정치이지만 매우 큰 분산을 가질 수 있습니다. 그 이유는 $\tau$의 모든 보상이 행동에 대한 로그 확률 미분과 곱해지기 때문입니다.
@@ -64,7 +65,8 @@ $$
 위의 수식은 분산을 줄이기 위해 시간적 구조를 활용하여 재구성한 것입니다. 직전 수식과의 차이는 각 시간에서의 행동에 대한 로그 확률 미분이 해당 시점 이후에 얻는 총 보상 $G_t$가 곱해지도록 변경한 것입니다. 이렇게 재구성하면 과거의 행동은 보상에 영향은 주지만 현재 행동의 가치가 이후에 얻게 될 보상에만 의존한다는 temporal causality를 반영할 수 있습니다.
 
 $$
-\nabla_\theta E[R] \approx (1/m) \sum_{i=1}^m \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t^{(i)}, s_t^{(i)})G_t^{(i)}
+\nabla_\theta E[R] \approx \\
+(1/m) \sum_{i=1}^m \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t^{(i)}, s_t^{(i)})G_t^{(i)}
 $$
 
 경험적 추정치로 근사화하면 이와 같습니다.
@@ -74,7 +76,8 @@ $$
 분산을 줄이기 위해 baseline $b(s)$를 도입하는 것은 중요한 결정이었습니다. 이는 추정치에 편향을 도입하지 않으면서도 안정성을 크게 향상시킵니다.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
+\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \\
+\left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
 $$
 
 여기서 $G_t-b(s_t)$는 advantage estimate $\hat{A}_t$가 됩니다. 얻는 총 보상 $G_t$가 기대한 보상 $b(s_t)$보다 좋았다면 해당 행동의 확률을 높이고 반대인 경우는 확률을 낮추게 됩니다.
@@ -110,13 +113,15 @@ $$
 중요도 샘플링(importance sampling)을 사용한다면 다른 방식으로 재구성될 수 있습니다. 이는 샘플링 분포가 달라도 기댓값을 추정할 수 있는 방법입니다.
 
 $$
-J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi'}, a \sim \pi'} [A^{\pi}(s,a)]
+J(\pi')-J(\pi) \\
+=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi'}, a \sim \pi'} [A^{\pi}(s,a)]
 $$
 
 하지만 아직도 새로운 정책에 의존하고 추정치가 exploding 또는 vanishing 문제가 발생할 수 있어서 kl-divergence를 사용하는 방법이 제안되었습니다.
 
 $$
-J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi}, a \sim \pi} \left[\frac{\pi'(a|s)}{\pi(a|s)} A^{\pi}(s,a) \right]
+J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi}, a \sim \pi} \\
+\left[\frac{\pi'(a|s)}{\pi(a|s)} A^{\pi}(s,a) \right]
 $$
 
 이 근사된 함수는 이전 정책으로부터 최적화할 수 있다는 장점을 갖고 새 정책과 가까울 때 꽤 좋다고 연구 결과에서 알려지기도 했습니다.

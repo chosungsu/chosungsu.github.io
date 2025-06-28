@@ -49,7 +49,9 @@ monte carlo와 dp의 요소를 결합합니다. 모델을 몰라도 작동하고
 1단계 학습($TD(0)$)으로는 가치함수를 아래와 같이 업데이트합니다.
 
 $$
-V^{\pi}(s_t)=V^{\pi}(s_t)+\alpha([r_t+\gamma V^{\pi}(s_{t+1})]-V^{\pi}(s_t))
+V^{\pi}(s_t)=V^{\pi}(s_t) \\
++\alpha([r_t+\gamma V^{\pi}(s_{t+1})] \\
+-V^{\pi}(s_t))
 $$
 
 여기서 $r_t+\gamma V^{\pi}(s_{t+1})$를 td 타깃이라고 하며 [r_t+\gamma V^{\pi}(s_{t+1})]-V^{\pi}(s_t) 이를 td 에러라고 합니다.
@@ -63,7 +65,8 @@ mc와 달리 에피소드 종료를 기다릴 필요가 없으며 일반적으�
 mdp 모델에서 전이확률($\hat{P}$)와 보상함수($r$)을 최대 우도 방식으로 추정하는 방법입니다.
 
 $$
-\hat{P}(s'|s,a)=\frac{1}{N(s,a)}\sum_{k=1}^{i}(s_k=s, a_k=a, s_{k+1}=s'), \\
+\hat{P}(s'|s,a)=\frac{1}{N(s,a)} \\
+*\sum_{k=1}^{i}(s_k=s, a_k=a, s_{k+1}=s'), \\
 \hat{r}(s,a)=\frac{1}{N(s,a)}\sum_{k=1}^{i}(s_k=s, a_k=a)
 $$
 

@@ -51,7 +51,8 @@ This formula can be approximated as an empirical approximation using $m$ samples
 The initial policy gradient uses the total reward $R(\tau^{i})$ of $\tau^{i}$ and the expected value of the derivative of log probability.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
+\nabla_\theta E_\tau [R] = E_\tau \left[ \left( \sum_{t=0}^{T-1} r_t \right) \\
+\left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) \right]
 $$
 
 This formula is an unbiased estimator but can have very large variance. This is because all rewards of $\tau$ are multiplied by the derivative of log probability with respect to actions.
@@ -64,7 +65,8 @@ $$
 The above formula is reconstructed using temporal structure to reduce variance. The difference from the previous formula is that the derivative of log probability with respect to actions at each time is multiplied by the total reward $G_t$ obtained after that point. This reconstruction reflects temporal causality that past actions affect rewards, but the value of current actions depends only on rewards to be obtained in the future.
 
 $$
-\nabla_\theta E[R] \approx (1/m) \sum_{i=1}^m \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t^{(i)}, s_t^{(i)})G_t^{(i)}
+\nabla_\theta E[R] \approx \\
+(1/m) \sum_{i=1}^m \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t^{(i)}, s_t^{(i)})G_t^{(i)}
 $$
 
 When approximated as an empirical estimator, it becomes like this.
@@ -74,7 +76,8 @@ When approximated as an empirical estimator, it becomes like this.
 Introducing a baseline $b(s)$ to reduce variance was an important decision. This greatly improves stability without introducing bias to the estimator.
 
 $$
-\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
+\nabla_\theta E_\tau [R] = E_\tau \left[ \sum_{t=0}^{T-1} \nabla_\theta \log \pi(a_t|s_t; \theta) \\
+\left( \sum_{t'=t}^{T-1} r_{t'} - b(s_t) \right) \right]
 $$
 
 Here, $G_t-b(s_t)$ becomes the advantage estimate $\hat{A}_t$. If the total reward $G_t$ obtained is better than the expected reward $b(s_t)$, the probability of that action is increased, and vice versa.
@@ -110,13 +113,15 @@ The above formula was significant in that it defines the performance of the new 
 Using importance sampling, it can be reconstructed differently. This is a method to estimate expected values even when sampling distributions differ.
 
 $$
-J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi'}, a \sim \pi'} [A^{\pi}(s,a)]
+J(\pi')-J(\pi) \\
+=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi'}, a \sim \pi'} [A^{\pi}(s,a)]
 $$
 
 But it still depends on the new policy and the estimator can have exploding or vanishing problems, so a method using KL-divergence was proposed.
 
 $$
-J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi}, a \sim \pi} \left[\frac{\pi'(a|s)}{\pi(a|s)} A^{\pi}(s,a) \right]
+J(\pi')-J(\pi)=\frac{1}{1-\gamma} \mathbb{E}_{s \sim d^{\pi}, a \sim \pi} \\
+\left[\frac{\pi'(a|s)}{\pi(a|s)} A^{\pi}(s,a) \right]
 $$
 
 This approximated function has the advantage that it can be optimized from the previous policy, and research results have shown that it works quite well when the new policy is close.

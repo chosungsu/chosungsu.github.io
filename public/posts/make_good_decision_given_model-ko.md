@@ -61,7 +61,8 @@ $\pi_0(s)$를 무작위 값으로 초기화를 합니다.
 $\pi$가 더 이상 변하지 않을 때까지 반복하여 현재 정책에 대한 가치함수인 $V^{\pi i}$를 상태-행동 가치함수$(Q^{\pi}(s,a))$를 통해 계산하고 이를 사용하여 새로운 정책 $\pi_{i+1}$을 계산합니다.
 
 $$
-Q^{\pi}(s,a)=R(s,a)+\gamma \sum_{s' \in S} P(s'|s, a)V^{\pi}(s'), \\
+Q^{\pi}(s,a)=R(s,a) \\
++\gamma \sum_{s' \in S} P(s'|s, a)V^{\pi}(s'), \\
 \pi_{i+1}(s)=argmax_aQ^{\pi_i}(s, a) \forall s \in S
 $$
 
@@ -84,7 +85,8 @@ $$
 reward model은 즉각적인 보상을 예측합니다.
 
 $$
-r(s_t=s, a_t=a)=E(r_t|s_t=s, a_t=a)
+r(s_t=s, a_t=a) \\
+=E(r_t|s_t=s, a_t=a)
 $$
 
 #### policy, $\pi$

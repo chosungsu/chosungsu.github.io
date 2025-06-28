@@ -48,7 +48,9 @@ Combines elements of Monte Carlo and DP. It works without knowing the model and 
 For 1-step learning ($TD(0)$), the value function is updated as follows.
 
 $$
-V^{\pi}(s_t)=V^{\pi}(s_t)+\alpha([r_t+\gamma V^{\pi}(s_{t+1})]-V^{\pi}(s_t))
+V^{\pi}(s_t)=V^{\pi}(s_t) \\
++\alpha([r_t+\gamma V^{\pi}(s_{t+1})] \\
+-V^{\pi}(s_t))
 $$
 
 Here, $r_t+\gamma V^{\pi}(s_{t+1})$ is called the TD target and $[r_t+\gamma V^{\pi}(s_{t+1})]-V^{\pi}(s_t)$ is called the TD error.
@@ -62,7 +64,8 @@ Unlike MC, it doesn't need to wait for episode termination and generally has low
 A method to estimate transition probabilities ($\hat{P}$) and reward function ($r$) using maximum likelihood estimation in the MDP model.
 
 $$
-\hat{P}(s'|s,a)=\frac{1}{N(s,a)}\sum_{k=1}^{i}(s_k=s, a_k=a, s_{k+1}=s'), \\
+\hat{P}(s'|s,a)=\frac{1}{N(s,a)} \\
+*\sum_{k=1}^{i}(s_k=s, a_k=a, s_{k+1}=s'), \\
 \hat{r}(s,a)=\frac{1}{N(s,a)}\sum_{k=1}^{i}(s_k=s, a_k=a)
 $$
 
