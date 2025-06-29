@@ -50,7 +50,9 @@ export default function PostContent({ id }: PostContentProps) {
       setLoading(true);
       setError(null);
       try {
-        const postResponse = await fetch(`/api/posts/${id}`);
+        // 다중 세그먼트 경로를 처리하기 위해 slug 배열로 변환
+        const slugArray = id.split('/');
+        const postResponse = await fetch(`/api/posts/${slugArray.join('/')}`);
         if (!postResponse.ok) {
           throw new Error(`HTTP error! status: ${postResponse.status}`);
         }
@@ -74,7 +76,9 @@ export default function PostContent({ id }: PostContentProps) {
   const handleLanguageChange = async (lang: string) => {
     const newId = `${baseId}-${lang}`;
     try {
-      const response = await fetch(`/api/posts/${newId}`);
+      // 다중 세그먼트 경로를 처리하기 위해 slug 배열로 변환
+      const slugArray = newId.split('/');
+      const response = await fetch(`/api/posts/${slugArray.join('/')}`);
       if (response.ok) {
         const data = await response.json();
         if (data.post) {

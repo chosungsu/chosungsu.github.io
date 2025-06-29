@@ -164,6 +164,17 @@ export async function getPostById(id: string, type: 'posts' | 'projects'): Promi
       });
     }
     
+    // 여전히 매칭이 없으면 언어 코드를 제거한 파일명으로 매칭 시도
+    if (!post) {
+      const fileName = path.basename(id);
+      const baseFileName = fileName.replace(/-[a-z]{2}$/, '');
+      post = posts.find(post => {
+        const postFileName = path.basename(post.id);
+        const postBaseFileName = postFileName.replace(/-[a-z]{2}$/, '');
+        return postBaseFileName === baseFileName;
+      });
+    }
+    
     return post || null;
   } catch (error) {
     console.error(`Error loading ${type} post:`, error);
