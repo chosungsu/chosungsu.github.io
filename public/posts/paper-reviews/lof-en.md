@@ -79,7 +79,7 @@ $$
 
 #### LOF changes according to Minpts
 
-In conclusion, it is stated that LOF values do not monotonically increase or decrease with respect to MinPts values.
+In Conclusion, it is stated that LOF values do not monotonically increase or decrease with respect to MinPts values.
 
 <img src="https://velog.velcdn.com/images/ski06043/post/6c69db18-59a0-4d22-b19c-4c9b3a3d655c/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 

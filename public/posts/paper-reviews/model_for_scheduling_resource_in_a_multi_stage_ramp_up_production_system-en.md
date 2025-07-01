@@ -185,7 +185,7 @@ Second, if inventory holding costs are high relative to setup costs at one produ
 
 ---
 
-### conclusion
+### Conclusion
 
 In this study, we researched the problem of managing multi-stage production systems including learning that affects production speed, proving that it is necessary to consider continuous-time production periods.
 

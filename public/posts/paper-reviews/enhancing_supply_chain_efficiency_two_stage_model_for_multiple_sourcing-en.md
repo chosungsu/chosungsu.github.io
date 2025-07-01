@@ -104,7 +104,7 @@ The objective function aims to maximize the profit of all additionally produced 
 
 ---
 
-### conclusion
+### Conclusion
 
 To emphasize the importance of utilizing multiple sourcing strategies, we covered various literature and methods, and these validated methodologies serve as important defense mechanisms against uncertainty, ultimately improving product quality and providing cost reduction opportunities. With the help of mathematical models and decision-making frameworks focused on the complexity of procurement strategy optimization, we support manufacturing companies to effectively balance cost efficiency, resource allocation, and agility. This enables strategic deployment of resources while skillfully navigating constraints arising from resource availability.
 

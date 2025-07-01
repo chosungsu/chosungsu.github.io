@@ -92,7 +92,7 @@ These vectors are stacked into observation matrix O(t) ∈ R^(T_seq × (M+17)) o
 
 ---
 
-### conclusion
+### Conclusion
 
 We proposed a distributed, mapless multi-robot navigation method combining APF and WF to overcome local minima problems in non-convex environments. Using rule-based and learning-based switching schemes, our approach enables collision-free navigation using only local sensors without communication. Experimental results showed some decline as the number of robots increased but demonstrated excellent results close to 30% better than baseline and were effective in reducing collisions in narrow spaces.
 

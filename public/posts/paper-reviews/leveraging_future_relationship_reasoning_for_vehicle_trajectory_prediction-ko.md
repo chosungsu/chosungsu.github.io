@@ -116,7 +116,7 @@ $$
 
 ---
 
-### conclusion
+### Conclusion
 
 본 논문에서는 궤적 예측을 위해 차량 간의 상호 작용을 효과적으로 학습하는 미래 관계(Future Relationship) 개념을 제안했습니다. 과거 궤적 외에 차선 정보를 명시적으로 활용함으로써, 우리의 FRM(Future Relationship Module)은 복잡한 도로 구조에서도 적절한 상호 작용을 추론할 수 있습니다.
 
