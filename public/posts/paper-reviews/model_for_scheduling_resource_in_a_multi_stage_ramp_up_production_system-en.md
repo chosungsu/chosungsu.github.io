@@ -151,7 +151,7 @@ $$
 
 This represents the average inventory level at stage i, where AIL_1 calculates the average inventory level at the final production stage. And we calculate inventory for items produced during period j at stage i.
 
-#### 5. Total Cost Function
+#### 6. Total Cost Function
 
 $$
 TRC(\alpha, \theta, w, p) = \sum_{i=1}^{m}s_i n_i \\
