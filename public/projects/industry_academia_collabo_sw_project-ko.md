@@ -83,6 +83,8 @@ F1_score : 100%
 
 ### 마무리하며
 
+<img src="https://velog.velcdn.com/images/devjo/post/52407ba7-f7c2-4575-96fe-92f52e7f5fa0/image.png" alt="Example Image" style="display: block; margin: 0 auto; width:60%; height:300;" />
+
 #### 프로젝트 성과 요약
 
 1.기술적 성과
