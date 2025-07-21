@@ -2,50 +2,84 @@
 title: 'Industry-Academia Collaborative Software Project'
 date: '2023-02-28'
 description: 'Developed an anomaly detection system based on industrial sensor data'
-tags: ['time series', 'unsupervise', 'sensor data']
-github: 'https://github.com/username/project'
+tags: ['time series', 'unsupervised', 'sensor data']
+github: 'https://github.com/chosungsu/time-series-anomaly-detection'
 ---
 
 ### Project Overview
-This project was part of an industry-academia collaborative software initiative, aimed at developing an anomaly detection system based on sensor data collected from industrial environments. The project lasted for approximately eight months, during which I served as the project lead and primary algorithm developer.
+This project was an industry-academia collaborative software project to develop an anomaly detection system using unsupervised learning based on sensor data collected from industrial sites. The project lasted about 8 months, and I participated as the project leader and main algorithm developer.
+
+#### Project Goals
+1. Real-time anomaly detection: Real-time monitoring of time series data collected from manufacturing processes
+2. Adaptive learning: Automatic adaptation of the model to environmental changes
+3. User-friendly interface: Intuitive web-based monitoring system
 
 ---
 
 ### Problem Definition
-Industrial equipment generates vast amounts of sensor data; however, most of this data represents normal operating conditions, and anomalous data is either rare or lacks proper labeling. Therefore, the core objective was to leverage unsupervised learning to model normal behavioral patterns and identify deviations from those patterns as anomalies.
+Industrial equipment collects data through numerous sensors, but most of this data corresponds to normal states, and there is little or no labeled anomaly data. Therefore, the key was to use unsupervised learning to learn normal patterns as much as possible and detect patterns that differ from these as "anomalies."
+
+#### Technical Features
+1. Pseudo labeling using traditional unsupervised learning algorithms
+2. Utilization of PPO (Proximal Policy Optimization) reinforcement learning algorithm
+3. Real-time web interface visualization based on Streamlit
 
 ---
 
-### Model Selection: VQ-VAE (Vector Quantized Variational Autoencoder)
-🔍 What is VQ-VAE?
-VQ-VAE is an extended version of the Variational Autoencoder (VAE), where the model learns discrete latent representations through vector quantization, rather than continuous latent variables. This makes it particularly effective at capturing clustered patterns, which is advantageous for anomaly detection.
+### Model Selection and Implementation
+Two main models were used in the project:
 
-Input data → Encoder → Mapped to the nearest vector in the codebook → Decoder → Reconstruction
+#### Isolation Forest
+- Anomaly detection algorithm based on unsupervised learning
+- Can be trained with only normal data and is computationally efficient
+- Extracts features from time series data to calculate anomaly scores
+- Used as the initial model for pseudo labeling
 
-The larger the reconstruction error, the higher the likelihood of an anomaly.
-
-✅ Application Strategy
-Trained the model exclusively using time-series sensor data from normal operating conditions
-
-Used reconstruction error to detect anomalies in new data
-
-Experimented with various reconstruction loss metrics, such as MSE and MAE
-
----
-
-### Experiment Tracking with WandB
-Throughout the development process, we utilized Weights & Biases (WandB) to establish a robust experiment management framework.
+#### PPO (Proximal Policy Optimization)
+- Adaptive anomaly detection algorithm based on reinforcement learning
+- Dynamically adjusts thresholds according to environmental changes
+- Improves model performance through real-time feedback
+- Complements the results of Isolation Forest for final anomaly decision
 
 ---
 
-### Results & Achievements
-Achieved a 6% improvement in early anomaly detection rate compared to rule-based or standard Autoencoder methods
+### Results and Achievements
 
-Explored lightweight deployment strategies for real-world industrial environments
+#### 1. Overall System Architecture
 
-Recognized with an Encouragement Award for the project’s success and potential impact
+<img src="https://velog.velcdn.com/images/devjo/post/77edf257-b927-4104-90e4-4a56907fe9cf/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
+
+#### 2. Performance Metrics
+
+Accuracy: 100%
+
+Recall: 100%
+
+F1_score: 100%
+
+#### 3. Interface Features
+
+- Real-time chart: Visualizes current processing status
+- Performance metrics: Real-time performance monitoring
+- Control buttons: Start/Stop/Reset functions
+- Settings options: Automatic/Manual update modes
 
 ---
 
 ### Conclusion
-Through this project, we demonstrated the practical potential of unsupervised learning to solve real-world industrial problems. The effectiveness of VQ-VAE in anomaly detection was also validated. Moving forward, I plan to explore more models and expand this approach across various domains and applications.
+
+#### Project Summary
+
+1. Technical Achievements
+- Reinforcement learning-based anomaly detection: Developed an adaptive model using the PPO algorithm
+- Real-time processing system: Ensured stability through sequential data processing
+- Web-based interface: User-friendly system using Streamlit
+
+2. Business Value
+- Increased productivity: Minimized downtime through real-time anomaly detection
+- Quality control: Prevented quality issues by early anomaly detection
+- Operational efficiency: Improved workforce efficiency through automated monitoring
+
+#### Final Words
+
+Through this project, I was able to confirm how useful reinforcement learning can be in real industrial settings. In particular, the combination of adaptive learning and real-time processing shows great potential in the field of anomaly detection.
