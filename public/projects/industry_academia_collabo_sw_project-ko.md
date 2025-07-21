@@ -59,7 +59,7 @@ github: 'https://github.com/chosungsu/time-series-anomaly-detection'
 
 #### 1. 전체 시스템 구조
 
-<img src="https://velog.velcdn.com/images/devjo/post/77edf257-b927-4104-90e4-4a56907fe9cf/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
+<img src="https://velog.velcdn.com/images/devjo/post/77edf257-b927-4104-90e4-4a56907fe9cf/image.png" alt="Example Image" style="display: block; margin: 0 auto; width:60%; height:300;" />
 
 #### 2. 성능 지표
 

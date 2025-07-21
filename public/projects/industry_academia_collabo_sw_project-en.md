@@ -68,7 +68,7 @@ F1_score: 100%
 
 ### Conclusion
 
-<img src="https://velog.velcdn.com/images/devjo/post/52407ba7-f7c2-4575-96fe-92f52e7f5fa0/image.png" alt="Example Image" style="display: block; margin: 0 auto; width:60%; height:300;" />
+<img src="https://velog.velcdn.com/images/devjo/post/77edf257-b927-4104-90e4-4a56907fe9cf/image.png" alt="Example Image" style="display: block; margin: 0 auto; width:60%; height:300;" />
 
 #### Project Summary
 
