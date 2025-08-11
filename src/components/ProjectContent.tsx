@@ -5,7 +5,6 @@ import { notFound, useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import FormattedDate from './FormattedDate';
-import { Globe } from 'lucide-react';
 import remarkGfm from 'remark-gfm';
 import remarkEmoji from 'remark-emoji';
 import remarkMath from 'remark-math';
@@ -13,6 +12,8 @@ import rehypeRaw from 'rehype-raw';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 import ScrollToTop from './ScrollToTop';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface ProjectContentProps {
   id: string;
@@ -23,31 +24,30 @@ export default function ProjectContent({ id }: ProjectContentProps) {
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState(id.endsWith('-ko') ? 'ko' : 'en');
+  
+  const { t, currentLocale } = useLanguage();
   
   // 기본 프로젝트 ID (언어 코드 제외)
   const baseId = id.replace(/-[a-z]{2}$/, '');
-
-  useEffect(() => {
-    setSelectedLang(id.endsWith('-ko') ? 'ko' : 'en');
-  }, [id]);
 
   useEffect(() => {
     async function loadProject() {
       setLoading(true);
       setError(null);
       try {
-        const projectResponse = await fetch(`/api/projects/${id}`);
+        const requestId = `${baseId}-${currentLocale}`;
+        let projectResponse = await fetch(`/api/projects/${requestId}`);
+        // 해당 언어 문서가 없으면 반대 언어로 폴백
         if (!projectResponse.ok) {
-          throw new Error(`HTTP error! status: ${projectResponse.status}`);
+          const fallbackLang = currentLocale === 'ko' ? 'en' : 'ko';
+          const fallbackId = `${baseId}-${fallbackLang}`;
+          projectResponse = await fetch(`/api/projects/${fallbackId}`);
         }
+        if (!projectResponse.ok) throw new Error(`HTTP error! status: ${projectResponse.status}`);
+
         const projectData = await projectResponse.json();
-        if (projectData.project) {
-          setProject(projectData.project);
-        } else {
-          throw new Error('Project data not found');
-        }
+        if (projectData.project) setProject(projectData.project);
+        else throw new Error('Project data not found');
       } catch (error) {
         console.error('Failed to load project:', error);
         setError(error instanceof Error ? error.message : 'Failed to load project');
@@ -57,35 +57,14 @@ export default function ProjectContent({ id }: ProjectContentProps) {
     }
 
     loadProject();
-  }, [id]);
-
-  const handleLanguageChange = async (lang: string) => {
-    const newId = `${baseId}-${lang}`;
-    try {
-      const response = await fetch(`/api/projects/${newId}`);
-      if (response.ok) {
-        const data = await response.json();
-        if (data.project) {
-          setProject(data.project);
-          setSelectedLang(lang);
-          // URL 은 기본 경로로 유지하면서 내용만 변경
-          router.replace(`/projects/${baseId}`);
-          // 새 콘텐츠 로드 후 스크롤 맨 위로 이동
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }
-    } catch (error) {
-      console.error('Failed to load project in new language:', error);
-    }
-    setIsLangDropdownOpen(false);
-  };
+  }, [id, currentLocale]);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+          <p className="text-gray-600 dark:text-gray-400">{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -95,12 +74,12 @@ export default function ProjectContent({ id }: ProjectContentProps) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
+          <p className="text-red-600 dark:text-red-400 mb-4">{t('common.error')}</p>
           <button
             onClick={() => router.push('/projects')}
             className="text-gray-600 dark:text-gray-400 hover:underline"
           >
-            Go back to project list
+            {t('common.backToList')}
           </button>
         </div>
       </div>
@@ -114,54 +93,29 @@ export default function ProjectContent({ id }: ProjectContentProps) {
   return (
     <div className="min-h-screen py-8">
       <article className="max-w-3xl mx-auto px-4">
-        <header className="mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
-          <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-            {project.title}
-          </h1>
-          <div className="flex flex-wrap justify-between items-center gap-4">
-            <FormattedDate date={project.date} className="text-sm text-gray-600 dark:text-gray-400" />
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="relative mt-4">
-            <button
-              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <Globe className="w-4 h-4" />
-            </button>
-            {isLangDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg z-10">
-                <button
-                  onClick={() => handleLanguageChange('ko')}
-                  className={`block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg ${
-                    selectedLang === 'ko'
-                      ? 'text-blue-600 dark:text-blue-400 font-medium'
-                      : 'text-gray-700 dark:text-gray-300'
-                  }`}
-                >
-                  {selectedLang === 'en' ? 'kor' : '한국어'}
-                </button>
-                <button
-                  onClick={() => handleLanguageChange('en')}
-                  className={`block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 last:rounded-b-lg ${
-                    selectedLang === 'en'
-                      ? 'text-blue-600 dark:text-blue-400 font-medium'
-                      : 'text-gray-700 dark:text-gray-300'
-                  }`}
-                >
-                  {selectedLang === 'ko' ? '영어' : 'eng'}
-                </button>
+        <header className="mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              {project.title}
+            </h1>
+            <div className="flex flex-wrap justify-between items-center gap-4">
+              <FormattedDate date={project.date} className="text-sm text-gray-600 dark:text-gray-400" />
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-            )}
+            </div>
+            
+            {/* 언어 변경 버튼 - 제목 아래에 배치 */}
+            <div className="mt-4">
+              <LanguageToggle />
+            </div>
           </div>
         </header>
         <div className="prose prose-lg dark:prose-invert max-w-none">
