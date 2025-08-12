@@ -37,8 +37,8 @@ AGV 운송 과정에서 공차(empty) 및 적재(loaded) 상태의 에너지 소
 $$
 F=min(\alpha*C_{max}+(1-\alpha)*EC), \\
 EC=EC_f+EC_k, \\
-EC_f=PL(\sum t_f^{AGV1} (m_1, m_2)+\sum t_f^{AGV2}(m_3, m_4)), \\
-EC_k=PL(\sum t_k^{AGV1} (m_1, m_2)+\sum t_k^{AGV2}(m_3, m_4))
+EC_f=PL(\sum t_f^{AGV1} (m_1, m_2)+ \\ \sum t_f^{AGV2}(m_3, m_4)), \\
+EC_k=PL(\sum t_k^{AGV1} (m_1, m_2)+ \\ \sum t_k^{AGV2}(m_3, m_4))
 $$
 
 여기서 $\alpha$는 가중치이며 $C_{max}$는 최대 완료 시간 최소화와 관련되고 EC는 에너지 소비를 나타냅니다.

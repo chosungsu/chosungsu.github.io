@@ -37,8 +37,8 @@ In the AGV transportation process, considering energy consumption in both empty 
 $$
 F=min(\alpha*C_{max}+(1-\alpha)*EC), \\
 EC=EC_f+EC_k, \\
-EC_f=PL(\sum t_f^{AGV1} (m_1, m_2)+\sum t_f^{AGV2}(m_3, m_4)), \\
-EC_k=PL(\sum t_k^{AGV1} (m_1, m_2)+\sum t_k^{AGV2}(m_3, m_4))
+EC_f=PL(\sum t_f^{AGV1} (m_1, m_2)+ \\ \sum t_f^{AGV2}(m_3, m_4)), \\
+EC_k=PL(\sum t_k^{AGV1} (m_1, m_2)+ \\ \sum t_k^{AGV2}(m_3, m_4))
 $$
 
 where $\alpha$ is the weight, $C_{max}$ is related to makespan minimization, and EC represents energy consumption.

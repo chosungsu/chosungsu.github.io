@@ -87,7 +87,7 @@ $i$번째 가상 레이블과 가장 유사한 정답 레이블 간의 유사도
 $$
 p_{PL}(p_i)=\sum^{N_p}_{j=1} exp(d(l^{k(s)}_{PL, p_i}, l^{k(s)}_{PL, p_j})/\tau), \\
 n_{PL}(p_i)=\sum^{N_n}_{j=1} exp(d(l^{k(s)}_{PL, p_i}, l^{k(s)}_{PL, n_j})/\tau), \\
-L_{PG}^k=-\frac{1}{N_p}\sum{N_p}{i=1} log \frac{p_{PL}(p_i)}{p_{PL}(p_i)+n_{PL}(p_i)}
+L_{PG}^k=-\frac{1}{N_p}\sum^{N_p}_{i=1} log \frac{p_{PL}(p_i)}{p_{PL}(p_i)+n_{PL}(p_i)}
 $$
 
 분류 이후 긍정적 가상 레이블 유도 손실 $L^k_{PG}$를 고안하였습니다. 여기서 $p, n$은 각각 긍정과 부정을 나타내고 $N$은 레이블 수이며 $\tau$는 온도 매개변수입니다.

@@ -55,12 +55,12 @@ GCD 모델 $f_d(\cdots)$는 백본 $b(\cdots)$와 프로젝션 헤드 $g(\cdots)
 
 $I^u_o$와 $I^l_o$에는 배경 또는 인접한 객체와 함께 타겟 객체가 포함되어 있으므로 객체별 특징을 인코딩하기 위해 소프트 어텐션 모듈(SAM)을 연구하였습니다. $f_o(\cdot)$를 사용하여 $D_u$에 대한 가상 마스크 $M^u$를 생성하지만 노이즈가 많은 경계로 인하여 가상 마스크를 직접 사용하여 인코딩하는 것이 위험합니다. 따라서 $D_u$에 대한 가상 마스크 $M^u$와 $D_l$에 대한 gt 마스크 $M^l$을 사용하여 모듈을 훈련하였습니다.
 
-zhang, 2021은 비지도 군집화를 위해 $I^u_o$에 대해 kl 발산 기반 손실 $L^u_{cls}=\sum^C_{c=1} \bar{p_{ic}} log \frac{\bar{p_{ic}}}{q_{ic}}$과 같이 구현합니다. 여기서 $q_{ic}$sms $I_i$가 클래스 c에 속할 확률입니다. 여기에 추가로 일반적인 교차 엔트로피 손실값인 $L^s_{cls}=\sum^C_{c=1} -y_{ic} log_{q_{ic}}$를 계싼합니다.
+zhang, 2021은 비지도 군집화를 위해 $I^u_o$에 대해 kl 발산 기반 손실 $L^u_{cls}=\sum^C_{c=1} \bar{p_{ic}} log \frac{\bar{p_{ic}}}{q_{ic}}$과 같이 구현합니다. 여기서 $q_{ic}$sms $I_i$가 클래스 c에 속할 확률입니다. 여기에 추가로 일반적인 교차 엔트로피 손실값인 $L^s_{cls}=\sum^C_{c=1} -y_{ic} log({q_{ic}})$를 계싼합니다.
 
 $f_d(\cdot)$에 대한 총 손실 $L_{gcd}$는 두 개의 대조 손실, 두 개의 분류 손실, 그리고 어텐션 손실의 가중 합으로 다음과 같이 계산됩니다.
 
 $$
-L_{gcd} = L_{att} + (1-\lambda)L^u_{rep} + \lambda L^s_{rep} + (1-\lambda) L^u_{cls} + \lambda L^s_{cls}
+L_{gcd} = L_{att} + (1-\lambda)L^u_{rep} + \\ \lambda L^s_{rep} + (1-\lambda) L^u_{cls} + \\ \lambda L^s_{cls}
 $$
 
 ---

@@ -55,12 +55,12 @@ We first train an instance segmentation network $f_o(\cdot)$ to obtain class-agn
 
 Since $I^u_o$ and $I^l_o$ contain target objects along with background or adjacent objects, we studied a soft attention module (SAM) to encode object-specific features. We generate pseudo masks $M^u$ for $D_u$ using $f_o(\cdot)$, but directly using pseudo masks for encoding is risky due to noisy boundaries. Therefore, we trained the module using pseudo masks $M^u$ for $D_u$ and ground truth masks $M^l$ for $D_l$.
 
-Zhang et al. (2021) implemented a KL divergence-based loss for unsupervised clustering on $I^u_o$ as $L^u_{cls}=\sum^C_{c=1} \bar{p_{ic}} log \frac{\bar{p_{ic}}}{q_{ic}}$, where $q_{ic}$ is the probability that $I_i$ belongs to class c. Additionally, we calculate the general cross-entropy loss $L^s_{cls}=\sum^C_{c=1} -y_{ic} log q_{ic}$.
+Zhang et al. (2021) implemented a KL divergence-based loss for unsupervised clustering on $I^u_o$ as $L^u_{cls}=\sum^C_{c=1} \bar{p_{ic}} log \frac{\bar{p_{ic}}}{q_{ic}}$, where $q_{ic}$ is the probability that $I_i$ belongs to class c. Additionally, we calculate the general cross-entropy loss $L^s_{cls}=\sum^C_{c=1} -y_{ic} log (q_{ic})$.
 
 The total loss $L_{gcd}$ for $f_d(\cdot)$ is calculated as a weighted sum of two contrastive losses, two classification losses, and an attention loss as follows:
 
 $$
-L_{gcd} = L_{att} + (1-\lambda)L^u_{rep} + \lambda L^s_{rep} + (1-\lambda) L^u_{cls} + \lambda L^s_{cls}
+L_{gcd} = L_{att} + (1-\lambda)L^u_{rep} + \\ \lambda L^s_{rep} + (1-\lambda) L^u_{cls} + \\ \lambda L^s_{cls}
 $$
 
 ---

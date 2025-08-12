@@ -61,7 +61,7 @@ CollaPAUL은 두 가지 핵심 구성 요소로 이루어져 있습니다.
 동일한 아키텍처와 초기화를 공유하는 교사 모델(teacher model)과 학생 모델(student model)로 구성된 평균 교사(MT) 프레임워크를 사용합니다. 학생 모델은 교사 모델이 생성한 가상 레이블을 사용하여 훈련됩니다. 교사 모델은 학생 모델로부터 EMA(지수 이동 평균)를 통해 업데이트됩니다.
 
 $$
-L_{det}=L_{cls}(\hat{c_s}, \hat{c_t}) + L_{L1}(\hat{b_s}, \hat{b_t}) + L_{giou}(\hat{b_s}, \hat{b_t}), \\
+L_{det}=L_{cls}(\hat{c_s}, \hat{c_t}) + \\ L_{L1}(\hat{b_s}, \hat{b_t}) + \\ L_{giou}(\hat{b_s}, \hat{b_t}), \\
 \bar{\theta_t} \leftarrow \alpha \theta_t + (1-\alpha) \theta_s
 $$
 

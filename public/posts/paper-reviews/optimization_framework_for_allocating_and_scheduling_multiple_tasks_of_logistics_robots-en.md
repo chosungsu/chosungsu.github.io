@@ -10,15 +10,15 @@ This study addresses the Multi-Robot Task Allocation (MRTA) problem for logistic
 
 To solve this problem, this study proposes a 5-stage optimization framework that reduces computation time while maintaining practical applicability.
 
-- Uses the A* algorithm to calculate and store distances and paths between product locations, allowing reuse in subsequent calculations.
+-Uses the A* algorithm to calculate and store distances and paths between product locations, allowing reuse in subsequent calculations.
 
-- Applies hierarchical clustering to orders based on spatial similarity and capacity constraints to reduce problem size.
+-Applies hierarchical clustering to orders based on spatial similarity and capacity constraints to reduce problem size.
 
-- Formulates the Traveling Salesman Problem (TSP) to determine optimal execution order within each cluster.
+-Formulates the Traveling Salesman Problem (TSP) to determine optimal execution order within each cluster.
 
-- Uses a Mixed Integer Linear Programming (MILP) model to allocate clusters to robots while minimizing total task completion time (makespan).
+-Uses a Mixed Integer Linear Programming (MILP) model to allocate clusters to robots while minimizing total task completion time (makespan).
 
-- Optimizes task order and partial charging schedules for each robot to integrate battery constraints.
+-Optimizes task order and partial charging schedules for each robot to integrate battery constraints.
 
 Numerical experiments were conducted with up to 1,000 orders and 100 robots, confirming that the proposed method is scalable and effective for large-scale scenarios.
 
