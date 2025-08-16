@@ -4,7 +4,7 @@ date: '2023-03-20'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### properties of basis and dimensions
+### Properties of basis and dimensions
 
 $R^n$의 부분집합 $S = \{v_1, v_2, … , v_s\}$가 아래 두 조건을 만족하면 $S$가 기저가 됩니다.
 
@@ -20,7 +20,7 @@ $R^n$ 상의 벡터들의 일차독립성을 보이려면 $A = [x_1 : x_2 :  …
 
 ---
 
-### basic space and dimension theorem
+### Basic space and dimension theorem
 
 $n*n$ 행렬 $A$의 고윳값 $\lambda$에 대한 고유공간 $\{x \in R^n | Ax=\lambda x\}$은 $R^n$의 부분공간입니다. 또한 동차연립방정식 $Ax=0$ 의 해집합도 부분공간입니다. 이는 해공간 혹은 영공간이라고 하며 $Null(A)$로 나타냅니다.
 
@@ -32,7 +32,7 @@ $n*n$ 행렬 $A$의 고윳값 $\lambda$에 대한 고유공간 $\{x \in R^n | Ax
 
 ---
 
-### rank theorem
+### Rank theorem
 
 차원의 기본정리로 임의의 $m*n$ 행렬 $A$는 dim Row $(A)$ = dim Col $(A)$입니다. dim Row $(A) ≤ m$과 dim Col $(A) ≤ n$이고 $rankA$는 두 차원과 같기 때문에 $rankA ≤ min\{m, n\}$이 만족됨을 알 수 있습니다.
 
@@ -44,7 +44,7 @@ $rank(AB) ≤ min\{rankA, rankB\}$를 만족하면서 임의의 행렬 $B$에 �
 
 ---
 
-### orthogonal projection theorem
+### Orthogonal projection theorem
 
 <img src="https://velog.velcdn.com/images/devjo/post/83dad265-0bbb-440f-8451-4e28dec06661/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
@@ -64,7 +64,7 @@ $W$를 $R^n$의 부분공간이라고 하고 $M$의 열벡터들이 $W$의 기�
 
 ---
 
-### gram-schmidt process
+### Gram-schmidt process
 
 $R^n$의 부분공간 중 $\{0\}$과 $R^n$은 자명한 부분공간이라 합니다. $R^n$의 모든 부분공간은 정규직교기저를 갖습니다.
 
@@ -82,7 +82,7 @@ $S \in R^n$인 집합의 벡터 $x_1, x_2, …, x_n$에서 임의의 두 벡터�
 
 ---
 
-### coordinate vector
+### Coordinate vector
 
 집합 $\alpha = \{x_1, x_2, …, x_n\}$이 $R^n$의 기저이면 $R$에 속하는 모든 벡터 $x = c_1x_1 + c_2x_2 + … + c_nx_n$으로 유일하게 표현됩니다. 이 때 스칼라 $c$ 기저를 순서기저(ordered basis)라고 하며 $x$의 좌표라고 합니다. 그리고 순서기저의 벡터화를 좌표벡터($[X]_\alpha$)라고 합니다.
 

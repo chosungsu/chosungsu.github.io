@@ -4,7 +4,7 @@ date: '2023-03-10'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### matrix operations
+### Matrix operations
 
 두 행렬이 모든 $i$, $j$에 대하여 $a_{ij}$$=b_{ij}$를 만족하면 서로 항등하다고 할 수 있습니다. 그리고 행렬의 곱이 성립하기 위한 조건으로는 곱하게 되는 두 행렬 중 선행 행렬의 열과 후행 행렬의 행 값이 동일해야 하며 결과 행렬의 행은 선행 행렬의 행 값으로 열은 후행 행렬의 열 값으로 반영이 되도록 아래와 같이 유의해야 합니다.
 
@@ -22,13 +22,13 @@ $$
 
 ---
 
-### inverse matrix
+### Inverse matrix
 
 $n$차의 정사각행렬 $A$에 대해서 $AB=I_n=BA$를 만족하는 행렬 $B$가 존재하면 $A$는 가역행렬(invertible)이라고 할 수 있게 됩니다. 이 때의 $B$를 역행렬(inverse matrix)이라고 하며 역행렬이 없는 $A$는 비가역이라고 합니다.
 
 ---
 
-### elementary matrix
+### Elementary matrix
 
 $I_n$에 기본행연산(ERO)를 한 번 적용해서 얻은 행렬을 기본행렬(elementary matrix)이라고 합니다. 그리고 치환행렬은 $I_n$의 행들을 교환하여 얻어진 행렬을 의미합니다.
 
@@ -42,7 +42,7 @@ $I_n$에 기본행연산(ERO)를 한 번 적용해서 얻은 행렬을 기본행
 
 ---
 
-### subspace and linearly independent
+### Subspace and linearly independent
 
 집합 $W$가 $R^n$의 부분집합이라고 할 때 아래의 두 조건을 만족하는 경우 부분공간이 될 수 있습니다.
 
@@ -58,9 +58,9 @@ $I_n$에 기본행연산(ERO)를 한 번 적용해서 얻은 행렬을 기본행
 
 ---
 
-### matrix of systems of linear equation
+### Matrix of systems of linear equation
 
-$n$차의 정사각행렬 $A$가 가역이고 $b$가 $R^n$의 벡터일 때 연립방정식 $Ax=b$는 유일한 해인 $x=A^{-1}b$을 갖습니다. 그리고 $Ax=0$을 수 수반동차연립방정식(associated homogeneous system of linear equations)이라고 합니다.
+$n$차의 정사각행렬 $A$가 가역이고 $b$가 $R^n$의 벡터일 때 연립방정식 $Ax=b$는 유일한 해인 $x=A^{-1}b$을 갖습니다. 그리고 $Ax=0$을 수반동차연립방정식(associated homogeneous system of linear equations)이라고 합니다.
 
 ---
 

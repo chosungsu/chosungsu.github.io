@@ -4,7 +4,7 @@ date: '2023-03-10'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### matrix operations
+### Matrix operations
 
 Two matrices are said to be identical if they satisfy $a_{ij}=b_{ij}$ for all $i$, $j$. For matrix multiplication to be valid, the number of columns in the leading matrix must equal the number of rows in the following matrix, and the resulting matrix's rows reflect the leading matrix's row values while its columns reflect the following matrix's column values, as shown below.
 
@@ -22,13 +22,13 @@ The sum of the diagonal elements is denoted by $tr(A)$.
 
 ---
 
-### inverse matrix
+### Inverse matrix
 
 For an $n$-th order square matrix $A$, if there exists a matrix $B$ that satisfies $AB=I_n=BA$, then $A$ is said to be invertible. At this time, $B$ is called the inverse matrix, and $A$ without an inverse matrix is called non-invertible.
 
 ---
 
-### elementary matrix
+### Elementary matrix
 
 A matrix obtained by applying Elementary Row Operations (ERO) once to $I_n$ is called an elementary matrix. And a permutation matrix refers to a matrix obtained by exchanging rows of $I_n$.
 
@@ -42,7 +42,7 @@ The method to find the inverse matrix of an invertible matrix using elementary m
 
 ---
 
-### subspace and linearly independent
+### Subspace and linearly independent
 
 When a set $W$ is a subset of $R^n$, it can become a subspace if it satisfies the following two conditions:
 
@@ -58,7 +58,7 @@ In a linear combination structure, if the constants are 0, it is linearly indepe
 
 ---
 
-### matrix of systems of linear equation
+### Matrix of systems of linear equation
 
 When an $n$-th order square matrix $A$ is invertible and $b$ is a vector in $R^n$, the system of equations $Ax=b$ has a unique solution $x=A^{-1}b$. And $Ax=0$ is called the associated homogeneous system of linear equations.
 

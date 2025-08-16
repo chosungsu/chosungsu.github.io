@@ -4,7 +4,7 @@ date: '2023-03-24'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### matrix representation
+### Matrix representation
 
 $T : R^n \rightarrow R^m$을 $y=T(x)$ 로 정의된 선형변환이라고 하고 $\alpha = \{x_1, …, x_n\}, \beta = \{y_1, …, y_m\}$을 각각 순서기저라고 하면 $[y]_{\beta} = A’[x]_{\alpha} = [T]_{\alpha}^{\beta}[x]_{\alpha}$이므로 행렬 $A’=[[T(x_1)]_{\beta}:[T(x_2)]_{\beta}…]$와 같습니다.
 
@@ -14,7 +14,7 @@ $T : R^n \rightarrow R^m$을 $y=T(x)$ 로 정의된 선형변환이라고 하고
 
 ---
 
-### similarity and diagonalization of matrices
+### Similarity and diagonalization of matrices
 
 $T : R^n \rightarrow R^n$이 선형변환이고 $\alpha, \beta$가 두 기저일 때 $A = [T]_{\alpha}, A’ = [T]_{\beta}$라고 하면 기저 $\beta$에서 기저 $\alpha$로의 전이행렬 $P = [I]_{\beta}^{\alpha}$에 대해서 $A’ = P^{-1}AP$가 성립합니다.
 
@@ -28,7 +28,7 @@ $n$차 정사각행렬의 대수적 중복도는 항상 기하적 중복도보�
 
 ---
 
-### orthogonal diagonalization
+### Orthogonal diagonalization
 
 정사각행렬 $A$에 대해서 $A^{-1} = A^T, A^TA = I$이면 $A$를 직교행렬(real orthogonal matrix)라고 합니다. 직교행렬이면 행벡터, 열벡터들은 각각 서로 수직이며 정규벡터입니다. $A$는 가역행렬이며 길이보존법칙을 만족합니다.
 
@@ -38,7 +38,7 @@ $n$차 정사각행렬의 대수적 중복도는 항상 기하적 중복도보�
 
 ---
 
-### singular vector decomposition and inverse matrix
+### Singular vector decomposition and inverse matrix
 
 $A$를 실수행렬이라고 하고 직교행렬인 $U, V$와 대각선행렬 $\sum$이 존재한다면 $U^TAV = \begin{bmatrix} \sum_1 & O \\ O & O \end{bmatrix}$와 같이 표현이 가능합니다. 이 때 대각선성분들을 특이값(singular value)라고 하고 $U$의 열들을 $A$의 left singular vector, $V$의 열들을 $A$의 right singular vector라고 합니다. $V$는 $A^TA$를, $U$는 $AA^T$를 직교대각화하는 직교행렬입니다. $V^T(A^TA)V = diag_{n*n}, U^T(AA^T)U = diag_{m*m}$으로 둘의 행렬 크기는 다릅니다.
 
@@ -48,7 +48,7 @@ $rankA = n$인 full column rank를 갖는 $m*n$ 행렬 $A$의 pseudo-inverse는 
 
 ---
 
-### complex of eigenvalue and eigenvector
+### Complex of eigenvalue and eigenvector
 
 유클리드 내적은 두 벡터 $u, v$를 이용하여 $u \cdot v = \bar{v_1}u_1 + \bar{v_2}u_2 + … + \bar{v_n}u_n = <u, v>$로 나타낼 수 있습니다. 내적이 0이면 직교한다고 합니다.
 
@@ -56,7 +56,7 @@ $rankA = n$인 full column rank를 갖는 $m*n$ 행렬 $A$의 pseudo-inverse는 
 
 ---
 
-### hermitian, unitary, regular matrix
+### Hermitian, unitary, regular matrix
 
 복소행렬 $A$에 대해서 $\bar{A}^T$는 A의 켤레전치행렬(conjugate transpose)라고 하고 $A^*$로 나타냅니다. 정사각 복소행렬 $A$가 $A = A^*$이면 $A$는 Hermitian행렬이라고 합니다. 만약 $A = -A^*$이면 반-Hermitian(skew-Hermitian)행렬이 됩니다. 그리고 $U^*U = I$이면 $U$는 unitary 행렬이고 이 때  $U^* = U^{-1}$도 성립합니다.
 

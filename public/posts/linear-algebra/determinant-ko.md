@@ -4,7 +4,7 @@ date: '2023-03-13'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### definition and theorem of determinant
+### Definition and theorem of determinant
 
 자연수 집합 $S$의 치환(순열, permutation)이란 일대일 대응함수로 갯수는 모두 $n!$입니다.
 
@@ -26,7 +26,7 @@ $A$가 $n$차의 삼각행렬이면 행렬식은 주대각 성분의 곱과 같�
 
 ---
 
-### cofactor expansion
+### Cofactor expansion
 
 정사각행렬 $A=[a_{ij}]$의 $i$행과 $j$열을 제거하여 만든 부분행렬을 $A(i|j)$라고 하고 그 행렬식 $M_{ij}=det(A(i|j))$를 소행렬식이라고 합니다. 또한 $A_{ij}=(-1)^{i+j}M_{ij}$를 여인자라고 합니다. 여인자를 모은 행렬을 adj로 표현합니다.
 
@@ -34,7 +34,7 @@ $A$가 $n$차의 삼각행렬이면 행렬식은 주대각 성분의 곱과 같�
 
 ---
 
-### cramer's formula
+### Cramer's formula
 
 이 공식은 미지수와 방정식의 개수가 같은 선형연립방정식에 적용합니다.
 
@@ -42,7 +42,7 @@ $A$가 $n$차의 삼각행렬이면 행렬식은 주대각 성분의 곱과 같�
 
 ---
 
-### eigenvalue and eigenvector
+### Eigenvalue and eigenvector
 
 $$
 Ax=\lambda x

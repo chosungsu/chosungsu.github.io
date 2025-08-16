@@ -4,9 +4,17 @@ date: '2023-03-03'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### n space
+### Definition
 
-우리들이 일상적으로 사용하는 물리적인 양에는 크기만 알면 표현이 가능한 scalar와 방향을 모른다면 표현이 불가능한 vector가 있습니다. 이 중 vector는 크기와 방향이 지정되어야 하기 때문에 유향선분으로 화살표를 통해 표현이 가능해집니다.
+<img src="https://velog.velcdn.com/images/devjo/post/6853698c-9d01-4930-9730-b186e84aebff/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
+
+벡터는 크기와 방향을 동시에 나타냅니다. 예를 들어 벡터가 되는 것과 되지 못하는 것을 구분해보자면 시속 5마일로 움직인다는 정보는 벡터가 될 수 없습니다. 그 이유는 물체가 어느 방향으로 움직이는지 알 수 없기 때문입니다. 하지만 이 정보는 스칼라가 될 수는 있습니다.
+
+이러한 정보가 벡터가 될 수 있는 방법은 위치 정보이고 즉, 시속 5마일로 동쪽으로 이동한다는 정보가 있다면 이는 벡터가 될 수 있습니다.
+
+---
+
+### N space
 
 시작점과 끝점이 같은 벡터는 영벡터라고 하며 이 벡터는 크기가 0이므로 방향을 임의의 방향으로 하여도 됩니다.
 
@@ -16,7 +24,27 @@ tags: ['Linear algebra', 'lecture']
 
 ---
 
-### dot product and orthogonal
+### Sum of vector
+
+$\vec{a}=\begin{bmatrix} 6 \\ -2 \end{bmatrix}$, $\vec{b}=\begin{bmatrix} -4 \\ 4 \end{bmatrix}$가 있을 때 $\vec{a} + \vec{b} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$ 와 같이 덧셈이 가능합니다. n차원 공간 상에서 $\vec{a}$, $\vec{b}$는 크기가 같은 여러 시작점 및 끝점을 가진 벡터로 그려질 수 있습니다. 결국 중요한 것은 크기와 방향임은 변하지 않습니다.
+
+---
+
+### Product of vector
+
+$\vec{a}=\begin{bmatrix} 2 \\ 1 \end{bmatrix}$이 있을 때 $\vec{a}$에 3을 곱하게 되면 $3*\begin{bmatrix} 2 \\ 1 \end{bmatrix}=\begin{bmatrix} 6 \\ 3 \end{bmatrix}$이 됩니다. 이러한 과정으로 벡터는 방향은 바뀌지 않고 대신 scale이 바뀌게 됩니다. 다만 음수를 곱하게 된다면 방향도 바뀝니다.
+
+---
+
+### Unit vector
+
+단위벡터를 표시하는 방법은 $i = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$으로 가능하며 이는 수직방향은 고려하지 않는 경우입니다. 반대로 수평방향을 고려하지 않을 경우에는 $j = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$로 표현가능합니다.
+
+이를 통해서 $\vec{v} = \begin{bmatrix} 2 \\ 3 \end{bmatrix}$에 대해서 $2i+3j$로 덧셈이 가능함을 알 수 있습니다.
+
+---
+
+### Dot product and Orthogonal
 
 $\begin{vmatrix}x \end{vmatrix}$=$\sqrt{x_1^2+x_2^2,…,x_n^2}$을 $x$의 노름이라고 합니다. 이러한 정의를 통해 $x$는 원점에서 $P$에 이르는 거리로 정의됨을 의미합니다.
 
@@ -30,7 +58,7 @@ $u=\frac{1}{\begin{Vmatrix} x \end{Vmatrix}} * x$와 같이 나타내면 이는 
 
 ---
 
-### vector equation
+### Vector equation
 
 기울기인 방향벡터와 한 점이 있을 때, $v(a,b,c), P(x_0, y_0, z_0)$에 대해서 아래의 방정식이 성립합니다.
 
@@ -54,3 +82,5 @@ $u=\frac{1}{\begin{Vmatrix} x \end{Vmatrix}} * x$와 같이 나타내면 이는 
 ### 참고 자료
 
 [원본 경로 #1](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
+
+[원본 경로 #2](https://www.boostcourse.org/ai151/joinLectures/194162)

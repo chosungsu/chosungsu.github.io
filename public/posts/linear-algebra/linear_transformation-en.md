@@ -4,7 +4,7 @@ date: '2023-03-17'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### matrix as a function
+### Matrix as a function
 
 A transformation refers to a function where both input and output are vectors, and in the transformation $T : R^n \rightarrow R^m$, $w=T(x)$ is called the image of vector $x$ under $T$, and $x$ is called the pre-image of vector $w$. A transformation of the form $T(x) = Ax$ is called a matrix transformation. A transformation is called a linear transformation if it satisfies the following conditions for any vectors $u, v \in R^n$ and any scalar k during the transformation process.
 
@@ -16,7 +16,7 @@ For any $v \in R^n$, if $T:R^n \rightarrow R^m$ is defined as $T(v) = 0$, then $
 
 ---
 
-### geometry meanings
+### Geometry meanings
 
 A linear transformation $T : R^n \rightarrow R^n$ that preserves length, i.e., $|T(x)| = |x|$, is called a euclidean isometry. It can also preserve inner products as in $T(x) \cdot T(y) = x \cdot y, x, y \in R^n$.
 
@@ -32,7 +32,7 @@ For an $n$-th order square matrix $A$, all of the following conditions hold:
 
 ---
 
-### kernel and range
+### Kernel and range
 
 When $T : R^n \rightarrow R^m$ is a linear transformation, the complete set of vectors in $R^n$ whose image under $T$ becomes 0 is called the kernel and is denoted by $kerT$. That is, it satisfies $kerT = \{v \in R^n | T(v) = 0\}$. $kerT$ is a subspace of $R^n$ and is called the kernel space.
 
@@ -44,7 +44,7 @@ If $T$ is one-to-one, then the column vectors of matrix $A$ are linearly indepen
 
 ---
 
-### composition and reversibility
+### Composition and reversibility
 
 If $T : R^n \rightarrow R^m$ and $S : R^k \rightarrow R^m$ are both linear transformations, then the composite function $S \circ T$ is also a linear transformation. A necessary and sufficient condition for a function $f : X \rightarrow Y$ to be invertible is that $f$ is both onto and one-to-one. If $T : R^n \rightarrow R^n$ is invertible, then $T^{-1}$ is also a linear transformation.
 

@@ -4,7 +4,27 @@ date: '2023-03-06'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### systems of linear equation
+### Linear combination
+
+$v_1, v_2, \cdots, v_n \in R$이 성립할 때 상수항 집합 $\{C_k\}$를 각 벡터에 곱하면 이를 선형결합이라고 합니다. 영벡터 역시 선형결합입니다.
+
+span($\vec{a}, \vec{b}$)=$R^2$와 같이 span을 사용하여 나타낼 수 있습니다.
+
+선형결합을 풀이하는 과정을 예로 들어보면 $\vec{a} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$, $\vec{b} = \begin{bmatrix} 0 \\ 3 \end{bmatrix}$이 있고 $\vec{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$를 만족하는 상수집합이 있을 것이고 이는 연립방정식으로 $1c_1+0c_2=x_1$, $2c_1+3c_2=x_2$이고 즉, $c_1=x_1$, $c_2=\frac{1}{3}(x_2-2x_1)$임을 구할 수 있습니다.
+
+---
+
+### Linear independence
+
+예를 들어 $\{\begin{bmatrix} 2 \\ 3 \end{bmatrix}, \begin{bmatrix} 4 \\ 6 \end{bmatrix}\}$이 있을 때 이를 상수항을 곱하여 $c_1\begin{bmatrix} 2 \\ 3 \end{bmatrix} + c_2\begin{bmatrix} 4 \\ 6 \end{bmatrix}=(c_1+2c_2)\begin{bmatrix} 2 \\ 3 \end{bmatrix}=c_3\begin{bmatrix} 2 \\ 3 \end{bmatrix}$과 같이 치환을 통하여 간단하게 나타낼 수 있습니다. 이와 같이 선형결합을 취하면 하나의 벡터로 줄어드는 경우를 선형종속이라고 합니다.
+
+또 다른 선형종속의 예로는 $\{\begin{bmatrix} 2 \\ 3 \end{bmatrix}, \begin{bmatrix} 7 \\ 2 \end{bmatrix}, \begin{bmatrix} 9 \\ 5 \end{bmatrix}\}$ 이처럼 두 벡터의 합이 다른 벡터와 동일해지는 경우도 해당합니다.
+
+따라서 같은 평면에 존재하는 벡터는 선형종속, 그 이외에는 선형독립이라고 할 수 있습니다.
+
+---
+
+### Systems of linear equation
 
 선형방정식은 미지수 $x_1, x_2, …, x_n$에 계수곱으로 이루어진 일차식과 상수항으로 이루어진 방정식입니다. 만일 상수항이 모두 0인 연립방정식은 동차선형연립방정식이라고 합니다.
 
@@ -21,7 +41,7 @@ $$
 
 ---
 
-### gauss elimination and gauss-jordan elimination
+### Gauss elimination and gauss-jordan elimination
 
 소거법의 연산으로는 아래와 같습니다.
 
@@ -58,3 +78,5 @@ $m*n$ 행렬 $E$가 다음 3가지 성질을 만족할 때, 행 사다리꼴(REF
 ### 참고 자료
 
 [원본 경로 #1](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
+
+[원본 경로 #2](https://www.boostcourse.org/ai151/joinLectures/194162)

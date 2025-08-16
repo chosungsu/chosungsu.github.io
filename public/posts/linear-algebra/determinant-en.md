@@ -4,7 +4,7 @@ date: '2023-03-13'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### definition and theorem of determinant
+### Definition and theorem of determinant
 
 A permutation of the natural number set $S$ is a one-to-one correspondence function, and the total number is $n!$.
 
@@ -26,7 +26,7 @@ If $A$ is an $n$-th order triangular matrix, the determinant is equal to the pro
 
 ---
 
-### cofactor expansion
+### Cofactor expansion
 
 The submatrix created by removing the $i$-th row and $j$-th column of a square matrix $A=[a_{ij}]$ is called $A(i|j)$, and its determinant $M_{ij}=det(A(i|j))$ is called the minor. Also, $A_{ij}=(-1)^{i+j}M_{ij}$ is called the cofactor. The matrix composed of cofactors is expressed as adj.
 
@@ -34,7 +34,7 @@ The inverse matrix of an invertible matrix $A$ can be found as $\frac{1}{|A|}adj
 
 ---
 
-### cramer's formula
+### Cramer's formula
 
 This formula applies to systems of linear equations where the number of unknowns equals the number of equations.
 
@@ -42,7 +42,7 @@ For example, if $x=\{x_1, x_2, …, x_n\}$ and $b=\{b_1, b_2, …, b_n\}$, then 
 
 ---
 
-### eigenvalue and eigenvector
+### Eigenvalue and eigenvector
 
 $$
 Ax=\lambda x
