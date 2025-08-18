@@ -118,7 +118,7 @@ FJSPT를 해결하기 위해, 우리는 세 가지 주요 구성 요소로 이�
 
 3.호환 가능한 기계에 대한 처리 시간을 표현하기 어렵습니다.
 
-따라서 이 논문에서 새로운 이종 그래프 $H$를 제안합니다. 그래프는 $\mathcal{H} = (\mathcal{O} \cup \mathcal{M} \cup \mathcal{V}, \mathcal{C}, \mathcal{\xi}_m \cup \mathcal{\xi}_{v}^{off} \cup \mathcal{\xi}_{v}^{on})$로 정의됩니다. 기계 노드 $M_k \in \mathcal{M}$와 차량 노드 $V_u \in \mathcal{V}$는 각각 기계 및 차량의 특징을 나타냅니다. 하역 차량 아크 $\mathcal{\xi}_{v}^{off}$의 아크 $E_{iju}^v$는 $V_u$가 $O_{ij}$와 관련된 제품 위치에 도착하는 하역 운송 시간을 나타냅니다. 상역 차량 아크 $\mathcal{\xi}_{v}^{on}$의 아크 $E_{kk'}^v$는 상역 상태의 차량이 $M_k$에서 $M_{k'}$로 이동하는 상역 운송 시간을 나타냅니다. $\mathcal{\xi}_{mt}$와 $\mathcal{\xi}_{vt}^{off}$는 FJSPT를 해결하는 동안 동적으로 변합니다.
+따라서 이 논문에서 새로운 이종 그래프 $H$를 제안합니다. 그래프는 $\mathcal{H} = (\mathcal{O} \cup \mathcal{M} \cup \mathcal{V}, \mathcal{C}, \mathcal{\zeta}_m \cup \mathcal{\zeta}_{v}^{off} \cup \mathcal{\zeta}_{v}^{on})$로 정의됩니다. 기계 노드 $M_k \in \mathcal{M}$와 차량 노드 $V_u \in \mathcal{V}$는 각각 기계 및 차량의 특징을 나타냅니다. 하역 차량 아크 $\mathcal{\zeta}_{v}^{off}$의 아크 $E_{iju}^v$는 $V_u$가 $O_{ij}$와 관련된 제품 위치에 도착하는 하역 운송 시간을 나타냅니다. 상역 차량 아크 $\mathcal{\zeta}_{v}^{on}$의 아크 $E_{kk'}^v$는 상역 상태의 차량이 $M_k$에서 $M_{k'}$로 이동하는 상역 운송 시간을 나타냅니다. $\mathcal{\zeta}_{mt}$와 $\mathcal{\zeta}_{vt}^{off}$는 FJSPT를 해결하는 동안 동적으로 변합니다.
 
 $t$ 시점에서 $O_{ij}$의 이웃 노드를 $\mathcal{N}_t(O{ij}) = {\mathcal{N}_{mt}(O{ij}) \cup \mathcal{N}_{vt}(O{ij})}$라고 합시다. 여기서 $\mathcal{N}_{mt}(O{ij})$는 이웃 기계이고 $\mathcal{N}_{vt}(O{ij})$는 이웃 차량입니다. $\mathcal{N}_{mt}(O{ij})$는 $t$ 시점에서 $O_{ij}$의 사용 가능한 기계를 나타냅니다. $\mathcal{M}_{ij}$에 속하는 일부 기계는 다른 작업에 의한 선점 때문에 사용 불가능할 수 있으므로, $\mathcal{N}_{mt}(O_{ij}) \subseteq \mathcal{M}_{ij}$ 입니다. $\mathcal{N}_{vt}(O{ij})$는 운송 중인 차량을 제외한 현재 사용 가능한 차량을 나타냅니다.
 
@@ -126,7 +126,7 @@ $t$ 시점에서 $O_{ij}$의 이웃 노드를 $\mathcal{N}_t(O{ij}) = {\mathcal{
 
 매 시간 단계 $t$마다 에이전트는 상태 $s_t$를 인식하고 행동 $a_t$를 선택합니다.
 
-행동은 할당되지 않은 작업을 사용 가능한 차량으로 운송하여 비어있는 기계에서 처리될 수 있도록 합니다. 이종 그래프 $\mathcal{H}t(\mathcal{O} \cup \mathcal{M} \cup \mathcal{V}, \mathcal{C}, \mathcal{\xi}_{mt} \cup \mathcal{\xi}_{vt}^{off} \cup \mathcal{\xi}_{v}^{on})$입니다. 이 그래프에서, 우리는 노드와 엣지의 원시 특징(raw features)을 정의합니다.
+행동은 할당되지 않은 작업을 사용 가능한 차량으로 운송하여 비어있는 기계에서 처리될 수 있도록 합니다. 이종 그래프 $\mathcal{H}t(\mathcal{O} \cup \mathcal{M} \cup \mathcal{V}, \mathcal{C}, \mathcal{\zeta}_{mt} \cup \mathcal{\zeta}_{vt}^{off} \cup \mathcal{\zeta}_{v}^{on})$입니다. 이 그래프에서, 우리는 노드와 엣지의 원시 특징(raw features)을 정의합니다.
 
 작업 노드 $O_{ij}$의 원시 특징 벡터 $\mu_{ij} \in R^7$ 요소로 구성됩니다. 기계 $M_k$의 원시 특징 벡터 $\mu_k \in R^4$ 요소로 구성됩니다. 차량 $V_u$의 원시 특징 벡터 $\mu_v \in R^4$로 구성됩니다.
 
