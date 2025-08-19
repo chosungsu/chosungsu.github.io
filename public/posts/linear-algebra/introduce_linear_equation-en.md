@@ -1,5 +1,5 @@
 ---
-title: 'Systems of Linear Equations'
+title: 'Introduce Linear Equations'
 date: '2023-03-01'
 tags: ['Linear algebra', 'lecture']
 ---

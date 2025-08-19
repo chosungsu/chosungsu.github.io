@@ -4,7 +4,7 @@ date: '2023-03-03'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### Definition
+### Warm up
 
 <img src="https://velog.velcdn.com/images/devjo/post/6853698c-9d01-4930-9730-b186e84aebff/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
@@ -84,3 +84,5 @@ As shown in the image above, since $p$ is parallel to $x$, we can say $p = tx$, 
 [Original Source #1](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
 
 [Original Source #2](https://www.boostcourse.org/ai151/joinLectures/194162)
+
+[Original Source #3](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
