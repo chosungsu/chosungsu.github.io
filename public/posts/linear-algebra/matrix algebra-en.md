@@ -1,0 +1,86 @@
+---
+title: 'Matrix algebra'
+date: '2023-03-08'
+tags: ['Linear algebra', 'lecture']
+---
+
+### Sums of Matrices
+
+$$
+A=\begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix} ,
+B=\begin{bmatrix} b_{11} & b_{12} & \cdots & b_{1n} \\
+b_{21} & b_{22} & \cdots & b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+b_{m1} & b_{m2} & \cdots & b_{mn}
+\end{bmatrix}
+$$
+
+Given two matrices as above, their sum is
+
+$$
+A+B=\begin{bmatrix} a_{11}+b_{11} & a_{12}+b_{12} & \cdots & a_{1n}+b_{1n} \\
+a_{21}+b_{21} & a_{22}+b_{22} & \cdots & a_{2n}+b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1}+b_{m1} & a_{m2}+b_{m2} & \cdots & a_{mn}+b_{mn}
+\end{bmatrix}
+$$
+
+For a scalar $\alpha$, the scalar multiple $\alpha A$ is defined as
+
+$$
+\alpha A=\begin{bmatrix} \alpha a_{11} & \alpha a_{12} & \cdots & \alpha a_{1n} \\
+\alpha a_{21} & \alpha a_{22} & \cdots & \alpha a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\alpha a_{m1} & \alpha a_{m2} & \cdots & \alpha a_{mn}
+\end{bmatrix}
+$$
+
+---
+
+### Matrix Multiplication
+
+Given an $m\times n$ matrix $A$ and an $n\times p$ matrix $B$, the product is defined by
+$AB=[Ab_1\; Ab_2\; \dots\; Ab_p]$, where $b_j$ is the $j$-th column of $B$. The matrix product $AB$ is defined only when the number of columns of $A$ equals the number of rows of $B$.
+
+---
+
+### Matrix Transpose
+
+Given an $m\times n$ matrix $A$, the transpose $A^T$ is the matrix whose $i$-th row of $A$ becomes the $i$-th column of $A^T$ (equivalently, $(A^T)_{ij}=A_{ji}$).
+
+$$
+A=\begin{bmatrix} 0 & -1 & 8 & -7 & -4 \\
+-4 & 6 & -10 & -9 & 6 \\
+9 & 5 & -2 & -3 & 5 \\
+-8 & 8 & 4 & 7 & 7
+\end{bmatrix}
+\rightarrow
+A^T=\begin{bmatrix} 0 & -4 & 9 & -8 \\
+-1 & 6 & 5 & 8 \\
+8 & -10 & -2 & 4 \\
+-7 & -9 & -3 & 7 \\
+-4 & 6 & 5 & 7
+\end{bmatrix}
+$$
+
+It can be transformed as above.
+
+The properties of the transpose are as follows:
+
+1. $(A^T)^T=A$
+
+2. $(A+B)^T=A^T+B^T$
+
+3. $(\alpha A)^T=\alpha A^T$
+
+4. $(AB)^T=B^T A^T$
+
+---
+
+### References
+
+[Original Source #1](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
