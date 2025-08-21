@@ -97,6 +97,16 @@ For example, consider a circle where $0 < \theta \le 2\pi$ and a random variable
 
 ---
 
+### Entropy
+
+$H_X \triangleq -\sum_{k=1}^{\infty}p_k * ln(p_k)$ is defined, where $p_k$ represents the probability value that $X=x_k$. $-ln(x)$ is positive to the left of 1 and negative to the right. The $-xln(x)$ graph, when multiplied together, always yields positive values between 0 and 1, and since $x$ is a probability value, it only exists in the interval $[0,1]$, thus making it a relationship that can never be negative.
+
+For example, when the sample space is $S=\{H, T\}$ and $P[H]=\theta$, we have $S_X=\{0, 1\}$, and the entropy can be expressed as $H_X=-\theta*ln(\theta)-(1-\theta)*ln(1-\theta)$. If we assume $\theta=\frac{1}{2}$, the entropy equals 1.
+
+A high entropy means high uncertainty and also indicates a large amount of information.
+
+---
+
 ### References
 
 [Original Source #1](https://www.youtube.com/watch?v=RbSVWHbu7c0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=4)

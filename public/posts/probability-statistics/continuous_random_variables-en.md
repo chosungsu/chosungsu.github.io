@@ -42,6 +42,54 @@ The pdf is $\frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-m)^2}{2\sigma^2}}$, and 
 
 ---
 
+### Examples of r.v
+
+For example, let $Y=X^2=g(x)$ be defined, and the event occurs when $\{Y \le y\}$ is $\{X^2 \le y\}$.
+
+In this case, the probability value is given by $F_Y(y)=\begin{cases} 0 & y < 0 \\ F_X(\sqrt{y})-F_X(-\sqrt{y}) & y > 0 \end{cases}$, so differentiating gives $f_Y(y)= \frac{f_X(\sqrt{y})}{2\sqrt{y}}-\frac{f_X(-\sqrt{y})}{-2\sqrt{y}}=\frac{f_X(\sqrt{y})}{2\sqrt{y}}+\frac{f_X(-\sqrt{y})}{2\sqrt{y}}$.
+
+---
+
+### Markov inequality
+
+$$
+P[X \ge a] \le \frac{E[X]}{a}
+$$
+
+This formula holds only when $X$ is non-negative.
+
+Since $E[X]=\int_{0}^{a} xf_X(x)dx+\int_{a}^{\infty} xf_x(x)dx \ge \int_{a}^{\infty} xf_x(x)dx \ge a\int_{a}^{\infty} f_x(x)dx$ holds, and $\int_{a}^{\infty} f_x(x)dx$ is equivalent to $P[X \ge a]$, the above formula can be proven.
+
+---
+
+### Chebyshev inequality
+
+$$
+P[|X-E[X]| \ge a] \le \frac{Var[X]}{a^2}
+$$
+
+This formula holds for any arbitrary $X$.
+
+If we define $(X-E[X])^2 = D^2$, then we can obtain $P[D^2 \ge a^2] \le \frac{E[D^2]}{a^2}=\frac{Var[X]}{a^2}$, which proves the above formula.
+
+As an example problem, we have $P[|X-m| \ge k\sigma] \le \frac{1}{k^2}$, and $\frac{1}{k^2}=\frac{\sigma^2}{(k\sigma)^2}$ is a proper reduction, and when $k=2$, it equals $0.25$.
+
+---
+
+### pdf of Y
+
+$$
+X \rightarrow Y=g(X)
+$$
+
+In the above equation, when $g(X)=aX+b$, while we can find $f_X(x)$, let's look at how to find $f_Y(y)$.
+
+$F_Y(y)=P[Y \le y]=P[aX+b \le y]=\begin{cases} P[X \le \frac{y-b}{a}] & a > 0 \\ P[X \ge \frac{y-b}{a}] & a < 0 \end{cases}=\begin{cases} F_X(\frac{y-b}{a}) & a > 0 \\ 1 - F_X(\frac{y-b}{a}) & a < 0 \end{cases}$ can be expanded, so differentiating gives $f_Y(y)=\begin{cases} \frac{1}{a}f_X(\frac{y-b}{a}) & a > 0 \\ -\frac{1}{a}f_X(\frac{y-b}{a}) & a < 0 \end{cases}=\frac{1}{|a|}f_X(\frac{y-b}{a})$.
+
+For example, in a normal distribution $(X \sim N(0,1))$ where $f_X(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$, substituting the above $Y$ gives: $f_Y(y)=\frac{1}{\sqrt{2\pi}|a|}e^{-\frac{(y-b)^2}{2a^2}}$, and now we can express that the normal distribution has $(X \sim N(b,a^2))$.
+
+---
+
 ### References
 
 [Original Source #1](https://www.youtube.com/watch?v=ZMSuPBOOT7Y&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=8)

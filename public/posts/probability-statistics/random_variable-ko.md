@@ -98,6 +98,16 @@ cdf(cumulative distribution function)은 $F_X(x) \triangleq P[X \le x]$와 같�
 
 ---
 
+### Entropy
+
+$H_X \triangleq -\sum_{k=1}^{\infty}p_k * ln(p_k)$로 정의되며 여기서 $p_k$는 $X=x_k$를 가질 확률값을 의미합니다. $-ln(x)$는 1을 기점으로 좌측은 양수, 우측은 음수를 갖습니다. $-xln(x)$그래프는 둘을 곱하면 0과 1 사이에서 항상 양수를 갖게 되고 범위는 $x$가 확률값이므로 $[0,1]$ 사이에서만 존재하고 따라서 절대 음수가 나오지 않는 관계식입니다.
+
+예를 들어 sample space는 $S=\{H, T\}$이고 $P[H]=\theta$의 확률값을 가진다고 했을 때, $S_X=\{0, 1\}$를 갖게 되며 엔트로피는 $H_X=-\theta*ln(\theta)-(1-\theta)*ln(1-\theta)$이라고 할 수 있습니다. 단 $\theta=\frac{1}{2}$로 가정할 수 있으므로 대입하면 엔트로피는 1을 갖습니다.
+
+엔트로피가 크다는 것은 불확실성(uncertainty)가 크다는 것이고 정보량이 많다는 의미이기도 합니다.
+
+---
+
 ### 참고 자료
 
 [원본 경로 #1](https://www.youtube.com/watch?v=RbSVWHbu7c0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=4)
