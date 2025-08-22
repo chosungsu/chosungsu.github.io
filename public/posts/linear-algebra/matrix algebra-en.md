@@ -81,6 +81,22 @@ The properties of the transpose are as follows:
 
 ---
 
+### Inverse of a Matrix
+
+The inverse of a square matrix $A \in \mathbb{R}^{n \times n}$ generalizes the concept of reciprocal of a nonzero real number $a \in \mathbb{R}$. Formally, the reciprocal of a nonzero real number $a \in \mathbb{R}$ is the unique real number $c \in \mathbb{R}$ that satisfies $ac=ca=1$. Usually denoted as $a^{-1} = \frac{1}{a}$, the reciprocal of a nonzero $a$ can be used to solve equations of the form $ax=b$.
+
+This leads to definitions like $ax=b \rightarrow a^{-1}ax=a^{-1}b \rightarrow x=a^{-1}b$.
+
+A matrix $A \in \mathbb{R}^{n \times n}$ is called invertible if there exists a matrix $C$ satisfying $AC=I_n$ and $CA=I_n$. An invertible matrix can have only one inverse. Also, $AA^{-1}=A^{-1}A=I_n$ holds.
+
+If matrix $A$ is invertible, we calculate its inverse as follows:
+
+If $A^{-1}=[c_1 c_2 \cdots c_n]$, then $AA^{-1}=[Ac_1 Ac_2 \cdots Ac_n]$ and with $I_n=[e_1 e_2 \cdots e_n]$, we can reduce to RREF: $[A e_1] \sim [I_n c_1]$.
+
+For example, if $A=\begin{bmatrix} 1 & 3 \\ -1 & -2 \end{bmatrix}$, we start with the augmented matrix $[A I_2]=\begin{bmatrix} 1 & 3 & 1 & 0 \\ -1 & -2 & 0 & 1\end{bmatrix}$. First, performing $R_1+R_2$ gives $\begin{bmatrix} 1 & 3 & 1 & 0 \\ 0 & 1 & 1 & 1\end{bmatrix}$, then $-3R_2+R_1$ gives $\begin{bmatrix} 1 & 0 & -2 & -3 \\ 0 & 1 & 1 & 1\end{bmatrix}$. Since we have $I_n$ in the RREF, the remaining matrix automatically becomes the inverse. Therefore, the inverse is $\begin{bmatrix} -2 & -3 \\ 1 & 1\end{bmatrix}$.
+
+---
+
 ### References
 
 [Original Source #1](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)

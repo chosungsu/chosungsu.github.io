@@ -80,6 +80,22 @@ $$
 
 ---
 
+### Inverse of a Matrix
+
+정방행렬 $A \in \mathbb{R}^{n \times n}$의 역행렬은 0이 아닌 실수 $a \in \mathbb{R}$의 역수 개념을 일반화한 것입니다. 형식적으로, 0이 아닌 실수 $a \in \mathbb{R}$의 역수는 $ac=ca=1$을 만족하는 유일한 실수 $c \in \mathbb{R}$입니다. 보통 $a^{-1} = \frac{1}{a}$로 표기되는 0이 아닌 a의 역수는 방정식 $ax=b$를 푸는 데 사용될 수 있습니다.
+
+따라서 $ax=b \rightarrow a^{-1}ax=a^{-1}b \rightarrow x=a^{-1}b$ 와 같은 정의를 이끌어냅니다.
+
+그리고 행렬 $A \in \mathbb{R}^{n \times n}$이 $AC=I_n$이고 $CA=I_n$을 만족하는 행렬 $C$가 존재한다면 $A$는 가역행렬이라고 합니다. 가역행렬에는 단 하나의 역행렬만 가질 수 있습니다. 또한 $AA^{-1}=A^{-1}A=I_n$이 성립합니다.
+
+만약 행렬 $A$가 가역행렬이라면 역행렬 계산은 아래와 같이 진행합니다.
+
+$A^{-1}=[c_1 c_2 \cdots c_n]$이라면 $AA^{-1}=[Ac_1 Ac_2 \cdots Ac_n]$이고 $I_n=[e_1 e_2 \cdots e_n]$과 같다는 전제가 성립하고 RREF를 간단히 하면 $[A e_1] \sim [I_n c_1]$이 됩니다.
+
+예를 들어 $A=\begin{bmatrix} 1 & 3 \\ -1 & -2 \end{bmatrix}$이면 $[A I_2]=\begin{bmatrix} 1 & 3 & 1 & 0 \\ -1 & -2 & 0 & 1\end{bmatrix}$ 행렬에서부터 행감소를 진행합니다. 우선 $R_1+R_2$를 진행하면 $\begin{bmatrix} 1 & 3 & 1 & 0 \\ 0 & 1 & 1 & 1\end{bmatrix}$이 되고 $-3R_2+R_1$을 진행하면 $\begin{bmatrix} 1 & 0 & -2 & -3 \\ 0 & 1 & 1 & 1\end{bmatrix}$이 되고 RREF값에 $I_n$이 존재하므로 나머지 행렬값이 자동으로 역행렬이 되게 됩니다. 따라서 역행렬은 $\begin{bmatrix} -2 & -3 \\ 1 & 1\end{bmatrix}$입니다.
+
+---
+
 ### 참고 자료
 
 [원본 경로 #1](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
