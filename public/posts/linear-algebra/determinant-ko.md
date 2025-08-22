@@ -114,25 +114,76 @@ a_{22} & a_{23} & a_{24} \\
 
 ---
 
-### Cramer's formula
+### ERO and Determinants
 
-이 공식은 미지수와 방정식의 개수가 같은 선형연립방정식에 적용합니다.
+행렬 $A \in \mathbb{R}^{n \times n}$에 대해, 우리는 행렬식 $det A$를 다음과 같이 정의하였습니다.
 
-예를 들어 $x=\{x_1, x_2, …, x_n\}$이고 $b=\{b_1, b_2, …, b_n\}$이면 연립방정식 $Ax=b$로 나타낼 수 있게 되고 $x_1=\frac{|A_1|}{|A|}$, $x_2=\frac{|A_2|}{|A|}$와 같이 유일해를 갖게 됩니다. 이 때 분자는 $j$열의 원소들을 b값으로 바꾼 $A$행렬을 사용합니다.
+$$
+det A=a_{j1}C_{j1}+a_{j2}C_{j2}+ \cdots + a_{jn}C_{jn}
+$$
+
+-내적으로도 표현할 수 있으므로 $det A=a_j*c_j^T$가 됩니다.
+
+-그리고 $A$의 두 행을 교환하여 얻은 행렬을 $B$라고 하면 $det B=-det A$가 성립합니다.
+
+예를 들어 $A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$이고, 두 행을 교환하여 얻은 $B = \begin{bmatrix} a_{21} & a_{22} \\ a_{11} & a_{12} \end{bmatrix}$라 하면 $det B=a_{21}a_{12}-a_{22}a_{11}=-(a_{11}a_{22}-a_{12}a_{21}) =-det A$로 $2 \times 2$는 쉽게 증명이 됩니다.
+
+-$A$의 한 행에 스칼라 $\beta$를 곱하여 얻은 행렬이 $B$라 하면 $det B=\beta*det A$가 성립합니다.
+
+예를 들어 $A$의 $j$번째 행에 $\beta$를 곱하여 $B$를 얻었다고 가정하면 $j$번째 행을 제외한 나머지 행들은 동일하므로 $det B=(\beta*a_j)*c_j^T=\beta*det A$임을 증명할 수 있습니다.
+
+-$A$의 $k$번째 행에 $\beta$를 곱하여 $j$번째 행에 더하여 얻은 행렬을 $B$라고 하면 $detB=detA$가 성립합니다.
+
+예를 들어 임의의 행 벡터 $r = \begin{bmatrix} r_1 & r_2 & \dots & r_n \end{bmatrix}$와 행렬 $A$에 대해 표현식 $r \cdot c_j^T = r_1C_{j1} + r_2C_{j2} + \dots + r_nC_{jn}$은 $A$의 $j$번째 행을 $r$로 대체하여 얻은 행렬의 행렬식과 같습니다. 따라서 만약 $k \ne j$이면 $a_k*c_j^T=0$입니다. 그 이유는 두 행을 서로 대체하면 두 개의 동일한 행이 생기기 때문입니다. $B$의 $j$번째 행은 $b_j=a_j+\beta*a_k$가 되어 전개하면 $det B=(a_j+\beta*a_k)*c_j^T=(a_j*c_j^T)+\beta*(a_k*c_j^T)=det A+\beta(0)=det A$가 성립합니다.
 
 ---
 
-### Eigenvalue and eigenvector
+### Properties of the Determinant
+
+정사각 행렬 $A$가 가역일 필요충분 조건은 $det A \ne 0$입니다. 만약 $A_p$가 삼각 행렬이면 행렬식은 주대각선 원소들의 곱으로 각 원소들이 모두 0이 아니면 $det A = det A_p \ne 0$이고 이 경우 $A_p$에는 $n$개의 선행 원소가 있으므로 가역이 성립합니다. 그렇지 아니하고 원소 중 하나가 0이면 $r<n$ 개의 선행 원소가 있으므로 가역이 아닙니다.
+
+$A \in \mathbb{R}^{n \times n}$이고 $B=\beta*A$일 때 $det B = \beta^n * det A$가 성립합니다. 예를 들어 $2 \times 2$ 행렬에서 $det (\beta*A)=(\beta*a_{11})(\beta*a_{22})-(\beta*a_{12})(\beta*a_{21})=\beta^2*detA$로 증명이 됩니다.
+
+---
+
+### Cofactor method
+
+행렬 $A \in \mathbb{R}^{n \times n}$에 대해 여인수에 대해서는 수차례 다음과 같이 정의를 하였습니다. $C_{jk} = (-1)^{j+k} \det A_{jk}$가 행렬 $A$의 $j$번째 행, $k$번째 열에 대한 여인수로 여인수행렬을 다음과 같이 구성합니다.
 
 $$
-Ax=\lambda x
+\text{Cof(A)}= \begin{bmatrix}
+C_{11} & C_{12} & \cdots & C_{1n} \\
+C_{21} & C_{22} & \cdots & C_{2n} \\ 
+\vdots & \vdots & \ddots & \vdots \\
+C_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix}
 $$
 
-$n$차의 정사각행렬 $A$에 대해서 0이 아닌 스칼라 $\lambda$를 고유값이라고 하고 $x$를 $\lambda$에 대응하는 벡터가 될 때 이를 고유벡터라고 합니다.
+행렬과의 곱은 $A(Cof(A))^T=detA*I_n$으로 간단히 할 수 있습니다. $det A \ne 0$이면 나눠질 수 있으므로 $A^{-1}=\frac{1}{det A}*(Cof(A))^T$로 볼 수 있으므로 예를 들어 $A^{-1}=\frac{1}{ad-bc}*\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$입니다.
 
-이를 구하는 일반적인 방법으로는 동차연립방정식을 이용하는 것으로 $(\lambda-A)x=0$으로 만들어서 계산하고 $x$와 곱하는 방정식을 특성방정식이라고 합니다.
+---
 
-동차연립방정식의 해공간을 $\lambda$에 대응하는 $A$의 고유공간이라고 합니다.
+### Cramer's formula
+
+이 공식은 계수 행렬이 가역인 선형 시스템의 해를 찾기 위한 명시적인 공식입니다. 즉, 행렬 $A$가 가역이라면 $x=A^{-1}b$를 이용해야 합니다.
+
+위에서 나온 여인수 공식에 따르면 $A^{-1}=\frac{1}{det A}*(Cof(A))^T$이므로 $x=\frac{1}{det A}*\begin{bmatrix}
+C_{11} & C_{12} & \cdots & C_{1n} \\
+C_{21} & C_{22} & \cdots & C_{2n} \\ 
+\vdots & \vdots & \ddots & \vdots \\
+C_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix} * \begin{bmatrix} b_1 \\b_2 \\ \vdots \\ b_n \end{bmatrix}$과 같이 쓸 수 있습니다.
+
+이제 해의 첫번째 성분을 전개하면 $x_1=\frac{1}{det A}*(b_1C_{11} + b_2C_{21} + \cdots + b_nC_{n1})$인데 괄호 안의 값은 행렬 $A$의 첫번째 열을 $b$로 대체하여 얻은 행렬식과 같습니다. 따라서 이를 요약한 것이 Cramer's formula입니다.
+
+$$
+x=\frac{1}{det A}*\begin{bmatrix}
+det A_1 \\
+det A_2 \\
+\vdots \\
+det A_n
+\end{bmatrix}
+$$
 
 ---
 

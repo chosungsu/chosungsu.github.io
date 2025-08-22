@@ -94,5 +94,9 @@ $F_Y(y)=P[Y \le y]=P[aX+b \le y]=\begin{cases} P[X \le \frac{y-b}{a}] & a > 0 \\
 
 [원본 경로 #1](https://www.youtube.com/watch?v=ZMSuPBOOT7Y&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=8)
 
+[원본 경로 #2](https://www.youtube.com/watch?v=UI1RMiAJ-yA&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=10)
+
+[원본 경로 #3](https://www.youtube.com/watch?v=FeYEITE6JJk&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=11)
+
 
 

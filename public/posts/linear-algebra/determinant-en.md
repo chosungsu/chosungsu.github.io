@@ -114,25 +114,76 @@ a_{22} & a_{23} & a_{24} \\
 
 ---
 
-### Cramer's formula
+### ERO and Determinants
 
-This formula applies to linear systems where the number of unknowns equals the number of equations.
+For a matrix $A \in \mathbb{R}^{n \times n}$, we defined the determinant $det A$ as follows:
 
-For example, if $x=\{x_1, x_2, \ldots, x_n\}$ and $b=\{b_1, b_2, \ldots, b_n\}$, then the system of equations can be represented as $Ax=b$, and we have unique solutions $x_1=\frac{|A_1|}{|A|}$, $x_2=\frac{|A_2|}{|A|}$, etc. Here, the numerator uses matrix $A$ with the elements of the $j$-th column replaced by the $b$ values.
+$$
+det A=a_{j1}C_{j1}+a_{j2}C_{j2}+ \cdots + a_{jn}C_{jn}
+$$
+
+-This can also be expressed as an inner product, so $det A=a_j*c_j^T$.
+
+-And if matrix $B$ is obtained by exchanging two rows of $A$, then $det B=-det A$ holds.
+
+For example, if $A = \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix}$ and $B = \begin{bmatrix} a_{21} & a_{22} \\ a_{11} & a_{12} \end{bmatrix}$ is obtained by exchanging two rows, then $det B=a_{21}a_{12}-a_{22}a_{11}=-(a_{11}a_{22}-a_{12}a_{21}) =-det A$, which easily proves the case for $2 \times 2$ matrices.
+
+-If matrix $B$ is obtained by multiplying a row of $A$ by a scalar $\beta$, then $det B=\beta*det A$ holds.
+
+For example, if $B$ is obtained by multiplying the $j$th row of $A$ by $\beta$, since all other rows remain the same except the $j$th row, we can prove that $det B=(\beta*a_j)*c_j^T=\beta*det A$.
+
+-If matrix $B$ is obtained by adding $\beta$ times the $k$th row to the $j$th row of $A$, then $detB=detA$ holds.
+
+For example, for any row vector $r = \begin{bmatrix} r_1 & r_2 & \dots & r_n \end{bmatrix}$ and matrix $A$, the expression $r \cdot c_j^T = r_1C_{j1} + r_2C_{j2} + \dots + r_nC_{jn}$ equals the determinant of the matrix obtained by replacing the $j$th row of $A$ with $r$. Therefore, if $k \ne j$, then $a_k*c_j^T=0$ because replacing two rows creates two identical rows. The $j$th row of $B$ becomes $b_j=a_j+\beta*a_k$, and expanding gives $det B=(a_j+\beta*a_k)*c_j^T=(a_j*c_j^T)+\beta*(a_k*c_j^T)=det A+\beta(0)=det A$.
 
 ---
 
-### Eigenvalue and eigenvector
+### Properties of the Determinant
+
+A square matrix $A$ is invertible if and only if $det A \ne 0$. If $A_p$ is a triangular matrix, its determinant is the product of its diagonal elements, and if none of these elements are zero, then $det A = det A_p \ne 0$, and in this case $A_p$ has $n$ leading elements, making it invertible. If one of the elements is zero, there are $r<n$ leading elements, making it non-invertible.
+
+For $A \in \mathbb{R}^{n \times n}$ and $B=\beta*A$, $det B = \beta^n * det A$ holds. For example, in a $2 \times 2$ matrix, $det (\beta*A)=(\beta*a_{11})(\beta*a_{22})-(\beta*a_{12})(\beta*a_{21})=\beta^2*detA$ proves this.
+
+---
+
+### Cofactor method
+
+For a matrix $A \in \mathbb{R}^{n \times n}$, we have defined cofactors several times as follows. $C_{jk} = (-1)^{j+k} \det A_{jk}$ is the cofactor for the $j$th row and $k$th column of matrix $A$, and the cofactor matrix is constructed as:
 
 $$
-Ax=\lambda x
+\text{Cof(A)}= \begin{bmatrix}
+C_{11} & C_{12} & \cdots & C_{1n} \\
+C_{21} & C_{22} & \cdots & C_{2n} \\ 
+\vdots & \vdots & \ddots & \vdots \\
+C_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix}
 $$
 
-For an $n$-th order square matrix $A$, a nonzero scalar $\lambda$ is called an eigenvalue, and when $x$ is the corresponding vector for $\lambda$, it is called an eigenvector.
+The matrix product can be simplified as $A(Cof(A))^T=detA*I_n$. If $det A \ne 0$, division is possible, so $A^{-1}=\frac{1}{det A}*(Cof(A))^T$. For example, $A^{-1}=\frac{1}{ad-bc}*\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$.
 
-A general method to find these is to use the homogeneous system of equations, making it $(\lambda I-A)x=0$ and calculating. The equation obtained by multiplying with $x$ is called the characteristic equation.
+---
 
-The solution space of the homogeneous system of equations is called the eigenspace of $A$ corresponding to $\lambda$.
+### Cramer's formula
+
+This formula is an explicit formula for finding solutions to linear systems with invertible coefficient matrices. That is, if matrix $A$ is invertible, we use $x=A^{-1}b$.
+
+According to the cofactor formula above, $A^{-1}=\frac{1}{det A}*(Cof(A))^T$, so we can write $x=\frac{1}{det A}*\begin{bmatrix}
+C_{11} & C_{12} & \cdots & C_{1n} \\
+C_{21} & C_{22} & \cdots & C_{2n} \\ 
+\vdots & \vdots & \ddots & \vdots \\
+C_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix} * \begin{bmatrix} b_1 \\b_2 \\ \vdots \\ b_n \end{bmatrix}$.
+
+Expanding the first component of the solution gives $x_1=\frac{1}{det A}*(b_1C_{11} + b_2C_{21} + \cdots + b_nC_{n1})$, where the value in parentheses equals the determinant of the matrix obtained by replacing the first column of $A$ with $b$. Therefore, this is summarized in Cramer's formula:
+
+$$
+x=\frac{1}{det A}*\begin{bmatrix}
+det A_1 \\
+det A_2 \\
+\vdots \\
+det A_n
+\end{bmatrix}
+$$
 
 ---
 

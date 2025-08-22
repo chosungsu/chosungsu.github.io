@@ -94,5 +94,6 @@ For example, in a normal distribution $(X \sim N(0,1))$ where $f_X(x)=\frac{1}{\
 
 [Original Source #1](https://www.youtube.com/watch?v=ZMSuPBOOT7Y&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=8)
 
+[Original Source #2](https://www.youtube.com/watch?v=UI1RMiAJ-yA&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=10)
 
-
+[Original Source #3](https://www.youtube.com/watch?v=FeYEITE6JJk&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=11)
