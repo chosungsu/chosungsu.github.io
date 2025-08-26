@@ -91,11 +91,33 @@ $A$가 대칭행렬이면 서로 독립이고 수직관계인 eigen vector 집�
 
 ---
 
+### Estimation
+
+$Y$가 주어진 경우 $X$를 추정하는 것으로 MAP(Maximum a posterior), ML(Maximum likelihood), MMSE(Minimum mean squared error) 등을 사용합니다.
+
+우선 discrete r.v에서는 아래의 방법으로 각각을 해결합니다.
+
+$\rightarrow \hat{X}=\text{argmax}_x P[X=x|Y=y]=\text{argmax}_x \frac{P[Y=y|X=x]P[X=x]}{P[Y=y]}$ : 이는 MAP로서 $Y=y$의 값이 주어진다면 $x$를 추정하는 과정입니다.
+
+$\rightarrow \hat{X}=\text{argmax}_x P[Y=y|X=x]$ : 이는 ML로서 운 좋게 $X=x$를 맞추었고 $Y=y$를 추정하는 과정입니다.
+
+다음은 continuous r.v에서입니다.
+
+$\rightarrow \hat{X}=\text{argmax}_x f_X(x|y)$
+
+$\rightarrow \hat{X}=\text{argmax}_x f_Y(y|x)$
+
+마지막으로 MMSE는 $\hat{X} = g(Y) \rightarrow e \triangleq X-g(Y)$라는 에러변인을 추가합니다.
+
+---
+
 ### 참고 자료
 
 [원본 경로 #1](https://www.youtube.com/watch?v=1JNsCY02QyY&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=14)
 
 [원본 경로 #2](https://www.youtube.com/watch?v=CXwYlOfNSww&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=15)
+
+[원본 경로 #3](https://www.youtube.com/watch?v=MQRheH5YShc&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=16)
 
 
 

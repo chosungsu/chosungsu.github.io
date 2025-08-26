@@ -91,11 +91,30 @@ For example, if matrix $A$ is $\begin{bmatrix} 3 & 4 \\ 5 & 2\end{bmatrix}$, the
 
 ---
 
+### Estimation
+
+For estimating $X$ given $Y$, we use methods like MAP (Maximum a posterior), ML (Maximum likelihood), and MMSE (Minimum mean squared error).
+
+First, for discrete random variables, we solve each method as follows:
+
+$\rightarrow \hat{X}=\text{argmax}_x P[X=x|Y=y]=\text{argmax}_x \frac{P[Y=y|X=x]P[X=x]}{P[Y=y]}$ : This is MAP, which estimates $x$ when the value of $Y=y$ is given.
+
+$\rightarrow \hat{X}=\text{argmax}_x P[Y=y|X=x]$ : This is ML, which estimates $Y=y$ when we fortunately get $X=x$ correct.
+
+Next is for continuous random variables:
+
+$\rightarrow \hat{X}=\text{argmax}_x f_X(x|y)$
+
+$\rightarrow \hat{X}=\text{argmax}_x f_Y(y|x)$
+
+Finally, MMSE adds an error variable $\hat{X} = g(Y) \rightarrow e \triangleq X-g(Y)$.
+
+---
+
 ### References
 
 [Original Source #1](https://www.youtube.com/watch?v=1JNsCY02QyY&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=14)
 
 [Original Source #2](https://www.youtube.com/watch?v=CXwYlOfNSww&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=15)
 
-
-
+[Original Source #3](https://www.youtube.com/watch?v=MQRheH5YShc&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=16)
