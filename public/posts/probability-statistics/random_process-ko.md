@@ -54,11 +54,21 @@ $$
 
 ---
 
+### Random process
+
+$X(t, \zeta) \in R$로 시간 매개변수 $t$에 따라 random variable이 변한다고 말합니다. 예를 들어 $\zeta \in [0, 1]$이고 $\zeta=0.347802...$를 갖는다고 할 때 $X(t,\zeta)$의 시간 매개변수 $t$가 discrete이며 소수점 자리수를 대변한다고 합니다.
+
+이 때 $X(1,\zeta)=3, X(2, \zeta)=4$ 등을 가짐을 알 수 있습니다. 이는 $\zeta$가 달라지더라도 동일할 것입니다. discrete일 때는 $X_n(\zeta)$, continuous일 때는 $X(t,\zeta)$ 기호로 정의합니다.
+
+---
+
 ### 참고 자료
 
 [원본 경로 #1](https://www.youtube.com/watch?v=Kjhvx1z3TjM&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=17)
 
 [원본 경로 #2](https://www.youtube.com/watch?v=tPoZcVAVJF8&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=18)
+
+[원본 경로 #3](https://www.youtube.com/watch?v=vK7RjVR_Pl0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=19)
 
 
 

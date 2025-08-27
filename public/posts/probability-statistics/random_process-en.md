@@ -54,11 +54,21 @@ As such, the sum inside the exponential can be changed to a product and can be e
 
 ---
 
+### Random process
+
+$X(t, \zeta) \in R$ means that the random variable changes according to the time parameter $t$. For example, when $\zeta \in [0, 1]$ and $\zeta=0.347802...$, the time parameter $t$ of $X(t,\zeta)$ is discrete and represents decimal places.
+
+At this time, we can see that it has values like $X(1,\zeta)=3, X(2, \zeta)=4$, etc. This will be the same even if $\zeta$ changes. We define it as $X_n(\zeta)$ when discrete and $X(t,\zeta)$ when continuous.
+
+---
+
 ### References
 
 [Original Source #1](https://www.youtube.com/watch?v=Kjhvx1z3TjM&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=17)
 
 [Original Source #2](https://www.youtube.com/watch?v=tPoZcVAVJF8&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=18)
+
+[Original Source #3](https://www.youtube.com/watch?v=vK7RjVR_Pl0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=19)
 
 
 
