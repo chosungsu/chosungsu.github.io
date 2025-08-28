@@ -26,7 +26,8 @@ $$
 Typically, we assume conditional independence between state transitions and rewards:
 
 $$
-P[S_{t+1}, R_{t+1}\mid S_t, A_t]=P[S_{t+1}\mid S_t, A_t] \, P[R_{t+1}\mid S_t, A_t]
+P[S_{t+1}, R_{t+1}|S_t, A_t] \\
+=P[S_{t+1}|S_t, A_t]P[R_{t+1}|S_t, A_t]
 $$
 
 We estimate the model $M_{\eta}$ from experience $\{S_1, A_1, R_2, \dots, S_T\}$. Learning $(s,a) \to r$ is a regression problem, while learning $(s,a) \to s'$ is a density estimation problem.
@@ -42,7 +43,8 @@ Forward search constructs a search tree rooted at the current state $s_t$ and ro
 Given a model $M_{\eta}$, we simulate $K$ episodes from the current state $s_t$ using the current simulation policy $\pi$. We build a search tree containing the visited states and actions and evaluate $Q(s,a)$ as follows:
 
 $$
-Q(s,a)=\frac{1}{N(s,a)} \sum_{k=1}^{K} \sum_{u=t}^{T} \mathbf{1}(S_u^k, A_u^k=s,a)\,G_u^k \;\Rightarrow\; q^{\pi}(s,a)
+Q(s,a)=\frac{1}{N(s,a)} \sum_{k=1}^{K} \sum_{v=t}^{T} 1G_u^k \\
+\rightarrow q^{\pi}(s,a)
 $$
 
 We then select the action with the highest current value.
@@ -82,7 +84,8 @@ We estimate an upper confidence bound $\hat{U}_t(a)$ for each action value. With
 Let $X_1, \dots, X_t$ be i.i.d. random variables in the range $[0,1]$. If the sample mean is $\bar{X}_t=\frac{1}{t} \sum_{\tau=1}^{t} X_{\tau}$, then $P(\mathbb{E}[X] > \bar{X}_t + u) \le e^{-2tu^2}$. Applying this inequality to the reward when choosing action $a$ gives:
 
 $$
-P\big(Q(a) > \hat{Q}_t(a) + U_t(a)\big) \le e^{-2N_t(a)U_t(a)^2}
+P(Q(a) > \hat{Q}_t(a) + U_t(a)) \\
+\le e^{-2N_t(a)U_t(a)^2}
 $$
 
 #### Calculate UCB

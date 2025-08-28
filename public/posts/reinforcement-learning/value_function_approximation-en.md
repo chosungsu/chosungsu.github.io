@@ -57,7 +57,9 @@ Thus, MC evaluation converges to a local optimum.
 The TD target $R_{t+1} + \gamma\,\hat{v}(S_{t+1}, \mathbf{w})$ is a biased sample of the true value $v_\pi(S_t)$. Still, we can apply supervised learning to the training data $\{\langle S_1, R_2 + \gamma\hat{v}(S_2, \mathbf{w})\rangle, \dots, \langle S_{T-1}, R_T\rangle\}$.
 
 $$
-\Delta w=\alpha\,(R+\gamma \, \hat{v}(S',w)-\hat{v}(S,w))\,\nabla_w \hat{v}(S,w)=\alpha\, \delta\, X(S)
+\Delta w=\alpha(R+\gamma \hat{v}(S',w)-\hat{v}(S,w))*\\
+\nabla_w \hat{v}(S,w) \\
+=\alpha \delta X(S)
 $$
 
 In this way, linear TD(0) converges to the global optimum.
@@ -83,8 +85,10 @@ DQN uses experience replay and fixed Q-targets. Following a greedy policy, the a
 #### Least Squares Q-Learning
 
 $$
-\delta = R_{t+1}+\gamma \, \hat{q} (S_{t+1}, \pi(S_{t+1}), w)-\hat{q}(S_t, A_t, w), \\
-\Delta w=\alpha \, \delta \, X(S_t,A_t)
+\delta = R_{t+1} \\
++\gamma \hat{q} (S_{t+1}, \pi(S_{t+1}), w) \\
+-\hat{q}(S_t, A_t, w), \\
+\Delta w=\alpha \delta X(S_t,A_t)
 $$
 
 This yields the linear Q-learning update.

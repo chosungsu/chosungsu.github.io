@@ -26,7 +26,8 @@ $$
 그리고 일반적으로 상태 전이와 보상 간의 조건부 독립성을 가정합니다.
 
 $$
-P[S_{t+1}, R_{t+1}|S_t, A_t]=P[S_{t+1}|S_t, A_t]P[R_{t+1}|S_t, A_t]
+P[S_{t+1}, R_{t+1}|S_t, A_t] \\
+=P[S_{t+1}|S_t, A_t]P[R_{t+1}|S_t, A_t]
 $$
 
 경험 ${S_1, A_1, R_2, \dots, S_T}$로부터 모델 $M_{\eta}$를 추정합니다. $(s,a) \rightarrow r$을 학습하는 것은 회귀 문제이고 $(s, a) \to s'$를 학습하는 것은 밀도 추정(density estimation) 문제입니다.
@@ -42,7 +43,8 @@ $$
 모델 $M_v$가 주어졌을 때, 현재 시뮬레이션 정책 $\pi$를 사용하여 현재 상태 $s_t$에서 $K$개의 에피소드를 시뮬레이션합니다. 방문한 상태와 행동을 포함하는탐색 트리를 구성하여 $Q(s,a)$를 다음과 같이 평가합니다.
 
 $$
-Q(s,a)=\frac{1}{N(s,a)} \sum_{k=1}^{K} \sum_{v=t}^{T} 1(S_u^k, A_u^k=s,a)G_u^k \rightarrow q^{\pi}(s,a)
+Q(s,a)=\frac{1}{N(s,a)} \sum_{k=1}^{K} \sum_{v=t}^{T} 1G_u^k \\
+\rightarrow q^{\pi}(s,a)
 $$
 
 가장 높은 가치를 가진 현재 행동을 선택합니다.
@@ -84,7 +86,8 @@ $$
 $X_1, \dots, X_t$가 $[0,1]$ 범위의 i.i.d 확률변수라고 할 때 표본 평균이 $\bar{X}_t=\frac{1}{\tau} \sum_{\tau=1}^{t} X_{\tau}$라고 하면 확률은 $P(E[X] > \bar{X}_t + u) \le e^{-2tu^2}$이 성립합니다. 이 부등식을 행동 $a$를 선택했을 때의 보상에 다음과 같이 적용합니다.
 
 $$
-P(Q(a) > \hat{Q}_t(a) + U_t(a)) \le e^{-2N_t(a)U_t(a)^2}
+P(Q(a) > \hat{Q}_t(a) + U_t(a)) \\
+\le e^{-2N_t(a)U_t(a)^2}
 $$
 
 #### Calculate UCB
@@ -117,7 +120,7 @@ $$
 
 행동-가치 함수는 상태 $s$와 행동 $a$에 대한 예상 보상으로 $Q(s,a)=E[r|s,a]$로 표기합니다. 선형 함수 근사로 $Q_{\theta}(s,a)= \phi(s,a)^T \theta \sim Q(s,a)$와 같이 추정합니다.
 
-LUCB에서 최소 제곱 회귀는 평균 행동-가치 함수 $Q_{\theta}(s,a)$를 추정하는데 이는 분산인 $\sigma^2_{\theta}(s,a)와 불확실성을 추정할 수 있습니다. 공분산은 $A^{-1}$이며 행동-가치는 선형이므로 분산은 2차 즉, $\sigmq^2_{\theta}=\phi(s,a)^T A^{-1} \phi(s,a)$ 형식입니다.
+LUCB에서 최소 제곱 회귀는 평균 행동-가치 함수 $Q_{\theta}(s,a)$를 추정하는데 이는 분산인 $\sigma^2_{\theta}(s,a)$와 불확실성을 추정할 수 있습니다. 공분산은 $A^{-1}$이며 행동-가치는 선형이므로 분산은 2차 즉, $\sigmq^2_{\theta}=\phi(s,a)^T A^{-1} \phi(s,a)$ 형식입니다.
 
 $$
 Q_{\theta}(s,a)+c\sqrt{\phi(s,a)^T A^{-1} \phi(s,a)}

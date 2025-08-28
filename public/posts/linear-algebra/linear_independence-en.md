@@ -46,19 +46,19 @@ This is related to the concept of dimension: sets of vectors with size larger th
 
 $$
 v_1=\begin{bmatrix}
-8 \\ 3 \\ 0 \\ -2
-\end{bmatrix}
-, v_2=\begin{bmatrix}
-4 \\ 11 \\ -4 \\ 6
-\end{bmatrix}
-, v_3=\begin{bmatrix}
-2 \\ 0 \\ 1 \\ 1
-\end{bmatrix}
-, v_4=\begin{bmatrix}
-3 \\ -9 \\ -5 \\ 3
-\end{bmatrix}
-, v_5=\begin{bmatrix}
-0 \\ -2 \\ -7 \\ 7
+8 // 3 // 0 // -2
+\end{bmatrix}, \\
+v_2=\begin{bmatrix}
+4 // 11 // -4 //6
+\end{bmatrix}, \\
+v_3=\begin{bmatrix}
+2 // 0 // 1 // 1
+\end{bmatrix}, \\
+v_4=\begin{bmatrix}
+3 // -9 // -5 // 3
+\end{bmatrix}, \\
+v_5=\begin{bmatrix}
+0 // -2 // -7 // 7
 \end{bmatrix}
 $$
 

@@ -47,17 +47,17 @@ $R^n$에 속하는 벡터들의 집합 ${v_1, v_2, \dots, v_p}$에서 만약 $p 
 $$
 v_1=\begin{bmatrix}
 8 // 3 // 0 // -2
-\end{bmatrix}
-, v_2=\begin{bmatrix}
+\end{bmatrix}, \\
+v_2=\begin{bmatrix}
 4 // 11 // -4 //6
-\end{bmatrix}
-, v_3=\begin{bmatrix}
+\end{bmatrix}, \\
+v_3=\begin{bmatrix}
 2 // 0 // 1 // 1
-\end{bmatrix}
-, v_4=\begin{bmatrix}
+\end{bmatrix}, \\
+v_4=\begin{bmatrix}
 3 // -9 // -5 // 3
-\end{bmatrix}
-, v_5=\begin{bmatrix}
+\end{bmatrix}, \\
+v_5=\begin{bmatrix}
 0 // -2 // -7 // 7
 \end{bmatrix}
 $$

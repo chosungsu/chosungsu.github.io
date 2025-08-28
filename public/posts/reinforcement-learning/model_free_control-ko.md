@@ -34,8 +34,10 @@ $$
 $$
 q_{\pi}(s,\pi'(s)) \\
 =\sum_{a \in A} \pi'(a|s)q_{\pi}(s,a) \\
-=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) + (1-\epsilon) max_{a \in A} q_{\pi}(s,a) \\
-=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) + (1-\epsilon) \frac{\sum_{a \in A} \pi(a|s) -\epsilon/m}{1-\epsilon}q_{\pi}(s,a) \\
+=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) \\
++ (1-\epsilon) max_{a \in A} q_{\pi}(s,a) \\
+=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) \\
++ (1-\epsilon) \frac{\sum_{a \in A} \pi(a|s) -\epsilon/m}{1-\epsilon}q_{\pi}(s,a) \\
 =\sum_{a \in A} \pi(a|s) q_{\pi}(s,a) \\
 =v_{\pi}(s)
 $$
@@ -53,13 +55,17 @@ $Q(S,A) \leftarrow Q(S,A) + \alpha[R+\gamma Q(S',A')-Q(S,A)]$와 같이 행동-�
 #### $n$ step Sarsa
 
 $$
-n = 1 \rightarrow \text{Sarsa} : q_t^{(1)}=R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})
+n = 1 \\
+\rightarrow \text{Sarsa} : q_t^{(1)}=R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})
 $$
 
 $n$단계 $Q$ 리턴을 정의하면 아래와 같습니다.
 
 $$
-q_t^{(n)}=R_{t+1} + \cdots + \gamma^{n-1}R_{t+n} + \gamma^n Q(S_{t+n}, A_{t+n})
+q_t^{(n)}=R_{t+1} \\
++ \cdots \\
++ \gamma^{n-1}R_{t+n} \\
++ \gamma^n Q(S_{t+n}, A_{t+n})
 $$
 
 그리고 $n$단계 Sarsa는 $Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha(q_t^{n} - Q(S_t, A_t))$로 업데이트합니다.
@@ -93,7 +99,7 @@ MC에서는 $\mu$에서 생성된 return을 사용하여 정책을 평가하고 
 
 #### Q learning
 
-행동-가치(action-value) $Q(s, a)$의 오프-정책 학습을 고려합니다. 중요도 샘플링이 필요하지 않고 다음 행동은 행동 정책 $\mu$에 따라서 $A_{t+1} \sim \mu(\cdot|S_t)$으로 선택됩니다. 그리고 $Q(S_t, A_t)$는 대안적 행동의 가치를 향해 $Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha(R_{t+1}+\gamma Q(S_{t+1}, A')-Q(S_t,A_t))로 업데이트됩니다.
+행동-가치(action-value) $Q(s, a)$의 오프-정책 학습을 고려합니다. 중요도 샘플링이 필요하지 않고 다음 행동은 행동 정책 $\mu$에 따라서 $A_{t+1} \sim \mu(\cdot|S_t)$으로 선택됩니다. 그리고 $Q(S_t, A_t)$는 대안적 행동의 가치를 향해 $Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha(R_{t+1}+\gamma Q(S_{t+1}, A')-Q(S_t,A_t))$로 업데이트됩니다.
 
 ---
 

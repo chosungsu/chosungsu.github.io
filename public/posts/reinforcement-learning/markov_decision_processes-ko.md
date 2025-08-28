@@ -40,7 +40,7 @@ $\rightarrow$ 다음 상태의 할인된 가치인 $\gamma*v(S_{t+1})$
 
 $$
 v(s)=E[R_{t+1}+\gamma*R_{t+2}+\cdots|S_t=s] \\
-=E[R_{t+1}+\gamma*(R_{t+2} + \gamma*R_{t+3} + \cdots)|S_t=s] \\
+=E[R_{t+1}+\gamma*(R_{t+2} + \gamma*R_{t+3} + \cdots)|] \\
 =E[R_{t+1}+\gamma*G_{t+1}|S_t=s] \\
 =E[R_{t+1}+\gamma*v(S_{t+1})|S_t=s]
 $$

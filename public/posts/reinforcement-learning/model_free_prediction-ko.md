@@ -73,8 +73,8 @@ TD의 목표는 리턴보다 훨씬 낮은 분산(variance)을 가지는 것입�
 
 $$
 \sum_{k=1}^K \sum_{t=1}^{T_k} (G_t^k - V(s_t^k))^2, \\
-\hat{P}_{s,s'}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k, s_{t+1}^k=s,a,s'), \\
-\hat{R}_{s}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k,=s,a)r_t^k
+\hat{P}_{s,s'}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k, s_{t+1}^k), \\
+\hat{R}_{s}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k)r_t^k
 $$
 
 MC는 최소평균 제곱오차(MMSE)를 가진 해로 수렴하지만 TD(0)은 최대 우도(ML) 해로 수렴합니다.
@@ -88,8 +88,12 @@ MC는 최소평균 제곱오차(MMSE)를 가진 해로 수렴하지만 TD(0)은 
 $n=1,2,\infty$에 대한 $n$단계 리턴을 생각해보면 다음과 같습니다.
 
 $$
-n=1 \rightarrow G_t=R_{t+1}+\gamma V(S_{t+1}), \\
-n=\infty \rightarrow G_t=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{T-1}R_T
+n=1 \\
+\rightarrow \\
+G_t=R_{t+1}+\gamma V(S_{t+1}), \\
+n=\infty \\
+\rightarrow \\
+G_t=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{T-1}R_T
 $$
 
 따라서 $G_t^{(n)}=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{n-1}R_{t+n}+\gamma^n V(S_{t+n})$으로 정의가 되고 시간차 학습은 $V(S_t) \leftarrow V(S_t)+\alpha(G_t^{(n)}-V(S_t))$입니다.

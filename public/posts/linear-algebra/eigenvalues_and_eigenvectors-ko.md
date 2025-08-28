@@ -15,12 +15,12 @@ A=\begin{bmatrix}
 4 & -1 & 6 \\
 2 & 1 & 6 \\
 2 & -1 & 8
-\end{bmatrix},
+\end{bmatrix}, \\
 v=\begin{bmatrix}
 -3 \\
 0 \\
 1
-\end{bmatrix},
+\end{bmatrix}, \\
 u=\begin{bmatrix}
 -1 \\
 2 \\
@@ -98,10 +98,10 @@ $$
 
 $$
 Hess(f)=\begin{bmatrix}
-\frac{\partial^2 f}{\partial x_1 \partial x_1} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
-\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
-\vdots & \vdots & \ddots & \vdots \\
-\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n \partial x_n}
+\frac{\partial^2 f}{\partial x_1 \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n \partial x_n}
 \end{bmatrix}
 $$
 

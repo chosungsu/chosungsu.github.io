@@ -34,8 +34,10 @@ For any greedy policy $\pi$, the greedy policy $\pi'$ with respect to $q_{\pi}$ 
 $$
 q_{\pi}(s,\pi'(s)) \\
 =\sum_{a \in A} \pi'(a|s)q_{\pi}(s,a) \\
-=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) + (1-\epsilon) \max_{a \in A} q_{\pi}(s,a) \\
-=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) + (1-\epsilon) \frac{\sum_{a \in A} \pi(a|s) -\epsilon/m}{1-\epsilon}q_{\pi}(s,a) \\
+=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) \\
++ (1-\epsilon) max_{a \in A} q_{\pi}(s,a) \\
+=\frac{\epsilon}{m} \sum_{a \in A} q_{\pi}(s,a) \\
++ (1-\epsilon) \frac{\sum_{a \in A} \pi(a|s) -\epsilon/m}{1-\epsilon}q_{\pi}(s,a) \\
 =\sum_{a \in A} \pi(a|s) q_{\pi}(s,a) \\
 =v_{\pi}(s)
 $$
@@ -53,13 +55,17 @@ Updates the action-value function as $Q(S,A) \leftarrow Q(S,A) + \alpha[R+\gamma
 #### $n$ step Sarsa
 
 $$
-n = 1 \rightarrow \text{Sarsa} : q_t^{(1)}=R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})
+n = 1 \\
+\rightarrow \text{Sarsa} : q_t^{(1)}=R_{t+1}+\gamma Q(S_{t+1}, A_{t+1})
 $$
 
 Defining the $n$-step $Q$ return as follows:
 
 $$
-q_t^{(n)}=R_{t+1} + \cdots + \gamma^{n-1}R_{t+n} + \gamma^n Q(S_{t+n}, A_{t+n})
+q_t^{(n)}=R_{t+1} \\
++ \cdots \\
++ \gamma^{n-1}R_{t+n} \\
++ \gamma^n Q(S_{t+n}, A_{t+n})
 $$
 
 And $n$-step Sarsa updates as $Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha(q_t^{n} - Q(S_t, A_t))$.

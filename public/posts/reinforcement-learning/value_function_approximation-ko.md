@@ -58,7 +58,9 @@ TD 목표 $R_{t+1} + \gamma\hat{v}(S_{t+1}, \mathbf{w})$는 참 가치 $v_\pi(S_
 그래도 훈련 데이터 ${S_1, R_2 + \gamma\hat{v}(S_2, \mathbf{w})}, \dots, {S_{T-1}, R_T}$에 지도 학습을 적용할 수 있습니다.
 
 $$
-\Delta w=\alpha(R+\gamma \hat{v}(S',w)-\hat{v}(S,w))\nabla_w \hat{v}(S,w)=\alpha \delta X(S)
+\Delta w=\alpha(R+\gamma \hat{v}(S',w)-\hat{v}(S,w))*\\
+\nabla_w \hat{v}(S,w) \\
+=\alpha \delta X(S)
 $$
 
 이처럼 선형 TD(0)은 전역 최적점으로 수렴합니다.
@@ -84,7 +86,9 @@ DQN은 경험 재생과 고정된 Q-목표(fixed Q-targets)를 사용합니다. 
 #### Least Squares Q-Learning
 
 $$
-\delta = R_{t+1}+\gamma \hat{q} (S_{t+1}, \pi(S_{t+1}), w)-\hat{q}(S_t, A_t, w), \\
+\delta = R_{t+1} \\
++\gamma \hat{q} (S_{t+1}, \pi(S_{t+1}), w) \\
+-\hat{q}(S_t, A_t, w), \\
 \Delta w=\alpha \delta X(S_t,A_t)
 $$
 

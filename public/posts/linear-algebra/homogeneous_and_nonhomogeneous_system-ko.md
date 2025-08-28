@@ -31,8 +31,8 @@ $$
 3 & -3 & 6 & | 3 \\
 -1 & 1 & -2 & | -1 \\
 2 & -2 & 4 & | 2
-\end{bmatrix}
-\rightarrow
+\end{bmatrix} \\
+\downarrow \\
 \begin{bmatrix}
 1 & -1 & 2 & | 1 \\
 0 & 0 & 0 & | 0 \\

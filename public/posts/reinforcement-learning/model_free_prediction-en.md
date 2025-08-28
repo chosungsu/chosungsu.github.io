@@ -73,8 +73,8 @@ TD's goal is to have much lower variance than the return. While the original ret
 
 $$
 \sum_{k=1}^K \sum_{t=1}^{T_k} (G_t^k - V(s_t^k))^2, \\
-\hat{P}_{s,s'}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} \mathbf{1}(s_t^k, a_t^k, s_{t+1}^k=s,a,s'), \\
-\hat{R}_{s}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} \mathbf{1}(s_t^k, a_t^k=s,a)r_t^k
+\hat{P}_{s,s'}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k, s_{t+1}^k), \\
+\hat{R}_{s}^a=\frac{1}{N(s,a)} \sum_{k=1}^K \sum_{t=1}^{T_k} 1(s_t^k, a_t^k)r_t^k
 $$
 
 MC converges to a solution with minimum mean squared error (MMSE), but TD(0) converges to a maximum likelihood (ML) solution.
@@ -88,8 +88,12 @@ MC converges to a solution with minimum mean squared error (MMSE), but TD(0) con
 Consider n-step returns for $n=1,2,\infty$ as follows:
 
 $$
-n=1 \rightarrow G_t=R_{t+1}+\gamma V(S_{t+1}), \\
-n=\infty \rightarrow G_t=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{T-1}R_T
+n=1 \\
+\rightarrow \\
+G_t=R_{t+1}+\gamma V(S_{t+1}), \\
+n=\infty \\
+\rightarrow \\
+G_t=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{T-1}R_T
 $$
 
 Therefore, $G_t^{(n)}=R_{t+1}+\gamma R_{t+2} + \dots + \gamma^{n-1}R_{t+n}+\gamma^n V(S_{t+n})$ is defined, and temporal difference learning is $V(S_t) \leftarrow V(S_t)+\alpha(G_t^{(n)}-V(S_t))$.

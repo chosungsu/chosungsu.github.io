@@ -39,10 +39,10 @@ $\rightarrow$ Discounted value of next state $\gamma \cdot v(S_{t+1})$
 The above value function can be redefined as follows:
 
 $$
-v(s)=E[R_{t+1}+\gamma \cdot R_{t+2}+\cdots|S_t=s] \\
-=E[R_{t+1}+\gamma \cdot (R_{t+2} + \gamma \cdot R_{t+3} + \cdots)|S_t=s] \\
-=E[R_{t+1}+\gamma \cdot G_{t+1}|S_t=s] \\
-=E[R_{t+1}+\gamma \cdot v(S_{t+1})|S_t=s]
+v(s)=E[R_{t+1}+\gamma*R_{t+2}+\cdots|S_t=s] \\
+=E[R_{t+1}+\gamma*(R_{t+2} + \gamma*R_{t+3} + \cdots)|] \\
+=E[R_{t+1}+\gamma*G_{t+1}|S_t=s] \\
+=E[R_{t+1}+\gamma*v(S_{t+1})|S_t=s]
 $$
 
 As such, the Bellman equation shows that the value of state $s$ consists of immediate reward and expected value of the next state. Computational complexity is $O(n^3)$ for $n$ states.

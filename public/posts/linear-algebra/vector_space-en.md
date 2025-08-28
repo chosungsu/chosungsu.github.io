@@ -60,11 +60,11 @@ $$
 A_1=\begin{bmatrix}
 1 & 2 \\
 0 & -1
-\end{bmatrix},
+\end{bmatrix}, \\
 A_2=\begin{bmatrix}
 -1 & 3 \\
 1 & 0
-\end{bmatrix},
+\end{bmatrix}, \\
 A_3=\begin{bmatrix}
 5 & 0 \\
 -2 & -3
