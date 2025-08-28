@@ -1,7 +1,7 @@
 ---
 title: 'Model free prediction'
 date: '2025-03-14'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### Model free value function approximation

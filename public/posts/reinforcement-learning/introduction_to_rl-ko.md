@@ -1,7 +1,7 @@
 ---
 title: 'Introduction to RL'
 date: '2025-03-03'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### Overview

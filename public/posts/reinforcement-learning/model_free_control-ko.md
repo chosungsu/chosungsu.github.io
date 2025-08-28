@@ -1,7 +1,7 @@
 ---
 title: 'Model free control'
 date: '2025-03-17'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### On-policy MC

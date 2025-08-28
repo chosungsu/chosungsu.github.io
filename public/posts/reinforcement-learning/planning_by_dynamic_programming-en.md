@@ -1,7 +1,7 @@
 ---
 title: 'Planning by dynamic programming'
 date: '2025-03-10'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### Policy evaluation

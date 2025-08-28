@@ -1,7 +1,7 @@
 ---
 title: 'Value Function Approximation'
 date: '2025-03-21'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### Incremental Methods

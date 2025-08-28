@@ -1,7 +1,7 @@
 ---
 title: 'Markov Decision Processes'
 date: '2025-03-07'
-tags: ['cs234', 'lecture']
+tags: ['reinforcement learning', 'lecture']
 ---
 
 ### Overview
