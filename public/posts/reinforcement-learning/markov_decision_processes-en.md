@@ -61,7 +61,7 @@ It is a tuple composed of $<S, A, P, R, \gamma>$.
 
 Policy $\pi$ is a probability distribution of actions for a given state, defined as $\pi(a|s)=P[A_t=a|S_t=s]$. Markov Decision Processes depend only on the current state and are static.
 
-For a given MDP $M$ and policy $\pi$, the state sequence $S_1, S_2, \dots$ is a Markov process $<S, P^{\pi}>$, and the state and reward sequence is a Markov reward process $<S,P^{\pi}, R^{\pi}, \gamma>$.
+For a given MDP $M$ and policy $\pi$, the state sequence $S_1, S_2, \dots$ is a Markov process, and the state and reward sequence is a Markov reward process $<S,P^{\pi}, R^{\pi}, \gamma>$.
 
 Here, $P_{s,s'}^{\pi}=\sum_{a \in A} \pi(a|s) \cdot P_{ss'}^a$, which is the probability that the next state will be $s'$ when following action $\pi$ in state $s$, and $R_s^{\pi}=\sum_{a \in A} \pi(a|s) \cdot R_{s}^a$, which means the expected reward obtained when following action $\pi$ in state $s$.
 

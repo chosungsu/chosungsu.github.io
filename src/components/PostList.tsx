@@ -5,9 +5,8 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import { PostData } from '@/utils/mdUtils';
 import FormattedDate from './FormattedDate';
-import { CalendarArrowDown, CalendarArrowUp, Search, ChevronRight, Tag } from 'lucide-react';
+import { CalendarArrowDown, CalendarArrowUp, Search, Tag } from 'lucide-react';
 import ScrollToTop from './ScrollToTop';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 interface PostListProps {
   initialPosts: PostData[];
@@ -21,7 +20,7 @@ export default function PostList({ initialPosts }: PostListProps) {
   
   const [displayedPosts, setDisplayedPosts] = useState<PostData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [isDescending, setIsDescending] = useState(true);
   const [selectedMainTag, setSelectedMainTag] = useState<string>('');
   const [showTagFilter, setShowTagFilter] = useState(false);
@@ -37,14 +36,6 @@ export default function PostList({ initialPosts }: PostListProps) {
     };
     
     return colorMap[tag] || 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100';
-  };
-
-  // Dialog가 닫힐 때 검색어 초기화
-  const handleOpenChange = (open: boolean) => {
-    setShowSearchModal(open);
-    if (!open) {
-      setSearchTerm('');
-    }
   };
 
   // 모든 main 태그 추출 (각 포스트의 마지막 태그가 main 태그)
@@ -69,6 +60,19 @@ export default function PostList({ initialPosts }: PostListProps) {
     });
   }, [koreanPosts, selectedMainTag]);
 
+  // 검색어에 따른 필터링 (제목, 설명, 태그, 내용)
+  const filteredBySearch = useMemo(() => {
+    if (!searchTerm) return filteredByMainTag;
+    const lower = searchTerm.toLowerCase();
+    return filteredByMainTag.filter(post => {
+      const inTitle = post.title.toLowerCase().includes(lower);
+      const inDesc = post.description?.toLowerCase().includes(lower) ?? false;
+      const inTags = post.tags.some(tag => tag.toLowerCase().includes(lower));
+      const inContent = post.content?.toLowerCase().includes(lower) ?? false;
+      return inTitle || inDesc || inTags || inContent;
+    });
+  }, [filteredByMainTag, searchTerm]);
+
   const sortPosts = useMemo(() => {
     return (posts: PostData[]) => {
       return [...posts].sort((a, b) => {
@@ -78,22 +82,10 @@ export default function PostList({ initialPosts }: PostListProps) {
     };
   }, [isDescending]);
 
-  // 검색어에 따른 필터링 (제목, 설명, 태그) - Dialog용
-  const filteredPosts = useMemo(() => {
-    if (!searchTerm) return [];
-    const lower = searchTerm.toLowerCase();
-    return koreanPosts.filter(post => {
-      const inTitle = post.title.toLowerCase().includes(lower);
-      const inDesc = post.description?.toLowerCase().includes(lower) ?? false;
-      const inTags = post.tags.some(tag => tag.toLowerCase().includes(lower));
-      return inTitle || inDesc || inTags;
-    });
-  }, [koreanPosts, searchTerm]);
-
-  // 정렬된 포스트 - 메인 리스트용 (main 태그 필터 적용)
+  // 정렬된 포스트 - 메인 리스트용 (main 태그 필터 + 검색 필터 적용)
   const sortedPosts = useMemo(() => {
-    return sortPosts(filteredByMainTag);
-  }, [filteredByMainTag, sortPosts]);
+    return sortPosts(filteredBySearch);
+  }, [filteredBySearch, sortPosts]);
 
   // 초기 프로젝트 로딩 및 필터/정렬 변경 시 업데이트
   useEffect(() => {
@@ -121,6 +113,32 @@ export default function PostList({ initialPosts }: PostListProps) {
     setShowTagFilter(!showTagFilter);
   };
 
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+    if (!showSearch) {
+      setSearchTerm('');
+    }
+  };
+
+  // 검색어 하이라이트 함수
+  const highlightText = (text: string, searchTerm: string) => {
+    if (!searchTerm) return text;
+    
+    const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        return (
+          <mark key={index} className="bg-yellow-200 dark:bg-yellow-800 px-1 rounded">
+            {part}
+          </mark>
+        );
+      }
+      return part;
+    });
+  };
+
   // 프로젝트 ID에서 기본 ID 추출 (언어 코드 제거)
   const getBasePostId = (fullId: string) => {
     return fullId.replace(/-[a-z]{2}$/, '');
@@ -132,10 +150,14 @@ export default function PostList({ initialPosts }: PostListProps) {
         <div className="flex items-center gap-2">
           {/* 검색 아이콘 버튼 */}
           <button
-            onClick={() => setShowSearchModal(true)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            onClick={toggleSearch}
+            className={`p-2 rounded-full transition-colors ${
+              showSearch || searchTerm !== ''
+                ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100' 
+                : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300'
+            }`}
           >
-            <Search className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+            <Search className="w-4 h-4" />
           </button>
 
           {/* 태그 필터 토글 버튼 */}
@@ -165,9 +187,30 @@ export default function PostList({ initialPosts }: PostListProps) {
         </button>
       </div>
 
+      {/* 검색창 */}
+      {showSearch && (
+        <div className="mb-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="제목, 내용, 태그에서 검색..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 text-base text-gray-900 dark:text-gray-100 bg-white dark:bg-zinc-900 placeholder-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          {searchTerm && (
+            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              {filteredBySearch.length}개의 포스트를 찾았습니다.
+            </div>
+          )}
+        </div>
+      )}
+
       {/* 태그 필터 chip UI */}
       {showTagFilter && (
-        <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="mb-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex flex-wrap gap-2">
             {/* All 태그 버튼 */}
             <button
@@ -188,7 +231,7 @@ export default function PostList({ initialPosts }: PostListProps) {
                 onClick={() => setSelectedMainTag(selectedMainTag === tag ? '' : tag)}
                 className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                   selectedMainTag === tag 
-                    ? getTagColor(tag)
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
                     : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
                 }`}
               >
@@ -210,8 +253,13 @@ export default function PostList({ initialPosts }: PostListProps) {
               className="text-md font-semibold mb-2 text-gray-900 dark:text-white"
               style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
             >
-              {post.title}
+              {highlightText(post.title, searchTerm)}
             </h2>
+            {searchTerm && post.description && (
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
+                {highlightText(post.description, searchTerm)}
+              </p>
+            )}
             <div className="flex justify-between items-center">
               <FormattedDate date={post.date} />
               <div className="flex space-x-2 items-center">
@@ -228,7 +276,7 @@ export default function PostList({ initialPosts }: PostListProps) {
                             : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
                         }`}
                       >
-                        {tag}
+                        {highlightText(tag, searchTerm)}
                       </span>
                     );
                   })}
@@ -248,53 +296,6 @@ export default function PostList({ initialPosts }: PostListProps) {
         )}
       </div>
       <ScrollToTop />
-
-      {/* 검색 Dialog */}
-      <Dialog open={showSearchModal} onOpenChange={handleOpenChange}>
-        <DialogContent className="p-0 max-h-[90vh] flex flex-col bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-700">
-          <DialogTitle className="sr-only">Search Posts</DialogTitle>
-          <DialogDescription className="sr-only">
-            Search posts by title, description, or tags
-          </DialogDescription>
-          {/* Input & ESC row */}
-          <div className="relative px-2 pt-4 pb-2 flex-shrink-0 border-b border-gray-200 dark:border-gray-700">
-            <div className="relative flex items-center">
-              <Search className="absolute left-3 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                autoFocus
-                placeholder="Search posts"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 text-base text-gray-900 dark:text-gray-100 bg-transparent placeholder-gray-400 border-0 focus:outline-none focus:ring-0"
-              />
-            </div>
-          </div>
-          {/* list container */}
-          <div className="px-6 pb-6 overflow-y-auto flex-grow">
-            {searchTerm === '' ? (
-              <p className="text-center text-gray-500 py-10">No recent searches</p>
-            ) : filteredPosts.length === 0 ? (
-              <p className="text-center text-gray-500 py-10">No posts found.</p>
-            ) : (
-              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredPosts.map((post) => (
-                  <li key={post.id}>
-                    <Link
-                      href={`/posts/${getBasePostId(post.id)}`}
-                      className="flex justify-between items-center py-3 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 rounded text-gray-900 dark:text-gray-100"
-                      onClick={() => handleOpenChange(false)}
-                    >
-                      <span className="truncate max-w-sm">{post.title}</span>
-                      <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 } 
