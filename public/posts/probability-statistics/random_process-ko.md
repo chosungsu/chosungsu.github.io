@@ -60,6 +60,30 @@ $X(t, \zeta) \in R$로 시간 매개변수 $t$에 따라 random variable이 변�
 
 이 때 $X(1,\zeta)=3, X(2, \zeta)=4$ 등을 가짐을 알 수 있습니다. 이는 $\zeta$가 달라지더라도 동일할 것입니다. discrete일 때는 $X_n(\zeta)$, continuous일 때는 $X(t,\zeta)$ 기호로 정의합니다.
 
+#### Important r.p
+
+i.i.d인 random process가 있을 때 $F_{x_1, \dots, x_k}(x_1, \cdots, x_k)$에 대해서 각각을 따로 곱하는 것이 가능합니다. 평균인 $m_x(n)=m$이고 공분산인 $C_x(n_1, n2)=\begin{cases} 0 & n_1 \ne n_2\\ \sigma^2 & n_1 = n_2 \end{cases}$로 표현 가능하다는 것입니다.
+
+다음으로 sum process는 $S_n = \sum_{i=1}^{n} X_i$으로 $m_s(n)=E[S_n]=n*m$가 됩니다. 분산은 $Var(S_n)=n*\sigma^2_x$가 됩니다.
+
+#### Independent Increment
+
+정의는 $X(t)$가 incrementally independent이고 모든 $k$에 대해서 $t_1 \le t_2 \le \cdots \le t_k$이면 $X(t_1), X(t_2)-X(t_1), \dots, X(t_k)-X(t_{k-1})$가 모두 독립적이라고 합니다.
+
+#### Stationary Increment
+
+정의는 $X(t)$가 만약 $P[X(t_2)-X(t_1)=c]=P[X(t_2+\tau)-X(t_1+\tau)=c]$로 확률이 같으면 시간의 차이만큼 어떤 상수항을 가질 확률이 같다고 생각하는 것입니다.
+
+#### Poisson
+
+$N(t)$가 이벤트의 횟수라고 할 때, $M_N(t)=E[N(t)]=\lambda*t$, $Var(N(t))=\lambda*t$, $C_N(t_1, t_2)=E[(N(t_1)-\lambda*t_1)(N(t_2)-\lambda*t_2)]=m^2(t_1, t_2)*\lambda$로 정의될 수 있습니다.
+
+#### Wiener r.p
+
+$D_i=\begin{cases} 1 \\ -1 \end{cases}$로 절반의 동일한 확률로 결정될 때 $S_n=\sum_{i=1}^n D_i$이기 때문에 계단식 그래프가 생성됩니다. 시간이 $\delta$, 높이가 $h$라고 한다면 $h=\sqrt{\alpha \delta}$로 수렴합니다.
+
+그리고 평균은 $E[S_n]=n*E[D_i]=0$이 성립하고 분산은 $Var(S_n)=n*Var(D_i)=n$이 성립합니다.
+
 ---
 
 ### 참고 자료
@@ -70,5 +94,8 @@ $X(t, \zeta) \in R$로 시간 매개변수 $t$에 따라 random variable이 변�
 
 [원본 경로 #3](https://www.youtube.com/watch?v=vK7RjVR_Pl0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=19)
 
+[원본 경로 #4](https://www.youtube.com/watch?v=PXxzc92MMaw&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=20)
+
+[원본 경로 #5](https://www.youtube.com/watch?v=nPApzzftm5I&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=21)
 
 

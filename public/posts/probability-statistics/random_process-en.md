@@ -60,6 +60,30 @@ $X(t, \zeta) \in R$ means that the random variable changes according to the time
 
 At this time, we can see that it has values like $X(1,\zeta)=3, X(2, \zeta)=4$, etc. This will be the same even if $\zeta$ changes. We define it as $X_n(\zeta)$ when discrete and $X(t,\zeta)$ when continuous.
 
+#### Important r.p
+
+For an i.i.d random process, it's possible to multiply each $F_{x_1, \dots, x_k}(x_1, \cdots, x_k)$ separately. This means that the mean is $m_x(n)=m$ and the covariance can be expressed as $C_x(n_1, n2)=\begin{cases} 0 & n_1 \ne n_2\\ \sigma^2 & n_1 = n_2 \end{cases}$.
+
+Next, for the sum process $S_n = \sum_{i=1}^{n} X_i$, we have $m_s(n)=E[S_n]=n*m$. The variance is $Var(S_n)=n*\sigma^2_x$.
+
+#### Independent Increment
+
+The definition states that if $X(t)$ is incrementally independent and for all $k$ where $t_1 \le t_2 \le \cdots \le t_k$, then $X(t_1), X(t_2)-X(t_1), \dots, X(t_k)-X(t_{k-1})$ are all independent.
+
+#### Stationary Increment
+
+The definition states that if $X(t)$ has equal probabilities $P[X(t_2)-X(t_1)=c]=P[X(t_2+\tau)-X(t_1+\tau)=c]$, then we consider that it has the same probability of having some constant term for the time difference.
+
+#### Poisson
+
+When $N(t)$ represents the number of events, it can be defined as $M_N(t)=E[N(t)]=\lambda*t$, $Var(N(t))=\lambda*t$, $C_N(t_1, t_2)=E[(N(t_1)-\lambda*t_1)(N(t_2)-\lambda*t_2)]=m^2(t_1, t_2)*\lambda$.
+
+#### Wiener r.p
+
+When $D_i=\begin{cases} 1 \\ -1 \end{cases}$ is determined with equal probability of one-half, a step-like graph is generated because $S_n=\sum_{i=1}^n D_i$. If we denote time as $\delta$ and height as $h$, then $h$ converges to $\sqrt{\alpha \delta}$.
+
+And the mean satisfies $E[S_n]=n*E[D_i]=0$ while the variance satisfies $Var(S_n)=n*Var(D_i)=n$.
+
 ---
 
 ### References
@@ -70,5 +94,8 @@ At this time, we can see that it has values like $X(1,\zeta)=3, X(2, \zeta)=4$, 
 
 [Original Source #3](https://www.youtube.com/watch?v=vK7RjVR_Pl0&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=19)
 
+[Original Source #4](https://www.youtube.com/watch?v=PXxzc92MMaw&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=20)
+
+[Original Source #5](https://www.youtube.com/watch?v=nPApzzftm5I&list=PL48-12jNeoLp-yn6k8bRTVdyYyJkALSvu&index=21)
 
 
