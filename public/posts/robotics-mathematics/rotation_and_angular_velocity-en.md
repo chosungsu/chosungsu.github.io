@@ -65,7 +65,7 @@ A $3 \times 3$ matrix uses 9 parameters, but these parameters are not independen
 
 In Euler angles, to describe rotations in all directions, two consecutive rotations must not be around parallel axes. If the first and third rotations are around the same axis, they are called proper Euler angles; if all three angles are different, they are called Tait-Bryan or Cardan angles.
 
-$ZYZ$ Euler angles are well known as proper Euler angles, where the rotation angles can be collected into a parameter vector as $\chi_{R,eulerZYZ}=\begin{pmatrix} z_1 \\ y \\ z_2\end{pmatrix}$. The resulting rotation matrix is given by $C_{\mathcal{A}\mathcal{D}} _{\mathcal{D}}r$ according to the rotation composition formula above. The angles are $\begin{pmatrix} \text{atan2}(c_{13}, -c_{23}) \\ \text{atan2}(\sqrt{c^2_{13}+c^2_{23}}, c_{33}) \\ \text{atan2}(c_{31}, c_{32})\end{pmatrix}$.
+$ZYZ$ Euler angles are well known as proper Euler angles, where the rotation angles can be collected into a parameter vector as $\chi_{R,eulerZYZ}=\begin{pmatrix} z_1 \\ y \\ z_2\end{pmatrix}$. The resulting rotation matrix is given by $C_{\mathcal{A}\mathcal{D}} {_\mathcal{D}}r$ according to the rotation composition formula above. The angles are $\begin{pmatrix} \text{atan2}(c_{13}, -c_{23}) \\ \text{atan2}(\sqrt{c^2_{13}+c^2_{23}}, c_{33}) \\ \text{atan2}(c_{31}, c_{32})\end{pmatrix}$.
 
 $ZYX$ Euler angles are known as Tait-Bryan angles, where the rotation angles can be collected into a parameter vector as $\chi_{R,eulerZYX}=\begin{pmatrix} z \\ y \\ x\end{pmatrix}$. The angles are $\begin{pmatrix} \text{atan2}(c_{21}, c_{11}) \\ \text{atan2}(-c_{31}, \sqrt{c^2_{32}+c^2_{33}}) \\ \text{atan2}(c_{32}, c_{33})\end{pmatrix}$.
 
@@ -109,14 +109,14 @@ $$
 After the $y$-axis rotation, we have:
 
 $$
-_{\mathcal{A}}e_y^{\mathcal{A'}}=C_{\mathcal{A}\mathcal{A'}}(z) \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}=\begin{bmatrix} \cos(z) & -\sin(z) & 0\\ \sin(z) & \cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}
+_{\mathcal{A}}e_y^{\mathcal{A'}}=C_{\mathcal{A}\mathcal{A'}}(z) \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} \\
+=\begin{bmatrix} \cos(z) & -\sin(z) & 0\\ \sin(z) & \cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}
 $$
 
 Now, for the final $x$-axis rotation, we have:
 
 $$
-_{\mathcal{A}}e_x^{\mathcal{A''}}=C_{\mathcal{A}\mathcal{A'}}(z) \cdot C_{\mathcal{A'}\mathcal{A''}}(y) \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix} \\
-=\begin{bmatrix} \cos(z) & -\sin(z) & 0\\ \sin(z) & \cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} \cos(y) & 0 & \sin(y)\\ 0 & 1 & 0 \\ -\sin(y) & 0 & \cos(y)\end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix}
+_{\mathcal{A}}e_x^{\mathcal{A''}}=C_{\mathcal{A}\mathcal{A'}}(z) \cdot C_{\mathcal{A'}\mathcal{A''}}(y) \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix}
 $$
 
 The mapping $E(\chi_R)$ at this time will be calculated as follows:

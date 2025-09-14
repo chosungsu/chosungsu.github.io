@@ -109,14 +109,14 @@ $$
 이후 $y$축 회전을 하면 아래와 같습니다.
 
 $$
-_\mathcal{A}e_y^{\mathcal{A'}}=C_{\mathcal{A}\mathcal{A'}}(z) \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}=\begin{bmatrix} cos(z) & -sin(z) & 0\\ sin(z) & cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}
+_\mathcal{A}e_y^{\mathcal{A'}}=C_{\mathcal{A}\mathcal{A'}}(z) \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix} \\
+=\begin{bmatrix} cos(z) & -sin(z) & 0\\ sin(z) & cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ 0\end{bmatrix}
 $$
 
-이제 마지막 $x$출 회전을 하면 아래와 같습니다.
+이제 마지막 $x$축 회전을 하면 아래와 같습니다.
 
 $$
-_\mathcal{A}e_x^{\mathcal{A''}}=C_{\mathcal{A}\mathcal{A'}}(z) \cdot C_{\mathcal{A'}\mathcal{A''}}(y) \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix} \\
-=\begin{bmatrix} cos(z) & -sin(z) & 0\\ sin(z) & cos(z) & 0 \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} cos(y) & 0 & sin(y)\\ 0 & 1 & 0 \\ -sin(y) & 0 & cos(y)\end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix}
+_\mathcal{A}e_x^{\mathcal{A''}}=C_{\mathcal{A}\mathcal{A'}}(z) \cdot C_{\mathcal{A'}\mathcal{A''}}(y) \begin{bmatrix} 1 \\ 0 \\ 0\end{bmatrix}
 $$
 
 이 때의 매핑 $E(\chi_R)$는 다음과 같이 계산될 것입니다.

@@ -15,7 +15,8 @@ r_{\mathcal{A}\mathcal{P}}=r_{\mathcal{A}\mathcal{B}}+r_{\mathcal{B}\mathcal{P}}
 $$
 
 $$
-_\mathcal{A}r_{\mathcal{A}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+_\mathcal{A}r_{\mathcal{B}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+C_{\mathcal{A}\mathcal{B}} \cdot _\mathcal{B}r_{\mathcal{B}\mathcal{P}}
+_\mathcal{A}r_{\mathcal{A}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+_\mathcal{A}r_{\mathcal{B}\mathcal{P}} \\
+=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+C_{\mathcal{A}\mathcal{B}} \cdot _\mathcal{B}r_{\mathcal{B}\mathcal{P}}
 $$
 
 이에 따라 위치 벡터는 다음과 같이 계산할 수 있습니다.
@@ -33,7 +34,8 @@ $$
 툴 $C$에서 위치의 절대 시간 변화는 $_c(\dot{r}_{\mathcal{A}\mathcal{P}})=_c(\frac{d}{dt}r_{\mathcal{A}\mathcal{P}})=_c v_{\mathcal{A}\mathcal{P}}$가 됩니다. 또한 위치 벡터좌표의 시간 미분은 $(_c \dot{r}_{\mathcal{A}\mathcal{P}})=(_c r_{\mathcal{A}\mathcal{P}})^{\cdot}$이므로 이 차이를 이해하는 것이 중요합니다. $C$라는 틀이 관성 틀(inertial frame)인 경우 동일합니다.
 
 $$
-_\mathcal{A}r_{\mathcal{A}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+_\mathcal{A}r_{\mathcal{B}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+C_{\mathcal{A}\mathcal{B}} \cdot _\mathcal{B}r_{\mathcal{B}\mathcal{P}}
+_\mathcal{A}r_{\mathcal{A}\mathcal{P}}=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+_\mathcal{A}r_{\mathcal{B}\mathcal{P}} \\
+=_\mathcal{A}r_{\mathcal{A}\mathcal{B}}+C_{\mathcal{A}\mathcal{B}} \cdot _\mathcal{B}r_{\mathcal{B}\mathcal{P}}
 $$
 
 위와 같은 $P$의 위치를 시간에 대하여 미분하면 다음과 같습니다.
@@ -88,7 +90,12 @@ $$
 q=\begin{pmatrix} q_1 \\ q_2 \\ q_3\end{pmatrix}=\begin{pmatrix} \varphi_1 \\ \varphi_2 \\ \varphi_3\end{pmatrix}
 $$
 
-이를 사용하여 말단 장치의 위치와 방향을 계산하면 $\chi_e(q)=\begin{pmatrix} \chi_e P(q) \\ \chi_e R(q)\end{pmatrix}$이 되고 첫번째행의 값은 $\begin{pmatrix} x \\ z\end{pmatrix}=\begin{pmatrix} l_1sin(q_1) + l_2sin(q_1+q_2)+l_3sin(q_1+q_2+q_3) \\ l_0+l_1cos(q_1) + l_2cos(q_1+q_2)+l_3cos(q_1+q_2+q_3)\end{pmatrix}$로 계산이 가능하며 두번쨰 행의 값은 $\phi_e=q_1+q_2+q_3$이 됩니다.
+이를 사용하여 말단 장치의 위치와 방향을 계산하면 $\chi_e(q)=\begin{pmatrix} \chi_e P(q) \\ \chi_e R(q)\end{pmatrix}$이 되고 첫번째행의 값은 아래와 같이 계산이 가능하며 두번쨰 행의 값은 $\phi_e=q_1+q_2+q_3$이 됩니다.
+
+$$
+x = l_1sin(q_1) + l_2sin(q_1+q_2)+l_3sin(q_1+q_2+q_3), \\
+z = l_0+l_1cos(q_1) + l_2cos(q_1+q_2)+l_3cos(q_1+q_2+q_3)
+$$
 
 #### 4. Differential kinematics and analytical jacobian
 
@@ -105,13 +112,14 @@ $$
 기하학적 자코비언은 아래와 같습니다.
 
 $$
-\dot{r}_{IE}=\begin{bmatrix} n_1 \times r_{1(n+1)} & n_2 \times r_{2(n+1)} & \cdots & n_n \times r_{n(n+1)}\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
+\dot{r}_{IE}=\begin{bmatrix} n_1 \times r_{1(n+1)} & \cdots & n_n \times r_{n(n+1)}\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
 $$
 
 그리고 회전 자코비언은 아래와 같습니다.
 
 $$
-w_{IE}=\sum_{i=1}^{n} n_i \dot{q_i} = \begin{bmatrix} n_1 & n_2 & \cdots & n_n\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
+w_{IE}=\sum_{i=1}^{n} n_i \dot{q_i} \\
+= \begin{bmatrix} n_1 & n_2 & \cdots & n_n\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
 $$
 
 이제 두 식을 결합하면 기하학적 자코비언이 산출됩니다.

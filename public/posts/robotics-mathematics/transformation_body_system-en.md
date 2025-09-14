@@ -88,7 +88,12 @@ $$
 q=\begin{pmatrix} q_1 \\ q_2 \\ q_3\end{pmatrix}=\begin{pmatrix} \varphi_1 \\ \varphi_2 \\ \varphi_3\end{pmatrix}
 $$
 
-Using this to calculate the position and orientation of the end effector gives $\chi_e(q)=\begin{pmatrix} \chi_{eP}(q) \\ \chi_{eR}(q)\end{pmatrix}$, where the first row values are $\begin{pmatrix} x \\ z\end{pmatrix}=\begin{pmatrix} l_1\sin(q_1) + l_2\sin(q_1+q_2)+l_3\sin(q_1+q_2+q_3) \\ l_0+l_1\cos(q_1) + l_2\cos(q_1+q_2)+l_3\cos(q_1+q_2+q_3)\end{pmatrix}$, and the second row value is $\phi_e=q_1+q_2+q_3$.
+Using this, when calculating the position and orientation of the end effector, we get $\chi_e(q)=\begin{pmatrix} \chi_e P(q) \\ \chi_e R(q)\end{pmatrix}$, where the first row values can be calculated as shown below, and the second row value is $\phi_e=q_1+q_2+q_3$.
+
+$$
+x = l_1sin(q_1) + l_2sin(q_1+q_2)+l_3sin(q_1+q_2+q_3), \\
+z = l_0+l_1cos(q_1) + l_2cos(q_1+q_2)+l_3cos(q_1+q_2+q_3)
+$$
 
 #### 4. Differential kinematics and analytical jacobian
 
@@ -105,13 +110,14 @@ In the most general case, it has $6 \times n_j$ dimensions and has $_A W_e = _A 
 The geometric Jacobian is as follows:
 
 $$
-\dot{r}_{IE}=\begin{bmatrix} n_1 \times r_{1(n+1)} & n_2 \times r_{2(n+1)} & \cdots & n_n \times r_{n(n+1)}\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
+\dot{r}_{IE}=\begin{bmatrix} n_1 \times r_{1(n+1)} & \cdots & n_n \times r_{n(n+1)}\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
 $$
 
 And the rotational Jacobian is as follows:
 
 $$
-w_{IE}=\sum_{i=1}^{n} n_i \dot{q_i} = \begin{bmatrix} n_1 & n_2 & \cdots & n_n\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
+w_{IE}=\sum_{i=1}^{n} n_i \dot{q_i} \\
+= \begin{bmatrix} n_1 & n_2 & \cdots & n_n\end{bmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \vdots \\ \dot{q_n}\end{pmatrix}
 $$
 
 Now, combining the two equations yields the geometric Jacobian.
