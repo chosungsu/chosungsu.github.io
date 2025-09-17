@@ -167,6 +167,48 @@ $$
 
 ---
 
+### Projected Newton-Euler Method
+
+다물체 시스템의 EoM을 도출하기 위해 투영된 뉴턴 오일러 공식을 사용합니다. 이 방법은 카르테시안 좌표에서 동적 평형에 대한 고전적인 뉴턴 오일러 방정식과 일반화 좌표를 사용하는 제약 조건 호환 라그랑주 공식을 결합합니다.
+
+$$
+M(q) \ddot{q} + b(q, \dot{q}) + g(q) = \tau + J_e^T F_c
+$$
+
+#### Deriving Generalized Equations of Motion
+
+일반화 좌표의 사용은 해당 제약 조건과 일관된 방식으로 물체의 운동 및 가상 변위를 설명할 수 있습니다. 따라서 각 물체 $B_i$에 적용된 선형 및 각 운동량의 원리를 아래와 같이 작성할 수 있습니다.
+
+$$
+\begin{pmatrix} \dot{P}_{S_i} \\ \dot{N}_{S_i}\end{pmatrix} = \begin{pmatrix} ma_{S_i} \\ \Theta_{S_i} \Psi_{S_i} + \Omega_{S_i} \times \Theta_{S_i}\Omega_{S_i}\end{pmatrix}
+$$
+
+또한 일반화 좌표의 가상 변위 표현을 사용하여 가상 일의 원리를 아래와 같이 정의할 수 있습니다.
+
+$$
+0 = \delta W = \sum_{i=1}^{n_b} \begin{pmatrix} \delta r_{S_i} \\ \delta \Phi_{S_i}\end{pmatrix}^T \begin{bmatrix} \begin{pmatrix} \dot{P}_{S_i} \\ \dot{N}_{S_i}\end{pmatrix} - \begin{pmatrix} F_{ext, i} \\ T_{ext, i}\end{pmatrix}\end{bmatrix}
+$$
+
+#### External Forces & Actuation
+
+일반화 좌표로 표현된 EoM에서 외부 힘을 설명하기 위해, 적절한 자코비언 행렬을 사용하여 카르테시안 힘과 토크를 일반화 좌표의 공간에 투영할 수 있습니다.
+
+시스템에 $n_{f,ext}$개의 외부 힘 $F_j, j \in \{1, \dots, n_{f,ext}\}$와 $n_{m, ext}$개의 외부 토크 $T_k, k \in \{1, \dots, n_{m,ext}\}$가 작용할 때 외부 힘으로 인한 일반화 힘 $\tau_{F,ext}$는 다음 방식으로 계산될 수 있습니다.
+
+카르테시안 힘 $F_j$가 점 $P_j$에 작용하고 그 점의 병진 자코비언(translational jacobian)이 $J_{P, j, trans}$이면 일반화 힘은 $\tau_{F,ext}=\sum_{j=1}^{n_{f,ext}} J_{P,j}^T F_j$입니다. 이와 유사하게 일반화 힘은 물체의 회전 자코비언(rotational jacobian) 즉 $J_{B,k,rot}$으로 각 카르테시안 토크를 투영하여 $\tau_{T, ext} = \sum_{k=1}^{n_{m,ext}} J_{R,k}^T T_{ext,k}$로 평가할 수 있습니다. 마지막으로, 외부 힘과 토크의 기여는 둘 다 일반화 좌표의 공간에서 표현되므로 단순히 더할 수 있습니다.
+
+구동기 힘 또는 토크의 특별한 경우에 대해, 그 두 (연속적인) 물체 링크 사이에서 정의된 운동학적 관계만 고려하면 됩니다. 따라서, 물체 링크 $B_{k-1}$과 $B_k$ 사이에서 작용하는 구동기는 작용 반작용 원리에 의해 힘 또는 토크를 동일하고 반대 방향으로 부과합니다.
+
+따라서 구동기의 일반화 힘에 대한 기여는 아래와 같이 계산합니다.
+
+$$
+\tau_{a,k}=(J_{S_k} - J_{S_{k-1}})^T F_{a,k} + (J_{R_k} - J_{R_{k-1}})^T T_{a,k}
+$$
+
+이는 일반화 좌표 $q_j$의 방향으로 작용하는 구동기의 경우 자코비언 차이에 힘 또는 토크를 곱하면 힘 벡터 $\tau_j$의 단일 항목을 제공합니다. 총 외부 일반화 힘의 벡터는 $n_A$개의 관절 구동기와 $n_B$개의 물체 링크를 고려하여 $\tau = \sum_{k=1}^{n_A} \tau_{a,k} + \tau_{ext}$로 조합합니다.
+
+---
+
 ### 참고 자료
 
 [원본 경로 #1](https://ethz.ch/content/dam/ethz/special-interest/mavt/robotics-n-intelligent-systems/rsl-dam/documents/RobotDynamics2017/RD_HS2017script.pdf)

@@ -167,6 +167,48 @@ Here, $d(q)$ is a function of the generalized coordinates describing the element
 
 ---
 
+### Projected Newton-Euler Method
+
+The projected Newton-Euler formulation is used to derive the EoM of multi-body systems. This method combines classical Newton-Euler equations for dynamic equilibrium in Cartesian coordinates with constraint-compatible Lagrangian formulation using generalized coordinates.
+
+$$
+M(q) \ddot{q} + b(q, \dot{q}) + g(q) = \tau + J_e^T F_c
+$$
+
+#### Deriving Generalized Equations of Motion
+
+The use of generalized coordinates allows describing the motion and virtual displacements of bodies in a way consistent with their constraints. Thus, for each body $B_i$, the principles of linear and angular momentum can be written as:
+
+$$
+\begin{pmatrix} \dot{P}_{S_i} \\ \dot{N}_{S_i}\end{pmatrix} = \begin{pmatrix} ma_{S_i} \\ \Theta_{S_i} \Psi_{S_i} + \Omega_{S_i} \times \Theta_{S_i}\Omega_{S_i}\end{pmatrix}
+$$
+
+Additionally, using virtual displacement expressions in generalized coordinates, the principle of virtual work can be defined as:
+
+$$
+0 = \delta W = \sum_{i=1}^{n_b} \begin{pmatrix} \delta r_{S_i} \\ \delta \Phi_{S_i}\end{pmatrix}^T \begin{bmatrix} \begin{pmatrix} \dot{P}_{S_i} \\ \dot{N}_{S_i}\end{pmatrix} - \begin{pmatrix} F_{ext, i} \\ T_{ext, i}\end{pmatrix}\end{bmatrix}
+$$
+
+#### External Forces & Actuation
+
+To describe external forces in the EoM expressed in generalized coordinates, appropriate Jacobian matrices can be used to project Cartesian forces and torques into the space of generalized coordinates.
+
+When the system is subject to $n_{f,ext}$ external forces $F_j, j \in \{1, \dots, n_{f,ext}\}$ and $n_{m, ext}$ external torques $T_k, k \in \{1, \dots, n_{m,ext}\}$, the generalized force $\tau_{F,ext}$ due to external forces can be computed as follows:
+
+For a Cartesian force $F_j$ acting at point $P_j$ with translational Jacobian $J_{P, j, trans}$, the generalized force is $\tau_{F,ext}=\sum_{j=1}^{n_{f,ext}} J_{P,j}^T F_j$. Similarly, generalized forces can be evaluated by projecting each Cartesian torque using the body's rotational Jacobian $J_{B,k,rot}$ as $\tau_{T, ext} = \sum_{k=1}^{n_{m,ext}} J_{R,k}^T T_{ext,k}$. Finally, since both force and torque contributions are expressed in generalized coordinate space, they can simply be added.
+
+For the special case of actuator forces or torques, only the kinematic relationship defined between two (consecutive) body links needs to be considered. Thus, an actuator acting between body links $B_{k-1}$ and $B_k$ imposes forces or torques of equal magnitude but opposite direction by the action-reaction principle.
+
+Therefore, the contribution to generalized forces from actuators is calculated as:
+
+$$
+\tau_{a,k}=(J_{S_k} - J_{S_{k-1}})^T F_{a,k} + (J_{R_k} - J_{R_{k-1}})^T T_{a,k}
+$$
+
+For an actuator acting in the direction of generalized coordinate $q_j$, multiplying the Jacobian difference by the force or torque yields a single entry in the force vector $\tau_j$. The total external generalized force vector is combined as $\tau = \sum_{k=1}^{n_A} \tau_{a,k} + \tau_{ext}$, considering $n_A$ joint actuators and $n_B$ body links.
+
+---
+
 ### References
 
 [Source #1](https://ethz.ch/content/dam/ethz/special-interest/mavt/robotics-n-intelligent-systems/rsl-dam/documents/RobotDynamics2017/RD_HS2017script.pdf)
