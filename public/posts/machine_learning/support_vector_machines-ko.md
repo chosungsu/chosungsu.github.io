@@ -50,11 +50,11 @@ $y \in \{+1, -1\}$이라는 바이너리 환경에서 margin based 분류기는 
 
 마지막 분류기에서 양수와 음수 방향의 고려를 한다면 $sign(\sum_{i \in S^+} \lambda_ix_i^Tx - \sum_{j \in S^-} \lambda_jx_j^Tx)$로 볼 수 있습니다.
 
-하지만 svm 역시 대체로 linear한 경우에 fit한 경향이 있어서 noisy data에 강건하지 않습니다. 따라서 slack variables를 도입합니다. 여전히 maximum margin classifier를 학습시킬 것이지만 margin을 최소화함과 동시에 misclassification rate을 감소시키는 목적을 갖고 움직입니다.
+하지만 svm 역시 대체로 linear한 경우에 fit한 경향이 있어서 noisy data에 강건하지 않습니다. 따라서 slack variables를 도입합니다. 여전히 maximum margin classifier를 학습시킬 것이지만 margin을 최대화함과 동시에 misclassification rate을 감소시키는 목적을 갖고 움직입니다.
 
 slack variables인 $\xi_i$는 각 데이터 포인트에 대해서 제약조건인 $y_i\beta^Tx_i \ge 1$을 토대로 이 값이 1보다 크다면 $\xi_i = 0$으로 non-support vectors(=no violation)에 해당하고 support vector가 $0 < \xi_i < 1$이면 여전히 decision boundary 내부에 있으며 $1 \le \xi_i$이면 decision boundary 외부에 있음을 의미합니다. 이를 일반화하면 $\xi_i = max(0, 1-y_i\beta^Tx_i)$가 됩니다.
 
-<img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2021/04/image-361-6756c924ec912.webp" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
+<img src="https://learnopencv.com/wp-content/uploads/2018/07/svm-parameter-c-example.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 $$
 \underset{\beta} {\text{argmin}} (\frac{1}{2} |\beta|^2 + C \sum_{i=1}^n \xi_i)

@@ -50,11 +50,11 @@ That is, SVM aims to find the data points closest to the boundary and draw the d
 
 If we consider positive and negative directions in the final classifier, it can be viewed as $sign(\sum_{i \in S^+} \lambda_ix_i^Tx - \sum_{j \in S^-} \lambda_jx_j^Tx)$.
 
-However, SVM also tends to fit well in generally linear cases, so it is not robust to noisy data. Therefore, slack variables are introduced. We still train a maximum margin classifier, but it moves with the purpose of minimizing the margin while reducing the misclassification rate.
+However, SVM also tends to fit well in generally linear cases, so it is not robust to noisy data. Therefore, slack variables are introduced. We still train a maximum margin classifier, but it moves with the purpose of maximizing the margin while reducing the misclassification rate.
 
 Slack variables $\xi_i$ are based on the constraint $y_i\beta^Tx_i \ge 1$ for each data point. If this value is greater than 1, then $\xi_i = 0$ corresponds to non-support vectors (=no violation). If support vectors have $0 < \xi_i < 1$, they are still inside the decision boundary, and if $1 \le \xi_i$, they are outside the decision boundary. Generalizing this gives $\xi_i = max(0, 1-y_i\beta^Tx_i)$.
 
-<img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2021/04/image-361-6756c924ec912.webp" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
+<img src="https://learnopencv.com/wp-content/uploads/2018/07/svm-parameter-c-example.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
 
 $$
 \underset{\beta} {\text{argmin}} (\frac{1}{2} |\beta|^2 + C \sum_{i=1}^n \xi_i)
