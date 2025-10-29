@@ -1,132 +1,206 @@
 ---
 title: 'Eigenvalues and Eigenvectors'
-date: '2023-03-15'
+date: '2023-03-10'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### Eigenvalues and Eigenvectors
+### Warm up
 
-$n \times n$ 행렬 $A$는 임의의 새로운 출력 벡터 $A\mathbf{x}$는 입력 벡터 $\mathbf{x}$의 단순한 스칼라 배수가 됩니다. 즉, $A\mathbf{x} = \lambda\mathbf{x}$를 만족하는 스칼라 $\lambda$가 존재합니다. 이 때 $\mathbf{v}$를 $A$의 고유벡터라고 부르고 스칼라를 $\mathbf{v}$에 해당하는 고유값이라고 부릅니다.
-
-따라서 고유벡터는 $A$를 곱해도 스칼라에 의해 크기만 변할 뿐 방향은 바뀌지 않습니다. 또한 고유벡터는 영벡터가 될 수는 없습니다.
+String Theory에서 점 $x$에서 시간 $t$에서의 변위가 함수 $y(x,t)$로 주어지는 진동하는 현을 생각하면 현에 대한 모델링은 아래와 같습니다.
 
 $$
-A=\begin{bmatrix}
-4 & -1 & 6 \\
-2 & 1 & 6 \\
-2 & -1 & 8
-\end{bmatrix}, \\
-v=\begin{bmatrix}
--3 \\
-0 \\
-1
-\end{bmatrix}, \\
-u=\begin{bmatrix}
--1 \\
-2 \\
-1
-\end{bmatrix}
+V = \left\{y : R^2 \rightarrow R | \frac{\partial^{k+m} y(x,t)}{\partial x^k \partial t^m}\right\}
 $$
 
-예를 들어 위와 같은 행렬과 벡터들로 고유벡터 및 고유값을 계산해보겠습니다. 우선 $Av=2*\begin{bmatrix}
--3 \\
-0 \\
-1
-\end{bmatrix}=2v$가 되므로 이는 고유벡터가 성립하고 고유값 $\lambda=2$임을 알 수 있습니다. 하지만 $Au=\begin{bmatrix}
-0 \\
-6 \\
-4
-\end{bmatrix} \ne c*u$와 같이 $u$벡터는 스칼라곱으로 표현되지 않으므로 고유벡터가 성립할 수 없습니다.
+점 $(x, t)$에서 현의 오목함(concavity)과 가속도(acceleration)는 각각 $\frac{\partial^2 y}{\partial x^2}(x, t)$와 $\frac{\partial^2 y}{\partial t^2}(x, t)$입니다. 파동 방정식이 성립하려면 현의 각 지점에서 양이 존재해야 하므로, 우리는 $y(x, t)$의 모든 편도함수가 존재하도록 요구했습니다.
 
-만약 고유값이 0이라면 $A\mathbf{v} = 0 \cdot \mathbf{v} = \mathbf{0}$을 만족하는 영벡터가 아닌 벡터 $\mathbf{v}$가 존재합니다. 다시 말해, $\mathbf{v}$는 $A$의 null space에 속하고 역행렬을 가지지 않습니다.
+<img src="https://velog.velcdn.com/images/devjo/post/bb6ce9e1-e8b9-430c-8802-515276ee70ce/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
+
+또한 회색으로 그려진 함수 $y(x, t) = 0$은 벡터 공간 $V$에서 유일하게 특별한 벡터입니다.이제 몇 가지 추가 정보를 추가해 봅시다. 현의 시간과 공간에서의 거동은 파동 방정식(wave equation)
+
+$$
+\frac{\partial^2 y}{\partial t^2} = \frac{\partial^2 y}{\partial x^2}
+$$
+
+으로 모델링될 수 있습니다. 이 방정식은 현의 한 지점의 가속도가 그 지점에서의 오목함과 같다고 말합니다.
+
+$V$의 모든 함수가 파동 방정식의 해는 아닙니다. 벡터 공간 $V$의 모든 함수가 현이 실제로 진동하는 방식을 설명하는 것은 아닙니다. 현이 실제로 진동하는 방식은 (적어도 근사적으로) 위 파동 방정식의 해이며, 이는 선형 함수
+
+$$
+W y = 0
+$$
+
+으로 다시 작성될 수 있습니다. 또한 위 식은 동차 선형 방정식이므로, 해의 선형 결합도 해입니다. 즉, 핵 $\text{ker}(W)$은 벡터 공간입니다.
+
+$$
+y(x, t) = \sin(\omega t) v(x)
+$$
+
+형태의 해를 살펴보는 것으로 모델링됩니다. 여기서 주기적인 사인 함수는 현의 진동 운동을 설명하는 반면, 함수 $v(x)$는 주어진 고정된 순간의 현의 모양을 제공합니다. 그러면, $W(y) = 0$을 원하고, 이는 $\frac{d^2 f}{dx^2} = \omega^2 f$를 의미하므로, 진동하는 현의 모양을 결정하는 벡터 $v(x) \in U$는 다음을 따릅니다.
+
+$$
+L(v) = \lambda v
+$$
+
+이것은 바로 고유값-고유 벡터 방정식(eigenvalue-eigenvector equation)입니다.
 
 ---
 
-### Characteristic Polynomial of a Matrix
+### Invariant Directions
 
-숫자 $\lambda$는 $A \in \mathbb{R}^{n \times n}$의 고유값이라면, $A\mathbf{v} = \lambda\mathbf{v}$를 만족하는 영벡터가 아닌 벡터 $\mathbf{v}$가 존재한다는 것을 통해서 $\mathbf{v} \in \text{Null}(A - \lambda I)$와 동치라고 할 수 있습니다. 다시 말해 $\lambda$가 $A$의 고유값인 경우에만 영벡터 외의 벡터를 포함합니다.
+<img src="https://velog.velcdn.com/images/devjo/post/6c5888c7-f023-4d59-a605-d1efb4d44a0e/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
 
-우리는 어떤 행렬 $M$이 비자명한 영공간을 가질 필요충분조건은 $M$이 비가역이며 이는 $det(M)=0$과 동치인 것입니다. 따라서 $det(A-\lambda I)=0$을 만족하는 경우에만 고유값입니다.
+한 쌍의 벡터 $e_1, e_2$를 무작위로 선택한 후 원점에 모서리가 있는 단위 정사각형이 평행사변형으로 매핑되는 과정이 있습니다. 입력이 $\mathbf{f}_1$과 $\mathbf{f}_2$로 생성된 평행사변형에 있을 때 출력도 동일한 두 방향을 따라 놓인 모서리를 가진 평행사변형을 형성하도록 두 벡터 $\mathbf{f}_1$과 $\mathbf{f}_2$가 신중하게 선택되었습니다.
 
-예를 들어 $A = \begin{bmatrix} -2 & 4 \ -6 & 8 \end{bmatrix}$의 특성 다항식 $p(\lambda)$을 구해보면 $det(A-\lambda I)=(-2-\lambda)(8-\lambda)-(-24)=(\lambda-4)(\lambda-2)$를 갖게 되고 해가 4, 2이며 이는 고유값에 해당합니다.
+선형 변환 $L$에 대해서 아래와 같이 정의하면 
+
+$$
+\begin{aligned}
+& L \begin{pmatrix} 1 \\ 0\end{pmatrix} = \begin{pmatrix} -4 \\ -10\end{pmatrix} \\
+& L \begin{pmatrix} 0 \\ 1\end{pmatrix} = \begin{pmatrix} 3 \\ 7\end{pmatrix}
+\end{aligned}
+$$
+
+벡터는 방향과 크기이므로 선형 변환 내부 값이 변하면 당연히 벡터의 방향과 크기 모두 변한다는 것을 알 수 있습니다. 행렬은 $\begin{pmatrix} -4 & 3 \\ -10 & 7\end{pmatrix}$이므로 $L \begin{pmatrix} 1 \\ 2\end{pmatrix} = \begin{pmatrix} -4 \times 1 + 3 \times 2 \\ -10 \times 1 + 7 \times 2\end{pmatrix} = 2 \begin{pmatrix} 1 \\ 2\end{pmatrix}$과 같이 방향은 고정되지만 길이만 2배가 되는 경우도 있습니다.
+
+0이 아닌 임의의 벡터 $\mathbf{v}$는 $L$의 고유 벡터(eigenvector)라고 불리며, $\lambda$는 고유값(eigenvalue)이라고 불립니다. 행렬이 $\begin{pmatrix} -4 & 3 \\ -10 & 7 \end{pmatrix}$인 선형 변환 $L$의 예시에서, 우리는 $L$이 각각 고유값 1과 2를 가진 고유 벡터 $\mathbf{v}_1$과 $\mathbf{v}_2$로 표현되는 두 개의 불변 방향을 가진다는 속성을 누리고 있음을 보았습니다.
+
+이제 $w = r \mathbf{v}_1 + s \mathbf{v}_2$를 만족하는 상수 $r$과 $s$가 있다고 가정합니다.
+
+$$
+L(w) = L(r \mathbf{v}_1 + s \mathbf{v}_2) = r L(\mathbf{v}_1) + s L(\mathbf{v}_2) = r \mathbf{v}_1 + 2 s \mathbf{v}_2
+$$
+
+$L$은 단순히 숫자 $r$에 1을 곱하고 숫자 $s$에 2를 곱합니다. 이것을 행렬로 작성할 수 있다면 다음과 같을 것입니다.
+
+$$
+\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} r \\ s \end{pmatrix}
+$$
+
+이는 일반적인 시나리오
+
+$$
+L \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}$$
+
+보다 훨씬 깔끔합니다. 여기서 $r$과 $s$는 벡터 $\mathbf{v}_1$과 $\mathbf{v}_2$의 관점에서 $w$의 좌표를 제공하며 매우 간단한 대각 행렬을 가짐을 봅니다. 이 과정을 대각화(diagonalization)라고 합니다.
+
+이어서 $L: \mathbb{R}^2 \to \mathbb{R}^2$를 $L(x, y) = (2x + 2y, 16x + 6y)$라고 합시다. 
+
+$$
+\begin{aligned}
+& \begin{pmatrix} 2 & 2 \\ 16 & 6 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \lambda \begin{pmatrix} x \\ y \end{pmatrix} \\
+& \Rightarrow \begin{pmatrix} 2 & 2 \\ 16 & 6 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} \lambda & 0 \\ 0 & \lambda \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} \\
+& \Rightarrow
+\begin{pmatrix} 2 - \lambda & 2 \\ 16 & 6 - \lambda \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\end{aligned}
+$$
+
+이것은 동차 시스템이므로, 행렬 $\begin{pmatrix} 2 - \lambda & 2 \\ 16 & 6 - \lambda \end{pmatrix}$이 특이(singular)일 때에만 해를 가집니다. 따라서 행렬식 $det M = (2 - \lambda)(6-\lambda) - 32 = 0$을 만족하는 $\lambda = -2, 10$이 고유값이 됩니다.
 
 ---
 
-### Eigenvalues of Triangular Matrices
+### Eigenvalues and Eigenvectors Equation
 
-행렬 $A$가 삼각행렬이면 고유값은 주대각선 성분입니다. 예를 들어 아래와 같은 행렬이 있을 때 특성 다항식과 고유값을 구해보겠습니다.
+$L: V \to V$가 선형이고, 어떤 스칼라 $\lambda$와 $\mathbf{v} \ne 0_V$에 대해
 
 $$
-A=\begin{bmatrix}
-a_{11} & a_{12} & a_{13} \\
-0 & a_{22} & a_{23} \\
-0 & 0 & a_{33}
-\end{bmatrix}
+L \mathbf{v} = \lambda \mathbf{v}
 $$
 
-여기서 $p(\lambda)=det(A-\lambda I)=(a_{11}-\lambda)(a_{22}-\lambda)(a_{33} - \lambda)$와 같이 표현이 가능하고 해는 결국 주대각선 성분임을 알 수 있습니다.
+이면, $\lambda$는 고유 벡터 $\mathbf{v}$를 가진 $L$의 고유값입니다. 이 방정식은 동일 $v$의 방향은 선형 변환 $L$ 하에서 불변입니다. 동차 시스템 $(M - \lambda I) \mathbf{v} = 0$을 풀어 특이(singular)일 때에만 해를 가지고 고유값 $\lambda$와 관련 고유 벡터 $\mathbf{v}$를 찾을 수 있습니다.
+
+이 방정식의 좌항은 $M$의 특성 다항식 $P_M(\lambda)$라고 불리는 $\lambda$ 변수에 대한 다항식이며 $n \times n$ 행렬의 경우 차수 $n$을 가집니다.
+
+$$
+\begin{aligned}
+& P_M(\lambda) = \lambda^n + c_1 \lambda^{n-1} + \cdots + c_n, \\
+& P_M(0) = det(-M) = (-1)^n det(M)
+\end{aligned}
+$$
+
+대수학 정의에 의해 다항식은 $C$에 대한 1차 다항식의 곱으로 인수분해가 되며 $n$개의 복소수를 사용하여 $P_M(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lambda - \lambda_n) \Rightarrow P_M(\lambda_i) = 0$임을 의미하게 됩니다. 각 근은 실수이거나 복소수이거나 0일 수 있으며 모두 다를 필요는 없습니다. 겹치는 횟수는 중복도(multiplicity)라고 하게 됩니다.
+
+$$
+L \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 2x + y - z \\ x + 2y - z \\ -x - y + 2z \end{pmatrix}
+$$
+
+위 선형 변환의 예가 있을 때 행렬 $M$은 $L_{e_i}$를 열로 가지므로, 
+
+$$
+\begin{pmatrix} x \\ y \\ z \end{pmatrix} \rightarrow \begin{pmatrix} 2 & 1 & -1 \\ 1 & 2 & -1 \\ -1 & -1 & 2 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix}
+$$
+
+이에 대한 특성 방정식은 각 인자의 부호를 반대로 하여 계산하며 아래와 같습니다.
+
+$$
+\begin{aligned}
+& P_M(\lambda) = det \begin{pmatrix} \lambda - 2 & -1 & 1 \\ -1 & \lambda - 2 & 1 \\ 1 & 1 & \lambda - 2 \end{pmatrix} \\
+&= (\lambda-1)^2(\lambda - 4) = 0
+\end{aligned}
+$$
+
+따라서 $\lambda = 1, 4$가 고유값이 되며 각각 중복도 2, 1을 갖습니다. 이제는 각 고유값에 대한 고유 벡터를 구해보겠습니다.
+
+$$
+\begin{aligned}
+& \begin{pmatrix}
+2-4 & 1 & -1 & | & 0\\
+1 & 2-4 & -1 & | & 0 \\
+-1 & -1 & 2-4 & | & 0
+\end{pmatrix} \\
+& \sim
+\begin{pmatrix}
+1 & -2 & -1 & | & 0 \\
+0 & -3 & -3 & | & 0 \\
+0 & -3 & -3 & | & 0
+\end{pmatrix} \\
+& \sim
+\begin{pmatrix}
+1 & 0 & 1 & | & 0 \\
+0 & 1 & 1 & | & 0 \\
+0 & 0 & 0 & | & 0
+\end{pmatrix}
+\end{aligned}
+$$
+
+$\lambda = 4$에 대한 첨가 행렬을 통해 $x=-z, y=-z$를 알게 되고 $t\begin{pmatrix} -1 \\ -1 \\ 1\end{pmatrix}$ 형태의 모든 벡터는 고유벡터로 볼 수 있습니다. 다음으로 $\lambda = 1$일 때 첨가 행렬은 아래와 같습니다.
+
+$$
+\begin{aligned}
+& \begin{pmatrix}
+2-1 & 1 & -1 & | & 0\\
+1 & 2-1 & -1 & | & 0 \\
+-1 & -1 & 2-1 & | & 0
+\end{pmatrix} \\
+& \sim
+\begin{pmatrix}
+1 & 1 & -1 & | & 0 \\
+1 & 1 & -1 & | & 0 \\
+-1 & -1 & 1 & | & 0
+\end{pmatrix} \\
+& \sim
+\begin{pmatrix}
+1 & 1 & -1 & | & 0 \\
+0 & 0 & 0 & | & 0 \\
+0 & 0 & 0 & | & 0
+\end{pmatrix}
+\end{aligned}
+$$
+
+따라서 해 집합은 $z=t, y=s$로 두 자유 매개변수를 지정하고 $x=-s+t$라고 생각할 수 있게 됩니다. 그리고 $\left\{ s \begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix} + t \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} \mid s, t \in \mathbb{R} \right\}$에 대해서 불변한 상태가 됩니다.
 
 ---
 
-### Diagonalization
+### Eigenspaces
 
-두 행렬 $A, B$가 $A = PBP^{-1}$를 만족하는 가역 행렬 $P$가 존재할 때 similar 관계라고 할 수 있으며 따라서 $A$가 대각화 가능하다는 의미는 대각 행렬 $D$와 similar하다는 것입니다.
-
-가역 행렬 $P = \begin{bmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \end{bmatrix}$과 대각 행렬 $D = \begin{bmatrix} \lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n \end{bmatrix}$가 존재하여 $A = PDP^{-1}$가 성립합니다.
-
-이 식의 양변에 행렬 $P$를 곱한다면 $AP=PD$를 얻을 수 있는데 $[Av_1 Av_2 \cdots Av_n]=[\lambda_1v_1 \lambda_2v_2 \cdots \lambda_nv_n]$에서 즉 $P$의 열 벡터가 고유벡터이며 행렬은 가역행렬이므로 기저에 해당합니다.
-
-대각화 가능하다고 보는 조건은 다음과 같습니다.
-
-1.$n$개의 서로 다른 고유값을 가집니다.
-
-2.고유값의 대수적 중복도와 기하적 중복도가 같습니다.
-
----
-
-### Symmetric Matrices
-
-$$
-A=\begin{bmatrix}
-1 & -3 & 7 \\
--3 & 2 & 8 \\
-7 & 8 & 4
-\end{bmatrix}
-$$
-
-정사각 행렬 $A$가 $A^T=A$일 때 대칭(symmetric)이라고 합니다. 예를 들어 연속적인 2차 편미분을 가지는 함수 $f(x_1, x_2, \dots, x_n)$에 대해, 다변수 미적분학의 클레로 정리(Clairaut's Theorem)는 $\frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i}$라고 말합니다. 따라서 $f$의 해시안 행렬은 대칭이 됩니다.
-
-$$
-Hess(f)=\begin{bmatrix}
-\frac{\partial^2 f}{\partial x_1 \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
-\frac{\partial^2 f}{\partial x_2 \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
-\vdots & \ddots & \vdots \\
-\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n \partial x_n}
-\end{bmatrix}
-$$
-
-다변수 미적분학에서 이계 도함수 판정법에 따르면 $P=(a_1, a_2, \dots, a_n)$이 $f$의 임계점이라면 즉, $\frac{\partial f}{\partial x_i}(P)=0$과 같은 경우 $Hess(f)$의 모든 고유값이 양수이면 $P$는 극소점, 음수이면 극대점, 음수와 양수를 모두 가지면 안장점(saddle point)라고 합니다.
-
-$A$가 대칭 행렬일 때 $v_1, v_2$가 서로 다른 고유값에 해당하는 고유벡터라면 직교하는 대상이 됩니다.
-
-$$
-A=\begin{bmatrix}
-1& 0 & -1 \\
-0 & 1 & 1 \\
--1 & 1 & 2
-\end{bmatrix}
-$$
-
-$A$의 고유벡터로 이루어진 정규직교 기저 ${\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n}$가 존재합니다. $P^TP=I, A=PDP^T$입니다. 위의 $A$ 행렬의 특성 다항식은 $p(\lambda)=det(A-\lambda I)=\lambda(\lambda-1)(\lambda-3)$이 되므로 고유값은 $0, 1, 3$입니다. 각 고유값으로 얻는 고유벡터는 $u_1=\begin{bmatrix} 1 \\ -1 \\ 1\end{bmatrix}, u_2=\begin{bmatrix} 1 \\ 1 \\ 0\end{bmatrix}, u_3=\begin{bmatrix} -1 \\ 1 \\ 2\end{bmatrix}$와 같습니다. 그리고 각 고유벡터는 직교집합 $u_1^Tu_2=u_1^Tu_3=u_2^Tu_3=0$을 형성합니다. 이어서 정규직교 행렬을 만들어 보면 아래와 같습니다.
-
-$$
-P=[v_1 v_2 v_3]=\begin{bmatrix} \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{6}}\\ -\frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & 0 & \frac{2}{\sqrt{6}}\end{bmatrix}
-$$
-
-그리고 $A=P\begin{bmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 3\end{bmatrix}P^T$가 성립함을 확인할 수 있습니다.
+같은 고유값을 공유하는 고유 벡터의 임의의 합은 다시 고유 벡터입니다. 고유값 $\lambda$를 가진 모든 벡터의 공간을 고유 공간(eigenspace)이라고 합니다. 이것은 실제로는 더 큰 벡터 공간 $V$ 내에 포함된 벡터 공간입니다. $L 0_V = 0_V = \lambda 0_V$이므로 $0_V$를 포함하며, 위의 계산에 의해 덧셈 및 스칼라 곱셈에 대해 닫혀 있습니다.
 
 ---
 
 ### 참고 자료
 
 [원본 경로 #1](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
+
+[원본 경로 #2](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
+
+[원본 경로 #3](https://www.math.ucdavis.edu/~linear/linear-guest.pdf)

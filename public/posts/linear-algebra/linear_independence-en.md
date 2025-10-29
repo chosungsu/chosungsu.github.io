@@ -1,105 +1,71 @@
 ---
-title: 'Linear independence'
-date: '2023-03-06'
+title: 'Linear Independence'
+date: '2023-03-08'
 tags: ['Linear algebra', 'lecture']
 ---
 
 ### Warm up
 
-We defined the span of a set of vectors ${v_1, v_2, \dots, v_n}$ as the collection of all possible linear combinations.
+When we have a plane $P$ containing the origin in $R^3$ and non-zero vectors $\{u,v,w\} \in P$, if no two of these vectors are parallel, then $P = \text{span}\{u,v,w\}$.
 
-$$
-t_1v_1+t_2v_2+ \cdots + t_nv_n
-$$
-
-We denote this set by $\text{span}\{v_1, v_2, \dots, v_n\}$. The question is whether there are multiple ways to express $x$ as a linear combination of the vectors.
-
-For example, when $v_1 = (1,2), v_2=(0,1), v_3=(-1,-1), x=(3,-1)$, if $x \in \text{span}\{v_1, v_2, v_3\}$, then $x$ can be expressed in multiple ways such as $x=3v_1-7v_2+0v_3$ and $x=-4v_1+0v_2-7v_3$. This fact suggests that the set ${v_1, v_2, v_3}$ may have redundancy.
-
-That is, when some vector can be expressed as a linear combination of other vectors, the set is linearly dependent; otherwise, it is linearly independent.
+However, since any two vectors determine a plane, if we use $u, v$, there will be constants satisfying $w=d_1u+d_2v$. Then we say that $w$ is not independent. In other words, linear dependence occurs when all constants multiplied are non-zero.
 
 ---
 
-### Linear independence
+### Linear dependence
+
+Three vectors exist as follows.
 
 $$
-t_1v_1+t_2v_2+ \cdots + t_nv_n=0
+v_1 = \begin{pmatrix} 0 \\ 0 \\ 1\end{pmatrix}, v_2 = \begin{pmatrix} 1 \\ 2 \\ 1\end{pmatrix}, v_3 = \begin{pmatrix} 1 \\ 2 \\ 3\end{pmatrix}
 $$
 
-A set of vectors ${v_1, v_2, \dots, v_n}$ is linearly independent if and only if the zero vector (0) can be expressed as a linear combination of ${v_1, v_2, \dots, v_n}$ in exactly one way. In this case, all coefficients must be zero. Also, the trivial solution is the only solution: $x_1=x_2= \cdots =x_n=0$.
-
-Conversely, if ${v_1, v_2, \dots, v_n}$ is linearly dependent, then there exist scalars $x_1, x_2, \cdots, x_n$ not all zero, such that if we assume $x_n \ne 0$, then $v_n$ can be expressed in terms of the vectors $v_1, \dots, v_{n-1}$ as follows:
+To check if these are linearly independent, we can form a homogeneous system with $c_1, c_2, c_3$.
 
 $$
-v_n=-\frac{x_1}{x_n}v_1-\frac{x_2}{x_n}v_2 - \cdots -\frac{x_{n-1}}{x_n}v_{n-1}
+\begin{pmatrix} v_1 & v_2 & v_3\end{pmatrix} \begin{pmatrix} c_1 \\ c_2 \\ c_3\end{pmatrix} = 0
 $$
 
-The homogeneous system $Ax=0$ has only the trivial solution when there are no free parameters, and it is linearly independent when there is only the trivial solution.
+The above system has solutions only when the matrix $M = \begin{pmatrix} v_1 & v_2 & v_3 \end{pmatrix}$ is singular. The determinant is $\det M = det \begin{pmatrix} 0 & 1 & 1 \\ 0 & 2 & 2 \\ 1 & 1 & 3\end{pmatrix} = 0$, showing that there exist non-trivial solutions, indicating linear dependence.
+
+Another way to find coefficients proving linear dependence is to solve a system of linear equations as follows.
+
+$$
+\begin{aligned}
+\begin{pmatrix} 0 & 1 & 1 & | & 0 \\ 0 & 2 & 2 & | & 0 \\ 1 & 1 & 3 & | & 0\end{pmatrix} \\
+\sim \begin{pmatrix} 1 & 1 & 3 & | & 0 \\ 0 & 1 & 1 & | & 0 \\ 0 & 0 & 0 & | & 0\end{pmatrix} \\
+\sim \begin{pmatrix} 1 & 0 & 2 & | & 0 \\ 0 & 1 & 1 & | & 0 \\ 0 & 0 & 0 & | & 0\end{pmatrix}
+\end{aligned}
+$$
+
+Through the solution set $\{-2, -1, 1\}$, we can express the linear combination as $c_1v_1 + c_2v_2 + c_3v_3 = 0 \rightarrow -2v_1 -v_2 +v_3 = 0$. That is, if one vector can be expressed as a linear combination of the other vectors, then it is linearly dependent.
 
 ---
 
-### Maximum size of linearly independent set
+### Linear Independence
 
-For a set of vectors ${v_1, v_2, \dots, v_p}$ in $\mathbb{R}^n$, if $p > n$, then these vectors are linearly dependent. If $A = \begin{bmatrix} v_1 & v_2 & \dots & v_p \end{bmatrix}$, then it is an $n \times p$ matrix with rank $n$. The number of free parameters $d=p-r$ is always positive. This means the homogeneous system has nontrivial solutions.
+To show that a vector set is linearly dependent, we find a linear combination of vectors equal to 0 or show that one vector can be expressed as a linear combination of the others. On the other hand, to confirm that a vector set is linearly independent, we must verify that all linear combinations of vectors with non-zero coefficients produce something other than the zero vector.
 
-This is related to the concept of dimension: sets of vectors with size larger than the dimension $n$ are automatically linearly dependent.
+I will list three vectors below.
 
 $$
-v_1=\begin{bmatrix}
-8 // 3 // 0 // -2
-\end{bmatrix}, \\
-v_2=\begin{bmatrix}
-4 // 11 // -4 //6
-\end{bmatrix}, \\
-v_3=\begin{bmatrix}
-2 // 0 // 1 // 1
-\end{bmatrix}, \\
-v_4=\begin{bmatrix}
-3 // -9 // -5 // 3
-\end{bmatrix}, \\
-v_5=\begin{bmatrix}
-0 // -2 // -7 // 7
-\end{bmatrix}
+v_1 = \begin{pmatrix} 0 \\ 0 \\ 2\end{pmatrix}, v_2 = \begin{pmatrix} 2 \\ 2 \\ 1\end{pmatrix}, v_3 = \begin{pmatrix} 1 \\ 4 \\ 3\end{pmatrix}
 $$
 
-Therefore, for example, in $\mathbb{R}^4$ dimension, we can immediately say that the set of vectors ${v_1, \dots, v_5}$ is linearly dependent without calculation.
+To check if these vectors are linearly independent, we write whether $c_1v_1 + c_2v_2 + c_3v_3 = 0$ has a solution as a homogeneous system. Since the matrix $M = \begin{pmatrix} v_1 & v_2 & v_3 \end{pmatrix}$ has solutions only when it is singular, the determinant $det M = 12 \ne 0$, the result of a non-zero determinant must be fixed as $c_1 = c_2 = c_3 = 0$. Therefore, we can say they are linearly independent.
 
 ---
 
-### Solving linear system
+### From Dependent to Independent
 
-A set of vectors ${v_1, v_2, \dots, v_n}$ is linearly independent if and only if the rank $r$ of matrix $A$ equals $n$. That is, when converted to REF or RREF, the number of leading entries is exactly $n$.
+Now suppose the vectors $v_1, \dots, v_n$ are linearly dependent and the coefficient $c_1$ is non-zero. Then $\text{span} \{v_1, \dots, v_n\} = \text{span}\{v_2, \dots, v_n\}$, and from $\mathbf{x} \in \text{span}\{v_1, \dots, v_n\}$, we have $v_1 = -\frac{c_2}{c_1}v_2 -\cdots -\frac{c_n}{c_1}v_n$. Substituting this, we can organize it as $\mathbf{x} = a_1 (-\frac{c_2}{c_1}v_2 -\cdots -\frac{c_n}{c_1}v_n) + a_2v_2 + \cdots + a_nv_n = (a_2 - a_1 \frac{c_2}{c_1})v_2 + \cdots + (a_n - a_1 \frac{c_n}{c_1})v_n$.
 
-$$
-v_1=\begin{bmatrix}
-0 \\ 1 \\ 5
-\end{bmatrix}
-, v_2=\begin{bmatrix}
-1 \\ 2 \\ 8
-\end{bmatrix}
-, v_3=\begin{bmatrix}
-4 \\ -1 \\ 0
-\end{bmatrix}
-$$
-
-For example, given the vectors above, performing elementary row operations yields:
-
-$$
-A=\begin{bmatrix}
-1 & 2 & -1 \\
-0 & 1 & 4 \\
-0 & 0 & 13
-\end{bmatrix}
-$$
-
-The rank of matrix $A$ is $r=3$, which equals the number of vectors $n=3$. Therefore, the set is linearly independent.
+When writing a vector space as a $\text{span}$, we want the list to be as short as possible. For example, if there exists a vector in a $\text{span}$ such as $S = \text{span}\{1 + t, 1 + t^2, t + t^2, 2 + t + t^2, 1 + t + t^2\}$ that can be expressed as $v_4=v_1+v_2$ through summation, it can be removed. Therefore, the reduced set $S = \text{span}\{1 + t, 1 + t^2, t + t^2\}$ is called a minimal spanning set. And such a set is called a basis for $S$.
 
 ---
 
 ### References
 
-[Original Source #1](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
+[Original source #1](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
 
-[Original Source #2](https://www.boostcourse.org/ai151/joinLectures/194162)
-
-[Original Source #3](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
+[Original source #2](https://www.math.ucdavis.edu/~linear/linear-guest.pdf)
