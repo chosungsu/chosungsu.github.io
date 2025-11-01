@@ -1,103 +1,254 @@
 ---
 title: 'Some elementary statistical inference'
-date: '2023-05-15'
+date: '2023-05-12'
 tags: ['Mathematical statistics', 'lecture']
 ---
 
-### sampling and statistic
+### Sampling and Statistics
 
-Inference includes estimation and testing, and estimation is divided into point and interval estimation.
+Information about an unknown distribution or parameter of $X$ is obtained from a sample of $X$. Sample observations $X_1, X_2, \dots, X_n$ have the same distribution as $X$, and $n$ denotes the sample size. Often we assume the sample observations $X_1, X_2, \dots, X_n$ are mutually independent; in this case the sample is called a random sample. If they are independent and identically distributed (i.i.d.), these random variables constitute a random sample of size $n$ drawn from a common distribution. A function of the sample used to summarize the information in the sample is called a statistic. A sample function $T = T(X_1, X_2, \dots, X_n)$ is a statistic, and $t$ is a realization of $T$, i.e., $t = T(x_1, x_2, \dots, x_n)$.
 
-Sampling can be divided into sampling with replacement (independence) and sampling without replacement (dependence).
+#### Point estimators
 
----
+Let $X_1, X_2, \dots, X_n$ be a random sample from a random variable $X$ with density or mass function of the form $f(x; \theta)$ or $p(x; \theta)$. In this situation, it is natural to consider a statistic $T$ as an estimator of $\theta$. We call $T$ a point estimator of $\theta$, and $t$ an estimate of $\theta$.
 
-### order statistic
+Some properties of point estimators:
 
-Order statistics use the pdf $f(x)$ and cdf $F(x)$ of random samples $X_1, …, X_n$.
+- If a statistic $T$ satisfies $\mathbf{E(T) = \theta}$, then $T$ is called an unbiased estimator of $\theta$.
+- The information in the sample and the parameter $\theta$ are related through the joint distribution of the random sample, $\prod_{i=1}^n f(x_i; \theta)$. Viewed as a function of $\theta$, this is called the likelihood function:
 
-When defining the order of X as $Y_1, …, Y_n$, we ensure that $Y_1 < Y_2, … < Y_n$ is satisfied.
+$$
+\mathbf{L(\theta) = L(\theta; x_1, x_2, \dots, x_n) = \prod_{i=1}^n f(x_i; \theta)}
+$$
 
-For the pdf of y, since there is a one-to-one correspondence, the total number is n! and it is expressed as $g(y_1, …, y_n) = n!f(y_1)…f(y_n) = n!\prod\limits_{i=1}^{n}f(y_i)$. At this time, the total Jacobian matrix value satisfies 1.
+As an estimate of $\theta$, the value of $\theta$ that maximizes $L(\theta)$ is often used. If this value is unique, it is called the maximum likelihood estimator (MLE) and denoted by $\mathbf{\hat{\theta}}$. In practice, it is often easier to maximize the log-likelihood $\mathbf{l(\theta) = \log L(\theta)}$. Since $\log$ is strictly increasing, the maximizer of $L(\theta)$ also maximizes $l(\theta)$.
 
-For the marginal pdf of y, it satisfies $g_k(y_k) = \frac{n!}{(k-1)!(n-k)!} (F(y_k))^{k-1}(1-F(y_k))^{n-k}f(y_k)$.
-
-For the joint pdf of $y_i, y_j, i<j$, when dividing the interval, the interval lower than $y_i$ has $F(y_i)$, the interval between i and j has $F(y_j)-F(y_i)$, and the interval greater than j has $1-F(y_j)$. Therefore, it satisfies $g(y_i, y_j) = \frac{n!}{(i-1)!(j-i-1)!(n-j)!} (F(y_i))^{i-1}(F(yj)-F(y_i))^{j-i-1}(1-F(y_j))^{n-j}$.
-
-For example, when $y_1 < y_2 < y_3$ and $z_1 = y_3-y_1, z_2 = y_3 \rightarrow y_1 = z_2-z_1, y_3 = z_2$ relationship and the Jacobian matrix value is 1, the joint pdf for $Y_1, Y_2$ is first obtained as the pdf for the entire interval from $y_1$ to $y_3$: $g(y_1, y_3) = \frac{3!}{(1-1)!(3-1-1)!(3-3)!}(F(y_1))^{1-1}(F(y_3)-F(y_1))^{3-1-1}(1-F(y_3))^{3-3} = 6(y_3-y_1)$. Now $f(z_1, z_2) = g(z_2-z_1, z_2)|J| = 6(z_2-(z_2-z_1)) = 6z_1$ can be obtained.
-
----
-
-### tolerance limits for distributions
-
-For $Y_1 < … < Y_n$ defined by order statistics, when $p(F(Y_j)-F(Y_i) ≥ p) = \gamma$, it is expressed as 100$\gamma$% tolerance limits for 100$p$% of prob X. For the joint pdf of $Z = F(Y_n)$, since this follows $u(0, 1)$ and $p(Z ≤ z) = P(X ≤ F^{-1}(z)) = g$, $h(g_1, …, g_n) = n!$ holds.
-
-The method to calculate $\gamma$ is $p(Z_j-Z_i ≥ p) = \int\limits_{0}^{1-p}\int\limits_{p+z_i}^{1} h(z_i, z_j) dz_jdz_i = \int\int \frac{n!}{(i-1)!(j-i-1)!(n-j)!} Z_i^{i-1}(Z_j-Z_i)^{j-i-1}(1-Z_j)^{n-j}$ by expanding. Simplifying the above formula, since the probability between $z_j$ and $z_i$ is ultimately replaced by the probability of $z_{j-1}$, it can be changed to $p(Z_j-Z_i ≥ p) = p(Z_{j-i} ≥ p) = \int\limits_{p}^{1} h(v)\, dv = \int \frac{n!}{(k-1)!(n-k)!}v^{k-1}(1-v)^{n-k} \,dv$.
-
-For example, when finding $\gamma$ using $y_1, y_6$, $\gamma = P(F(y_6) - F(y_1) ≥ 0.8) = \int\limits_{0.8}^{1} \frac{6!}{(5-1}!(6-5)!) v^4(1-v)^1 \,dv = 0.34$.
+- If the MLE of parameter $\theta$ is $\hat{\theta}$, then for a specified function $g$, the MLE of $\eta = g(\theta)$ is $\mathbf{\hat{\eta} = g(\hat{\theta})}$.
 
 ---
 
-### more on confidence intervals
+### Confidence Intervals
 
-Confidence intervals are said to have 100$(1-\alpha)$% when $Z = (X-\mu)/\sigma \sim N(0, 1)$ is satisfied.
+Suppose the random variable $X$ of interest has pdf $f(x; \theta)$ with unknown $\theta \in \Omega$. When estimating $\theta$ by a statistic $\hat{\theta} = \hat{\theta}(X_1, \dots, X_n)$ from a sample, the probability that $\hat{\theta}$ equals the true value $\theta$ exactly is small. What we need is an estimate of the estimation error, i.e., how far $\hat{\theta}$ deviates from $\theta$.
 
-The confidence interval for $\mu$ is expressed as 100$(1-\alpha)$% $= \bar{x} \pm Z_{\alpha/2}\frac{s}{\sqrt{n}}$ when $\sqrt{n}(\bar{X}-\mu)/s \sim N(0, 1)$ for $x_1, …, x_n$.
+For a specified $\mathbf{0 < \alpha < 1}$, let $L = L(X_1, \dots, X_n)$ and $U = U(X_1, \dots, X_n)$ be two statistics. If the following holds, the interval $\mathbf{(L, U)}$ is called a $(1 - \alpha)\times 100\%$ confidence interval for $\mathbf{\theta}$:
 
-The confidence interval for p is expressed as $\hat{p} \pm Z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ when it follows $B(1, p)$ and satisfies $\sqrt{n}(\hat{p}-p) \sim N(0, p(1-p))$.
+$$
+\mathbf{1 - \alpha = P_{\theta}[\theta \in (L, U)]}
+$$
 
-The confidence interval for $\mu$ under normality is expressed as $\bar{X} \pm t_{\alpha/2}\frac{s}{\sqrt{n}}$ when $\sqrt{n}(\bar{X} - \mu)/s \sim t(n-1)$.
+The quantity $\mathbf{1 - \alpha}$ is called the confidence coefficient or confidence level. The expected length $E_{\theta}(U - L)$ is a measure of the efficiency of a confidence interval.
+
+By the central limit theorem (CLT), for a random sample $X_1, \dots, X_n$ drawn from a distribution with mean $\mu$ and finite variance $\sigma^2$, the distribution function of $\mathbf{W_n = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}}$ converges to the standard normal distribution function $\Phi$ as $n \to \infty$. When $n$ is sufficiently large, replacing $\sigma$ by the sample standard deviation $S$, the statistic $\mathbf{Z_n = \frac{\bar{X} - \mu}{S/\sqrt{n}}}$ is approximately $\mathbf{N(0, 1)}$ as well.
+
+#### Intervals for difference in Means
+
+For two independent random samples $X_1, \dots, X_{n_1}$ (mean $\mu_1$) and $Y_1, \dots, Y_{n_2}$ (mean $\mu_2$), we seek a confidence interval for the difference $\mathbf{\Delta = \mu_1 - \mu_2}$. The estimator is $\mathbf{\hat{\Delta} = \bar{X} - \bar{Y}}$.
+
+Using the CLT, an approximate $(1 - \alpha)\times 100\%$ confidence interval is
+
+$$
+\mathbf{(\bar{x} - \bar{y}) \pm z_{\alpha/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+$$
+
+If $X \sim N(\mu_1, \sigma^2)$ and $Y \sim N(\mu_2, \sigma^2)$ (equal variances $\sigma^2$), we can also define the pivot
+
+$$
+\mathbf{T = \frac{(\bar{X} - \bar{Y}) - (\mu_1 - \mu_2)}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}}
+$$
+
+where $S_p^2$ is the pooled variance estimator: $S_p^2 = \frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}$. Then $\mathbf{T}$ follows a $\mathbf{t}$-distribution with degrees of freedom $\mathbf{n_1 + n_2 - 2}$.
+
+#### Intervals for discrete distributions
+
+Let $X_1, X_2, \dots, X_n$ be a random sample from a discrete random variable $X$ with pmf $p(x; \theta)$, $\theta \in \Omega$. Let $F_T(t; \theta)$ denote the cdf of an estimator $T = T(X_1, \dots, X_n)$ of $\theta$. Assume that for all $t$ in the support of $T$, $F_T(t; \theta)$ is nonincreasing in $\theta$ and continuous in $\theta$.
+
+Given $0 < \alpha_1$ and $0 < \alpha_2$ with $\alpha = \alpha_1 + \alpha_2 < 0.5$, define $\underline{\theta}$ and $\overline{\theta}$ as the solutions to
+
+$$
+\begin{aligned}
+& \mathbf{F_T(t^-; \underline{\theta}) = 1 - \alpha_2} \\
+& \mathbf{F_T(t; \overline{\theta}) = \alpha_1}
+\end{aligned}
+$$
+
+Here $\mathbf{T^-}$ denotes a statistic that takes values one step below those in the support of $T$ to handle discontinuities of the discrete cdf. Then the confidence coefficient satisfies
+
+$$
+\begin{aligned}
+& P[\underline{\theta} < \theta < \overline{\theta}] \\
+&= 1 - P[\{\underline{\theta} \ge \theta\} \cup \{\overline{\theta} \le \theta\}] \\
+&= 1 - P[\underline{\theta} \ge \theta] - P[\overline{\theta} \le \theta] \\
+&\ge 1 - P[F_T(T^-; \theta) \le 1 - \alpha_2] - P[F_T(T; \theta) \ge \alpha_1]
+\end{aligned}
+$$
+
+Because the probability mass of $T$ is scattered depending on the true value of $\theta$, its cdf is a step function; exact probabilities $\alpha_1$ and $1-\alpha_2$ cannot generally be guaranteed. However, by continuity and monotonicity of $F_T(t; \theta)$ in $\theta$, we can ensure
+
+$$
+\mathbf{P[\underline{\theta} < \theta < \overline{\theta}] \ge 1 - \alpha_1 - \alpha_2}
+$$
+
+i.e., the confidence coefficient of the interval is at least $\mathbf{1 - \alpha}$.
 
 ---
 
-### introduction to hypothesis testing
+### Order statistics
 
-$H_0$: null hypothesis with negativity and $H_1$: alternative hypothesis with assertiveness. For example, when $\theta = 170$ is the null hypothesis and $\theta \ne 170$ is the alternative hypothesis, if $x_1, …, x_n$ are random samples and numbers in the range $\omega$, then if $w_0 \cap w_1 \ne \phi$, $w_0 \cup w_1 = \omega$ holds.
+Let $X_1, X_2, \dots, X_n$ be a random sample from a continuous distribution. Arrange them in ascending order $Y_1 < Y_2 < \dots < Y_n$; $Y_i$ is called the $i$-th order statistic. The joint pdf of $Y$ is
 
-The case of incorrectly rejecting the null hypothesis is judged as a Type I error, and the case of incorrectly accepting the alternative hypothesis as the null hypothesis is judged as a Type II error.
+$$
+\begin{cases}
+ g(y_1, y_2, \dots, y_n) = n! f(y_1) f(y_2) \cdots f(y_n), \\
+ 0, \text{ otherwise}
+\end{cases}
+$$
 
-When there are random samples $x$ following $B(1, p)$, when creating $\alpha$ validation sets for verification, the null hypothesis is set as $p=p_0$ and the alternative hypothesis as $p < 0$. And the test statistic $S = \sum\limits_{i=1}^{n}X_i$ is set to have successful $i$. For example, given $n = 20, P_0 = 0.7, \alpha = 0.15, P_{H_0}(S≤11) = 0.1133, P_{H_0}(S≤12) = 0.2277$, since $S≤11$ is smaller than test size 0.15 when following $B(20, 0.7)$, the null hypothesis is rejected.
+There are $n!$ possible permutations mapping the $X_i$ to the $Y_i$, and the absolute value of the Jacobian of each transformation is 1, yielding the factor $n!$.
 
----
+#### Quantiles
 
-### additional comments about statistical tests
+For a random variable $X$ with a continuous cdf $F(x)$, define the $p$-th quantile by $\mathbf{\xi_p = F^{-1}(p)}$.
 
-For large samples, two-sided testing uses random samples $x_1, …, x_n$ with $\mu, \sigma^2$ to set the null hypothesis $H_0 :  \mu = \mu_0$ and alternative hypothesis $H_1 : \mu \ne \mu_0$, then it can be rejected when $\bar{X} ≤ h$ or $\bar{X} ≥ k$. The significance level for each region is set to $\alpha/2$.
+If we denote the cdf of $Y_k$ by $F(Y_k)$, then $E(F(Y_k)) = \frac{k}{n+1}$. Since $p \approx \frac{k}{n+1}$, $Y_k$ is called the $p$-th sample quantile, an estimator of the $p$-th population quantile $\xi_p$.
 
-When random samples have null hypothesis $\theta = 0.1$, alternative hypothesis $\theta > 0.1$, and test size $\alpha$ = 0.05, the test stat $Y = \sum\limits_{i=1}^{10} X_i$ becomes and shows $Y \sim P(1) = 10 * 0.1$, then $P(Y ≥ 3) = 0.08$ and $P(Y ≥ 4) = 0.019$, and in such probabilities, the null hypothesis can be rejected when $P(Y ≥ 4)$. This test is called a non-randomized test.
+A q-q plot is obtained by plotting the sample order statistic $y_k$ against the theoretical quantile $\xi_{Z, p_k} = F^{-1}(p_k)$ derived from a theoretical cdf $F(z)$.
 
-Bernoulli trial w can be shown as P(w=1) = \frac{0.05-0.019}{0.08-0.019} = \frac{31}{61}, and the rejection region is ($X_i ≥ 4$) or {$X_i = 3$ and $W = 1$}, so it is calculated as $0.019 + (0.08 - 0.019)\frac{0.5-0.019}{0.08-0.019} = 0.05$. This test is called a randomized test.
+If we consider two order statistics $Y_i$ and $Y_j$ with $i < [(n+1)p] < j$, then the probability that $Y_i < \xi_p < Y_j$ equals the probability that, in $n$ independent trials, the number of successes $(p = P(X < \xi_p))$ lies between $i$ and $j-1$:
 
-Finally, the p-value is the significance probability, meaning the minimum value of $P_{H_0}$(observed test stat is rejected). That is, this can be said to be the minimum value of the Type I error probability of rejecting the null hypothesis among observation errors.
-
----
-
-### chi-square tests
-
-Chi-square tests include goodness-of-fit (GOF), homogeneity, and independence tests.
-
-First, the GOF test is given as $X_1 \sim B(n, p1), X_2 = n-X_i, p_2 = 1-p_1$, and it is expressed as $Q_1 = \frac{(X_1-np_1)^2}{np_1(1-p_1)} = \frac{(X_1-np_1)^2}{np_1} + \frac{(X_1-np_1)^2}{n(1-p_1)} \rightarrow \chi^2(1)$, and the generalized formula is defined as $Q_{k-1} = \sum\limits_{i=1}^{k} \frac{(X_i-np_i)^2}{np_i} \rightarrow \chi^2(k-1)$. For example, in a trial of rolling a die 60 times, when each probability is 1/6 and given as $x_1, …, x_6 = 13, 19, 11, 8, 5, 4$, $np_i = 60*\frac{1}{6} = 10$ becomes, and $Q_5 = \frac{(13-10)^2}{10} + … + \frac{(4-10)^2}{10} = 15.6$, which is larger than $\chi^2(5) = 11.1$. Therefore, the null hypothesis cannot be rejected.
-
-Next, when two independent variables $X_1, X_2$ follow $(n_1, p_{11}, …, p_{k1})$ and $(n_2, p_{12}, …, p_{k2})$, the null hypothesis is set as $p_{11} = p_{12}, …, p_{k1} = p_{k2}$, then the test stat can be defined as $Q = \sum\limits_{j=1}^{2}\sum\limits_{i=1}^{k} \frac{(X_{ij}-n_j\hat{p_{ij}})^2}{n_j\hat{p_{ij}}}$. Here, $\hat{p_{ij}} = \frac{X_i1 + X_i2}{n_1 + n_2}$ can be said. The degrees of freedom is $(k-1)*2 - (k-1) = k-1$ because there are k rows and 2 columns, and there is 1 constraint of k. This can be rearranged as $(col-1)*row - (col-1) = (row-1)(col-1)$.
-
-Finally, for the independence test, when there are two categorical variables $A, B$, $P_{ij} = P(A_i \cap B_i)$ and the null hypothesis is set as the two variables are independent, then the test stat $Q = \sum\limits_{j=1}^{b}\sum\limits_{i=1}^{a} \frac{(X_{ij}-n\hat{p_{ij}})^2}{n\hat{p_{ij}}}$ and $\hat{p_{ij}} = \hat{p_i.}*\hat{p_j.} = \frac{X_i.}{n}\frac{X_j.}{n}$ can be expressed. The degrees of freedom becomes $(ab - 1) - ((a-1)+(b-1)) = (a-1)(b-1)$.
+$$
+\begin{aligned}
+&P(Y_i < \xi_p < Y_j) \\
+&= \sum_{w=i}^{j-1} \binom{n}{w} p^w (1 - p)^{n-w}
+\end{aligned}
+$$
 
 ---
 
-### method of monte carlo
+### Hypothesis testing
 
-In random number generation, when the random variable $U \sim U(0,1)$ follows, using continuous cdf $F$, $X = F^{-1}(U) \sim F$ is defined. Through this definition, $P(X ≤ x) = P(F^{-1}(U) ≤ x)$ becomes, and taking F on both sides, it can be arranged as $P(U ≤ F(x)) = F(x)$. And the estimation for \pi is given as $X = \begin{cases} 1 & U_1^2+U_2^2 < 1 \\ 0 & others \end{cases}$, then $E(X) = \frac{\pi}{4}$ follows the circle law and $\pi = 4E(X)$ becomes, so $\hat{\pi} = 4*\frac{1}{n}\sum\limits_{i=1}^{n}X_i$ can be said.
+Suppose the random variable $X$ of interest has density $f(x; \theta)$ with unknown parameter $\theta \in \Omega$. Based on theory or preliminary experimentation, we may wish to determine whether $\theta$ lies in $\omega_0$ or $\omega_1$. We set up the hypotheses
 
-Monte Carlo integration is expressed as $\int\limits_{a}^{b} g(x) \,dx = (b-a)\int\limits_{a}^{b} g(x) \frac{1}{b-a} \,dx = (b-a)E[g(X)]$ and $X \sim u(a, b)$ follows.
+$$
+\begin{aligned}
+& H_0 : \theta \in \omega_0 \\
+& H_1 : \theta \in \omega_1
+\end{aligned}
+$$
 
-The Box-Muller transformation is given as $Y_1, Y_2$ are independent and follow $u(0,1)$, and $X_1 = (-2log(y_1))^{1/2}cos(2\pi y_2), X_2 = (-2log(y_1))^{1/2}sin(2\pi y_2)$, then applying to the circle equation, $X_1^2 + X_2^2 = -2log(y_1)$ becomes, and therefore $Y_1 = exp[-(X_1^2 + X_2^2)/2]$ is expressed, and $\frac{X_2}{X_1} = tan(2\pi y_2)$ becomes, and therefore $Y_2 = \frac{1}{2\pi} arctan(\frac{X_2}{X_1})$ is expressed. At this time, the Jacobian matrix $J = \begin{vmatrix} \frac{dy_1}{dx_1} & \frac{dy_1}{dx_2} \\ \frac{dy_2}{dx_1} & \frac{dy_2}{dx_2} \end{vmatrix} = -\frac{1}{2\pi} exp[-\frac{x_1^2 + x_2^2}{2}]$ becomes. Therefore, these two independent variables can be said to follow the normal distribution $N(0, 1)$.
+$\mathbf{H_0}$ is the null hypothesis, often representing no change or no difference relative to the past. $\mathbf{H_1}$ is the alternative hypothesis, representing change or difference, and is often the research worker's hypothesis.
+
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20250527152427210496/Hypothesis-Testing.webp" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
+
+Rejecting $\mathbf{H_0}$ when it is true is a Type I error; accepting it when $\mathbf{H_1}$ is true is a Type II error. Typically, Type I errors are considered more serious.
+
+The significance level $\alpha$ is defined by
+
+$$
+\mathbf{\alpha = \max_{\theta \in \omega_0} P_{\theta}[(X_1, \dots, X_n) \in C]}
+$$
+
+A rejection region should be chosen to maximize power while controlling the significance level.
+
+#### Two-sided tests
+
+For a random variable $X$ with mean $\mu$ and finite variance $\sigma^2$, consider testing
+
+$$
+\begin{aligned}
+& H_0 : \mu = \mu_0 \\
+& H_1 : \mu \ne \mu_0
+\end{aligned}
+$$
+
+If $\mu \ne \mu_0$, reject $H_0$ when $\bar{X}$ is too small or too large relative to $\mu_0$:
+
+$$
+\frac{|\bar{X} - \mu_0|}{S/\sqrt{n}} \ge z_{\alpha/2}
+$$
+
+This test has approximate level $\alpha$ by the CLT.
+
+#### p-value
+
+Given an observed value $x$ of a test statistic $X$, the p-value is the probability, assuming $H_0$ is true, of obtaining a value at least as extreme as the observed $x$:
+
+$$
+\mathbf{\text{p-value} = P_{H_0}(X \ge x)} \quad \text{(tail adapted to the test)}
+$$
+
+$\mathbf{H_0}$ is rejected at any significance level $\alpha$ greater than or equal to the p-value. For example, if $\text{p-value}=0.048$, the test rejects at $\alpha=0.05$ but not at $\alpha=0.01$.
+
+---
+
+### Chi-square tests
+
+For independent random variables $X_1, \dots, X_n$ with $X_i \sim N(\mu_i, \sigma_i^2)$, the random variable $\sum_{i=1}^n \left(\frac{X_i - \mu_i}{\sigma_i}\right)^2$ follows a $\mathbf{\chi^2(n)}$ distribution.
+
+If $X_1 \sim b(n, p_1)$, then $\mathbf{Q_1 = \frac{(X_1 - n p_1)^2}{n p_1} + \frac{(X_2 - n p_2)^2}{n p_2}}$, where $X_2 = n - X_1$ and $p_2 = 1 - p_1$, is approximately $\mathbf{\chi^2(1)}$ as $n \to \infty$. In general,
+
+$$
+Q_{k-1} = \sum_{i=1}^k \frac{(X_i - n p_i)^2}{n p_i}
+$$
+
+has approximately a $\chi^2(k-1)$ distribution. To use this approximation reliably, each expected count $\mathbf{n p_i}$ should be at least 5. For example, to test whether a fair die has $P(A_i) = p_{i0} = 1/6$, with $n=60$ and $k=6$, each expected count is $\mathbf{n p_{i0} = 10}$. With degrees of freedom $6-1=5$, if the observed $Q_5 = 15.6$ exceeds the critical value $11.0705$ at $\alpha=0.05$, then $H_0$ is rejected.
+
+For a test of independence when classifying by two criteria $A$ with categories $(A_1, \dots, A_a)$ and $B$ with categories $(B_1, \dots, B_b)$, the null hypothesis of independence is $\mathbf{H_0 : p_{ij} = P(A_i \cap B_j) = P(A_i)P(B_j) = p_{i \cdot} p_{\cdot j}}$.
+
+Estimate the parameters using row and column marginals:
+
+$$
+\begin{aligned}
+& \hat{p}_{i \cdot} = X_{i \cdot} / n \\
+& \hat{p}_{\cdot j} = X_{\cdot j} / n
+\end{aligned}
+$$
+
+The number of estimated parameters is $\mathbf{(a-1) + (b-1) = a+b-2}$. With $k=ab$ total categories, the degrees of freedom are $\text{df} = ab - 1 - (a+b-2) = \mathbf{(a-1)(b-1)}$.
+
+Thus, the test statistic is
+
+$$
+\mathbf{\sum_{j=1}^b \sum_{i=1}^a \frac{\left(X_{ij} - E_{ij}\right)^2}{E_{ij}}}
+$$
+
+---
+
+### Method of Monte Carlo
+
+This technique has long been used to simulate complex processes and to investigate the finite-sample properties of statistical methods. In the last three decades in particular, it has become central in areas such as bootstrap and modern Bayesian inference.
+
+For the distribution function $F(x) = 1 - e^{-x/\beta}$, the inverse is $\mathbf{F^{-1}(u) = -\beta \log(1 - u)}$. Therefore, if $U \sim \text{Uniform}(0, 1)$ and we set $\mathbf{X = -\beta \log(1 - U)}$, we obtain random draws from the $\Gamma(1, \beta)$ distribution.
+
+Monte Carlo methods can be used to estimate integrals $\int_a^b g(x) dx$:
+
+$$
+\mathbf{\int_a^b g(x) dx = (b - a) E[g(X)]}
+$$
+
+where $X \sim \text{Uniform}(a, b)$. Then $\mathbf{\bar{Y} = \frac{1}{n} \sum_{i=1}^n (b - a)g(X_i)}$ is an unbiased estimator of the integral.
+
+Since the inverse cdf of the normal distribution does not have a closed form, transformations such as the Box–Muller method are used. For $Y_1, Y_2 \sim \text{Uniform}(0, 1)$,
+
+$$
+\begin{aligned}
+& X_1 = (-2 \log Y_1)^{1/2} \cos(2\pi Y_2) \\
+& X_2 = (-2 \log Y_1)^{1/2} \sin(2\pi Y_2)
+\end{aligned}
+$$
+
+Then $X_1$ and $X_2$ are independent standard normal random variables $N(0, 1)$.
+
+#### Accept–Reject Algorithm
+
+- Generate $Y$ from a pdf $g(y)$.
+- Generate $U \sim \text{Uniform}(0, 1)$.
+- If $\mathbf{U \le \frac{f(Y)}{M g(Y)}}$, accept $X = Y$.
 
 ---
 
 ### References
 
-[Original source #1](http://www.kocw.net/home/cview.do?cid=7c789810ade43386)
-
-[Original source #2](http://www.kocw.net/home/search/kemView.do?kemId=1390551)
+[Original source #1](https://minerva.it.manchester.ac.uk/~saralees/statbook2.pdf)
 
 

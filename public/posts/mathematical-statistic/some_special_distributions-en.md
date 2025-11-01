@@ -4,80 +4,312 @@ date: '2023-05-08'
 tags: ['Mathematical statistics', 'lecture']
 ---
 
-### the binomial and related distributions
+### The binomial and related distributions
 
-We will examine four distributions: binomial, negative binomial, trinomial, and multinomial.
+#### Bernoulli Trial
 
-First, in the binomial distribution, the definition is $(a+b)^n = \sum\limits_{x=0}^n \begin{pmatrix} n \\ x \end{pmatrix} b^xa^{n-x}$. A Bernoulli trial refers to independent outcomes of success and failure in continuous trials where the result of each attempt cannot be predicted (e.g., sampling without replacement), with $P(X_i = 1) = p$ and $P(X_i = 0) = 1-p$ probabilities. For this trial following $X_i \sim B(n, p)$, $E(X_i) = \sum\limits_{X_i=0}^{1} X_if(x_i) = 0*(1-p) + 1*p = p$ and $Var(X_i) = E(X_i^2) - E^2(X_i) = 0^2(1-p) + 1^2*p - p^2 = p(1-p)$. Accordingly, the pmf can be expressed as $p(x) = \begin{pmatrix} n \\ x \end{pmatrix} p^x(1-p)^{n-x}$. The mgf is $M(t) = E[e^{tX}] = \sum\limits_{x=0}^{n} e^{tx} \begin{pmatrix} n \\ x \end{pmatrix} p^x(1-p)^{n-x} = \sum\limits_{x=0}^{n} \begin{pmatrix} n \\ x \end{pmatrix} (pe^t)^x(1-p)^{n-x} = [(1-p) + pe^t]^n$. From the mgf, $\mu = M'(0) = np, \sigma^2 = M''(0) - M'(0)^2 = np(1-p)$.
+A Bernoulli experiment is a random experiment whose outcomes can be classified into exactly two mutually exclusive categories, such as success or failure (e.g., female or male, survival or death, non-defective or defective).
 
-Next, in the negative binomial distribution, the definition is that in $B(1, p)$ Bernoulli trials, Y is the number of failures before the r-th success, and this is called the negative binomial. The pmf of Y is expressed as $p(y) = \begin{pmatrix} y+r - 1 \\ r - 1 \end{pmatrix} p^r(1-p)^y$ and follows $Y \sim NB(r, p)$. The mgf $M_y(t) = E[e^{tY}] = \sum\limits_{y=0}^{\infty} e^{ty}\begin{pmatrix} y + r - 1 \\ r - 1 \end{pmatrix} p^r(1-p)^y = p^r\sum\limits_{y=0}^{\infty} \begin{pmatrix} y + r - 1 \\ r - 1 \end{pmatrix} [(1-p)e^t]^y = p^r\{1x^0 + rx + \frac{r(r+1)}{2} x^2 + … \}, (1-p)e^t = x$. Using Taylor expansion, defining $g(x) = (1-x)^{-r}$ and $g(x) = g(0) + (x-0)g'(0) + \frac{1}{2}(x-0)^2g''(0) + …$, we get $g(0) = 1, g'(x) = -r(1-x)^{-r-1}(-1), g'(0) = r, g''(0) = r(r+1)$. Here, $\mu = \frac{r(1-p)}{p}$ and $\sigma^2 = \frac{r(1-p)}{p^2}$.
+A sequence of Bernoulli trials occurs when a Bernoulli experiment is repeated independently many times, with the probability of success $p$ remaining constant for each trial.
 
-In the trinomial distribution, for $x, y$, $f(x, y) = \frac{n!}{x!y!(n-x-y)!} p_1^xp_2^yp_3^{n-x-y}$ holds. The mgf $M_{X, Y}(t_1, t_2) = E[e^{t_1X + t_2Y}] = \sum\limits_{x=0}^{n}\sum\limits_{y=0}^{n-x} e^{t_1x + t_2y} \frac{n!}{x!y!(n-x-y)!}p_1^xp_2^yp_3^{n-x-y} = \sum\limits_{x=0}^{n} \begin{pmatrix} n \\ x \end{pmatrix} (p_1e^{t_1})^x \sum\limits_{y=0}^{n-x} \begin{pmatrix} n-x \\ y \end{pmatrix} (p_2e^{t_2})^y p_3^{n-x-y} = \sum\limits_{x=0}^{n} \begin{pmatrix} n \\ x \end{pmatrix} (p_1e^{t_1})^x (p_2e^{t_2} + p_3)^{n-x} = (p_1e^{t_1} + p_2e^{t_2} + p_3e^{t_3})^n$. Now the marginal pmf $f_X(x) = \sum\limits_{y=0}^{n-x} f_{X, Y}(x, y) = \sum\limits_{y=0}^{n-x} \frac{n!}{x!y!(n-x-y)!} p_1^xp_2^y(1-p_1-p_2)^{n-x-y} = \frac{n!}{x!(n-x)!}p_1^x \sum\limits_{y=0}^{n-x} \frac{(n-x)!}{y!(n-x-y)!}p_2^y(1-p_1-p_2)^{n-x-y} = \frac{n!}{x!(n-x)!}p_1^x(1-p_1)^{n-x}$. Through this, we can see that $X \sim B(n, p_1)$ and $Y \sim B(n, p_2)$. In the conditional pmf, when X is given for Y, $f_{Y|X}(y|x) = \frac{f_{X, Y}(x, y)}{f_X(x)} = \frac{\frac{n!}{x!y!(n-x-y)!}p_1^xp_2^y(1-p_1-p_2)^{n-x-y}}{\frac{n!}{x!(n-x)!}p_1^x(1-p_1)^y} = \frac{(n-x)!}{y!(n-x-y)!}*\frac{p_2^y(1-p_1-p_2)^{n-x-y}}{(1-p_1)^{n-x-y+y}} = \begin{pmatrix} n-x \\ y \end{pmatrix} \begin{pmatrix} \frac{p_2}{1-p_1} \end{pmatrix}^y \begin{pmatrix} 1-\frac{p_2}{1-p_1} \end{pmatrix}^{n-x-y}$, which follows $\sim B(n-x, \frac{p_2}{1-p_1})$.
+A random variable $X$ associated with a Bernoulli trial is defined by
 
-Finally, in the multinomial distribution, the pmf is expressed as $f(x_1, …, x_{k-1}) = \frac{n!}{x_1!x_2!…x_k!}p_1^{x_1}p_2^{x_2}…p_k^{x_k}$ and the mgf is also defined as $M(t_1, …, t_{k-1}) = (p_1e^{t_1} + … p_{k-1}e^{t_{k_1}} + p_k)^n$.
+$$
+X(\text{Success}) = 1 \quad \text{and} \quad X(\text{Fail}) = 0
+$$
+
+The probability mass function (pmf) of $X$ is
+
+$$
+p(x) = p^x (1 - p)^{1-x}, \quad x = 0, 1
+$$
+
+If $X$ follows a Bernoulli distribution, the expectation and variance are
+
+$$
+\begin{aligned}
+& \mu = E(X) = p, \\
+& \sigma^2 = \text{var}(X) = p(1 - p)
+\end{aligned}
+$$
+
+In $n$ independent Bernoulli trials with constant success probability $p$, let the random variable $X$ denote the number of observed successes. If $x$ successes occur, then $n-x$ failures occur.
+
+The number of ways to choose positions for $x$ successes out of $n$ trials is $\binom{n}{x}$, and the probability of each arrangement is $p^x (1 - p)^{n-x}$. Therefore, the pmf of $X$ is
+
+$$
+p(x) = \begin{cases} \binom{n}{x} p^x (1 - p)^{n-x} & x = 0, 1, \dots, n \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+A random variable $X$ with this pmf is said to follow a Binomial distribution, denoted $\mathbf{b(n, p)}$.
+
+#### Negative Binomial
+
+Let the random variable $Y$ denote the total number of failures before the $r$-th success occurs. That is, $Y+r$ is the total number of trials needed to obtain exactly $r$ successes, and the last trial must be a success.
+
+$$
+p_Y(y) = \begin{cases} \binom{y+r-1}{r-1} p^r (1 - p)^y & y = 0, 1, 2, \dots \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+$Y$ follows this pmf.
+
+#### Multinomial Distribution
+
+This generalizes the binomial distribution. When a random experiment is repeated independently $n$ times and each outcome belongs to one of $k$ mutually exclusive categories $C_1, C_2, \dots, C_k$, assume the probability $p_i$ for each category remains constant ($\sum_{i=1}^k p_i = 1$).
+
+Let $X_i$ be the number of outcomes belonging to category $C_i$. Then the joint pmf of $\mathbf{(X_1, X_2, \dots, X_{k-1})}$ is
+
+$$
+\begin{aligned}
+& P(X_1=x_1, \dots, X_{k-1}=x_{k-1}) \\
+&= \frac{n!}{x_1! \cdots x_{k-1}! x_k!} p_1^{x_1} \cdots p_{k-1}^{x_{k-1}} p_k^{x_k}
+\end{aligned}
+$$
+
+where $x_k = n - \sum_{i=1}^{k-1} x_i$ and $p_k = 1 - \sum_{j=1}^{k-1} p_j$.
 
 ---
 
-### the poisson distribution
+### The poisson distribution
 
-By Taylor expansion, defining $g(m)$ at $m = 0$ as $\sum\limits_{x=0}^{\infty} \frac{m^x}{x!} = e^m$, through this, the Poisson pmf can be expressed as $p(x) = \frac{e^{-m}m^x}{x!}$. The mgf is $M(t) = E{e^{tX}} = \sum\limits_{x=0}^{\infty} e^{tx}\frac{e^{-m}m^x}{x!} = e^{m}\sum\limits_{x=0}^{\infty} \frac{(me^t)^x}{x!} = exp[m(e^t-1)]$. Therefore, $\mu = M'(0) = m, \sigma^2 = M''(0) - M'^2(0) = m$.
+For all real $z$, the series expansion
+
+$$
+\begin{aligned}
+& 1 + z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots \\
+&= \sum_{x=0}^{\infty} \frac{z^x}{x!} = e^z
+\end{aligned}
+$$
+
+holds. Define a function $p(x)$ by
+
+$$
+p(x) = \begin{cases} \frac{\lambda^x e^{-\lambda}}{x!} & x = 0, 1, 2, \dots \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+where $\lambda > 0$ ensures probabilities are nonnegative. We derive the distribution under three axioms:
+
+$\rightarrow g(1, h) = \lambda h + o(h)$
+
+$\rightarrow \sum_{k=2}^{\infty} g(k, h) = o(h)$
+
+$\rightarrow$ Event counts in non-overlapping intervals are independent.
+
+For $k=0$, the event of no occurrence in $(0, t+h]$ is equivalent to no occurrence in $(0, t]$ and no occurrence in $(t, t+h]$. By axioms (1) and (2), the probability of no occurrence in $(0, h]$ is $1 - \lambda h + o(h)$. By axiom (3) independence,
+
+$$
+g(0, t + h) = g(0, t)[1 - \lambda h + o(h)]
+$$
+
+Differentiating:
+
+$$
+\begin{aligned}
+&\frac{g(0, t + h) - g(0, t)}{h} \\
+&= -\lambda g(0, t) + g(0, t) \frac{o(h)}{h} \\
+&\to -\lambda g(0, t) \quad \text{as } h \to 0
+\end{aligned}
+$$
+
+So $\mathbf{g(0, t) = e^{-\lambda t}}$.
+
+Next, assume $g(k, t) = e^{-\lambda t}(\lambda t)^k/k!$ holds for $k$, and show it for $k+1$. For $k+1$ events in $(0, t+h]$, either $k+1$ events occur in $(0, t]$ and $0$ in $(t, t+h]$, or $k$ occur in $(0, t]$ and $1$ in $(t, t+h]$:
+
+$$
+\begin{aligned}
+& g(k + 1, t + h) \\
+&= g(k + 1, t)[1 - \lambda h + o(h)] + g(k, t)[\lambda h + o(h)]
+\end{aligned}
+$$
+
+Differentiating:
+
+$$
+\frac{d}{dt} g(k + 1, t) = -\lambda g(k + 1, t) + \lambda g(k, t)
+$$
+
+Substituting the integral form gives $g(k+1, t) = e^{-\lambda t} \frac{(\lambda t)^{k+1}}{(k+1)!}$.
 
 ---
 
-### the $\gamma, \chi, \beta$ distributions
+### The $\Gamma, \chi^2, \beta$ distributions
 
-First, explaining the $\gamma$ distribution, the $\gamma$ function is $\gamma(\alpha) = \int\limits_{0}^{\infty} y^{\alpha - 1}e^{-y} \,dy$ ($\alpha > 0$), and properties of this distribution include: if $\alpha > 1$, then $\gamma(\alpha) = (\alpha - 1)\gamma(\alpha - 1)$; when $\alpha$ is a positive integer, $\gamma(\alpha) = (\alpha - 1)!$; and $\gamma(\frac{1}{2}) = \sqrt(\pi)$.
+#### $\Gamma$ function
 
-The pdf follows $X \sim \gamma(\alpha, \beta)$ and when $y = \frac{x}{\beta}$, defining $f(x) = \int\limits_{0}^{\infty} \begin{pmatrix} \frac{x}{\beta} \end{pmatrix}^{\alpha - 1} e^{-\frac{x}{\beta}} \frac{1}{\beta} \,dx$, we get $1 = \int\limits_{0}^{\infty} \frac{x^{\alpha - 1}e^{-\frac{x}{\beta}}}{\gamma(\alpha)\beta^{\alpha}} \,dx$. Now the mgf is $M(t) = \int\limits_{0}^{\infty} e^{tx} \frac{x^{\alpha - 1}e^{-\frac{x}{\beta}}}{\gamma(\alpha)\beta^{\alpha}} \,dx = \int\limits_{0}^{\infty} \frac{x^{\alpha - 1}e^{-x(-t+\frac{1}{\beta})}}{\gamma(\alpha)\beta^{\alpha}} \,dx = \int\limits_{0}^{\infty} \frac{\gamma(\alpha)(\frac{\beta}{1-t\beta})}{\gamma(\alpha)\beta^{\alpha}} \frac{x^{\alpha - 1}e^{-x/\frac{\beta}{1-t\beta}}}{\gamma(\alpha) (\frac{\beta}{1-t\beta})^{\alpha}} \, dx = (1-t\beta)^{-\alpha}$. Therefore, $\mu = \alpha\beta, \sigma^2 = \alpha\beta^2$. A characteristic is that the $\beta$ value remains unchanged and only the $\alpha$ value can vary, so the mgf for the sum of independent trials is $M_y(t) = (1-t\beta)^{\sum a_i}$.
+For the Gamma distribution, the following integral exists for $\alpha > 0$:
 
-Next, the $\chi^2$ distribution: if $X \sim \gamma(\frac{r}{2}, 2)$ is satisfied, then $X \sim \gamma^2(r)$ is satisfied. The pdf of this distribution is defined as $f(x) = \frac{x^{\frac{r}{2} - 1}e^{-\frac{r}{2}}}{\gamma(\frac{r}{2})2^{\frac{r}{2}}}$. The mgf is $M(t) = (1-2t)^{-\frac{r}{2}}$, so $\mu = r, \sigma^2 = 2r$.
+$$
+\Gamma(\alpha) = \int_0^{\infty} y^{\alpha-1} e^{-y} dy
+$$
 
-Finally, the $\beta$ distribution has pdf $f(x) = \frac{\gamma(\alpha + \beta)}{\gamma(\alpha)\gamma(\beta)}x^{\alpha - 1}(1-x)^{\beta - 1}$ and follows $X \sim Beta(\alpha, \beta)$. $E(x) = \int\limits_{0}^{1} x*\frac{\gamma(\alpha + \beta)}{\gamma(\alpha)\gamma(\beta)}x^{\alpha - 1}(1-x)^{\beta - 1} \,dx = \frac{\alpha}{\alpha + \beta}$ and $Var(x) = \frac{\alpha\beta}{(\alpha + \beta + 1)(\alpha + \beta)^2}$.
+When $\alpha = 1$, $\Gamma(1) = \int_0^{\infty} e^{-y} dy = 1$. For $\alpha > 1$, integration by parts gives
+
+$$
+\mathbf{\Gamma(\alpha) = (\alpha - 1) \Gamma(\alpha - 1)}
+$$
+
+If $\alpha$ is a positive integer greater than 1, then $\Gamma(\alpha) = (\alpha - 1)!$. The $\Gamma$ function is sometimes called the factorial function.
+
+The pdf of a continuous random variable $X$ is
+
+$$
+f(x) = \begin{cases} \frac{1}{\Gamma(\alpha)\beta^{\alpha}} x^{\alpha-1} e^{-x/\beta} & x > 0 \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+To show the pdf integrates to 1, use the substitution $z=\frac{x}{\beta}$. For the moment generating function mgf, use $y=\frac{x(1-\beta t)}{\beta}$ to obtain
+
+$$
+\mathbf{M(t) = \frac{1}{(1 - \beta t)^{\alpha}}} \quad \text{for } t < \frac{1}{\beta}
+$$
+
+Differentiating yields the mean and variance: $\mu=\alpha \beta$, $\sigma^2 = \alpha \beta^2$.
+
+#### $\chi^2$ distribution
+
+A special case of the gamma distribution with $\mathbf{\alpha = r/2}$ and $\mathbf{\beta = 2}$, the $\chi^2$ distribution has pdf
+
+$$
+f(x) = \begin{cases} \frac{1}{\Gamma(r/2) 2^{r/2}} x^{r/2-1} e^{-x/2} & x > 0 \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+The parameter $r$ is called degrees of freedom, and we write $\mathbf{X \sim \chi^2(r)}$. The mean and variance are $\mu=r$, $\sigma^2 = 2r$.
+
+#### $\beta$ distribution
+
+The $\beta$ distribution is useful for modeling continuous distributions with bounded support, such as $(a, b)$, especially on $(0,1)$. Its pdf is
+
+$$
+f(x) = \begin{cases} \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1} & 0 < x < 1 \\ 0 & \text{elsewhere} \end{cases}
+$$
+
+If $\alpha = \beta = 1$, it becomes the uniform distribution. The mean and variance are $\mu = \frac{\alpha}{\alpha+\beta}$, $\sigma^2 = \frac{\alpha \beta}{(\alpha+\beta+1)(\alpha+\beta)^2}$.
 
 ---
 
-### the normal distribution
+### The normal distribution
 
-First, to calculate $I = \int\limits_{-\infty}^{\infty} e^{-\frac{y^2}{2}} \, dy$, squaring both sides gives $I^2 = \int\limits_{-\infty}^{\infty} e^{-\frac{y^2}{2}} \,dy \int\limits_{-\infty}^{\infty} e^{-\frac{z^2}{2}} \,dz = \int\limits_{-\infty}^{\infty}\int\limits_{-\infty}^{\infty} e^{-\frac{y^2+z^2}{2}} \,dydz$. At this point, using $y = rcos\theta, z = rsin\theta$, the Jacobian matrix $J = \begin{vmatrix} \frac{dy}{dr} & \frac{dy}{d\theta} \\ \frac{dz}{dr} & \frac{dz}{d\theta} \end{vmatrix} = \begin{vmatrix} cos\theta & -rsin\theta \\ sin\theta & rcos\theta \end{vmatrix} = r$.
+#### The Standard normal distribution
 
-Therefore, $\int\int e^{-\frac{r^2}{2}}*rdrd\theta = \int\limits_{0}^{2\pi} [-e^{-\frac{r^2}{2}}]_{0}^{\infty}d\theta = \int\limits_{0}^{2\pi}Id\theta = 2\pi$, so $I=\sqrt{2\pi}$. Using $1 = \int \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}\,dy$ and $y = \frac{x-\mu}{\sigma}$, we get $1 = \int\limits_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}\sigma}exp[-\frac{(x-\mu)^2}{2\sigma^2}]\,dx$.
+$$
+I = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} \exp \left( -\frac{z^2}{2} \right) dz
+$$
 
-Examining the structure of contaminated normals: $Z \sim N(0, 1), I_{\epsilon} \sim B(1, 1-\epsilon)$ and these two are independent when $W = I_{\epsilon}Z + (1-I_{\epsilon})\sigma_{c}Z$. To find the pdf of W, $F_W(w) = P(W ≤ w) = P(W ≤ w, I_{\epsilon} = 1) + P(W ≤ w, I_{\epsilon} = 0) = P(W ≤ w|I_{\epsilon} = 1)P(I_{\epsilon} = 1) + P(W ≤ w|I_{\epsilon} = 0)P(I_{\epsilon} = 0) = (1-\epsilon)P(Z ≤ w) + \epsilon P(Z ≤ \frac{w}{\sigma_{c}}) = (1-\epsilon)\phi(w) + \epsilon\phi(\frac{w}{\sigma_{c}})$, so $f_W(w) = (1-\epsilon)\phi(w) + \frac{\epsilon}{\sigma_c}\phi(\frac{w}{\sigma_c})$.
+This integral exists because the integrand is a positive continuous function. Using polar coordinates, we find $I^2=1$, hence $I=1$.
+
+A continuous random variable $Z$ with the following pdf is called a standard normal random variable:
+
+$$
+f(z) = \frac{1}{\sqrt{2\pi}} \exp \left( -\frac{z^2}{2} \right), \quad -\infty < z < \infty
+$$
+
+The mgf is obtained using the substitution $w=z-t$:
+
+$$
+M_Z(t) = E[\exp\{tZ\}] = \exp \left( \frac{1}{2} t^2 \right)
+$$
+
+The mean and variance are $0$ and $1$.
+
+#### The General normal distribution
+
+For positive $b$ and any $a$, define a continuous random variable $X$ by $\mathbf{X = bZ + a}$. The pdf is
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp \left[ -\frac{1}{2} \left( \frac{x - \mu}{\sigma} \right)^2 \right], \quad -\infty < x < \infty
+$$
+
+where $a=E(X)=\mu$ and $b^2=Var(X)=\sigma^2$. The mgf is obtained by substitution $X = \sigma Z + \mu$:
+
+$$
+\mathbf{M_X(t) = \exp \left( \mu t + \frac{1}{2} \sigma^2 t^2 \right)}
+$$
+
+We write $Z \sim N(0,1)$. The pdf is symmetric about the vertical line $x=\mu$ and attains its maximum $\frac{1}{\sigma \sqrt{2\pi}}$ at $x=\mu$. The inflection points are at $x=\mu \pm \sigma$. The mean parameter $\mu$ is a location parameter that shifts the graph, and the standard deviation parameter $\sigma$ is a scale parameter that controls the spread.
 
 ---
 
-### the multivariate normal distribution
+### The Multivariate normal distribution
 
-In the standard normal case, $Z = (z_1, …, z_n)'$, the set Z where $Z_i \sim N(0, 1)$ is independent, and the pdf is $f(z) = \prod\limits_{i=1}^{n} f(Z_i) = \prod\limits_{i=1}^{n}(2\pi)^{-\frac{1}{2}}exp[-\frac{1}{2}z_i^2] = (2\pi)^{-\frac{n}{2}}exp(-\frac{1}{2}\sum\limits_{i=1}^{n}z_i^2) = (2\pi)^{-\frac{n}{2}}exp(-\frac{1}{2}z'z)$.
+#### Bivariate
 
-Spectral decomposition: when an arbitrary matrix A is an $n*n$ symmetric matrix and there exists an orthogonal matrix $\Gamma$ and a diagonal matrix $\Lambda$ such that $\Lambda = diag(\lambda_1, …, \lambda_n)$ and the eigenvalues $\lambda_1 ≥ \lambda_2≥ … ≥ \lambda_n > 0$ of matrix A are satisfied. Ultimately, matrix A is decomposed as $\Gamma' \Lambda \Gamma$.
+A pair of random variables $(X, Y)$ follows a bivariate normal distribution if its pdf is
 
-In the general normal case, letting $\sum$ be an $n*n$ symmetric matrix and using spectral decomposition to define $\sum = \Gamma' \Lambda \Gamma$, when $\Lambda^{\frac{1}{2}} = diag(\sqrt{\lambda_1}, …, \sqrt{\lambda_n})$, $\sum = \Gamma \Lambda^{\frac{1}{2}} \Lambda^{\frac{1}{2}} \Gamma = \Gamma \Lambda^{\frac{1}{2}} \Gamma \Gamma' \Lambda^{\frac{1}{2}} \Gamma = \sum^{\frac{1}{2}}\sum^{\frac{1}{2}}$ is decomposed. When $Z \sim N_n(0, I_n)$, through $X = \sum^{\frac{1}{2}}Z + \mu$, $Z = \sum^{-\frac{1}{2}}(X - \mu)$, and the Jacobian matrix J $= \begin{vmatrix} \frac{dz}{dx}\end{vmatrix} = |\sum|^{-\frac{1}{2}}$. Using this to find the pdf, $f(x) = g(\sum^{-\frac{1}{2}}(X-\mu))|J| = (2\pi)^{-\frac{n}{2}}exp[-\frac{1}{2}(\sum^{-\frac{1}{2}}(X-\mu))'(\sum^{-\frac{1}{2}}(X-\mu))]|\sum|^{-\frac{1}{2}}$.
+$$
+f(x, y) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1 - \rho^2}} e^{-q/2}, \quad -\infty < x, y < \infty
+$$
 
-In linear transformation, when $X \sim N_n(\mu, \sum)$ and $Y = AX + b \sim N_m(A\mu+b, A\sum A')$ for X, Y, using $M_X(t) = exp[t'\mu + \frac{1}{2}t'\sum t]$, we can show that $M_Y(t) = exp[t'(A\mu+b) + \frac{1}{2}t'A\sum A't]$.
+where $q = \frac{1}{1 - \rho^2} \left[ \left( \frac{x - \mu_1}{\sigma_1} \right)^2 - 2\rho \left( \frac{x - \mu_1}{\sigma_1} \right) \left( \frac{y - \mu_2}{\sigma_2} \right) + \left( \frac{y - \mu_2}{\sigma_2} \right)^2 \right]$ and parameters satisfy $\sigma_1, \sigma_2 > 0$ and $\rho^2 < 1$.
+
+The mgf of the bivariate normal is $M_{(X,Y)}(t_1, t_2) = \exp \left[ t_1\mu_1 + t_2\mu_2 + \frac{1}{2} (t_1^2\sigma_1^2 + 2t_1t_2\rho\sigma_1\sigma_2 + t_2^2\sigma_2^2) \right]$. The marginal distribution of $X$ is $M_{(X,Y)}(t_1, 0)$, so $\mathbf{X \sim N(\mu_1, \sigma_1^2)}$, and the marginal of $Y$ is $M_{(X,Y)}(0, t_2)$, so $\mathbf{Y \sim N(\mu_2, \sigma_2^2)}$.
+
+If $X$ and $Y$ are independent, then $\rho=0$ and the equal-probability contours are circular. The set of points satisfying $f(x,y)=c$ forms an ellipse.
+
+#### Multivariate
+
+When $\mathbf{Z} = (Z_1, \dots, Z_n)^T$ is a vector of independent and identically distributed (i.i.d.) $N(0, 1)$ random variables, the pdf of $\mathbf{Z}$ is
+
+$$
+f_{\mathbf{Z}}(\mathbf{z}) = \left( \frac{1}{2\pi} \right)^{n/2} \exp \left( -\frac{1}{2} \mathbf{z}^T \mathbf{z} \right), \quad \mathbf{z} \in \mathbb{R}^n
+$$
+
+The mean vector is $E[\mathbf{Z}]=\mathbf{0}$ and $\text{Cov}[\mathbf{Z}]=I_n$, so we write $\mathbf{Z} \sim N_n(\mathbf{0}, I_n)$.
+
+All marginal distributions of a multivariate normal $\mathbf{X}$ are themselves normal. When $\mathbf{X} \sim N_n(\mathbf{\mu}, \mathbf{\Sigma})$ is partitioned into $\mathbf{X_1}$ and $\mathbf{X_2}$, they are independent if and only if $\mathbf{\Sigma_{12} = O}$ (the cross-covariance matrix is the zero matrix).
+
+#### PCA
+
+Principal component analysis: when $\mathbf{X} \sim N_n(\mathbf{\mu}, \mathbf{\Sigma})$, use the spectral decomposition $\Sigma = \Gamma^T \Lambda \Gamma$ to define a new random vector $\mathbf{Y = \Gamma(X - \mu)}$. Since $\mathbf{Y}$ follows $\mathbf{N_n(\mathbf{0}, \mathbf{\Lambda})}$, the components $Y_1, \dots, Y_n$ are independent with $\text{Var}(Y_i) = \lambda_i$. The vector $\mathbf{Y}$ is called the principal components vector. Total Variation is preserved: $TV(\mathbf{X}) = \sum \sigma_i^2 = \sum \lambda_i = TV(\mathbf{Y})$. Moreover, $Y_1$ (the first principal component) has the largest variance $\mathbf{\lambda_1}$ among all linear combinations $\mathbf{a}^T(\mathbf{X}-\mathbf{\mu})$.
 
 ---
 
 ### t and f distribution
 
-First, examining the t distribution: when $W \sim N(0, 1)$, $V \sim \chi^2(r)$ are independent, $T = \frac{W}{\sqrt{\frac{V}{r}}}$ can be defined, and the degrees of freedom is r. To define the pdf, following $(w, v) \rightarrow (t, u)$, $t = \frac{w}{\sqrt{\frac{v}{r}}}, u = v$, so the Jacobian matrix $J = \begin{vmatrix} \frac{dw}{dt} & \frac{dw}{du} \\ \frac{dv}{dt} & \frac{dv}{du} \end{vmatrix} = \frac{\sqrt{u}}{\sqrt{r}}$ is obtained. $f(w, v) = \frac{1}{\sqrt{2\pi}} e^{-\frac{w^2}{2}} \frac{v^{\frac{r}{2} - 1}e^{-\frac{v}{2}}}{\gamma(\frac{r}{2})2^{\frac{r}{2}}}$ is found, and changing the perspective to $(t, u)$, $g(t, u) = f(\frac{t\sqrt{u}}{\sqrt{r}}, u)|J| = \frac{1}{\sqrt{2\pi}\gamma(\frac{r}{2})2^{\frac{r}{2}}} exp(-\frac{t^2u}{2r})u^{\frac{r}{2} - 1}e^{-\frac{u}{2}}\frac{u^{\frac{1}{2}}}{r^{\frac{1}{2}}}$. Here, $E(T) = E[\frac{W}{\sqrt{V/r}}] = E(W)E(\frac{1}{\sqrt{V/r}}) = 0$ and $Var(T) = E(T^2) - E^2(T) = E(T^2) = E(\frac{W^2}{V/r}) = E(W^2)E(\frac{r}{v})$, where $E(W^2) = Var(w) + E^2(W) = Var(w) = 1$ and $E(\frac{r}{v}) = rE(V^{-1}) = r\int\limits_{0}^{\infty} v^{-1} \frac{v^{\frac{r}{2}-1}e^{-\frac{v}{2}}}{\gamma(\frac{r}{2})2^{\frac{r}{2}}} \,dv = r\int\limits_{0}^{\infty} \frac{\gamma(\frac{r}{2} + 1)2^{\frac{r}{2}+1}}{\gamma(\frac{r}{2})2^{\frac{r}{2}}} \frac{v^{\frac{r}{2}+1-1}e^{-\frac{v}{2}}}{\gamma(\frac{r}{2}+1)2^{\frac{r+2}{2}}} = r/(r-2) > 1$ holds.
+#### The t distribution
 
-Next, examining the f distribution: when $U \sim \chi^2(r_1)$, $V \sim \chi^2(r_2)$ are independent, $W = \frac{U/r_1}{V/r_2}$ is defined. Here, following $(u, v) = (w, z)$, $w = \frac{u/r_1}{v/r_2}, z = v$. As inverse functions, $u = \frac{r_1}{r_2}wz$, $v = z$, and the Jacobian matrix $J = \begin{vmatrix} \frac{du}{dw} & \frac{du}{dz} \\ \frac{dv}{dw} & \frac{dv}{dz} \end{vmatrix} = \frac{r_1}{r_2}z$.
+Let $W$ be a random variable following $N(0, 1)$ and $V$ be a random variable following $\chi^2(r)$, and assume they are independent. Define a new random variable $T$ by
 
-Now finding the pdf, $f(u, v) = f_U(u)f_V(v) = \frac{u^{\frac{r_1}{2} - 1}e^{-\frac{u}{2}}v^{\frac{r_1}{2}-1}e^{-\frac{v}{2}}}{\gamma(\frac{r_1}{2})2^{\frac{r_1}{2}}\gamma(\frac{r_2}{2})2^{\frac{r_2}{2}}}$ is satisfied. The mean $E(F) = \frac{r_2}{r_1}E(\frac{U}{V}) = \frac{r_2}{r_1}E(U)E(V^{-1}) = \frac{r_2}{r_1}r_1\frac{1}{r_2-2} = \frac{r_2}{r_2-2}$. $Var(F) = E(W^2) - E^2(W) = \frac{r_2^2}{r_1^2}E(U^2)E(V^{-2}) - E^2(W) = \frac{r_2^2}{r_1^2}(r_1^2 + 2r_1)(\frac{r(\frac{r_2}{2}-2)}{r(\frac{r_2}{2})2^2}) - (\frac{r_2}{r_2-2})^2 = r_2^2\frac{2(r_1+r_2-2)}{r_1(r_2-2)^2(r_2-4)}$.
+$$
+\mathbf{T = \frac{W}{\sqrt{V/r}}}
+$$
 
-When the t distribution is squared, $(\frac{z}{\sqrt{v/r}})^2 = \frac{z^2/1}{v/r} \sim F(1, r)$ form is obtained.
+Using transformation techniques, the pdf $g_1(t)$ of $T$ can be obtained. With the substitution $u = v$, the marginal pdf $g_1(t)$ of $T$ is derived as
 
-Finally, Student's theory states that when $X_1, …, X_n$ satisfy iid and follow $N(\mu, \sigma^2)$, $\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$ and $\bar{X}$ and standard deviation $s$ are independent. $\frac{\sum(X - \bar{X})^2}{\sigma^2} = \frac{(n-1)s^2}{sigma^2} \sim \chi^2(n-1)$. And $\frac{\bar{X} - \mu}{\frac{s}{\sqrt{n}}} \sim t(n-1)$. Proving this step by step: first, $X = (X_1, …, X_n)', 1= (1, …, 1)'$ and $a = \frac{1}{n}1 = (\frac{1}{n}, …, \frac{1}{n})$, and through $a'X \sim N(a'(\mu_1), a'\sum a)$, we can say $X \sim N_n(\mu_1, \sum)$. Here, $\mu_1 = (\mu_1I, …, \mu_nI), \sum = \sigma^2I$ represent, so ultimately $\bar{X} = N(\mu, \sigma^2/n)$.
+$$
+\mathbf{g_1(t) = \frac{\Gamma[(r + 1)/2]}{\sqrt{\pi r}\Gamma(r/2)} \frac{1}{(1 + t^2/r)^{(r+1)/2}}}, \quad -\infty < t < \infty
+$$
 
-Second, to examine the independence relationship, when $Y = (X_1-\bar{X}, …, X_n-\bar{X)}'$ and $W = \begin{pmatrix} \bar{X} \\ Y \end{pmatrix} = \begin{pmatrix} \frac{1}{n}1 \\ I - 1\frac{1}{n}1' \end{pmatrix}X = AX$, if two variables are independent, using the theory that covariance becomes 0, the equation development is as follows: $Cov(W) = Cov\begin{pmatrix} \bar{X} \\ Y \end{pmatrix} = \begin{pmatrix} Var(\bar{X}) & Cov(\bar{X}, Y) \\ Cov(Y, \bar{X}) & Cov(Y) \end{pmatrix}$, so $ACovA' = \begin{pmatrix} \frac{1}{n}1 \\ I - 1\frac{1}{n}1' \end{pmatrix}X\sigma^2I(\frac{1}{n}1 I-1\frac{1}{n}1') = \sigma^2 \begin{pmatrix} \frac{1}{n} & 0 \\ 0 & I - 1\frac{1}{n}1' \end{pmatrix}$, showing that the covariance is 0.
+The distribution of $T$ is generally called the $t$-distribution and is completely determined by the parameter $\mathbf{r}$ (degrees of freedom of the chi-square distribution). Properties of the $t$-distribution:
+
+$\rightarrow$ Since $g_1(-t) = g_1(t)$, the pdf of $T$ is symmetric about $\mathbf{0}$. Therefore, the median of $T$ is $0$.
+
+$\rightarrow$ The unique maximum occurs at $t=0$.
+
+$\rightarrow$ As the degrees of freedom $r$ approaches $\mathbf{\infty}$, the $t$-distribution converges to the $\mathbf{N(0, 1)}$ distribution.
+
+#### The f distribution
+
+Let $U$ and $V$ be independent chi-square random variables with degrees of freedom $r_1$ and $r_2$, respectively. Define a new random variable $W$ by
+
+$$
+\mathbf{W = \frac{U/r_1}{V/r_2}}
+$$
+
+Using transformation techniques, the pdf $g_1(w)$ of $W$ can be obtained. The marginal pdf $g_1(w)$ of $W$ is derived as
+
+$$
+\mathbf{g_1(w) = \frac{\Gamma[(r_1+r_2)/2](r_1/r_2)^{r_1/2}}{\Gamma(r_1/2)\Gamma(r_2/2)} \frac{w^{r_1/2-1}}{(1+r_1w/r_2)^{(r_1+r_2)/2}}}, \quad w > 0
+$$
+
+The distribution of $W$ is generally called the $F$ distribution. This distribution is completely determined by two parameters $\mathbf{r_1}$ and $\mathbf{r_2}$ (numerator and denominator degrees of freedom, respectively). The pdf of the $F$ distribution has a right-skewed shape.
+
+#### Student's theorem
+
+This is a corollary of the $t$-distribution derived above, often called Student's Theorem.
+
+Let $X_1, \dots, X_n$ be independent and identically distributed (i.i.d.) random variables from a normal distribution with mean $\mu$ and variance $\sigma^2$. Define the sample mean $\mathbf{\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i}$ and sample variance $\mathbf{S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2}$. Then the distribution of $\bar{X}$ is $\mathbf{N \left( \mu, \frac{\sigma^2}{n} \right)}$. Moreover, $\mathbf{\bar{X}}$ and $\mathbf{S^2}$ are independent.
 
 ---
 
 ### References
 
-[Original source #1](http://www.kocw.net/home/cview.do?cid=7c789810ade43386)
-
-[Original source #2](http://www.kocw.net/home/search/kemView.do?kemId=1390551)
-
-
+[Original source #1](https://minerva.it.manchester.ac.uk/~saralees/statbook2.pdf)
