@@ -1,3 +1,6 @@
 node_modules/
 out/
 .next/
+
+# 면접 대비 파일 무시
+**/면접_대비.md
