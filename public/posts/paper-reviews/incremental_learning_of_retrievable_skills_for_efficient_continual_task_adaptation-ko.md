@@ -1,6 +1,5 @@
 ---
-title: 'Incremental Learning of Retrievable Skills For
-Efficient Continual Task Adaptation'
+title: 'Incremental Learning of Retrievable Skills For Efficient Continual Task Adaptation'
 date: '2025-09-12'
 tags: ['embodied ai', 'paper review']
 ---
