@@ -1,237 +1,113 @@
 ---
 title: 'Eigenvalues and Eigenvectors'
-date: '2023-03-10'
+date: '2023-03-06'
 tags: ['Linear algebra', 'lecture']
 ---
 
-### Warm up
+### Introduction to Eigenvalues and Eigenvectors
 
-Consider a vibrating string in String Theory whose displacement at point $x$ and time $t$ is given by a function $y(x,t)$. A model for the string is
+Most vectors $\mathbf{x}$ change direction when multiplied by matrix $\mathbf{A}$. However, certain exceptional vectors $\mathbf{x}$ do not change direction when multiplied by $\mathbf{A}$ and remain on the same line as the original direction. These vectors are called eigenvectors ($\mathbf{x}$).
 
-$$
-V = \left\{ y : R^2 \to R \ \bigg| \ \frac{\partial^{k+m} y(x,t)}{\partial x^k \, \partial t^m} \text{ exists for all nonnegative integers } k,m \right\}.
-$$
-
-At a point $(x,t)$, the concavity and acceleration of the string are given by $\frac{\partial^2 y}{\partial x^2}(x,t)$ and $\frac{\partial^2 y}{\partial t^2}(x,t)$, respectively. For the wave equation to make sense at every point on the string, we require all the relevant partial derivatives of $y(x,t)$ to exist.
-
-<img src="https://velog.velcdn.com/images/devjo/post/bb6ce9e1-e8b9-430c-8802-515276ee70ce/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
-
-The function drawn in gray, $y(x,t)=0$, is the uniquely special vector in the vector space $V$. Now let us add a bit more structure. The spatio-temporal behavior of the string can be modeled by the wave equation
+The result of multiplying an eigenvector by matrix $\mathbf{A}$, $\mathbf{A}\mathbf{x}$, becomes a scalar multiple of the original vector $\mathbf{x}$. This scalar $\lambda$ is called an eigenvalue.
 
 $$
-\frac{\partial^2 y}{\partial t^2} = \frac{\partial^2 y}{\partial x^2}.
+\mathbf{A}\mathbf{x} = \lambda\mathbf{x}
 $$
 
-This equation states that the acceleration of the string at a point equals the concavity at that point.
-
-Not every function in $V$ is a solution to the wave equation; not every function in $V$ describes how the string actually vibrates. The actual (at least approximate) motion of the string is a solution to the wave equation above, which can be rewritten as a linear equation
+To solve the equation $\mathbf{A}\mathbf{x} = \lambda\mathbf{x}$, we move $\lambda\mathbf{x}$ to the left side.
 
 $$
-W y = 0.
+(\mathbf{A} - \lambda\mathbf{I})\mathbf{x} = \mathbf{0}
 $$
 
-Because this is a homogeneous linear equation, any linear combination of solutions is again a solution. In other words, the kernel $\operatorname{ker}(W)$ is a vector space.
+For this equation to have a nonzero solution ($\mathbf{x} \ne \mathbf{0}$), the matrix $\mathbf{A} - \lambda\mathbf{I}$ must be singular. That is, the determinant of this matrix must be zero.
 
-We look for solutions of the form
-
-$$
-y(x,t) = \sin(\omega t)\, v(x),
-$$
-
-where the periodic sine function describes the oscillatory motion over time, and the function $v(x)$ gives the shape of the string at a fixed instant. Substituting into $W(y)=0$ leads to an ordinary differential equation of the form \( \frac{d^2 f}{dx^2} = \omega^2 f \). Thus the vector $v(x) \in U$ determining the vibrating shape satisfies
+The product of $n$ eigenvalues equals the determinant of matrix $\mathbf{A}$.
 
 $$
-L(v) = \lambda v,
+\lambda_1 \lambda_2 \cdots \lambda_n = \det(\mathbf{A})
 $$
 
-which is precisely the eigenvalue–eigenvector equation.
+The sum of $n$ eigenvalues equals the trace, which is the sum of the main diagonal elements.
+
+$$
+\lambda_1 + \lambda_2 + \cdots + \lambda_n = \text{trace}(\mathbf{A})
+$$
+
+An eigenvector $\mathbf{x}$ of $\mathbf{A}$ is also an eigenvector of $\mathbf{A}^k$, with eigenvalue $\lambda^k$.
+
+#### Diagonalizing a Matrix
+
+The process of transforming matrix $\mathbf{A}$ into a diagonal matrix $\mathbf{\Lambda}$ using eigenvectors is called diagonalization.
+
+When an $n \times n$ matrix $\mathbf{A}$ has $n$ linearly independent eigenvectors $\mathbf{x}_1, \dots, \mathbf{x}_n$, we arrange them as columns of matrix $\mathbf{X}$ and place the corresponding eigenvalues as diagonal elements of diagonal matrix $\mathbf{\Lambda}$.
+
+$$
+\begin{aligned}
+&\mathbf{X} = [\mathbf{x}_1 \mid \mathbf{x}_2 \mid \cdots \mid \mathbf{x}_n] \\
+&\mathbf{\Lambda} = \begin{bmatrix} \lambda_1 & & \\ & \lambda_2 & \\ & & \ddots \end{bmatrix}
+\end{aligned}
+$$
+
+The diagonalization formula for matrix $\mathbf{A}$ is derived as follows.
+
+$$
+\mathbf{\Lambda} = \mathbf{X}^{-1}\mathbf{A}\mathbf{X}
+$$
+
+For matrix $\mathbf{A}$ to be diagonalizable, it must have $n$ linearly independent eigenvectors. That is, the eigenvector matrix $\mathbf{X}$ must have an inverse. If $\mathbf{A}$ has $n$ distinct eigenvalues, the eigenvectors are automatically linearly independent, so $\mathbf{A}$ is always diagonalizable. When eigenvalue repetition occurs, $\mathbf{A}$ may or may not be diagonalizable.
 
 ---
 
-### Invariant Directions
+### Symmetric Matrices
 
-<img src="https://velog.velcdn.com/images/devjo/post/6c5888c7-f023-4d59-a605-d1efb4d44a0e/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
+When a symmetric matrix $\mathbf{S}$ satisfies $\mathbf{S}\mathbf{x} = \lambda\mathbf{x}$, the eigenvalue $\lambda$ and eigenvector $\mathbf{x}$ have the following special properties.
 
-Pick a pair of vectors $e_1, e_2$ arbitrarily. A unit square with a corner at the origin is mapped to a parallelogram. The output was engineered so that when the input is a parallelogram generated by $\mathbf{f}_1$ and $\mathbf{f}_2$, the image is again a parallelogram whose edges lie along the same two directions $\mathbf{f}_1$ and $\mathbf{f}_2$.
+Symmetric matrices have only real eigenvalues. The eigenvectors of a symmetric matrix can be chosen to be orthonormal.
 
-For a linear transformation $L$ defined by
-
-$$
-\begin{aligned}
-& L \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} -4 \\ -10 \end{pmatrix}, \\
-& L \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 3 \\ 7 \end{pmatrix},
-\end{aligned}
-$$
-
-vectors have both direction and magnitude, so when inputs change under a linear map, both direction and magnitude generally change. Here the matrix is $\begin{pmatrix} -4 & 3 \\ -10 & 7 \end{pmatrix}$, and we can observe a case where only the length changes while the direction is fixed:
+If we choose eigenvectors as orthonormal vectors $\mathbf{q}_1, \dots, \mathbf{q}_n$ and use them as columns of matrix $\mathbf{Q}$, then $\mathbf{Q}$ becomes an orthogonal matrix.
 
 $$
-L \begin{pmatrix} 1 \\ 2 \end{pmatrix} 
-= \begin{pmatrix} -4\cdot 1 + 3\cdot 2 \\ -10\cdot 1 + 7\cdot 2 \end{pmatrix}
-= 2 \begin{pmatrix} 1 \\ 2 \end{pmatrix}.
+\mathbf{S} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{\text{T}}
 $$
 
-Any nonzero vector $\mathbf{v}$ satisfying $L\mathbf{v} = \lambda \mathbf{v}$ is called an eigenvector of $L$, and $\lambda$ is the corresponding eigenvalue. In this example with matrix $\begin{pmatrix} -4 & 3 \\ -10 & 7 \end{pmatrix}$, $L$ enjoys two invariant directions spanned by eigenvectors $\mathbf{v}_1$ and $\mathbf{v}_2$ with eigenvalues 1 and 2, respectively.
+This decomposition is called the Spectral Theorem.
 
-If $w = r\, \mathbf{v}_1 + s\, \mathbf{v}_2$ for some scalars $r,s$, then
-
-$$
-L(w) = L(r\,\mathbf{v}_1 + s\,\mathbf{v}_2) = r\, L(\mathbf{v}_1) + s\, L(\mathbf{v}_2) = r\, \mathbf{v}_1 + 2s\, \mathbf{v}_2.
-$$
-
-So, in the coordinates relative to the basis $\{\mathbf{v}_1,\mathbf{v}_2\}$, the action of $L$ is simply multiplication by a diagonal matrix:
-
-$$
-\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} r \\ s \end{pmatrix}.
-$$
-
-This is much cleaner than the generic scenario
-
-$$
-L \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}.
-$$
-
-Here, $r$ and $s$ are the coordinates of $w$ in the basis of eigenvectors, yielding a very simple diagonal matrix. This process is called diagonalization.
-
-Next, let $L : \mathbb{R}^2 \to \mathbb{R}^2$ be given by $L(x,y) = (2x + 2y,\, 16x + 6y)$. Then
-
-$$
-\begin{aligned}
-& \begin{pmatrix} 2 & 2 \\ 16 & 6 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \lambda \begin{pmatrix} x \\ y \end{pmatrix} \\
-& \Rightarrow \begin{pmatrix} 2 & 2 \\ 16 & 6 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} \lambda & 0 \\ 0 & \lambda \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} \\
-& \Rightarrow \begin{pmatrix} 2 - \lambda & 2 \\ 16 & 6 - \lambda \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
-\end{aligned}
-$$
-
-This is a homogeneous system, so it has a nontrivial solution only when the matrix $\begin{pmatrix} 2 - \lambda & 2 \\ 16 & 6 - \lambda \end{pmatrix}$ is singular. Hence the eigenvalues are the roots of the determinant
-
-$$
-\det M = (2-\lambda)(6-\lambda) - 32 = 0,
-$$
-
-giving $\lambda = -2, 10$.
+According to the sign matching theorem, the number of positive eigenvalues of a symmetric matrix $\mathbf{S}$ equals the number of positive pivots.
 
 ---
 
-### Eigenvalues and Eigenvectors Equation
+### Positive Definite Matrices
 
-Let $L: V \to V$ be linear. If, for some scalar $\lambda$ and some nonzero vector $\mathbf{v} \neq 0_V$,
+Among symmetric matrices $\mathbf{S}$, those for which all eigenvalues ($\lambda$) are positive are called positive definite matrices (PD).
 
-$$
-L\, \mathbf{v} = \lambda \mathbf{v},
-$$
+#### The Fundamental Definition
 
-then $\lambda$ is an eigenvalue of $L$ with eigenvector $\mathbf{v}$. The equation states that the direction of $\mathbf{v}$ is invariant under the linear transformation $L$. Solving the homogeneous system $(M - \lambda I)\, \mathbf{v} = 0$ yields eigenvalues $\lambda$ (for which the system has nontrivial solutions) and the corresponding eigenvectors $\mathbf{v}$.
-
-The left-hand side leads to the characteristic polynomial $P_M(\lambda)$ of the matrix $M$, which is a degree-$n$ polynomial when $M$ is $n\times n$:
+The most fundamental definition of a positive definite matrix is the energy test.
 
 $$
-\begin{aligned}
-& P_M(\lambda) = \lambda^n + c_1 \lambda^{n-1} + \cdots + c_n, \\
-& P_M(0) = \det(-M) = (-1)^n\, \det(M).
-\end{aligned}
+\mathbf{x}^{\text{T}}\mathbf{S}\mathbf{x} > 0
 $$
 
-By the Fundamental Theorem of Algebra, a polynomial over $\mathbb{C}$ factors into linear terms, so with $n$ complex numbers we can write
+#### Principal Minor and Pivot Tests
 
-$$
-P_M(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2)\cdots(\lambda - \lambda_n) \quad \Rightarrow \quad P_M(\lambda_i)=0.
-$$
-
-Each root may be real, complex, or zero, and roots need not be distinct. The number of times a root is repeated is its multiplicity.
-
-Consider
-
-$$
-L \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 2x + y - z \\ x + 2y - z \\ -x - y + 2z \end{pmatrix}.
-$$
-
-Then the associated matrix $M$ (whose columns are the images of the standard basis vectors) is
-
-$$
-\begin{pmatrix} x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix} 2 & 1 & -1 \\ 1 & 2 & -1 \\ -1 & -1 & 2 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix}.
-$$
-
-The characteristic polynomial is computed (by replacing $M$ with $\lambda I - M$) as
+Pivots $d_i$ can be expressed as ratios of $k \times k$ principal minors $\text{det}(\mathbf{S}_k)$. This test is much faster than computing eigenvalues.
 
 $$
 \begin{aligned}
-& P_M(\lambda) = \det \begin{pmatrix} \lambda - 2 & -1 & 1 \\ -1 & \lambda - 2 & 1 \\ 1 & 1 & \lambda - 2 \end{pmatrix} \\
-&= (\lambda - 1)^2(\lambda - 4) = 0.
+&\mathbf{a} > 0, \\
+&\mathbf{ac - b^2} > 0
 \end{aligned}
 $$
 
-Thus the eigenvalues are $\lambda = 1, 4$ with multiplicities 2 and 1, respectively. Now compute eigenvectors for each eigenvalue.
-
-For $\lambda = 4$:
-
-$$
-\begin{aligned}
-& \begin{pmatrix}
-2-4 & 1 & -1 & | & 0\\
-1 & 2-4 & -1 & | & 0 \\
--1 & -1 & 2-4 & | & 0
-\end{pmatrix}
-\ \sim \
-\begin{pmatrix}
-1 & -2 & -1 & | & 0 \\
-0 & -3 & -3 & | & 0 \\
-0 & -3 & -3 & | & 0
-\end{pmatrix}
-\ \sim \
-\begin{pmatrix}
-1 & 0 & 1 & | & 0 \\
-0 & 1 & 1 & | & 0 \\
-0 & 0 & 0 & | & 0
-\end{pmatrix}.
-\end{aligned}
-$$
-
-Hence $x=-z$, $y=-z$, so every vector of the form $t\begin{pmatrix} -1 \\ -1 \\ 1 \end{pmatrix}$ is an eigenvector for $\lambda=4$.
-
-For $\lambda = 1$:
-
-$$
-\begin{aligned}
-& \begin{pmatrix}
-2-1 & 1 & -1 & | & 0\\
-1 & 2-1 & -1 & | & 0 \\
--1 & -1 & 2-1 & | & 0
-\end{pmatrix}
-\ \sim \
-\begin{pmatrix}
-1 & 1 & -1 & | & 0 \\
-1 & 1 & -1 & | & 0 \\
--1 & -1 & 1 & | & 0
-\end{pmatrix}
-\ \sim \
-\begin{pmatrix}
-1 & 1 & -1 & | & 0 \\
-0 & 0 & 0 & | & 0 \\
-0 & 0 & 0 & | & 0
-\end{pmatrix}.
-\end{aligned}
-$$
-
-Thus the solution set can be parameterized by two free parameters: let $z=t$, $y=s$, then $x=-s+t$. The eigenspace is
-
-$$
-\left\{\, s \begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix} 
-+ t \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} \ \bigg| \ s,t \in \mathbb{R} \,\right\}.
-$$
-
----
-
-### Eigenspaces
-
-Any sum of eigenvectors that share the same eigenvalue is again an eigenvector (with that eigenvalue). The set of all vectors with a given eigenvalue $\lambda$ is called the eigenspace associated with $\lambda$. This is a vector subspace of the ambient space $V$: it contains $0_V$ because $L\,0_V = 0_V = \lambda\,0_V$, and, as the computations above show, it is closed under addition and scalar multiplication.
+Here, the first principal minor is $a$ and the second principal minor is $ac-b^2$.
 
 ---
 
 ### References
 
-[Original source #1](https://www.geneseo.edu/~aguilar/public/assets/courses/233/main_notes.pdf)
+[Original Source #1](https://renessans-edu.uz/files/books/2023-12-04-11-33-41_46e7ce28c81d5c62d59b34ccc1c6f465.pdf)
 
-[Original source #2](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
+[Original Source #2](https://www.math.ucdavis.edu/~linear/linear-guest.pdf)
 
-[Original source #3](https://www.math.ucdavis.edu/~linear/linear-guest.pdf)
+[Original Source #3](http://matrix.skku.ac.kr/2015-Album/BigBook-LinearAlgebra-2015.pdf)
