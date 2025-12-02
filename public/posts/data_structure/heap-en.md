@@ -1,120 +1,37 @@
 ---
 title: 'Heap'
 date: '2023-08-22'
-tags: ['Data Structure', 'Algorithm']
+tags: ['Data Structure', 'lecture']
 ---
 
 ### Preliminary
 
-A heap is a data structure in the form of a complete binary tree, where the parent node is always greater than or equal to its children (max heap) or always less than or equal to its children (min heap).
+A heap can be viewed as a simple tree-based data structure, but in practice it usually follows one of two strategies.
 
-$$
-\text{Max Heap: } A[\text{parent}(i)] \geq A[i]
-$$
+A min-heap satisfies the property that each parent node's value is less than or equal to ($\le$) the values of its children. Therefore, the root node holds the smallest value in the entire tree.
 
-$$
-\text{Min Heap: } A[\text{parent}(i)] \leq A[i]
-$$
-
-Due to this property, heaps are widely used for efficient implementation of priority queues. Additionally, heap sort guarantees stable performance ($O(n \log n)$) among sorting algorithms.
+A max-heap satisfies the property that each parent node's value is greater than or equal to ($\ge$) the values of its children. Therefore, the root node holds the largest value in the entire tree.
 
 ---
 
-### Structural Properties of Heap
+### Basic Structure
 
-Heaps satisfy the following two properties:
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrhJjBCRB95EcVLrwAa5JqPZPD4BboTANzKw&s" alt="Example Image" style="display: block; margin: 0 auto; height:150;" />
 
-$\Rightarrow$ Shape Property
+Nodes are stored in an array by sequentially appending values from top to bottom and left to right.
 
-The tree must maintain a complete binary tree structure. That is, all levels except the last are full, and the last level is filled from left to right.
+Because an array is used, we need a way to compute the indices of a node's parent and children from a given index. For index $i$, the formulas are:
 
-$\Rightarrow$ Heap Property
+Parent index: $(i - 1) / 2$, left child: $2i + 1$, right child: $2i + 2$.
 
-The key value of each node must maintain order between the parent node and child nodes.
+Heap insertion is simple, but we must ensure that the heap order is maintained after insertion. The actual insertion is $O(1)$, but restoring heap order costs $O(\log n)$.
 
-$$
-\forall i,\  \text{key}(\text{parent}(i)) \ge \text{key}(i) \quad (\text{Max Heap})
-$$
+Deleting an element must also preserve the heap order, with a time complexity of $O(\log n)$. The new value moved into the deleted position may be too large (in a min-heap) or too small (in a max-heap), so we restore heap order by moving it down the tree, swapping with the smaller (or larger) child as needed.
 
----
-
-### Heap Index Structure
-
-Although heaps are tree structures, they can be efficiently represented as arrays.
-
-| Relation | Formula |
-|----------|---------|
-| Parent index | $$\text{parent}(i) = \lfloor i/2 \rfloor$$ |
-| Left child | $$\text{left}(i) = 2i$$ |
-| Right child | $$\text{right}(i) = 2i + 1$$ |
-
-For example, the array
-
-$$
-A = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
-$$
-
-represents the following heap:
-
-$$
-16 \rightarrow (14, 10) \rightarrow (8, 7, 9, 3) \rightarrow (2, 4, 1)
-$$
-
----
-
-### Heap Operations and Time Complexity
-
-| Operation | Description | Time Complexity |
-|-----------|-------------|-----------------|
-| heapify | Convert subtree to heap | $O(\log n)$ |
-| build-heap | Convert entire array to heap structure | $O(n)$ |
-| insert | Insert new element and restore heap property | $O(\log n)$ |
-| extract-max/min | Remove root element and restore | $O(\log n)$ |
-| peek | Check root value | $O(1)$ |
-
----
-
-### Build-Heap Algorithm
-
-A process of converting a given array $A[1 \ldots n]$ into a heap. A bottom-up (Heapify Down) approach is more efficient than top-down insertion.
-
-$\Rightarrow$ Start from non-leaf nodes
-
-$\Rightarrow$ For each node, compare with children and swap to satisfy heap property
-
-$\Rightarrow$ Repeat up to the root
-
-$$
-\text{for } i = \lfloor n/2 \rfloor \text{ downto } 1: \text{heapify}(A, i)
-$$
-
----
-
-### Mathematical Analysis of Fibonacci Heap
-
-A Fibonacci heap is composed of an implicit set of trees, improving the average time complexity of insert, minimum extraction, and key decrease operations.
-
-| Operation | Average Time | Worst Time |
-|-----------|--------------|------------|
-| insert | $$O(1)$$ | $$O(\log n)$$ |
-| find-min | $$O(1)$$ | $$O(1)$$ |
-| extract-min | $$O(\log n)$$ | $$O(\log n)$$ |
-| decrease-key | $$O(1)$$ | $$O(\log n)$$ |
-
-#### Relationship between Number of Nodes and Height
-
-$$
-n \ge F_{h+2} - 1
-$$
-
-where $$F_k$$ is the $k$th element of the Fibonacci sequence. From this equation, we can derive that the height of the heap is $$O(\log_\phi n)$$ (φ is the golden ratio).
+The simplest way to search in a heap is to linearly scan all entries in the heap array, which yields a time complexity of $O(n)$.
 
 ---
 
 ### References
 
-[Original source #1](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/)
-
-[Original source #2](https://web.stanford.edu/class/archive/cs/cs161/cs161.1232/)
-
-[Original source #3](https://sp21.datastructur.es/)
+[Original source #1](https://mta.ca/~rrosebru/oldcourse/263111/Dsa.pdf)

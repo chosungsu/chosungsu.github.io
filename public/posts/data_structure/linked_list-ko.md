@@ -1,155 +1,51 @@
 ---
 title: 'Linked List'
 date: '2023-08-08'
-tags: ['Data Structure', 'Algorithm']
+tags: ['Data Structure', 'lecture']
 ---
 
 ### Preliminary
 
-연결 리스트(Linked List)는 노드(Node)들의 집합으로, 각 노드는 데이터(data)와 다음 노드의 주소(pointer)를 포함합니다. 배열과 달리 메모리 상에서 연속적으로 배치되지 않으며, 동적 크기 조정이 가능하다는 점에서 유연성이 높습니다.
+연결 리스트는 고수준 관점에서 일련의 노드(nodes)로 생각할 수 있습니다. 각 노드는 다음 노드를 가리키는 포인터(pointer)를 최소한 하나 가지고 있으며, 마지막 노드의 경우 널 포인터(null pointer)를 통해 목록의 끝을 나타냅니다.
 
-$$
-\text{Node}_i = (data_i, next_i)
-$$
-
-연결 리스트의 핵심은 포인터 기반 탐색과 연결 구조의 유지입니다.
+연결 리스트는 항상 헤드(head)와 테일(tail) 포인터를 유지하여, 리스트의 앞 또는 뒤에 삽입하는 작업이 상수 시간($O(1)$) 연산이 되도록 합니다. 임의의 위치에 삽입(Random insertion)은 이에 해당하지 않으며 선형 시간($O(n)$) 연산이 됩니다.
 
 ---
 
 ### 기본 구조
 
+삽입은 연결 리스트의 가장 큰 장점 중 하나입니다. 헤드와 테일 노드에 대한 포인터(또는 참조)를 유지함으로써, 리스트의 앞 또는 뒤에 노드를 추가하는 것은 $O(1)$ 연산이 됩니다.
+
+그러나 예외적으로 싱글 연결 리스트에서 헤드나 테일이 아닌 노드 앞에 삽입을 수행하는 경우, 삽입할 지정된 노드의 이전 노드(predecessor)를 찾기 위해 리스트를 순회해야 합니다. 이 순회는 $O(n)$ 실행 시간을 발생시킵니다.
+
+연결 리스트의 주요 장점으로는 리스트 크기가 동적으로 조정되므로, 배열이나 벡터가 결국 발생시키는 복사 페널티(copy penalty)가 없는 동적 크기 조정을 말할 수 있습니다.
+
 #### 1. 단일 연결 리스트 (Singly Linked List)
 
-각 노드는 다음 노드의 포인터 하나를 가지며 마지막 노드는 `NULL` 포인터를 가리킵니다.
+<img src="https://velog.velcdn.com/images/devjo/post/1f21231d-8d8c-480f-8ab7-e3e7aaa2b3ed/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:50;" />
 
-$$
-[data_1|next] \rightarrow [data_2|next] \rightarrow [data_3|NULL]
-$$
+각 노드는 값(value)과 리스트의 다음 노드에 대한 참조(reference)로 구성됩니다. 일반적으로 연결 리스트에 대한 삽입은 노드를 리스트의 테일(꼬리)에 추가하는 것을 의미합니다.
+
+연결 리스트를 탐색하는 것은 리스트를 순회하면서 찾고자 하는 값과 각 노드의 값을 비교하는 것으로 실행 시간은 $O(n)$입니다.
+
+노드를 삭제하는 것은 까다롭지 않지만 빈 리스트, 유일한 노드, 헤드 노드, 테일 노드, 중간 노드, 없는 항목 등 경우의 수가 많습니다. 일반적으로 삭제는 $O(n)$ 연산이고 리스트의 맨 앞에서만 삭제가 일어나는 경우에 한하여 $O(1)$ 연산이 됩니다.
+
+단일 연결 리스트는 앞으로만 이동할 수 있는 구조를 가지고 있으므로, 역순 순회는 매우 비효율적입니다. 각 노드의 이전 노드(predecessor)를 찾기 위해 매번 리스트를 처음부터 순회해야 합니다. 각 노드에 대해 $O(n)$이 소요되므로, 전체 역순 순회는 $O(n^2)$ 비용이 발생합니다.
 
 #### 2. 이중 연결 리스트 (Doubly Linked List)
 
-각 노드는 이전(`prev`)과 다음(`next`) 포인터를 모두 가집니다.
+<img src="https://velog.velcdn.com/images/devjo/post/337023cb-91b4-4a83-a6be-bd861a55461f/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:50;" />
 
-$$
-[NULL|data_1|next] \leftrightarrow [prev|data_2|next] \leftrightarrow [prev|data_3|NULL]
-$$
+이중 연결 리스트는 싱글 연결 리스트와 매우 유사하지만, 각 노드가 다음(Next) 노드뿐만 아니라 이전(Prev) 노드에 대한 참조도 가집니다.
 
-#### 3. 원형 연결 리스트 (Circular Linked List)
+싱글 리스트와 달리, 새 노드를 삽입할 때 이전 포인터($n.Prev$)도 올바른 값으로 바인딩해야 합니다. 실행 시간은 $O(1)$입니다.
 
-마지막 노드의 `next`가 첫 번째 노드를 가리켜 순환 구조를 이룹니다.
+이중 연결 리스트의 삭제는 싱글 리스트와 동일한 경우를 사용하지만, 추가적으로 이전(Prev) 참조도 바인딩해야 합니다. 실행 시간은 $O(n)$입니다. 노드 $n$을 삭제할 때, $n.Prev.Next$와 $n.Next.Prev$를 모두 업데이트하여 $n$을 건너뛰도록 만듭니다.
 
-$$
-[data_1|next] \rightarrow [data_2|next] \rightarrow [data_3|next] \rightarrow (back\ to\ data_1)
-$$
-
----
-
-### 시간 복잡도
-
-| 연산 | 평균 시간복잡도 | 설명 |
-|------|------------------|------|
-| 탐색 (Search) | $O(n)$ | 순차적으로 이동 필요 |
-| 삽입 (Insertion) | $O(1)$ | 노드 포인터 조작만 필요 |
-| 삭제 (Deletion) | $O(1)$ | 노드 포인터 변경만 수행 |
-
-단, 삽입/삭제는 해당 노드의 포인터를 이미 알고 있는 경우에만 $O(1)$입니다. 임의 접근(Random Access)는 불가능합니다.
-
----
-
-### 메모리 구조
-
-연결 리스트는 비연속 메모리 블록으로 구성됩니다. 따라서 캐시 효율성은 낮지만, 동적 메모리 할당에 유리합니다.
-
-$$
-\text{Address}(Node_i) = \text{malloc}(sizeof(Node))
-$$
-
-이는 힙(Heap) 메모리 영역에 각 노드가 산재함을 의미합니다.
-
-#### 장점
-
-$\Rightarrow$ 삽입/삭제 시 데이터 이동이 불필요
-
-$\Rightarrow$ 동적 크기 조절 가능
-
-#### 단점
-
-$\Rightarrow$ 인덱스 접근 불가
-
-$\Rightarrow$ 추가 포인터 저장으로 인한 메모리 오버헤드 발생
-
----
-
-### 수학적 모델링
-
-연결 리스트는 유향 그래프(directed graph)로 모델링할 수 있습니다. 노드를 정점(Vertex), 포인터를 간선(Edge)으로 간주하면 다음과 같습니다.
-
-$$
-G = (V, E), \quad V = \{v_1, v_2, ..., v_n\}, \quad E = \{(v_i, v_{i+1})\}
-$$
-
-이 때, 단일 연결 리스트는 비순환 그래프(DAG), 원형 연결 리스트는 사이클 그래프(Cycle Graph)에 해당합니다.
-
----
-
-### 고급 구조 및 변형
-
-#### 1. Skip List
-
-다단계 인덱스를 두어 탐색 복잡도를 $O(\text{log} n)$ 으로 줄인 구조입니다. 평균적 탐색 단계는 다음과 같습니다.
-
-$$
-E[h] = \text{log}_{1/p}n
-$$
-
-여기서 $p$는 각 레벨에서 노드가 선택될 확률입니다.
-
-#### 2. XOR Linked List
-
-prev 와 next 포인터를 XOR 연산으로 결합하여, 포인터 공간을 절반으로 줄이는 기법입니다.
-
-$$
-link=prev \oplus next
-$$
-
-복원 시,
-
-$$
-next=prev \oplus link
-$$
-
-이 방식은 메모리 절약 효과가 있으나, 디버깅과 GC(가비지 컬렉션)에 불리합니다.
-
----
-
-### 동적 메모리 관리
-
-연결 리스트는 삽입/삭제 시마다 동적 메모리 할당을 수행합니다. 이로 인해 실제 성능은 할당/해제 비용에 크게 의존합니다.
-
-$$
-T_{insert}=O(1)+T_{alloc}
-$$	​
-
-C/C++에서는 malloc/free, Python에서는 gc 기반 객체 관리가 수행됩니다.
-
----
-
-### 한계와 개선 방향
-
-$\Rightarrow$ 포인터 구조로 인한 메모리 파편화(Fragmentation)
-
-$\Rightarrow$ 무작위 접근(Random Access) 불가능
-
-$\Rightarrow$ 포인터 오류 및 dangling pointer 위험
-
-이를 해결하기 위한 Hybrid Memory Models (e.g., Rope, Gap Buffer) 및 컨테이너 추상화(Vector + List 혼합 구조)가 연구되고 있습니다.
+이중 연결 리스트는 각 노드가 이전 노드를 알고 있기 때문에 역순 순회가 매우 간단하고 효율적입니다. 싱글 연결 리스트의 $O(n^2)$와 달리, $O(n)$ 시간에 수행됩니다.
 
 ---
 
 ### 참고 자료
 
-[원본 경로 #1](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 
-
-[원본 경로 #2](https://web.stanford.edu/class/cs166/)  
-
-[원본 경로 #3](https://www.cs.cmu.edu/~15122/)
+[원본 경로 #1](https://mta.ca/~rrosebru/oldcourse/263111/Dsa.pdf)
