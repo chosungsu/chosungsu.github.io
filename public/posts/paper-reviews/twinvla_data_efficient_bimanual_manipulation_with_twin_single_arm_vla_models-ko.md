@@ -1,6 +1,6 @@
 ---
 title: 'TWINVLA: DATA-EFFICIENT BIMANUAL MANIPULATION WITH TWIN SINGLE-ARM VISION-LANGUAGEACTION MODELS'
-date: '2024-10-07'
+date: '2025-12-01'
 tags: ['embodied ai', 'paper review']
 ---
 

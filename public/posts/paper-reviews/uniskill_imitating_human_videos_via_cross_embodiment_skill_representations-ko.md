@@ -1,6 +1,6 @@
 ---
 title: 'UniSkill: Imitating Human Videos via Cross-Embodiment Skill Representations'
-date: '2024-10-04'
+date: '2025-12-01'
 tags: ['embodied ai', 'paper review']
 ---
 
