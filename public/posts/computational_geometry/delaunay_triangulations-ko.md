@@ -1,5 +1,5 @@
 ---
-title: 'Trapezoidal Maps'
+title: 'Delaunay Triangulations'
 date: '2023-07-05'
 tags: ['Computational Geometry', 'lecture']
 ---
