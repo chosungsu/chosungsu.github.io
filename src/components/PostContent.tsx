@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { notFound, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import FormattedDate from './FormattedDate';
@@ -14,9 +15,103 @@ import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/hooks/useLanguage';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PostContentProps {
   id: string;
+}
+
+interface NavigationPost {
+  id: string;
+  title: string;
+  url: string;
+}
+
+interface NavigationData {
+  prevPost: NavigationPost | null;
+  nextPost: NavigationPost | null;
+}
+
+interface PostListItem {
+  id: string;
+  title: string;
+  date: string;
+  tags: string[];
+}
+
+// 네비게이션 계산 함수
+function calculateNavigation(currentPost: any, allPosts: PostListItem[]): NavigationData {
+  const currentTags = currentPost.tags || [];
+  if (currentTags.length < 2) {
+    return { prevPost: null, nextPost: null };
+  }
+
+  // 마지막 태그 = 부모 태그 (lecture, paper review 등)
+  const parentTag = currentTags[currentTags.length - 1];
+  // 첫 번째 태그 = 소제목 태그 (embodied ai, data structure 등)
+  const subtitleTag = currentTags[0];
+
+  // 같은 부모 태그와 소제목 태그를 가진 포스트들 필터링
+  const relatedPosts = allPosts.filter(post => {
+    const postTags = post.tags || [];
+    if (postTags.length < 2) return false;
+    
+    const postParentTag = postTags[postTags.length - 1];
+    const postSubtitleTag = postTags[0];
+    
+    return postParentTag === parentTag && postSubtitleTag === subtitleTag;
+  });
+
+  // 날짜 순으로 정렬 (최신순)
+  relatedPosts.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA; // 최신순
+  });
+
+  // 현재 포스트의 언어 코드 추출
+  const currentLangMatch = currentPost.id.match(/-([a-z]{2})$/);
+  const currentLang = currentLangMatch ? currentLangMatch[1] : 'ko';
+  
+  // 같은 언어의 포스트만 필터링
+  const sameLangPosts = relatedPosts.filter(post => {
+    const langMatch = post.id.match(/-([a-z]{2})$/);
+    const lang = langMatch ? langMatch[1] : 'ko';
+    return lang === currentLang;
+  });
+
+  // 날짜 순으로 다시 정렬 (같은 언어만)
+  sameLangPosts.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA; // 최신순
+  });
+
+  // 현재 포스트의 인덱스 찾기
+  const currentIndex = sameLangPosts.findIndex(p => p.id === currentPost.id);
+  
+  // 이전/이후 포스트 찾기
+  const prevPost = currentIndex > 0 ? sameLangPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < sameLangPosts.length - 1 ? sameLangPosts[currentIndex + 1] : null;
+
+  // 포스트 ID에서 URL 경로 생성
+  const getPostUrl = (postId: string) => {
+    const baseId = postId.replace(/-[a-z]{2}$/, '');
+    return `/posts/${baseId.split('/').join('/')}`;
+  };
+
+  return {
+    prevPost: prevPost ? {
+      id: prevPost.id,
+      title: prevPost.title,
+      url: getPostUrl(prevPost.id),
+    } : null,
+    nextPost: nextPost ? {
+      id: nextPost.id,
+      title: nextPost.title,
+      url: getPostUrl(nextPost.id),
+    } : null,
+  };
 }
 
 export default function PostContent({ id }: PostContentProps) {
@@ -24,6 +119,7 @@ export default function PostContent({ id }: PostContentProps) {
   const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [navigation, setNavigation] = useState<NavigationData | null>(null);
   
   const { t, currentLocale } = useLanguage();
   
@@ -61,8 +157,26 @@ export default function PostContent({ id }: PostContentProps) {
         if (!postResponse.ok) throw new Error(`HTTP error! status: ${postResponse.status}`);
 
         const postData = await postResponse.json();
-        if (postData.post) setPost(postData.post);
-        else throw new Error('Post data not found');
+        if (postData.post) {
+          setPost(postData.post);
+          
+          // 네비게이션 데이터 로드 (모든 포스트 목록을 가져와서 클라이언트에서 처리)
+          try {
+            const postsListResponse = await fetch('/api/posts/list');
+            if (postsListResponse.ok) {
+              const postsListData = await postsListResponse.json();
+              const allPosts = postsListData.posts || [];
+              
+              // 네비게이션 계산
+              const navData = calculateNavigation(postData.post, allPosts);
+              setNavigation(navData);
+            }
+          } catch (navError) {
+            console.error('Failed to load navigation:', navError);
+          }
+        } else {
+          throw new Error('Post data not found');
+        }
       } catch (error) {
         console.error('Failed to load post:', error);
         setError(error instanceof Error ? error.message : 'Failed to load post');
@@ -72,7 +186,7 @@ export default function PostContent({ id }: PostContentProps) {
     }
 
     loadPost();
-  }, [id, currentLocale]);
+  }, [id, currentLocale, baseId]);
 
   if (loading) {
     return (
@@ -223,6 +337,55 @@ export default function PostContent({ id }: PostContentProps) {
             {post.content}
           </ReactMarkdown>
         </div>
+        
+        {/* 이전/이후 포스트 네비게이션 */}
+        {navigation && (navigation.prevPost || navigation.nextPost) && (
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* 이전 포스트 */}
+              {navigation.prevPost ? (
+                <Link
+                  href={navigation.prevPost.url}
+                  className="group flex items-start gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <div className="flex-shrink-0 mt-1">
+                    <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                      {t('common.prevPost')}
+                    </div>
+                    <div className="text-base font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
+                      {navigation.prevPost.title}
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <div></div>
+              )}
+              
+              {/* 이후 포스트 */}
+              {navigation.nextPost ? (
+                <Link
+                  href={navigation.nextPost.url}
+                  className="group flex items-start gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors md:text-right"
+                >
+                  <div className="flex-1 min-w-0 md:order-2">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                      {t('common.nextPost')}
+                    </div>
+                    <div className="text-base font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
+                      {navigation.nextPost.title}
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0 mt-1 md:order-1">
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+                  </div>
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        )}
       </article>
       <ScrollToTop />
     </div>

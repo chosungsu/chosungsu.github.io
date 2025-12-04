@@ -24,7 +24,9 @@ export const messages = {
       backToList: '목록으로 돌아가기',
       minRead: '분 읽기',
       switchToEnglish: '영어로 변경',
-      switchToKorean: '한국어로 변경'
+      switchToKorean: '한국어로 변경',
+      prevPost: '이전 포스트',
+      nextPost: '다음 포스트'
     },
     navigation: {
       projects: '프로젝트',
@@ -45,7 +47,9 @@ export const messages = {
       backToList: 'Back to list',
       minRead: 'min read',
       switchToEnglish: 'Switch to English',
-      switchToKorean: 'Switch to Korean'
+      switchToKorean: 'Switch to Korean',
+      prevPost: 'Previous post',
+      nextPost: 'Next post'
     },
     navigation: {
       projects: 'Projects',
