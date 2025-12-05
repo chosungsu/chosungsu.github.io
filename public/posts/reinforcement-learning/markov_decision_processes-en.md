@@ -4,100 +4,113 @@ date: '2025-03-07'
 tags: ['reinforcement learning', 'lecture']
 ---
 
-### Overview
+### The Agent–Environment Interface
 
-Markov Decision Processes are tools for formally describing reinforcement learning environments.
+The agent and environment interact continually, with the agent selecting actions and the environment responding to those actions and presenting new situations. The environment also generates rewards, special numerical values that the agent seeks to maximize over time.
 
-When the environment is fully observable, the current state can perfectly characterize the entire process. The Markov property means that given the present, the future is independent of the past, which is because the state is a sufficient statistic that receives all information from history.
-
-The state transition matrix contains transition probabilities from all states $s$ to all next states $s'$, which is defined from $P=\begin{bmatrix} P_{11} & \cdots & P_{1n} \\ \vdots & \ddots & \vdots \\ P_{n1} & \cdots & P_{nn} \end{bmatrix}$, and the sum of each row is 1.
+They need not be actual fixed time intervals; they can be arbitrary successive stages of decision making and action.
 
 ---
 
-### Markov Reward Process
+### Goals and Rewards
 
-Markov Reward Processes include value. This is in the form of a tuple $<S, P, R, \gamma>$, where each corresponds to a finite set of states, state transition probability matrix, reward function, and discount rate.
+The reward hypothesis states that all of what we mean by goals and purposes can be well thought of as the maximization of the expected value of the cumulative sum of a received scalar signal (called reward). The reward signal is not the place to impart to the agent prior knowledge about how to achieve what we want it to do.
 
-#### 1. Return & Discount factor
-
-Return $G_t$ is the total discounted reward from time $t$. It can be calculated through $G_t=R_{t+1}+\gamma \cdot R_{t+2}+ \cdots=\sum_{k=0}^{\infty} \gamma^k \cdot R_{t+k+1}$, where $\gamma^k \cdot R$ is the value of reward received after $k+1$ time steps, which evaluates immediate rewards higher than delayed rewards. As $\gamma$ gets closer to 0, it tends to make myopic evaluations.
-
-Most Markov Reward Decision Processes have discount factors because discounting rewards is convenient and it's a way to avoid infinite $G$ values in cyclic processes. Also, uncertainty about the future may not be fully reflected, and if rewards are financial, immediate rewards become more valuable than delayed rewards.
-
-#### 2. Value function
-
-The value function provides the long-term value of state $s$, defined as the expected value when starting from state $s$ like $v(s)=E[G_t|S_t=s]$.
-
-#### 3. Bellman Equation
-
-The value function can be decomposed into two parts:
-
-$\rightarrow$ Immediate reward $R_{t+1}$
-
-$\rightarrow$ Discounted value of next state $\gamma \cdot v(S_{t+1})$
-
-The above value function can be redefined as follows:
-
-$$
-v(s)=E[R_{t+1}+\gamma*R_{t+2}+\cdots|S_t=s] \\
-=E[R_{t+1}+\gamma*(R_{t+2} + \gamma*R_{t+3} + \cdots)|] \\
-=E[R_{t+1}+\gamma*G_{t+1}|S_t=s] \\
-=E[R_{t+1}+\gamma*v(S_{t+1})|S_t=s]
-$$
-
-As such, the Bellman equation shows that the value of state $s$ consists of immediate reward and expected value of the next state. Computational complexity is $O(n^3)$ for $n$ states.
+For example, a chess-playing agent should be rewarded only for actually winning, not for achieving subgoals such as taking its opponent's pieces. If achieving these kinds of subgoals were rewarded, then the agent might find a way to achieve them without achieving the real goal.
 
 ---
 
-### Markov Decision Process
+### Returns
 
-Markov Decision Processes are processes with decision-making added, where all states have Markov properties.
+To formally define the agent's objective, we seek to maximize the expected return.
 
-#### 1. Definition
-
-It is a tuple composed of $<S, A, P, R, \gamma>$.
-
-#### 2. Policy
-
-Policy $\pi$ is a probability distribution of actions for a given state, defined as $\pi(a|s)=P[A_t=a|S_t=s]$. Markov Decision Processes depend only on the current state and are static.
-
-For a given MDP $M$ and policy $\pi$, the state sequence $S_1, S_2, \dots$ is a Markov process, and the state and reward sequence is a Markov reward process $<S,P^{\pi}, R^{\pi}, \gamma>$.
-
-Here, $P_{s,s'}^{\pi}=\sum_{a \in A} \pi(a|s) \cdot P_{ss'}^a$, which is the probability that the next state will be $s'$ when following action $\pi$ in state $s$, and $R_s^{\pi}=\sum_{a \in A} \pi(a|s) \cdot R_{s}^a$, which means the expected reward obtained when following action $\pi$ in state $s$.
-
-#### 3. Value function
-
-$v_{\pi}(s)=E_{\pi}[G_t|S_t=s]$, where the state value function is defined as the expected return when starting from state $s$ and following policy $\pi$, and the action value function $q_{\pi}(s,a)=E_{\pi}[G_t|S_t=s, A_t=a]$ is used as the expected return when taking action $a$ in state $s$ and then following the policy.
-
-The value functions are connected as follows:
-
-In $v_{\pi}(s)=\sum_{a \in A} \pi(a|s) \cdot q_{\pi}(s,a)$, the value of state $s$ can be calculated as the average of action values for all possible actions $a$ according to the policy's probability, and in $q_{\pi}(s,a)=R_s^a + \gamma \cdot \sum_{s' \in S} P_{ss'}^a v_{\pi}(s')$, the action value can be calculated as the weighted average of values of all next states when taking the action, according to transition probabilities.
-
-#### 4. Bellman Equation
-
-Using the above two equations, we can derive the Bellman equation as follows:
+In tasks where there is a final time step $T$ (e.g., games, maze running), the return is simply the sum of the rewards:
 
 $$
-v_{\pi}=R^{\pi}+\gamma \cdot P^{\pi}v_{\pi}
+G_t = R_{t+1} + R_{t+2} + R_{t+3} + \cdots + R_T
 $$
 
-The optimal state value function $v_*(s)$ is the function with the highest value among all policies, defined as $v_*(s)=\max_{\pi}v_{\pi}(s)$. And the optimal action value function $q_*(s,a)$ is the function with the highest action value among all policies, defined as $q_*(s,a)=\max_{\pi}q_{\pi}(s,a)$.
+Each episode ends in a terminal state and then resets.
 
-Such optimal value functions represent the best possible performance in MDP and can define a partial ordering for all policies.
-
-In MDP, there always exists a deterministic policy, and if we know $q_*(s, a)$, we can immediately obtain the optimal policy. Also, they are recursively connected through the Bellman optimality equation.
+Tasks in which the agent–environment interaction continues without limit are called continuing tasks. In this case, $T = \infty$, so the simple sum $G_t$ could be infinite. Therefore, we generally use the concept of discounting to maximize the expected discounted return:
 
 $$
-v_*(s)=\max_a q_*(s,a), \\
-v_*(s)=\max_a (R_s^a+\gamma \cdot \sum_{s' \in S} P_{ss'}^a v_*(s')), \\
-q_*(s,a)=R_s^a+\gamma \cdot \sum_{s' \in S} P_{ss'}^a \max_{a'}q_*(s',a')
+G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
 $$
+
+---
+
+### The Markov Property
+
+The conditions on the state signal include both comprehensiveness—it can include immediate sensations and memories of past sensations or other complex structures containing much information—and an allowance for incompleteness—we should not expect it to inform us of everything useful for making decisions.
+
+A state signal that has the Markov property need not be more than a complete record of all past sensations, but it must hold all relevant information. That is, all future states and expected rewards can be predicted from the current state and action alone. This is called independence of path.
+
+$$
+\Pr\{R_{t+1} = r, S_{t+1} = s' | S_0, A_0, R_1, \ldots, S_t, A_t\}
+$$
+
+The dynamics of the environment generally depend on everything that has happened in the past. However, if the Markov property holds, then the environment's response at $t+1$ depends only on the current state $S_t$ and action $A_t$.
+
+#### Markov Decision Processes
+
+A reinforcement learning task that satisfies the Markov property is called a Markov decision process (MDP). If the state and action spaces are finite, it is called a finite Markov decision process (finite MDP).
+
+For given state $s$ and action $a$, the probability of each possible pair of next state $s'$ and reward $r$ is denoted $p(s', r|s, a)$:
+
+$$
+p(s', r|s, a) = \Pr\{S_{t+1} = s', R_{t+1} = r \mid S_t = s, A_t = a\}
+$$
+
+For example, a recycling robot can be thought of as having the following MDP:
+
+The state set is $\mathcal{S}$: $\{ \text{high, low} \}$ representing battery level, and the action sets are $\mathcal{A}(\text{high}) = \{ \text{search, wait} \}$, $\mathcal{A}(\text{low}) = \{ \text{search, wait, recharge} \}$. Rewards are expressed as the expected number of cans while searching, and the expected number of cans while waiting.
+
+#### Value Functions
+
+Value functions are defined with respect to particular policies. $\pi(a|s)$ is the probability of taking action $a$ in state $s$.
+
+The value $v_\pi(s)$ of a state $s$ under a policy $\pi$ is the expected return when starting in $s$ and following $\pi$ thereafter:
+
+$$
+\begin{aligned}
+&v_\pi(s) = E_\pi[G_t \mid S_t = s] \\
+&= E_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid S_t = s \right]
+\end{aligned}
+$$
+
+The value $q_\pi(s, a)$ of taking action $a$ in state $s$ under a policy $\pi$ is the expected return starting from $s$, taking the action $a$, and thereafter following policy $\pi$:
+
+$$
+\begin{aligned}
+&q_\pi(s, a) = E_\pi[G_t \mid S_t = s, A_t = a] \\
+&= E_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \mid S_t = s, A_t = a \right]
+\end{aligned}
+$$
+
+A fundamental property of value functions is that they satisfy recursive relationships. The Bellman equation for $v_\pi$ is:
+
+$$
+v_\pi(s) = \sum_{a} \pi(a|s) \sum_{s', r} p(s', r|s, a) \left[ r + \gamma v_\pi(s') \right]
+$$
+
+This expresses that the value $v_\pi(s)$ of the current state $s$ must equal the average of the expected reward $r$ plus the discounted value $\gamma v_\pi(s')$ of possible next states $s'$.
+
+#### Optimal Value Functions
+
+An optimal policy is a policy that has a greater or equal expected return than all other policies.
+
+$$
+\begin{aligned}
+&v^*(s) = \max_{\pi} v_\pi(s) \\
+&q^*(s, a) = \max_{\pi} q_\pi(s, a)
+\end{aligned}
+$$
+
+For finite MDPs, the Bellman optimality equation has a unique solution, but actually finding this solution directly requires knowing $p(s', r|s, a)$ exactly and having sufficient computational resources.
 
 ---
 
 ### References
 
-[Original Source #1](https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/lecture-2-mdp.pdf)
-
-
-
+[Original source #1](https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/lecture-2-mdp.pdf)

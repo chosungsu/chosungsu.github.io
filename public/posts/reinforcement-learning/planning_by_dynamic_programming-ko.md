@@ -6,123 +6,91 @@ tags: ['reinforcement learning', 'lecture']
 
 ### Policy evaluation
 
-주어진 정책 $\pi$를 평가하는 문제는 벨만 기대 백업을 반복적으로 적용하여 해결합니다.
+정책 평가(Policy Evaluation)는 임의의 정책 $\pi$에 대한 상태 가치 함수 $v_\pi$를 계산하는 과정입니다. 이는 DP 문헌에서 예측 문제(prediction problem)라고도 불립니다.
 
-동기식 백업(synchronous backups)에서 각 반복과 모든 상태에서 다음 상태$(s')$의 가치함수 $v_k(s')$를 이용해 다음 반복의 가치함수를 갱신합니다.
+#### Iterative Policy Evaluation
+
+환경의 동역학이 완전히 알려진 경우 $| \mathcal{S} |$개의 미지수를 가진 $| \mathcal{S} |$개의 연립 선형 방정식 시스템은 
 
 $$
-v_{k+1}(s)=\sum_{a \in A} \pi(a|s)(R_s^a+\gamma \sum_{s' \in S} P_{ss'}^a v_k(s')) \\
-\Rightarrow v^{k+1} \sim R^{\pi}+\gamma P^{\pi}v^k
+v_\pi(s) = \sum_a \pi(a|s) \sum_{s', r} p(s', r|s, a) \left[ r + \gamma v_\pi(s') \right]
 $$
+
+이 시스템의 해를 찾는 데 반복적 해법이 가장 적합합니다. 반복적 정책 평가는 $v_k$에서 $v_{k+1}$로 successive approximation(연속 근사) 시퀀스를 생성하며, $v_\pi$에 대한 벨만 방정식을 업데이트 규칙으로 사용합니다.
+
+$$
+\begin{aligned}
+&v_{k+1}(s) = E_\pi[R_{t+1} + \gamma v_k(S_{t+1}) \mid S_t = s] \\
+&= \sum_a \pi(a|s) \sum_{s', r} p(s', r|s, a) \left[ r + \gamma v_k(s') \right]
+\end{aligned}
+$$
+
+$v_k = v_\pi$는 이 업데이트 규칙의 고정점입니다. ${v_k}$는 $k \to \infty$ 일 때 $v_\pi$로 수렴합니다.
 
 ---
 
-### Policy iteration
+### Policy Improvement
 
-<img src="https://velog.velcdn.com/images/devjo/post/7ec398e5-088e-4282-8758-068e07306d76/image.png" alt="Example Image" style="display: block; margin: 0 auto; height:200;" />
-
-정책 이터레이션은 주어진 정책 $\pi$를 반복적으로 평가하고 개선하여 최적 정책 $\pi$를 찾는 것입니다. 다음의 두 단계로 구성됩니다.
-
-#### 1. Policy Evaluation
+임의의 결정적 정책 $\pi$와 $\pi'$에 대해, 모든 상태 $s \in \mathcal{S}$에 대해 다음 조건이 충족되면
 
 $$
-v_{\pi}(s)=E[R_{t+1}+\gamma R_{t+2}+ \dots |S_t=s]
+q_\pi(s, \pi'(s)) \ge v_\pi(s)
 $$
 
-이는 벨만 기대 백업을 반복적으로 적용하여 수행할 수 있습니다. 현재 정책에 대한 가치함수를 추정하는 과정입니다.
+정책 $\pi'$는 $\pi$만큼 좋거나 더 좋습니다.
 
-#### 2. Policy Improvement
-
-평가된 가치 함수에 대해 탐욕적으로 행동하여 새로운 정책을 생성하는 과정입니다.
+정책 개선은 $v_\pi$에 대해 탐욕적(greedy)인 새로운 정책 $\pi'$을 만드는 과정입니다.
 
 $$
-\pi'(s)=\text{argmax}_{a \in A} q_{\pi}(s,a)
+\pi'(s) = \underset{a}{\operatorname{argmax}} \ q_\pi(s, a)
 $$
 
-이 과정은 모든 상태 $s$에 대해 가치를 한 단계 개선합니다. 결과적으로 새로운 정책의 가치 함수는 이전 정책의 가치 함수보다 항상 같거나 큽니다.
-
-만약 정책 개선 과정에서 더 이상 가치가 개선되지 않는다면 즉 $v_{\pi'}(s) = v_\pi(s)$인 경우 벨만 최적 방정식(bellman optimality equation)이 만족됩니다.
-
-$$
-q_{\pi}(s,\pi'(s))=\text{max}_{a \in A} q_{\pi}(s,a) \\
-=q_{\pi}(s,\pi(s))=v_{\pi}(s)
-$$
-
-이 때 $v_\pi(s) = \max_{a \in A} q_\pi(s, a)$가 성립하므로, $v_\pi(s) = v_*(s)$가 되어 현재 정책이 최적임을 의미합니다.
+탐욕 정책은 1단계 앞을 내다보는 탐색에 따라 가장 좋아 보이는 행동을 선택합니다. 정책 개선 정리 덕분에 새로운 탐욕 정책은 원래 정책보다 항상 같거나 더 좋습니다.
 
 ---
 
-### Value iteration
+### Policy Iteration
 
-최적 정책(optimal policy)는 두 가지 요소로 나눌 수 있습니다.
-
-$\rightarrow$ 최적의 첫 번째 행동 $A^*$
-
-$\rightarrow$ 그 다음 상태 $S'$에서 이어지는 최적 정책
-
-#### 최적성의 원리
-
-정책 $\pi(a|s)$가 상태 $s$에서 최적의 가치 $v_{\pi}(s) = v_*(s)$를 달성하는 필요충분 조건은 다음과 같습니다. 상태 $s$로부터 도달 가능한 어떤 상태 $s'$에 대해서도 $\pi$가 상태 $s'$에서 최적 가치를 달성해야만 합니다. 만약 하위 문제$(s')$에서의 최적 가치인 $v_{s'}$의 해답을 알고 있다면 $v_{s}$의 해답은 one-step lookahead로 찾도록 합니다.
+정책 평가를 통해 $v_\pi$를 얻고, 이를 사용하여 정책 개선을 통해 더 나은 정책 $\pi'$을 얻으면, 이 과정을 반복하여 단조롭게 개선되는 정책과 가치 함수의 시퀀스를 얻을 수 있습니다.
 
 $$
-v_*(s) \leftarrow max_{a \in A} (R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a v_*(s'))
+\pi_0 \overset{E}{\longrightarrow} v_{\pi_0} \overset{I}{\longrightarrow} \pi_1 \overset{E}{\longrightarrow} v_{\pi_1} \cdots \overset{I}{\longrightarrow} \pi^* \overset{E}{\longrightarrow} v^*
 $$
 
-가치 반복의 아이디어는 이 업데이트를 반복적으로 적용하는 것입니다. 더 쉽게는 최종 보상에서 시작하여 역행으로 되짚어가는 방식이라고 생각할 수 있습니다.
+이 최적 정책을 찾는 방법을 정책 반복이라고 합니다. 유한 MDP는 유한한 수의 정책만 가지고 있으므로, 이 프로세스는 유한한 횟수의 반복 내에 최적 정책과 최적 가치 함수로 수렴해야 합니다.
 
 ---
 
-### Extensions to dynamic programming
+### Value Iteration
 
-여기서는 동기식 동적 프로그래밍의 한계를 극복하기 위한 비동기식 동적 프로그래밍과 그 안의 세 가지 방법에 대해 알아보겠습니다.
+정책 반복의 한 가지 단점은 각 반복이 정책 평가(Policy Evaluation)를 포함한다는 것입니다. 정책 평가는 그 자체로 여러 번의 상태 집합 스윕(sweeps)을 요구하는 반복적인 계산일 수 있으며, 정확한 수렴은 극한에서만 발생합니다.
 
-#### 1. Asynchronous dynamic programming
-
-비동기식 dp는 개별 상태를 어떤 순서로든 백업합니다. 선택된 각 상태에 대해 적절한 백업을 적용하며 이를 통해 계산량을 크게 줄일 수 있습니다.
-
-#### 2. In-place dynamic programming
-
-동기식 가치 반복은 가치 함수를 두개 저장합니다. 예를 들어 모든 $s \in S$에 대해 $v_{new}(s) \leftarrow max_{a \in A} (R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a v_{old}(s'))$와 $v_{old} \leftarrow v_{new}$로 저장하며 in-place dp는 $v(s) \leftarrow max_{a \in A} (R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a v(s'))$ 한개만 저장합니다.
-
-#### 3. Prioritised sweeping
-
-벨만 오차의 크기를 사용하여 상태 선택을 유도하는 과정입니다. 예를 들어 다음과 같이 정의합니다.
+가치 반복은 정책 평가 단계를 단 한 번의 스윕으로 잘라낸(truncated) 정책 반복의 중요한 특수 사례입니다.
 
 $$
-|\text{max}_{a \in A} (R_s^a + \gamma \sum_{s' \in S} P_{ss'}^a v(s'))-v(s)|
+\begin{aligned}
+&v_{k+1}(s) = \max_a E[R_{t+1} + \gamma v_k(S_{t+1}) \mid S_t = s, A_t = a], \\
+&v_{k+1}(s) = \max_{a} \sum_{s', r} p(s', r|s, a) \left[ r + \gamma v_k(s') \right]
+\end{aligned}
 $$
 
-이 때 가장 큰 오차가 남아있는 상태를 백업합니다. 우선순위 큐를 유지함으로써 효율적인 구현이 가능합니다.
-
-#### 4. Full width backups
-
-DP는 full width 백업을 사용합니다. 각 백업마다 후속 상태와 행동이 고려되며 이는 transition 지식을 사용하여 진행됩니다. 하지만 큰 차원에서는 차원의 저주에 빠지게 됩니다.
+가치 반복은 $v^*$로 정확하게 수렴하는 데 형식적으로 무한한 수의 반복을 요구합니다. 실제로는 한 번의 스윕에서 가치 함수 변화량 $\max_{s} |v_{k+1}(s) - v_k(s)|$이 충분히 작아지면 중지합니다.
 
 ---
 
-### Contraction Mapping Theorem
+### Asynchronous Dynamic Programming
 
-가치함수들의 벡터 공간 $V$는 $|S|$차원으로 공간의 각 점은 가치 함수 $v(s)$를 완벽하게 나타냅니다.
+DP 방법의 주요 단점은 상태 집합 전체에 대한 체계적인 스윕(sweeps)을 요구한다는 것입니다. 비동기적 DP 알고리즘은 상태 집합에 대한 체계적인 스윕 방식으로 구성되지 않은 인플레이스 반복 DP 알고리즘입니다.
 
-$$
-|u-v|_{\infty}=\text{max}_{s \in S} |u(s)-v(s)|
-$$
+어떤 순서로든 상태의 값을 백업하며 다른 상태의 사용 가능한 값들을 사용합니다. 어떤 상태는 다른 상태가 한 번 백업되기 전에 여러 번 백업될 수 있습니다. 올바르게 수렴하려면, 모든 상태의 값을 무한히 백업해야 합니다.
 
-두 상태-가치 함수 $u,v$ 사이의 거리는 무한 노름으로 측정하고 이는 즉 상태-가치 간의 가장 큰 차이를 측정하는 것입니다.
-
-$$
-T_{\pi}(v)=R^{\pi}+\gamma P^{\pi}v
-$$
-
-벨만 기대 백업 연산자인 $T_{\pi}$는 위와 같이 정의되며 이는 $\gamma$축소 사상이므로 가치 함수를 적어도 $\gamma$만큼 더 가깝게 만드는 역할을 합니다.
-
-위 정리들을 활용하여 축소 사상 정리는 연산자 $T_{\pi}$에 대해 complete인 거리공간 $V$에서 축소 사상일 경우 유일한 고정점으로 수렴하고 수렴 속도는 $\gamma$의 선형 속도에 따른다고 할 수 있습니다.
+장점으로는 정책 개선을 위해 진전을 이루기 전에 끝없이 긴 스윕에 갇힐 필요가 없습니다. 에이전트가 방문하는 상태에 백업을 적용함으로써 DP 알고리즘의 초점을 에이전트에게 가장 관련 있는 상태에 맞출 수 있습니다.
 
 ---
 
 ### 참고 자료
 
-[원본 경로 #1](https://davidstarsilver.wordpress.com/wp-content/uploads/2025/04/lecture-3-planning-by-dynamic-programming-.pdf)
+[원본 경로 #1](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf?utm_source=chatgpt.com)
 
 
 
