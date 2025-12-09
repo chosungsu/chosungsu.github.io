@@ -28,9 +28,7 @@ export default function RootLayout({
               <ScrollReset />
               <Navbar />
               <main className="pt-16">
-                <Container>
-                  {children}
-                </Container>
+                {children}
               </main>
             </div>
           </ThemeProvider>

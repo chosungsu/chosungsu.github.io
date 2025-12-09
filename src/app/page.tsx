@@ -35,7 +35,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen py-16">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4 w-full">
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12">
           <div className="w-48 h-48 relative rounded-full overflow-hidden">
             <Image

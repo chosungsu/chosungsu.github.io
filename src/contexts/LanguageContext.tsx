@@ -26,7 +26,8 @@ export const messages = {
       switchToEnglish: '영어로 변경',
       switchToKorean: '한국어로 변경',
       prevPost: '이전 포스트',
-      nextPost: '다음 포스트'
+      nextPost: '다음 포스트',
+      seeMore: '자세히 보기'
     },
     navigation: {
       projects: '프로젝트',
@@ -49,7 +50,8 @@ export const messages = {
       switchToEnglish: 'Switch to English',
       switchToKorean: 'Switch to Korean',
       prevPost: 'Previous post',
-      nextPost: 'Next post'
+      nextPost: 'Next post',
+      seeMore: 'See more'
     },
     navigation: {
       projects: 'Projects',

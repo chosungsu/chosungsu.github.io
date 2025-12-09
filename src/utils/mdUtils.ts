@@ -9,6 +9,7 @@ export interface PostData {
   description: string;
   tags: string[];
   content: string;
+  github?: string;
 }
 
 let cachedProjects: PostData[] | null = null;
@@ -118,6 +119,7 @@ export async function getProjectPosts(): Promise<PostData[]> {
           description: data.description || '',
           tags: Array.isArray(data.tags) ? data.tags : [],
           content,
+          github: data.github || undefined,
         };
       })
     );

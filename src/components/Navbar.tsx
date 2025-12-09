@@ -18,23 +18,34 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className={`fixed top-0 w-full z-50 transition-all duration-200 ${
+    <div className={`fixed top-0 w-full z-[200] transition-all duration-200 ${
       isScrolled ? 'backdrop-blur-md bg-white/70 dark:bg-zinc-900/70' : 'bg-white dark:bg-zinc-900'
-    }`}>
+    } pointer-events-auto`}>
       <Container>
-        <nav className="flex justify-between items-center h-16">
-          <Link href="/" className="text-md font-bold text-gray-800 dark:text-white">
+        <nav className="flex justify-between items-center h-16 relative z-[201] pointer-events-auto">
+          <Link 
+            href="/" 
+            className="text-md font-bold text-gray-800 dark:text-white hover:opacity-80 transition-opacity relative z-[202] pointer-events-auto"
+          >
             Sungsu Cho
           </Link>
           
-          <div className="flex items-center space-x-4">
-            <Link href="/projects" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <div className="flex items-center space-x-4 relative z-[202] pointer-events-auto">
+            <Link 
+              href="/projects" 
+              className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors relative z-[203] pointer-events-auto"
+            >
               Projects
             </Link>
-            <Link href="/posts" className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+            <Link 
+              href="/posts" 
+              className="text-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors relative z-[203] pointer-events-auto"
+            >
               Posts
             </Link>
-            <ThemeToggle />
+            <div className="relative z-[203] pointer-events-auto">
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
       </Container>
