@@ -1,7 +1,7 @@
 ---
 title: 'Control method and floating base'
 date: '2024-10-23'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Inverse differential

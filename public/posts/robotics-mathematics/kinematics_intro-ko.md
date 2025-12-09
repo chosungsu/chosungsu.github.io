@@ -1,7 +1,7 @@
 ---
 title: 'Kinematics Introduction'
 date: '2024-10-02'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Introduction

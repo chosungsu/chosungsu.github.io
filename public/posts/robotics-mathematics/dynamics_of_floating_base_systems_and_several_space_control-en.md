@@ -1,7 +1,7 @@
 ---
 title: 'Dynamics of floating base systems and several space control'
 date: '2024-11-06'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Dynamics of floating base systems

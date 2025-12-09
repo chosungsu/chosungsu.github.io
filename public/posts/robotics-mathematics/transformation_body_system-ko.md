@@ -1,7 +1,7 @@
 ---
 title: 'Transform and Body system'
 date: '2024-10-16'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Homogeneous Transformation

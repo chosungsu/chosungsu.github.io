@@ -1,7 +1,7 @@
 ---
 title: 'Foundations from classical mechanics and several methods'
 date: '2024-10-30'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Multi body dynamics

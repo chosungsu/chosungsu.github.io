@@ -1,7 +1,7 @@
 ---
 title: 'Rotation and angular velocity'
 date: '2024-10-09'
-tags: ['robotics', 'mathematics', 'lecture']
+tags: ['Robotics', 'Mathematics', 'lecture']
 ---
 
 ### Rotation
