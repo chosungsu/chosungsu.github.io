@@ -72,7 +72,8 @@ export default function ProjectList() {
           description: data.description || '', // 설명이 없으면 빈 문자열
           language: data.language || null,
           githubUrl: data.html_url || githubUrl,
-          websiteUrl: config?.website,
+          // GitHub API의 homepage 필드를 우선 사용, 없으면 하드코딩된 website 사용
+          websiteUrl: data.homepage || config?.website,
         };
       } else {
         console.error(`GitHub API error for ${projectId}:`, response.status);

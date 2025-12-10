@@ -38,6 +38,14 @@ async function getAllMarkdownFiles(dir: string, baseDir: string = dir): Promise<
   const files: Array<{ filePath: string; relativePath: string }> = [];
   
   try {
+    // 디렉토리 존재 여부 확인
+    try {
+      await fs.access(dir);
+    } catch {
+      // 디렉토리가 없으면 빈 배열 반환
+      return files;
+    }
+    
     const items = await fs.readdir(dir, { withFileTypes: true });
     
     for (const item of items) {
@@ -54,7 +62,10 @@ async function getAllMarkdownFiles(dir: string, baseDir: string = dir): Promise<
       }
     }
   } catch (error) {
-    console.error(`Error reading directory ${dir}:`, error);
+    // 디렉토리가 없거나 읽을 수 없는 경우 에러를 무시하고 빈 배열 반환
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+      console.error(`Error reading directory ${dir}:`, error);
+    }
   }
   
   return files;

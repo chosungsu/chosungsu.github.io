@@ -1,4 +1,4 @@
-import { getProjectPosts, getPostById } from '@/utils/mdUtils';
+import { getPostById } from '@/utils/mdUtils';
 import { Metadata } from 'next';
 import ProjectContent from '@/components/ProjectContent';
 
@@ -8,15 +8,29 @@ interface Props {
   };
 }
 
-export async function generateStaticParams() {
-  const projects = await getProjectPosts();
+// 프로젝트별 URL 매핑 (ProjectList와 동일한 설정)
+const projectConfigs: { [projectId: string]: { github: string; website?: string } } = {
+  'mkad': {
+    github: 'https://github.com/chosungsu/time-series-anomaly-detection',
+  },
+  't5n2': {
+    github: 'https://github.com/chosungsu/Text-normalization-ko-number-part',
+  },
+  'lab_it': {
+    github: 'https://github.com/chosungsu/LaB_it',
+  },
+};
 
-  // 모든 프로젝트 ID(언어 코드 포함)를 수집하고, 기본 ID도 추가하여 중복 제거
+export async function generateStaticParams() {
+  // projectConfigs의 키를 기반으로 정적 파라미터 생성
+  const projectIds = Object.keys(projectConfigs);
+  
+  // 각 프로젝트 ID와 언어 코드 조합 생성
   const ids = new Set<string>();
-  projects.forEach(project => {
-    ids.add(project.id); // project1-ko, project1-en 등
-    const baseId = project.id.replace(/-[a-z]{2}$/, '');
-    ids.add(baseId);    // project1 와 같이 언어 코드 없는 경로도 추가
+  projectIds.forEach(projectId => {
+    ids.add(projectId); // 기본 ID
+    ids.add(`${projectId}-ko`); // 한국어 버전
+    ids.add(`${projectId}-en`); // 영어 버전
   });
 
   return Array.from(ids).map(id => ({ id }));
