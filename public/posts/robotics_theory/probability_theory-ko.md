@@ -222,8 +222,10 @@ $$
 
 $$
 \begin{aligned} 
-&H(\mathbf{x})
-&= - \int_{-\infty}^{\infty} p(\mathbf{x}) \left( - \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) - \ln \sqrt{(2\pi)^N \det \Sigma} \right) d\mathbf{x} \\ &= \frac{1}{2} \ln \left( (2\pi)^N \det \Sigma \right) + \int_{-\infty}^{\infty} \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) p(\mathbf{x}) d\mathbf{x} \\ &= \frac{1}{2} \ln \left( (2\pi)^N \det \Sigma \right) + \frac{1}{2} E[(\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu})]
+&H(\mathbf{x}) \\
+&= - \int_{-\infty}^{\infty} p(\mathbf{x}) \left( - \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) - \ln \sqrt{(2\pi)^N \det \Sigma} \right) d\mathbf{x} \\ 
+&= \frac{1}{2} \ln \left( (2\pi)^N \det \Sigma \right) + \int_{-\infty}^{\infty} \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}) p(\mathbf{x}) d\mathbf{x} \\ 
+&= \frac{1}{2} \ln \left( (2\pi)^N \det \Sigma \right) + \frac{1}{2} E[(\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu})]
 \end{aligned}
 $$
 
