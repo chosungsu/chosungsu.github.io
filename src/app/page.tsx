@@ -156,33 +156,24 @@ export default async function Home() {
                 {/* <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                   {post.description}
                 </p> */}
-                <div className="flex justify-between items-center">
-                  <FormattedDate date={post.date} />
-                  <div className="flex space-x-2 items-center">
-                    {/* 태그 상세: 중간 이상 화면에서 표시 */}
-                    <div className="hidden sm:flex space-x-2">
-                      {post.tags.map((tag, index) => {
-                        const isMainTag = index === post.tags.length - 1; // 마지막 태그가 main 태그
-                        return (
-                          <span
-                            key={tag}
-                            className={`px-2 py-1 rounded text-sm ${
-                              isMainTag 
-                                ? `${getTagColor(tag)} font-medium` 
-                                : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100'
-                            }`}
-                          >
-                            {tag}
-                          </span>
-                        );
-                      })}
+                <div className="flex flex-col gap-2 mt-auto">
+                  {post.tags.length > 0 && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
                     </div>
-                    {/* 태그 개수: 작은 화면에서만 표시 */}
-                    {post.tags.length > 0 && (
-                      <span className="flex sm:hidden px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded text-sm">
-                        +{post.tags.length}
-                      </span>
-                    )}
+                  )}
+                  {post.tags.length > 0 && (
+                    <div className="border-t border-gray-200 dark:border-gray-700 opacity-50"></div>
+                  )}
+                  <div className="flex justify-end">
+                    <FormattedDate date={post.date} />
                   </div>
                 </div>
               </Link>

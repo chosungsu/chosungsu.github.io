@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { Code, ExternalLink, ArrowRight } from 'lucide-react';
+import { Code, ArrowRight } from 'lucide-react';
 import ScrollToTop from './ScrollToTop';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -171,25 +171,6 @@ export default function ProjectList() {
                       <Code className="w-4 h-4" />
                       <span>Code</span>
                     </a>
-                  )}
-                  {project.websiteUrl ? (
-                    <a
-                      href={project.websiteUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>Website</span>
-                    </a>
-                  ) : (
-                    <Link
-                      href={`/projects/${project.projectId}`}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>Website</span>
-                    </Link>
                   )}
                 </div>
                 </div>

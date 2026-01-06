@@ -6,7 +6,7 @@ export default async function Posts() {
 
   return (
     <div className="min-h-screen pb-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto px-4">
         <PostList initialPosts={postList} />
       </div>
     </div>
